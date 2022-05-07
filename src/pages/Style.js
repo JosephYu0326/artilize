@@ -36,6 +36,9 @@ function Style(props) {
           <div className="LighterGrey">
             <h3>LighterGrey</h3>
           </div>
+          <div className="BackgaroudColor">
+            <h3>BackgaroudColor</h3>
+          </div>
         </div>
         <br />
         <br />

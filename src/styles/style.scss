@@ -1,7 +1,5 @@
 @import './global.scss';
-body{
-    background-color: $background;
-}
+
 .BorderRadius{
     border: 3px solid black;
     border-radius: $BorderRadius;
@@ -27,4 +25,7 @@ body{
 }
 .LighterGrey{
     background-color: $LighterGrey;
+}
+.BackgaroudColor{
+    background-color: $background;
 }
