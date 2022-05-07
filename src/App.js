@@ -29,6 +29,7 @@ import FrPersonalPage from './pages/Forum/FrPersonalPage'
 import NotFoundPage from './pages/Home/NotFoundPage'
 import B2B from './pages/B2B/B2B'
 import AddAbility from './pages/B2B/AddAbility'
+import Style from './pages/Style'
 
 function App() {
   return (
@@ -114,6 +115,9 @@ function App() {
         </Route>
         <Route path="/entrance">
           <Entrance />
+        </Route>
+        <Route path="/style">
+          <Style />
         </Route>
         <Route path="/" exact>
           <Home />

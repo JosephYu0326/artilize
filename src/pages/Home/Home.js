@@ -17,6 +17,10 @@ function Home(props) {
       <Link to="/forum">討論區</Link>
       <br />
       <Link to="/b2b">廠商後臺</Link>
+      <br />
+      <h1>
+        <Link to="/style">樣式</Link>
+      </h1>
     </>
   )
 }
