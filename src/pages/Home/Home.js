@@ -1,11 +1,12 @@
 //首頁
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Navbar, Container } from 'react-bootstrap'
 
 function Home(props) {
   return (
     <>
-      <div>首頁</div>
+      {/* <div>首頁</div>
       <Link to="/search">全站搜尋頁</Link>
       <br />
       <Link to="/users">會員資料</Link>
@@ -20,7 +21,21 @@ function Home(props) {
       <br />
       <h1>
         <Link to="/style">樣式</Link>
-      </h1>
+      </h1> */}
+      <Navbar bg="light" variant="light">
+        <Container>
+          <Navbar.Brand href="/">
+            <img
+              alt=""
+              src="{require('../../images/logo.png')}"
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />{' '}
+            React Bootstrap
+          </Navbar.Brand>
+        </Container>
+      </Navbar>
     </>
   )
 }
