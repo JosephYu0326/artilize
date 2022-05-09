@@ -2,6 +2,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Navbar, Container } from 'react-bootstrap'
+import logo from '../../images/logo.svg'
 
 function Home(props) {
   return (
@@ -27,9 +28,9 @@ function Home(props) {
           <Navbar.Brand href="/">
             <img
               alt=""
-              src="{require('../../images/logo.png')}"
-              width="30"
-              height="30"
+              src={logo}
+              width="45"
+              height="45"
               className="d-inline-block align-top"
             />{' '}
             React Bootstrap
