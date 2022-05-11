@@ -1,0 +1,37 @@
+@import '../styles/style.scss';
+@import '~bootstrap/scss/bootstrap';
+
+.asideBar{
+    position: fixed;
+    margin-left: 0;
+    width: 200px;
+    line-height: 100px;
+    border-radius:0 10px 10px 0;
+    box-shadow:rgb(110,116,145) 2px 2px 4px;
+    //收合
+    transform: translateX(-80%);
+    transition: .3s;
+}
+#sideMenu-switch{
+    opacity: 0;
+    z-index: -100;
+}
+#sideMenu-switch:checked + .asideBar{
+    transform: translateX(0);
+}
+
+#sideMenu-switch:checked + .asideBar label .faAngleLeft{
+    transform: scaleX(-1);
+}
+
+.asideBar > .asideBtn{
+    color: rgb(110,116,145);
+    width: 100px;
+    line-height: 30px;
+}
+
+.asideBar label{
+    color: rgb(110,116,145);
+    position: absolute;
+   font-size: 24px;
+}
