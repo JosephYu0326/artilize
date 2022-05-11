@@ -19,7 +19,7 @@ $background:#e5e5e5;
 
 //RWD寫法
 @mixin mobile {
-    @media (max-width:391px) {
+    @media (max-width:390px) {
         @content;
     }
 }
