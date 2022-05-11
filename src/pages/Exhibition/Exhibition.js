@@ -32,6 +32,7 @@ function Exhibition(props) {
   let card = []
   let category = []
   let gallery = []
+  let test = []
 
   const [optionBd, setOptionBd] = useState('selectsquare')
 
