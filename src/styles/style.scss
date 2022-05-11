@@ -1,0 +1,30 @@
+@import './global.scss';
+
+.BorderRadius{
+    border-radius: $BorderRadius;
+}
+.BoxShadow{
+    //border:3px solid $MiddleGrey;
+    //background-color: white;
+}
+.PurpleBlue{
+    background-color: $PurpleBlue;
+}
+.WarnYellow{
+    background-color: $WarnYellow;
+}
+.DarkGrey{
+    background-color: $DarkGrey;
+}
+.MiddleGrey{
+    background-color: $MiddleGrey;
+}
+.LightGrey{
+    background-color: $LightGrey;
+}
+.LighterGrey{
+    background-color: $LighterGrey;
+}
+.BackgaroudColor{
+    background-color: $background;
+}
