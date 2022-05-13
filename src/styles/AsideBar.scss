@@ -20,7 +20,7 @@
     transform: translateX(0);
 }
 
-#sideMenu-switch:checked + .asideBar label .faAngleLeft{
+#sideMenu-switch:checked + .asideBar label .faAngleRight{
     transform: scaleX(-1);
 }
 
