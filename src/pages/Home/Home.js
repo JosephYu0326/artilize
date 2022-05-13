@@ -1,10 +1,12 @@
 //首頁
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Header from '../../component/Header'
 
 function Home(props) {
   return (
     <>
+      <Header />
       <div>首頁</div>
       <Link to="/search">全站搜尋頁</Link>
       <br />
