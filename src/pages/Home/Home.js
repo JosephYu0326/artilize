@@ -3,6 +3,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Navbar, Container } from 'react-bootstrap'
 import logo from '../../images/logo.svg'
+import userIcon from '../../images/userIcon.svg'
+import '../../styles/home.scss'
+import Header from '../../component/Header'
 
 function Home(props) {
   return (
@@ -23,20 +26,7 @@ function Home(props) {
       <h1>
         <Link to="/style">樣式</Link>
       </h1> */}
-      <Navbar bg="light" variant="light">
-        <Container>
-          <Navbar.Brand href="/">
-            <img
-              alt=""
-              src={logo}
-              width="45"
-              height="45"
-              className="d-inline-block align-top"
-            />{' '}
-            React Bootstrap
-          </Navbar.Brand>
-        </Container>
-      </Navbar>
+      <Header />
     </>
   )
 }
