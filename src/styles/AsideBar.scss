@@ -2,7 +2,11 @@
 @import '~bootstrap/scss/bootstrap';
 
 .asideBar{
+    background-color: #fff;
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-left: 0;
     width: 200px;
     line-height: 100px;
@@ -10,8 +14,10 @@
     box-shadow:rgb(110,116,145) 2px 2px 4px;
     //收合
     transform: translateX(-80%);
-    transition: .3s;
+    transition: .3s
 }
+
+
 #sideMenu-switch{
     opacity: 0;
     z-index: -100;
@@ -20,18 +26,53 @@
     transform: translateX(0);
 }
 
-#sideMenu-switch:checked + .asideBar label .faAngleRight{
+#sideMenu-switch:checked + .asideBar label .faAngleLeft{
     transform: scaleX(-1);
 }
 
-.asideBar > .asideBtn{
+.asideBar  .asideBtn{
     color: rgb(110,116,145);
     width: 100px;
     line-height: 30px;
+}
+
+.asideBar  .asideBtn:hover{
+    color: #fff;
+    background: rgb(65,83,187);
 }
 
 .asideBar label{
     color: rgb(110,116,145);
     position: absolute;
    font-size: 24px;
+}
+
+@media (max-width:768px) {
+    .asideBar{
+        position: relative;
+        margin:auto;
+        width: 100%;
+        justify-content:space-between;
+        align-items: center;
+        flex-direction: row;
+        box-shadow: none;
+        transform: none;
+    }
+    .asideBar label{
+        display:none;
+    }
+
+    .asideBar  .asideBtn{
+        margin: 48px 0 24px 0;
+        border-radius: 50rem !important;
+        color: rgb(110,116,145);
+        width: 100px;
+        line-height: 30px;
+    }
+
+    .asideBar  .asideBtn:hover{
+        color: rgb(65,83,187);
+        border: 1px solid rgb(65,83,187);
+        background: rgb(255, 255, 255);
+    }
 }
