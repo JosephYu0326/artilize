@@ -1,6 +1,27 @@
 @import './global.scss';
 
+.swiperImg{
+
+    img{
+        overflow: hidden;
+        max-width: 100%;
+        height: 100%;
+    }
+}
+
+.homeSwiper{
+    max-width: 1243px !important; 
+}
+.homeSwiperRight{
+    max-width: 430px !important;
+}
+.homeSwiperLeft{
+    max-width: 104px !important;
+}
+
 .homeMap{
     background: url(../images/HomeMap.svg) no-repeat;
+    background-size: 100% ;
+    height: 451px;
     
 }

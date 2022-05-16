@@ -26,37 +26,22 @@ function Home(props) {
 
   function createSlide() {
     return (
-      <SwiperSlide className="d-flex justify-content-center mt-5">
-        <img
-          className="img"
-          src={imgUrl()}
-          alt=""
-          style={{ width: 1241, height: 795 }}
-        />
+      <SwiperSlide className="swiperImg">
+        <img src={imgUrl()} alt="" />
       </SwiperSlide>
     )
   }
   function createSlideRight() {
     return (
-      <SwiperSlide className="d-flex justify-content-center">
-        <img
-          className="img"
-          src={imgUrl()}
-          alt=""
-          style={{ width: 337, height: 547 }}
-        />
+      <SwiperSlide className="swiperImg">
+        <img src={imgUrl()} alt="" />
       </SwiperSlide>
     )
   }
   function createSlideleft() {
     return (
-      <SwiperSlide className="d-flex justify-content-center">
-        <img
-          className="img"
-          src={imgUrl()}
-          alt=""
-          style={{ width: 318, height: 351 }}
-        />
+      <SwiperSlide className="swiperImg">
+        <img src={imgUrl()} alt="" />
       </SwiperSlide>
     )
   }
@@ -81,63 +66,62 @@ function Home(props) {
       <Header />
       <section>
         <Container fluid>
-          <Row className="d-flex flex-nowrap">
-            <Col className="align-self-end ps-0 pe-0">
-              <Swiper
-                modules={[Navigation, Pagination, Autoplay]}
-                slidesPerView={'1'}
-                loop={true}
-                autoplay={{
-                  display: 2500,
-                  disableOnInteraction: false,
-                  pauseOnMouseEnter: true,
-                }}
-                style={{ width: 318, height: 351 }}
-              >
-                {createSlideleft()}
-                {createSlideleft()}
-                {createSlideleft()}
-                {createSlideleft()}
-              </Swiper>
-            </Col>
-            <Col>
-              <Swiper
-                modules={[Navigation, Pagination, Autoplay]}
-                slidesPerView={'1'}
-                navigation
-                loop={true}
-                autoplay={{
-                  display: 2500,
-                  disableOnInteraction: false,
-                  pauseOnMouseEnter: true,
-                }}
-                pagination={{ clickable: true }}
-                style={{ width: 1241, height: 795 }}
-              >
-                {createSlide()}
-                {createSlide()}
-                {createSlide()}
-                {createSlide()}
-              </Swiper>
-            </Col>
-            <Col className="ps-0 pe-0">
-              <Swiper
-                modules={[Navigation, Pagination, Autoplay]}
-                slidesPerView={'auto'}
-                loop={true}
-                autoplay={{
-                  display: 2500,
-                  disableOnInteraction: false,
-                  pauseOnMouseEnter: true,
-                }}
-                style={{ width: 337, height: 547 }}
-              >
-                {createSlideRight()}
-                {createSlideRight()}
-                {createSlideRight()}
-                {createSlideRight()}
-              </Swiper>
-            </Col>
+          <Row className=" d-flex">
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              slidesPerView={'1'}
+              loop={true}
+              autoplay={{
+                display: 2500,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }}
+              style={{ height: 466 }}
+              className="ps-0 pe-0 align-self-end homeSwiperLeft"
+            >
+              {createSlideleft()}
+              {createSlideleft()}
+              {createSlideleft()}
+              {createSlideleft()}
+            </Swiper>
+
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              slidesPerView={'1'}
+              navigation
+              loop={true}
+              autoplay={{
+                display: 2500,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }}
+              pagination={{ clickable: true }}
+              style={{ height: 890 }}
+              className="ps-0 pe-0 homeSwiper"
+            >
+              {createSlide()}
+              {createSlide()}
+              {createSlide()}
+              {createSlide()}
+            </Swiper>
+
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              slidesPerView={'auto'}
+              loop={true}
+              autoplay={{
+                display: 2500,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }}
+              style={{ height: 547 }}
+              className="ps-0 pe-0 homeSwiperRight"
+            >
+              {createSlideRight()}
+              {createSlideRight()}
+              {createSlideRight()}
+              {createSlideRight()}
+            </Swiper>
           </Row>
         </Container>
       </section>
