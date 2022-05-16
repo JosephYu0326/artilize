@@ -2,7 +2,7 @@ import React from 'react'
 import { Navbar, Container } from 'react-bootstrap'
 import logo from '../images/logo.svg'
 import userIcon from '../images/userIcon.svg'
-import '../styles/home.scss'
+import '../styles/Header.scss'
 import { Link } from 'react-router-dom'
 
 function Header(props) {
