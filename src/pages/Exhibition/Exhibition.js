@@ -1,12 +1,16 @@
 //展覽
 
-import React from 'react'
-import { useState } from 'react'
+import React, { useState } from 'react'
+import DatePicker from 'react-datepicker'
+import Slider from '@mui/material/Slider'
+
+import 'react-rangeslider/lib/index.css'
+import 'react-datepicker/dist/react-datepicker.css'
 
 import { Link } from 'react-router-dom'
 import { Accordion } from 'react-bootstrap'
 
-import '../../styles/exhibition.scss'
+import '../../styles/exhibition-list.scss'
 import '../../styles/style.scss'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -15,23 +19,87 @@ import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 
 import exhibitionimg from './images/exhibition1.jpeg'
+function valuetext(value) {
+  return `${value}$`
+}
 
 function Exhibition(props) {
+  const [value, setValue] = useState([20, 800])
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue)
+  }
+
+  const categories = {
+    0: ['古董文物', '油畫', '雕塑', '攝影'],
+    1: ['古董文物', '油畫', '雕塑', '攝影', '水彩', '書法'],
+  }
+  const galleries = {
+    0: ['故宮博物院', '台北市立美術館', '台北當代藝術館', '奇美博物館'],
+    1: [
+      '故宮博物院',
+      '台北市立美術館',
+      '台北當代藝術館',
+      '奇美博物館',
+      '高雄市立美術館',
+      '台中市立美術館',
+      '台南市立美術館',
+    ],
+  }
+
+  const [categoryAngle, setCategoryAngle] = useState(0)
+  const [categoryIcon, setCategoryIcon] = useState('block')
+  const [categoryState, setCategoryState] = useState(categories[0])
+
+  const [galleryAngle, setGalleryAngle] = useState(0)
+  const [galleryIcon, setGalleryIcon] = useState('block')
+  const [galleryState, setGalleryState] = useState(galleries[0])
+
+  const [startDate, setStartDate] = useState(new Date())
+  const [endDate, setEndDate] = useState(new Date())
+
   const imgurl = {
     backgroundImage: `url(${exhibitionimg})`,
   }
 
+  const categoryicon1 = {
+    height: '20px',
+    width: '5px',
+    background: 'black',
+    transform: `rotate(${categoryAngle}deg)`,
+    transition: '0.3s',
+  }
+
+  const categoryicon2 = {
+    height: '20px',
+    width: '5px',
+    background: 'black',
+    transform: 'rotate(90deg)',
+    position: 'absolute',
+    transition: '0.3s',
+    display: `${categoryIcon}`,
+  }
+
+  const galleryicon1 = {
+    height: '20px',
+    width: '5px',
+    background: 'black',
+    transform: `rotate(${galleryAngle}deg)`,
+    transition: '0.3s',
+  }
+
+  const galleryicon2 = {
+    height: '20px',
+    width: '5px',
+    background: 'black',
+    transform: 'rotate(90deg)',
+    position: 'absolute',
+    transition: '0.3s',
+    display: `${galleryIcon}`,
+  }
+
   const cards = ['1', '2', '3', '4', '5', '6']
 
-  const categories = ['古董文物', '油畫', '雕塑', '攝影', '全部']
-
-  const galleries = [
-    '故宮博物院',
-    '台北市立美術館',
-    '台北當代藝術館',
-    '奇美博物館',
-    '全部',
-  ]
   const areas = ['北部', '中部', '南部', '東部', '離島']
   const areasObject = {
     0: ['臺北市', '新北市', '基隆市', '新竹市', '桃園市', '新竹縣', '宜蘭縣'],
@@ -44,22 +112,26 @@ function Exhibition(props) {
   const card = cards.map((v, i) => {
     return (
       <div key={i}>
-        <div className="col">
-          <div className="exhibitioncard d-flex">
-            <Link to="#" className="imgframe-link">
+        <div className="col d-flex justify-content-center">
+          <div className="exhibitioncard d-flex BoxShadow">
+            <Link to="/exhibition/introduce" className="imgframe-link">
               <div style={imgurl} className="imgframe"></div>
             </Link>
             <div className="d-flex content">
               <div className="title mt-2">
-                <h5 className="titletext text-web pt-2">
-                  《掘光而行│洪瑞麟的展覽-{i}
-                </h5>
-                <h6 className="pRegular titletext text-mobile my-2">
-                  《掘光而行│洪瑞麟的展覽-{i}
-                </h6>
+                <Link to="/exhibition/introduce" className="selectlink">
+                  <h5 className="titletext text-web pt-2">
+                    《掘光而行│洪瑞麟的展覽-{i}
+                  </h5>
+                </Link>
+                <Link to="/exhibition/introduce" className="selectlink">
+                  <h6 className="pRegular titletext text-mobile my-2">
+                    《掘光而行│洪瑞麟的展覽-{i}
+                  </h6>
+                </Link>
               </div>
               <div className="date-area-data">
-                <div className="d-flex icon-content">
+                <div className="d-flex align-items-center">
                   <FontAwesomeIcon
                     className="cardicon me-2"
                     icon={faMapMarkerAlt}
@@ -67,7 +139,7 @@ function Exhibition(props) {
                   <div className="text-web">台北市立美術館</div>
                   <div className="text-mobile pSmall">台北市立美術館</div>
                 </div>
-                <div className="my-1 d-flex icon-content">
+                <div className="my-1 d-flex align-items-center">
                   <FontAwesomeIcon
                     className="cardicon me-2"
                     icon={faCalendarAlt}
@@ -99,26 +171,26 @@ function Exhibition(props) {
     )
   })
 
-  const category = categories.map((v, i) => {
+  const category = categoryState.map((v, i) => {
     return (
       <div key={i}>
-        <Link to="#" className="optionlink" onClick={optionChange}>
+        <Link to="#" className="selectlink" onClick={optionChange}>
           <div className="d-flex align-items-center selectframe">
             <div className="selectsquare" id={`option` + i}></div>
-            <div>{categories[i]}</div>
+            <div>{categoryState[i]}</div>
           </div>
         </Link>
       </div>
     )
   })
-  const gallery = galleries.map((v, i) => {
+  const gallery = galleryState.map((v, i) => {
     return (
       <div key={i}>
-        <Link to="#" className="optionlink" onClick={optionChange}>
+        <Link to="#" className="selectlink" onClick={optionChange}>
           <div className="d-flex align-items-center selectframe">
             <div className="selectsquare"></div>
 
-            <div>{galleries[i]}</div>
+            <div>{galleryState[i]}</div>
           </div>
         </Link>
       </div>
@@ -135,7 +207,7 @@ function Exhibition(props) {
               {areasObject[i].map((v, j) => {
                 return (
                   <div key={j}>
-                    <Link to="#" className="optionlink" onClick={optionChange}>
+                    <Link to="#" className="selectlink" onClick={optionChange}>
                       <div className="d-flex align-items-center selectframe">
                         <div className="selectsquare"></div>
                         {areasObject[i][j]}
@@ -154,8 +226,8 @@ function Exhibition(props) {
   return (
     <>
       <header>Exhibition Header</header>
-      <div className="d-flex theframe">
-        <aside className="webaside">
+      <div className="d-flex exlist-frame">
+        <aside>
           {/* 搜尋列 */}
           <form className="d-flex searchbar">
             <input
@@ -191,17 +263,20 @@ function Exhibition(props) {
           </div>
 
           {/* 價錢 */}
-          <div className="d-flex asideframe">
-            <div className="d-flex justify-content-between">
-              <div className="h4">價錢＄</div>
-              <div>0~5000</div>
+          <div className="d-flex asideframe BoxShadow">
+            <div className="d-flex justify-content-between align-items-center">
+              <div className="h4 my-0">價錢＄</div>
+              {value[0]}~{value[1]}
             </div>
-            <input
-              type="range"
-              className="form-range"
-              min="0"
-              max="5000"
-              step="100"
+            <Slider
+              getAriaLabel={() => 'Temperature'}
+              value={value}
+              onChange={handleChange}
+              valueLabelDisplay="auto"
+              getAriaValueText={valuetext}
+              min={0}
+              max={2000}
+              step={50}
             />
 
             <form className="mt-2 position-relative">
@@ -215,6 +290,7 @@ function Exhibition(props) {
                     className="form-control priceinput"
                     id="lowprice"
                     placeholder="0"
+                    value={value[0]}
                   />
                 </div>
                 <div>
@@ -225,7 +301,8 @@ function Exhibition(props) {
                     type="text"
                     className="form-control priceinput"
                     id="lowprice"
-                    placeholder="5000"
+                    placeholder="2000"
+                    value={value[1]}
                   />
                 </div>
               </div>
@@ -233,35 +310,67 @@ function Exhibition(props) {
           </div>
 
           {/* 日期 */}
-          <div className="asideframe">
-            <div className="d-flex justify-content-between">
-              <div className="h4">日期</div>
+          <div className="asideframe BoxShadow">
+            <div className="d-flex justify-content-between align-items-center mb-2">
+              <div className="h4 my-0">日期</div>
               <div>
                 <FontAwesomeIcon icon={faCalendarAlt} />
               </div>
             </div>
             <div className="d-flex">
-              <input type="date" className="dateinput me-1" />
+              {/* <input type="date" id="datestart" className="dateinput me-1" /> */}
+              <DatePicker
+                className="dateinput"
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+              />
               ~
-              <input type="date" className="dateinput ms-1" />
+              <DatePicker
+                className="dateinput"
+                selected={endDate}
+                onChange={(date) => setEndDate(date)}
+                minDate={startDate}
+              />
+              {/* <input type="date" id="dateend" className="dateinput ms-1" /> */}
             </div>
           </div>
 
           {/* 類別 */}
-          <div className="asideframe">
-            <div className="h4">展覽類別</div>
+          <div className="asideframe BoxShadow">
+            <div className="d-flex justify-content-between align-items-center">
+              <div className="h4 my-0">展覽類別</div>
+              <div className="option-expand">
+                <Link to="#" className="expand-link" onClick={expandCategory}>
+                  <div className="option-expand position-relative d-flex justify-content-center align-items-center">
+                    <div style={categoryicon1}></div>
+                    <div style={categoryicon2}></div>
+                  </div>
+                </Link>
+              </div>
+            </div>
+
             <div>{category}</div>
           </div>
 
           {/* 館所 */}
-          <div className="asideframe">
-            <div className="h4">館所</div>
+          <div className="asideframe BoxShadow">
+            <div className="d-flex justify-content-between align-items-center">
+              <div className="h4 my-0">館所</div>
+              <div className="option-expand">
+                <Link to="#" className="expand-link" onClick={expandGallery}>
+                  <div className="option-expand position-relative d-flex justify-content-center align-items-center">
+                    <div style={galleryicon1}></div>
+                    <div style={galleryicon2}></div>
+                  </div>
+                </Link>
+              </div>
+            </div>
             <div>{gallery}</div>
           </div>
 
           {/* 地區 */}
-          <div className="asideframe">
-            <div className="h4">區域</div>
+          <div className="asideframe BoxShadow">
+            <div className="h4 my-0">區域</div>
             <div>{area}</div>
           </div>
         </aside>
@@ -284,7 +393,7 @@ function Exhibition(props) {
             <div className="mobileoption">
               {/* 地圖 */}
               <button className="btn btn-light rounded-pill mobile-option-btn">
-                <Link className="optionlink" to="/exhibition/mapsearch">
+                <Link className="selectlink" to="/exhibition/mapsearch">
                   地圖
                 </Link>
               </button>
@@ -298,22 +407,25 @@ function Exhibition(props) {
                 </button>
                 <div className="mobilewindow">
                   <div className="window-off">
-                    <div className="window-background window-control-price">
+                    <div className="window-background">
                       <div className="d-flex mobileframe">
-                        <div className="d-flex justify-content-between">
-                          <div className="h4">價錢＄</div>
-                          <div>0~5000</div>
+                        <div className="d-flex justify-content-between align-items-center mb-2">
+                          <div className="h4 my-0">價錢＄</div>
+                          {value[0]}~{value[1]}
                         </div>
-                        <input
-                          type="range"
-                          className="form-range"
-                          min="0"
-                          max="5000"
-                          step="100"
+                        <Slider
+                          getAriaLabel={() => 'Temperature'}
+                          value={value}
+                          onChange={handleChange}
+                          valueLabelDisplay="auto"
+                          getAriaValueText={valuetext}
+                          min={0}
+                          max={2000}
+                          step={50}
                         />
 
                         <form className="mt-2 position-relative">
-                          <div className="justify-content-between d-flex">
+                          <div className="justify-content-between align-items-center d-flex">
                             <div>
                               <label htmlFor="lowprice" className="form-label">
                                 最低
@@ -323,6 +435,7 @@ function Exhibition(props) {
                                 className="form-control priceinput"
                                 id="lowprice"
                                 placeholder="0"
+                                value={value[0]}
                               />
                             </div>
                             <div>
@@ -333,20 +446,21 @@ function Exhibition(props) {
                                 type="text"
                                 className="form-control priceinput"
                                 id="lowprice"
-                                placeholder="5000"
+                                placeholder="2000"
+                                value={value[1]}
                               />
                             </div>
                           </div>
                         </form>
-                        <div className="d-flex justify-content-between mt-3">
+                        <div className="d-flex justify-content-between align-items-center mt-3">
                           <button
-                            className="btn btn-primary rounded-pill mobile-btn"
+                            className="btn btn-primary rounded-pill window-btn"
                             onClick={closewindow}
                           >
                             確定
                           </button>
                           <button
-                            className="btn btn-outline-primary rounded-pill mobile-btn"
+                            className="btn btn-outline-primary rounded-pill window-btn"
                             onClick={closewindow}
                           >
                             取消
@@ -367,10 +481,10 @@ function Exhibition(props) {
                 </button>
                 <div className="mobilewindow">
                   <div className="window-off">
-                    <div className="window-background window-control-date">
+                    <div className="window-background">
                       <div className="d-flex mobileframe">
-                        <div className="d-flex justify-content-between">
-                          <div className="h4">日期</div>
+                        <div className="d-flex justify-content-between align-items-center mb-2">
+                          <div className="h4 my-0">日期</div>
                           <div>
                             <FontAwesomeIcon icon={faCalendarAlt} />
                           </div>
@@ -381,15 +495,15 @@ function Exhibition(props) {
                           <input type="date" className="dateinput ms-1" />
                         </div>
 
-                        <div className="d-flex justify-content-between mt-3">
+                        <div className="d-flex justify-content-between align-items-center mt-3">
                           <button
-                            className="btn btn-primary rounded-pill mobile-btn"
+                            className="btn btn-primary rounded-pill window-btn"
                             onClick={closewindow}
                           >
                             確定
                           </button>
                           <button
-                            className="btn btn-outline-primary rounded-pill mobile-btn"
+                            className="btn btn-outline-primary rounded-pill window-btn"
                             onClick={closewindow}
                           >
                             取消
@@ -410,20 +524,35 @@ function Exhibition(props) {
                 </button>
                 <div className="mobilewindow">
                   <div className="window-off">
-                    <div className="window-background window-control-category">
+                    <div className="window-background">
                       <div className="d-flex mobileframe">
-                        <div className="h4">展覽類別</div>
-                        <div>{category}</div>
+                        <div className="d-flex justify-content-between align-items-center">
+                          <div className="h4 my-0">展覽類別</div>
+                          <div className="option-expand">
+                            <Link
+                              to="#"
+                              className="expand-link"
+                              onClick={expandCategory}
+                            >
+                              <div className="option-expand position-relative d-flex justify-content-center align-items-center">
+                                <div style={categoryicon1}></div>
+                                <div style={categoryicon2}></div>
+                              </div>
+                            </Link>
+                          </div>
+                        </div>
 
-                        <div className="d-flex justify-content-between mt-3">
+                        <div className="window-size">{category}</div>
+
+                        <div className="d-flex justify-content-between align-items-center mt-3">
                           <button
-                            className="btn btn-primary rounded-pill mobile-btn"
+                            className="btn btn-primary rounded-pill window-btn"
                             onClick={closewindow}
                           >
                             確定
                           </button>
                           <button
-                            className="btn btn-outline-primary rounded-pill mobile-btn"
+                            className="btn btn-outline-primary rounded-pill window-btn"
                             onClick={closewindow}
                           >
                             取消
@@ -444,20 +573,35 @@ function Exhibition(props) {
                 </button>
                 <div className="mobilewindow">
                   <div className="window-off">
-                    <div className="window-background window-control-gallery">
+                    <div className="window-background">
                       <div className="d-flex mobileframe">
-                        <div className="h4">館所</div>
-                        <div className="mobile-option-height">{gallery}</div>
+                        <div className="d-flex justify-content-between align-items-center">
+                          <div className="h4 my-0">館所</div>
+                          <div className="option-expand">
+                            <Link
+                              to="#"
+                              className="expand-link"
+                              onClick={expandGallery}
+                            >
+                              <div className="option-expand position-relative d-flex justify-content-center align-items-center">
+                                <div style={galleryicon1}></div>
+                                <div style={galleryicon2}></div>
+                              </div>
+                            </Link>
+                          </div>
+                        </div>
 
-                        <div className="d-flex justify-content-between mt-3">
+                        <div className="window-size">{gallery}</div>
+
+                        <div className="d-flex justify-content-between align-items-center mt-3">
                           <button
-                            className="btn btn-primary rounded-pill mobile-btn"
+                            className="btn btn-primary rounded-pill window-btn"
                             onClick={closewindow}
                           >
                             確定
                           </button>
                           <button
-                            className="btn btn-outline-primary rounded-pill mobile-btn"
+                            className="btn btn-outline-primary rounded-pill window-btn"
                             onClick={closewindow}
                           >
                             取消
@@ -479,20 +623,20 @@ function Exhibition(props) {
                 </button>
                 <div className="mobilewindow">
                   <div className="window-off">
-                    <div className="window-background window-control-area">
+                    <div className="window-background">
                       <div className="d-flex mobileframe">
-                        <div className="h4">區域</div>
-                        <div className="mobile-option-height">{area}</div>
+                        <div className="h4 my-0">區域</div>
+                        <div className="window-size pt-2">{area}</div>
 
-                        <div className="d-flex justify-content-between mt-3">
+                        <div className="d-flex justify-content-between align-items-center mt-3">
                           <button
-                            className="btn btn-primary rounded-pill mobile-btn"
+                            className="btn btn-primary rounded-pill window-btn"
                             onClick={closewindow}
                           >
                             確定
                           </button>
                           <button
-                            className="btn btn-outline-primary rounded-pill mobile-btn"
+                            className="btn btn-outline-primary rounded-pill window-btn"
                             onClick={closewindow}
                           >
                             取消
@@ -515,6 +659,30 @@ function Exhibition(props) {
       </div>
     </>
   )
+  function expandCategory() {
+    let angle = categoryAngle
+    if (angle === 0) {
+      setCategoryAngle(-90)
+      setCategoryIcon('none')
+      setCategoryState(categories[1])
+    } else {
+      setCategoryAngle(0)
+      setCategoryIcon('block')
+      setCategoryState(categories[0])
+    }
+  }
+  function expandGallery() {
+    let angle = galleryAngle
+    if (angle === 0) {
+      setGalleryAngle(-90)
+      setGalleryIcon('none')
+      setGalleryState(galleries[1])
+    } else {
+      setGalleryAngle(0)
+      setGalleryIcon('block')
+      setGalleryState(galleries[0])
+    }
+  }
 }
 function optionChange(e) {
   let thetarget = e.target.parentNode.childNodes[0]
@@ -526,7 +694,7 @@ function optionChange(e) {
   let changeicon = thetarget.getAttribute('class')
 
   if (changeicon === 'selectsquare') {
-    thetarget.setAttribute('class', 'selectsquare PurpleBlue')
+    thetarget.setAttribute('class', 'selectedsquare')
   } else {
     thetarget.setAttribute('class', 'selectsquare')
   }
