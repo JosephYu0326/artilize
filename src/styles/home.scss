@@ -165,7 +165,7 @@
 }
 .homeHotSale {
     height: 688px;
-    border: 1px solid black;
+    // border: 1px solid black;
 
     h1 {
         text-align: center;
@@ -174,12 +174,28 @@
         margin: 0;
     }
     .homeHotSaleCardGroup {
-        border: 1px solid black;
+        // border: 1px solid black;
         height: 557px;
+        a:-webkit-any-link {
+            text-decoration: none;
+            transition: 0.5;
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
         .homeHotSaleCard {
             border-radius: $BorderRadius;
             height: 447px;
-            border: 1px solid black;
+            // border: 1px solid black;
+            box-shadow: $BoxShadow;
+
+            h6 {
+                color: black;
+            }
+
+            h5 {
+                color: $DarkGrey;
+            }
         }
     }
 }

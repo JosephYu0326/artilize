@@ -236,48 +236,66 @@ function Home(props) {
               <h1 className="SemiBold">熱銷商品</h1>
             </div>
             <div className="d-flex justify-content-between align-items-center homeHotSaleCardGroup">
-              <Card style={{ width: '345px' }} className="homeHotSaleCard">
-                <Card.Img
-                  variant="top"
-                  src={HomeHotSale1}
-                  style={{ height: '350px' }}
-                />
-                <Card.Body style={{ padding: '0px' }}>
-                  <Card.Title>Card Title</Card.Title>
-                  <Card.Text>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-              <Card style={{ width: '345px' }} className="homeHotSaleCard">
-                <Card.Img
-                  variant="top"
-                  src={HomeHotSale2}
-                  style={{ height: '350px' }}
-                />
-                <Card.Body style={{ padding: '0px', marginTop: '16px' }}>
-                  <Card.Title>Card Title</Card.Title>
-                  <Card.Text>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-              <Card style={{ width: '345px' }} className="homeHotSaleCard">
-                <Card.Img
-                  variant="top"
-                  src={HomeHotSale3}
-                  style={{ height: '350px' }}
-                />
-                <Card.Body>
-                  <Card.Title>Card Title</Card.Title>
-                  <Card.Text>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </Card.Text>
-                </Card.Body>
-              </Card>
+              <Link to="*">
+                <Card style={{ width: '345px' }} className="homeHotSaleCard">
+                  <Card.Img
+                    variant="top"
+                    src={HomeHotSale1}
+                    style={{ height: '350px' }}
+                  />
+                  <Card.Body style={{ padding: '16px 16px' }}>
+                    <Card.Title>
+                      <div className="d-flex justify-content-between">
+                        <h6 className="SemiBold" style={{ width: '192px' }}>
+                          日常展 - 365天日記
+                        </h6>
+                        <h5 className="SemiBold">NT$ 150</h5>
+                      </div>
+                    </Card.Title>
+                    <Card.Text></Card.Text>
+                  </Card.Body>
+                </Card>
+              </Link>
+              <Link to="*">
+                <Card style={{ width: '345px' }} className="homeHotSaleCard">
+                  <Card.Img
+                    variant="top"
+                    src={HomeHotSale2}
+                    style={{ height: '350px' }}
+                  />
+                  <Card.Body>
+                    <Card.Title>
+                      <div className="d-flex justify-content-between">
+                        <h6 className="SemiBold" style={{ width: '192px' }}>
+                          迷你擺飾-迷你圓滿博古架文物組
+                        </h6>
+                        <h5 className="SemiBold">NT$ 980</h5>
+                      </div>
+                    </Card.Title>
+                    <Card.Text></Card.Text>
+                  </Card.Body>
+                </Card>
+              </Link>
+              <Link to="">
+                <Card style={{ width: '345px' }} className="homeHotSaleCard">
+                  <Card.Img
+                    variant="top"
+                    src={HomeHotSale3}
+                    style={{ height: '350px' }}
+                  />
+                  <Card.Body>
+                    <Card.Title>
+                      <div className="d-flex justify-content-between">
+                        <h6 className="SemiBold" style={{ width: '192px' }}>
+                          郎世寧系列·吉鶴歲 萬用袋(單色6入)
+                        </h6>
+                        <h5 className="SemiBold">NT$ 220</h5>
+                      </div>
+                    </Card.Title>
+                    <Card.Text></Card.Text>
+                  </Card.Body>
+                </Card>
+              </Link>
             </div>
           </div>
         </Container>
