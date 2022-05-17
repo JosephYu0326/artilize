@@ -1,0 +1,16 @@
+@import '../styles/style.scss';
+@import '~bootstrap/scss/bootstrap';
+
+.searchinput{
+    border: #B4A79E 1.5px solid !important;
+    border-radius: 21px !important;
+    width: 300px !important;
+}
+.searchbtn{
+    height: 48px;
+    position: absolute;
+    right: 0;
+    border: none !important;
+    border-radius: 21px !important;
+    color: #B4A79E !important;
+}

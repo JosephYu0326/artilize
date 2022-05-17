@@ -48,6 +48,31 @@
         height: 150vw;
         padding: 40px;
     }
+    .content-introduce{
+        white-space:pre-wrap;
+    }
+    .accordion{
+        border: 0px;
+        .title{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 30px;
+        }
+        .title:after{
+            color: #fff;
+        }
+    }
+    .accordion .accordion-item .title{
+        background-color: $PurpleBlue;
+        color: #fff;
+    }
+    .accordion .accordion-item .title:after{
+        font-size: 32px;
+        // color:#fff;
+        // background: #fff;
+    }
+    
 }
 
 

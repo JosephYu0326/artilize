@@ -1,6 +1,7 @@
 //展覽
 
 import React, { useState } from 'react'
+import { useEffect } from 'react'
 import DatePicker from 'react-datepicker'
 import Slider from '@mui/material/Slider'
 
@@ -18,16 +19,23 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 
+import SearchBar from '../../component/SearchBar'
+
+
 import exhibitionimg from './images/exhibition1.jpeg'
-function valuetext(value) {
-  return `${value}$`
-}
 
 function Exhibition(props) {
   const [value, setValue] = useState([20, 800])
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue)
+  const cards = ['1', '2', '3', '4', '5', '6']
+
+  const areas = ['北部', '中部', '南部', '東部', '離島']
+  const areasObject = {
+    0: ['臺北市', '新北市', '基隆市', '新竹市', '桃園市', '新竹縣', '宜蘭縣'],
+    1: ['臺中市', '苗栗縣', '彰化縣', '南投縣', '雲林縣'],
+    2: ['高雄市', '臺南市', '嘉義市', '嘉義縣', '屏東縣', '澎湖縣'],
+    3: ['花蓮縣', '台東縣'],
+    4: ['金門縣', '連江縣'],
   }
 
   const categories = {
@@ -98,15 +106,11 @@ function Exhibition(props) {
     display: `${galleryIcon}`,
   }
 
-  const cards = ['1', '2', '3', '4', '5', '6']
+  const [testHeight, setTestHeight] = useState(200)
 
-  const areas = ['北部', '中部', '南部', '東部', '離島']
-  const areasObject = {
-    0: ['臺北市', '新北市', '基隆市', '新竹市', '桃園市', '新竹縣', '宜蘭縣'],
-    1: ['臺中市', '苗栗縣', '彰化縣', '南投縣', '雲林縣'],
-    2: ['高雄市', '臺南市', '嘉義市', '嘉義縣', '屏東縣', '澎湖縣'],
-    3: ['花蓮縣', '台東縣'],
-    4: ['金門縣', '連江縣'],
+  const categoryOption = {
+    height: `${testHeight}px`,
+    transition: 'height 0.4s cubic-bezier(0.1, 0.4, 0.4, 0.1)',
   }
 
   const card = cards.map((v, i) => {
@@ -223,6 +227,46 @@ function Exhibition(props) {
     )
   })
 
+  const handleChange = (event, newValue) => {
+    setValue(newValue)
+  }
+
+  function expandCategory(num) {
+    let angle = categoryAngle
+
+    if (angle === 0) {
+      setCategoryAngle(-90)
+      setCategoryIcon('none')
+      setCategoryState(categories[1])
+      setTestHeight(num)
+    } else {
+      setCategoryAngle(0)
+      setCategoryIcon('block')
+      setCategoryState(categories[0])
+      setTestHeight(num)
+    }
+  }
+  function testExpand(el) {
+    setTestHeight(el)
+    console.log(el)
+  }
+  function expandGallery() {
+    let angle = galleryAngle
+    if (angle === 0) {
+      setGalleryAngle(-90)
+      setGalleryIcon('none')
+      setGalleryState(galleries[1])
+    } else {
+      setGalleryAngle(0)
+      setGalleryIcon('block')
+      setGalleryState(galleries[0])
+    }
+  }
+  useEffect(() => {
+    var el = document.querySelector('.categoryOption').scrollHeight
+    expandCategory(el)
+  }, [])
+
   return (
     <>
       <header>Exhibition Header</header>
@@ -230,15 +274,7 @@ function Exhibition(props) {
         <aside>
           {/* 搜尋列 */}
           <form className="d-flex searchbar">
-            <input
-              className="form-control searchinput"
-              type="search"
-              placeholder="搜尋展覽"
-              aria-label="Search"
-            />
-            <button className="btn searchbtn" type="submit">
-              <FontAwesomeIcon icon={faSearch} />
-            </button>
+            <SearchBar />
           </form>
 
           {/* 地圖搜尋 */}
@@ -290,7 +326,6 @@ function Exhibition(props) {
                     className="form-control priceinput"
                     id="lowprice"
                     placeholder="0"
-                    value={value[0]}
                   />
                 </div>
                 <div>
@@ -300,9 +335,8 @@ function Exhibition(props) {
                   <input
                     type="text"
                     className="form-control priceinput"
-                    id="lowprice"
+                    id="highprice"
                     placeholder="2000"
-                    value={value[1]}
                   />
                 </div>
               </div>
@@ -349,7 +383,9 @@ function Exhibition(props) {
               </div>
             </div>
 
-            <div>{category}</div>
+            <div style={categoryOption} className="categoryOption">
+              {category}
+            </div>
           </div>
 
           {/* 館所 */}
@@ -413,16 +449,18 @@ function Exhibition(props) {
                           <div className="h4 my-0">價錢＄</div>
                           {value[0]}~{value[1]}
                         </div>
-                        <Slider
-                          getAriaLabel={() => 'Temperature'}
-                          value={value}
-                          onChange={handleChange}
-                          valueLabelDisplay="auto"
-                          getAriaValueText={valuetext}
-                          min={0}
-                          max={2000}
-                          step={50}
-                        />
+                        <form>
+                          <Slider
+                            getAriaLabel={() => 'Temperature'}
+                            value={value}
+                            onChange={handleChange}
+                            valueLabelDisplay="auto"
+                            getAriaValueText={valuetext}
+                            min={0}
+                            max={2000}
+                            step={50}
+                          />
+                        </form>
 
                         <form className="mt-2 position-relative">
                           <div className="justify-content-between align-items-center d-flex">
@@ -435,7 +473,6 @@ function Exhibition(props) {
                                 className="form-control priceinput"
                                 id="lowprice"
                                 placeholder="0"
-                                value={value[0]}
                               />
                             </div>
                             <div>
@@ -445,9 +482,8 @@ function Exhibition(props) {
                               <input
                                 type="text"
                                 className="form-control priceinput"
-                                id="lowprice"
+                                id="highprice"
                                 placeholder="2000"
-                                value={value[1]}
                               />
                             </div>
                           </div>
@@ -653,36 +689,12 @@ function Exhibition(props) {
 
         <main className="container-fluid">
           <div className="container">
-            <div className="row row-cols-xxl-3 row-cols-2 ">{card}</div>
+            <div className="row row-cols-xxl-4 row-cols-xl-3 row-cols-2">{card}</div>
           </div>
         </main>
       </div>
     </>
   )
-  function expandCategory() {
-    let angle = categoryAngle
-    if (angle === 0) {
-      setCategoryAngle(-90)
-      setCategoryIcon('none')
-      setCategoryState(categories[1])
-    } else {
-      setCategoryAngle(0)
-      setCategoryIcon('block')
-      setCategoryState(categories[0])
-    }
-  }
-  function expandGallery() {
-    let angle = galleryAngle
-    if (angle === 0) {
-      setGalleryAngle(-90)
-      setGalleryIcon('none')
-      setGalleryState(galleries[1])
-    } else {
-      setGalleryAngle(0)
-      setGalleryIcon('block')
-      setGalleryState(galleries[0])
-    }
-  }
 }
 function optionChange(e) {
   let thetarget = e.target.parentNode.childNodes[0]
@@ -708,6 +720,10 @@ function mobilewindow(e) {
 function closewindow(e) {
   let thetarget = e.target.parentNode.parentNode.parentNode.parentNode
   thetarget.setAttribute('class', 'window-off')
+}
+
+function valuetext(value) {
+  return `${value}$`
 }
 
 export default Exhibition

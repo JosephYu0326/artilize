@@ -30,19 +30,7 @@ header{
         margin-bottom: 30px;
         position: relative;
     }
-    .searchinput{
-        border: #B4A79E 1.5px solid !important;
-        border-radius: 21px !important;
-        width: 300px !important;
-    }
-    .searchbtn{
-        height: 48px;
-        position: absolute;
-        right: 0;
-        border: none !important;
-        border-radius: 21px !important;
-        color: #B4A79E !important;
-    }
+    
 
     .maplink{
         color: #fff;
@@ -137,6 +125,9 @@ header{
         text-decoration: none;
         color: black;
     }
+    .accordion{
+        border: 0px;
+    }
     .option-expand{
         width: 25px;
         height: 25px;
@@ -174,6 +165,7 @@ header{
             align-items: center;
             max-height: 60px;
             max-width: 300px;
+            padding: 10px;
         }    
         .titletext {
             display: -webkit-box;

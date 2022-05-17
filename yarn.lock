@@ -7715,6 +7715,13 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.npmjs.org/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-light-accordion@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/react-light-accordion/-/react-light-accordion-0.1.4.tgz#4f16dce6c32fd9aeac8b53015fd70781f128ac00"
+  integrity sha512-PD0T//kS3ADiSv63Mdl6C+b9+pBp+iloAueF15GSMIZO65H/ulOIFU0WaGE1B06rUCqO8wkbF7gl4Ept9nfMrg==
+  dependencies:
+    classnames "^2.2.5"
+
 react-native-range-slider@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/react-native-range-slider/-/react-native-range-slider-0.1.2.tgz#f1bc020aa9094340a8ae22c25e22cbcb5af48710"

@@ -30,6 +30,7 @@
     "react-datepicker": "^4.7.0",
     "react-dom": "^18.1.0",
     "react-icons": "^4.3.1",
+    "react-light-accordion": "^0.1.4",
     "react-native-range-slider": "^0.1.2",
     "react-range": "^1.8.12",
     "react-rangeslider": "^2.2.0",
