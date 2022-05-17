@@ -21,7 +21,6 @@ import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 
 import SearchBar from '../../component/SearchBar'
 
-
 import exhibitionimg from './images/exhibition1.jpeg'
 
 function Exhibition(props) {
@@ -273,7 +272,7 @@ function Exhibition(props) {
       <div className="d-flex exlist-frame">
         <aside>
           {/* 搜尋列 */}
-          <form className="d-flex searchbar">
+          <form className="searchmargin">
             <SearchBar />
           </form>
 
@@ -689,7 +688,9 @@ function Exhibition(props) {
 
         <main className="container-fluid">
           <div className="container">
-            <div className="row row-cols-xxl-4 row-cols-xl-3 row-cols-2">{card}</div>
+            <div className="row row-cols-xxl-4 row-cols-xl-3 row-cols-2">
+              {card}
+            </div>
           </div>
         </main>
       </div>

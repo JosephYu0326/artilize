@@ -1,6 +1,10 @@
 @import '../styles/style.scss';
 @import '~bootstrap/scss/bootstrap';
 
+.searchbar{
+    position: relative;
+}
+
 .searchinput{
     height: 50px;
     border: #B4A79E 1.5px solid !important;
