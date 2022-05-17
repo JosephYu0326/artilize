@@ -1,88 +1,79 @@
-@import './global.scss';
+@import "./global.scss";
 
-.swiperImg{
-
-    img{
+.swiperImg {
+    img {
         overflow: hidden;
         max-width: 100%;
         height: 100%;
     }
 }
 
-.homeSwiper{
-    max-width: 1243px !important; 
+.homeSwiper {
+    max-width: 1243px !important;
 }
-.homeSwiperRight{
+.homeSwiperRight {
     max-width: 430px !important;
 }
-.homeSwiperLeft{
+.homeSwiperLeft {
     max-width: 104px !important;
 }
 
-.homeMap{
+.homeMap {
     background: url(../images/HomeMap.svg) no-repeat;
-    background-color:rgba(0,0,0,0.35) ;
+    background-color: rgba(0, 0, 0, 0.35);
     background-blend-mode: multiply;
-    background-size: 100% ;
+    background-size: 100%;
     height: 451px;
 
-    .homeMapInside{
-        
-        height: 451px ; 
-        div{
+    .homeMapInside {
+        height: 451px;
+        div {
             // border: 1px solid black;
-         
- 
-            h1{
+
+            h1 {
                 font-size: 64px;
             }
         }
-        .homeMapButton{
+        .homeMapButton {
             // border: 1px solid black;
             max-width: 503px;
-            button{
+            button {
                 border-radius: 32px;
                 padding: 15px 50px;
-                h2{
+                h2 {
                     margin: 0;
                 }
             }
-            button:nth-child(2){
+            button:nth-child(2) {
                 border: 3px solid #fff;
                 color: #fff;
             }
         }
-        .homeMapSearchBar{
+        .homeMapSearchBar {
             margin-top: 12px;
             max-width: 503px;
             gap: 16px;
-            form{
+            form {
                 border: 1px solid $DarkGrey;
                 border-radius: 37px;
                 box-shadow: $BoxShadow;
                 background-color: #fff;
                 width: 100%;
                 height: 74px;
-                
-        
-        
-                input{
+
+                input {
                     background: transparent;
                     border: 1px solid transparent;
                     width: 85%;
                     height: 44px;
                     // border: 1px solid black;
-            
-            
                 }
 
-                input:focus{
+                input:focus {
                     outline: none;
-        
                 }
-        
-        
-                button{
+
+                button {
                     text-indent: -999px;
                     overflow: hidden;
                     width: 42px;
@@ -96,82 +87,99 @@
             }
         }
     }
-    
 }
-.homeRank{
+.homeRank {
     background: #1a1c21;
     height: 688px;
 
-    .homeRankContainer{
+    .homeRankContainer {
         // border: 1px solid white;
         height: 688px;
     }
 
-    .homeRankHeader{
+    .homeRankHeader {
         max-width: 300px;
         // border: 1px solid white;
-        
-        
-        h1 span{
+
+        h1 span {
             color: white;
             text-align: center;
             border-bottom: 3px solid white;
         }
     }
-    h6{
+    h6 {
         color: #c4c4c4;
     }
-    button{
+    button {
         border: 1px solid #fff;
         border-radius: 31px;
         width: 371px;
-        h6{
+        h6 {
             color: white;
             margin: 0;
         }
         height: 62px;
-        &:hover{
+        &:hover {
             background-color: white;
-            h6{
+            h6 {
                 color: black;
             }
         }
     }
-    button::after{
-    display: block;
-    width: 16px;
-    min-width: 16px;
-    height: 9px;
-    margin-left: 10px;
-    // margin-top: 5px;
-    background: url(../images/Vector.svg);
-    background-size: 16px 9px;
-    content: "";
+    button::after {
+        display: block;
+        width: 16px;
+        min-width: 16px;
+        height: 9px;
+        margin-left: 10px;
+        // margin-top: 5px;
+        background: url(../images/Vector.svg);
+        background-size: 16px 9px;
+        content: "";
     }
-    .homeRank123{
+    .homeRank123 {
         // border: 1px solid white;
         width: 1020px;
         height: 688px;
 
-        ul{
+        ul {
             // border: 1px solid white;
             width: 100%;
             height: 100%;
             a:-webkit-any-link {
                 text-decoration: none;
-                img{
+                img {
                     transition: 0.5s;
                 }
-                &:hover{
-                    img{
+                &:hover {
+                    img {
                         opacity: 0.5;
-
                     }
                 }
             }
-            h6{
+            h6 {
                 color: #fff;
             }
+        }
+    }
+}
+.homeHotSale {
+    height: 688px;
+    border: 1px solid black;
+
+    h1 {
+        text-align: center;
+        border-bottom: 3px solid black;
+        width: 160px;
+        margin: 0;
+    }
+    .homeHotSaleCardGroup {
+        border: 1px solid black;
+        height: 557px;
+        .homeHotSaleCard {
+            border-radius: $BorderRadius;
+            height: 447px;
+            border: 1px solid black;
         }
     }
 }

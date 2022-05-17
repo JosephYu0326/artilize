@@ -1,7 +1,7 @@
 //首頁
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Navbar, Container, Row, Col } from 'react-bootstrap'
+import { Navbar, Container, Row, Col, Card } from 'react-bootstrap'
 import logo from '../../images/logo.svg'
 import userIcon from '../../images/userIcon.svg'
 import '../../styles/Home.scss'
@@ -17,6 +17,9 @@ import CountUp from 'react-countup'
 import Rank1 from '../../images/Rank1.svg'
 import Rank2 from '../../images/Rank2.svg'
 import Rank3 from '../../images/Rank3.svg'
+import HomeHotSale1 from '../../images/homeHotSale1.svg'
+import HomeHotSale2 from '../../images/homeHotSale2.svg'
+import HomeHotSale3 from '../../images/homeHotSale3.svg'
 
 function Home(props) {
   function rand(min, max) {
@@ -221,6 +224,62 @@ function Home(props) {
               </Container>
             </div>
           </Row>
+        </Container>
+      </section>
+      <section>
+        <Container>
+          <div className="d-flex flex-column homeHotSale">
+            <div
+              className=" d-flex justify-content-center align-items-end"
+              style={{ height: '131px' }}
+            >
+              <h1 className="SemiBold">熱銷商品</h1>
+            </div>
+            <div className="d-flex justify-content-between align-items-center homeHotSaleCardGroup">
+              <Card style={{ width: '345px' }} className="homeHotSaleCard">
+                <Card.Img
+                  variant="top"
+                  src={HomeHotSale1}
+                  style={{ height: '350px' }}
+                />
+                <Card.Body style={{ padding: '0px' }}>
+                  <Card.Title>Card Title</Card.Title>
+                  <Card.Text>
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+              <Card style={{ width: '345px' }} className="homeHotSaleCard">
+                <Card.Img
+                  variant="top"
+                  src={HomeHotSale2}
+                  style={{ height: '350px' }}
+                />
+                <Card.Body style={{ padding: '0px', marginTop: '16px' }}>
+                  <Card.Title>Card Title</Card.Title>
+                  <Card.Text>
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+              <Card style={{ width: '345px' }} className="homeHotSaleCard">
+                <Card.Img
+                  variant="top"
+                  src={HomeHotSale3}
+                  style={{ height: '350px' }}
+                />
+                <Card.Body>
+                  <Card.Title>Card Title</Card.Title>
+                  <Card.Text>
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </div>
+          </div>
         </Container>
       </section>
     </>
