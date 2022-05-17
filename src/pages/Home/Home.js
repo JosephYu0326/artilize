@@ -14,6 +14,9 @@ import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 import 'swiper/css/autoplay'
 import CountUp from 'react-countup'
+import Rank1 from '../../images/Rank1.svg'
+import Rank2 from '../../images/Rank2.svg'
+import Rank3 from '../../images/Rank3.svg'
 
 function Home(props) {
   function rand(min, max) {
@@ -167,16 +170,54 @@ function Home(props) {
         <Container fluid className="homeRank">
           <Row>
             <div>
-              <Container>
-                <div className="homeRankHeader">
-                  <h1 className="SemiBold">
-                    <span>展覽活動排行榜</span>
-                  </h1>
+              <Container className="d-flex">
+                <div className="d-flex flex-column justify-content-center homeRankContainer align-items-center">
+                  <div className="homeRankHeader">
+                    <h1 className="SemiBold">
+                      <span>展覽活動排行榜</span>
+                    </h1>
+                  </div>
+                  <h6 className="mt-3">
+                    此時此刻最熱門的展覽，活動與藝術家介紹
+                  </h6>
+                  <button className="btn d-flex justify-content-between align-items-center">
+                    <h6>更多展覽活動</h6>
+                  </button>
                 </div>
-                <h6>此時此刻最熱門的展覽，活動與藝術家介紹</h6>
-                <button className="btn d-flex justify-content-between">
-                  <h6>更多展覽活動</h6>
-                </button>
+                <div className="homeRank123">
+                  <ul className="d-flex justify-content-end">
+                    <li className="align-self-end">
+                      <Link to="*">
+                        <figure>
+                          <img src={Rank1} alt=""></img>
+                          <figcaption>
+                            <h6 className="SemiBold">塩田千春：顫動的靈魂</h6>
+                          </figcaption>
+                        </figure>
+                      </Link>
+                    </li>
+                    <li className="align-self-center ms-4 me-4">
+                      <Link to="*">
+                        <figure>
+                          <img src={Rank2} alt=""></img>
+                          <figcaption>
+                            <h6 className="SemiBold">挑戰—安藤忠雄展</h6>
+                          </figcaption>
+                        </figure>
+                      </Link>
+                    </li>
+                    <li className="align-self-baseline mt-4">
+                      <Link to="*">
+                        <figure>
+                          <img src={Rank3} alt=""></img>
+                          <figcaption>
+                            <h6 className="SemiBold">缺席 洪鈞元個展</h6>
+                          </figcaption>
+                        </figure>
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
               </Container>
             </div>
           </Row>
