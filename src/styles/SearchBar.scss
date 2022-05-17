@@ -1,18 +1,24 @@
 @import '../styles/style.scss';
 @import '~bootstrap/scss/bootstrap';
 
+.homeSearchBar{
+    display: flex;
+
+}
+
 .searchbar{
+    display: flex;
     position: relative;
 }
 
 .searchinput{
-    height: 50px;
+    height: 42px;
     border: #B4A79E 1.5px solid !important;
     border-radius: 21px !important;
     width: 300px !important;
 }
 .searchbtn{
-    height: 50px;
+    height: 42px;
     width: 50px;
     position: absolute;
     right: 0;
