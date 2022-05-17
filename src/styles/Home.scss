@@ -64,5 +64,89 @@
         background: transparent;
     }
 
-   
+    
+    
 }
+// ====footer====
+
+.fourword{
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    align-items: center;
+}
+
+footer{
+    margin: auto;
+    height: 40vh;
+    max-width: 80vw;
+    display: flex;
+    justify-content: space-between;
+    align-items:center
+}
+
+.footerSocial{
+    font-size: 2.5rem;
+}
+
+.txtGray{
+color:rgb(110,116,145);
+text-decoration: none;
+margin: 1rem;
+}
+
+
+.copyright{
+    align-self: flex-end;
+}
+
+@media (max-width:768px) {
+    .displayN{
+        display: none !important;
+    }
+    .fourword{
+        display: flex;
+        flex-direction: column;
+        justify-content:space-between;
+        align-items: center;
+    }
+
+    .fourword > .align-items-center{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .fourword  button{
+        margin: 30px;
+        width: 70vw;
+        color: #fff;
+        border: #fff 1px solid;
+    }
+    
+    footer{
+        min-width:100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content:space-around;
+        align-items:center;
+        margin: 0;
+        padding: 0;
+        background-color:rgb(110,116,145);
+    }
+
+    .txtGray{
+        color:#fff;
+        text-decoration: none;
+        
+    }
+
+    
+    .copyright{
+        align-self:center;
+    }
+    
+    //=== footer===
+    
+    
+    }
