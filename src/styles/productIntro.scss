@@ -1,0 +1,114 @@
+@import './global.scss';
+@import './style.scss';
+
+.pIntroDetailcard{
+    margin-top: 50px;
+    width: 635px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 3px rgb(199, 199, 199) ;
+    flex-direction: column;
+    padding: 0;
+}
+.pIntroMaincontenttopictext{
+    color: $PurpleBlue;
+}
+.pExintroTopictext{
+    color:$PurpleBlue;
+}
+
+.pSamesearchCard{
+    margin-top: 30px;
+    height: 550px;
+    width: 330px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 3px rgb(199, 199, 199) ;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0;
+}
+.pSameSearchimg{
+    background-repeat: no-repeat;
+    width: 330px;
+    height: 395px;
+    background-position: top,center;
+    background-size: cover;
+    overflow: hidden;
+}
+.pSamesearchContent{
+    width: 330px;
+    height:155px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.pSamesearchLinktopic{
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    color: #000;
+}
+.pPopCard{
+    margin-top: 30px;
+    height: 550px;
+    width: 330px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 3px rgb(199, 199, 199) ;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0;
+}
+.pPopImg{
+    background-repeat: no-repeat;
+    width: 330px;
+    height: 395px;
+    background-position: top,center;
+    background-size: cover;
+    overflow: hidden;
+}
+.pPopCardcontent{
+    width: 330px;
+    height:155px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.pPopLinktopic,.pPopLinkprice{
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    color: #000;
+}
+.pPopPrice{
+    font-weight: 800;
+}
+.pBrandCard{
+    margin-top: 30px;
+    height: 550px;
+    width: 330px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 3px rgb(199, 199, 199) ;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0;
+}
+.pBrandImg{
+    background-repeat: no-repeat;
+    width: 330px;
+    height: 395px;
+    background-position: center;
+    background-size: auto;
+    overflow: hidden;
+}
+.pBrandCardcontent{
+    width: 330px;
+    height:155px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.pBrandLink{
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif;
+    color: #000;
+}
