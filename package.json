@@ -19,6 +19,7 @@
     "react-bootstrap": "^2.3.1",
     "react-countup": "^6.2.0",
     "react-dom": "^18.1.0",
+    "react-horizontal-scrolling-menu": "^2.8.2",
     "react-icons": "^4.3.1",
     "react-router-dom": "5.3.1",
     "react-scripts": "5.0.1",
