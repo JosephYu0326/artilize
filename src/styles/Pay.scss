@@ -1,0 +1,150 @@
+@import './global.scss';
+// *{
+//     margin: 0;
+//     padding: 0;
+// }
+
+.payForm{
+    border-bottom: 1px solid $DarkGrey;
+    border-radius: $BorderRadius;
+    box-shadow: $BoxShadow;
+    input {
+        border: 1px solid $DarkGrey;
+        border-radius: $BorderRadius;
+    }
+    select{
+        border-radius: $BorderRadius;
+    }
+    textarea{
+        border-radius: $BorderRadius;
+    }
+    button{
+        border-radius: $BorderRadius;
+    }
+}
+
+
+// .step {
+//     width: 650px;
+//     margin:100px auto;
+//     padding: 0;
+//     outline: 1px solid $DarkGrey;
+//     display: flex;
+//     justify-content: space-between;
+// }
+// .step li{
+//     list-style: none;
+//     width: 40px;
+//     height: 40px;
+//     border-radius: 50%;
+//     background-color: $DarkGrey;
+//     position: relative;
+// }
+// .step li:not(:first-child):before{
+//     content: '';
+//     position: absolute;
+//     width: 265px;
+//     height: 10px;
+//     background-color: #aaa;
+//     top: 0;
+//     bottom: 0;
+//     right: 100%;
+//     margin: auto;
+// }
+
+    // @media (max-width:391px) {
+    //     .step {
+    //         display: none;
+    //     }
+    //     .step li{
+    //         display:none;
+    //     }
+  
+    // }
+    // <576px //手機板才樣式
+    @include media-breakpoint-down(sm) {  
+        .payyes{
+            // width: 330px;
+            margin:34px auto;
+            padding: 0;
+            text-align: center;
+            border-bottom: 1px solid $DarkGrey;
+            box-shadow: $BoxShadow;
+            border-radius: $BorderRadius;
+        }
+        
+        // 影藏css
+        .step {
+            display: none;
+        }
+        .checkstep{
+            display: none;
+        }
+        .allstep{
+            display: none;
+        }
+    }
+    
+    // ≥576px //桌機板樣式
+    @include media-breakpoint-up(sm) {
+        .step {
+            width: 650px;
+            margin:0px auto 100px;
+            padding: 0;
+            outline: 1px solid $DarkGrey;
+            display: flex;
+            justify-content: space-between;
+        }
+        .step li{
+            list-style: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: $DarkGrey;
+            position: relative;
+        }
+        .step li:not(:first-child):before{
+            content: '';
+            position: absolute;
+            width: 265px;
+            height: 10px;
+            background-color: #aaa;
+            top: 0;
+            bottom: 0;
+            right: 100%;
+            margin: auto;
+        }
+
+        .allstep{
+            width: 750px;
+            // border:1px solid green;
+            margin: 100px auto 0px;
+            padding: 0;
+            h3{  
+            //   border: 1px solid red;
+              padding: 0;
+              margin: 0;  
+            }
+            
+            .textstep1{
+                text-align:left ;
+            }
+            .textstep2{
+                text-align:center ;
+            }
+            .textstep3{
+                text-align:right ;
+            }
+
+          }
+    
+        
+        
+        .payyes{
+            display: none;
+        }
+
+      }
+     
+   
+   
