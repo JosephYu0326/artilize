@@ -199,3 +199,98 @@
         }
     }
 }
+.homeSologan {
+    height: 572.88px;
+    // border: 1px solid black;
+
+    h1 {
+        font-size: 100px;
+    }
+    img {
+        height: 572.88px;
+    }
+}
+.homeTour {
+    height: 569px;
+    // border: 1px solid black;
+    img {
+        height: 400px;
+        border-radius: 41px;
+        box-shadow: $BoxShadow;
+    }
+    div:nth-child(2) {
+        max-width: 534.21px;
+        // border: 1px solid black;
+
+        h1 {
+            text-align: center;
+            border-bottom: 3px solid black;
+            width: 160px;
+            margin: 0;
+        }
+        h4 {
+            text-align: center;
+        }
+        h4:nth-child(3) {
+            color: $DarkGrey;
+        }
+        button {
+            border-radius: $BorderRadius;
+            height: 42px;
+            width: 72px;
+        }
+    }
+}
+.homeApp {
+    height: 675px;
+    background: url(../images/homeApp.svg) no-repeat;
+    background-size: 100% auto;
+}
+.homeSponsor {
+    height: 497px;
+    // border: 1px solid black;
+
+    h1 {
+        text-align: center;
+        border-bottom: 3px solid black;
+        width: 160px;
+        margin: 0;
+    }
+    .card {
+        display: inline-block;
+        width: 213.66px;
+        height: 213.66px;
+        text-align: center;
+        border: none;
+    }
+}
+
+.homeMuseum {
+    height: 462px;
+    border: 1px solid black;
+    h1 {
+        text-align: center;
+        border-bottom: 3px solid black;
+        width: 160px;
+        margin: 0;
+    }
+    .homeMuseumScroll {
+        .homeMuseumCircle {
+            margin-right: 75px;
+            height: 137px;
+            div:nth-child(1) {
+                width: 120px;
+                height: 120px;
+                border: 1px solid black;
+                border-radius: 50%;
+            }
+            h6 {
+                text-align: center;
+                margin: 0;
+            }
+        }
+    }
+    .homeMuseumScroll::-webkit-scrollbar {
+        width: 0;
+    }
+}

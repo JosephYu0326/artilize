@@ -6,7 +6,8 @@ import logo from '../../images/logo.svg'
 import userIcon from '../../images/userIcon.svg'
 import '../../styles/Home.scss'
 import Header from '../../component/Header'
-import { Navigation, Pagination, Autoplay } from 'swiper'
+import Footer from '../../component/Footer'
+import { Navigation, Pagination, Autoplay, FreeMode } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -20,6 +21,20 @@ import Rank3 from '../../images/Rank3.svg'
 import HomeHotSale1 from '../../images/homeHotSale1.svg'
 import HomeHotSale2 from '../../images/homeHotSale2.svg'
 import HomeHotSale3 from '../../images/homeHotSale3.svg'
+import HomeSologan from '../../images/homeSologan.svg'
+import HomeTour from '../../images/homeTour.jpg'
+import HomeSponsor1 from '../../images/homeSponsor1.png'
+import HomeSponsor2 from '../../images/homeSponsor2.png'
+import HomeSponsor3 from '../../images/homeSponsor3.png'
+import HomeSponsor4 from '../../images/homeSponsor4.png'
+import HomeSponsor5 from '../../images/homeSponsor5.png'
+import HomeSponsor6 from '../../images/homeSponsor6.png'
+import HomeSponsor7 from '../../images/homeSponsor7.png'
+import HomeSponsor8 from '../../images/homeSponsor8.png'
+import HomeSponsor9 from '../../images/homeSponsor9.png'
+import HomeSponsor10 from '../../images/homeSponsor10.png'
+import HomeSponsor11 from '../../images/homeSponsor11.png'
+import HomeSponsor12 from '../../images/homeSponsor12.png'
 
 function Home(props) {
   function rand(min, max) {
@@ -52,6 +67,7 @@ function Home(props) {
       </SwiperSlide>
     )
   }
+
   return (
     <>
       {/* <div>首頁</div>
@@ -300,6 +316,206 @@ function Home(props) {
           </div>
         </Container>
       </section>
+      <section>
+        <Container fluid>
+          <Row>
+            <div className="homeSologan d-flex justify-content-between align-items-center">
+              <div className="ms-5">
+                <h5 className="ExtraBold">為你的生活上色，綻放..</h5>
+                <h1 className="ExtraBold">自我的光彩</h1>
+              </div>
+              <div>
+                <img src={HomeSologan} alt=""></img>
+              </div>
+            </div>
+          </Row>
+        </Container>
+      </section>
+      <section>
+        <Container>
+          <div className="homeTour d-flex justify-content-between">
+            <div className="align-self-center">
+              <img src={HomeTour} alt=""></img>
+            </div>
+            <div className="d-flex flex-column align-items-center justify-content-around">
+              <h1 className="SemiBold">導覽服務</h1>
+              <h4 className="Regular">
+                由館方專員為您解說，以最簡單有趣的方式，帶您認識博物館的館藏、歷史、文化及作品。
+              </h4>
+              <h4 className="Regular">
+                歡迎報名參加，凡線上報名者皆可參與抽獎
+              </h4>
+              <button className="btn btn-primary">報名</button>
+            </div>
+          </div>
+        </Container>
+      </section>
+      <section>
+        <Container fluid>
+          <Row>
+            <div className="homeApp"></div>
+          </Row>
+        </Container>
+      </section>
+      <section>
+        <Container>
+          <div className="homeSponsor d-flex flex-column justify-content-between mt-5">
+            <h1 className="SemiBold">合作單位</h1>
+            <div className="row-cols-6">
+              <div className="card">
+                <img
+                  src={HomeSponsor1}
+                  className="card-img-top"
+                  alt="..."
+                  style={{ width: 160, height: 160 }}
+                />
+              </div>
+              <div className="card">
+                <img
+                  src={HomeSponsor2}
+                  className="card-img-top"
+                  alt="..."
+                  style={{ width: 160, height: 160 }}
+                />
+              </div>
+              <div className="card">
+                <img
+                  src={HomeSponsor3}
+                  className="card-img-top"
+                  alt="..."
+                  style={{ width: 160 }}
+                />
+              </div>
+              <div className="card">
+                <img
+                  src={HomeSponsor4}
+                  className="card-img-top"
+                  alt="..."
+                  style={{ width: 120, height: 120 }}
+                />
+              </div>
+              <div className="card">
+                <img
+                  src={HomeSponsor5}
+                  className="card-img-top"
+                  alt="..."
+                  style={{ width: 120, height: 90 }}
+                />
+              </div>
+              <div className="card">
+                <img
+                  src={HomeSponsor6}
+                  className="card-img-top"
+                  alt="..."
+                  style={{ width: 60, height: 90 }}
+                />
+              </div>
+              <div className="card">
+                <img
+                  src={HomeSponsor7}
+                  className="card-img-top"
+                  alt="..."
+                  style={{ width: 160, height: 160 }}
+                />
+              </div>
+              <div className="card">
+                <img
+                  src={HomeSponsor8}
+                  className="card-img-top"
+                  alt="..."
+                  style={{ width: 100, height: 100 }}
+                />
+              </div>
+              <div className="card">
+                <img
+                  src={HomeSponsor9}
+                  className="card-img-top"
+                  alt="..."
+                  style={{ width: 120, height: 120 }}
+                />
+              </div>
+              <div className="card">
+                <img
+                  src={HomeSponsor10}
+                  className="card-img-top"
+                  alt="..."
+                  style={{ width: 120, height: 120 }}
+                />
+              </div>
+              <div className="card">
+                <img
+                  src={HomeSponsor11}
+                  className="card-img-top"
+                  alt="..."
+                  style={{ width: 160 }}
+                />
+              </div>
+              <div className="card">
+                <img
+                  src={HomeSponsor12}
+                  className="card-img-top"
+                  alt="..."
+                  style={{ width: 120, height: 120 }}
+                />
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+      <section>
+        <Container>
+          <div className="homeMuseum mt-5 d-flex flex-column justify-content-center">
+            <h1 className="SemiBold">夥伴館所</h1>
+            <div
+              className="d-flex justify-content-between homeMuseumScroll"
+              style={{ overflowX: 'scroll', border: '1px solid black' }}
+            >
+              <div className="homeMuseumCircle d-flex flex-column justify-content-between">
+                <div></div>
+                <h6 className="Regular">高雄美術館</h6>
+              </div>
+              <div className="homeMuseumCircle d-flex flex-column justify-content-between">
+                <div></div>
+                <h6 className="Regular">奇美博物館</h6>
+              </div>
+              <div className="homeMuseumCircle d-flex flex-column justify-content-between">
+                <div></div>
+                <h6 className="Regular">台北當代藝術館</h6>
+              </div>
+              <div className="homeMuseumCircle d-flex flex-column justify-content-between">
+                <div></div>
+                <h6 className="Regular">故宮博物院</h6>
+              </div>
+              <div className="homeMuseumCircle d-flex flex-column justify-content-between">
+                <div></div>
+                <h6 className="Regular">台北美術館</h6>
+              </div>
+              <div className="homeMuseumCircle d-flex flex-column justify-content-between">
+                <div></div>
+                <h6 className="Regular">台中美術館</h6>
+              </div>
+              <div className="homeMuseumCircle d-flex flex-column justify-content-between">
+                <div></div>
+                <h6 className="Regular">蘭陽博物館</h6>
+              </div>
+              <div className="homeMuseumCircle d-flex flex-column justify-content-between">
+                <div></div>
+                <h6 className="Regular">北師美術館</h6>
+              </div>
+              <div className="homeMuseumCircle d-flex flex-column justify-content-between">
+                <div></div>
+                <h6 className="Regular">嘉義美術館</h6>
+              </div>
+              <div className="homeMuseumCircle d-flex flex-column justify-content-between">
+                <div></div>
+                <h6 className="Regular">澎湖生活博物館</h6>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <Footer />
     </>
   )
 }
