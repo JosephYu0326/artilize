@@ -6,7 +6,7 @@ function B2B(props) {
   return (
     <>
       <div>廠商後臺</div>
-      <Link to="/b2b/addability">建立新活動資料</Link>
+      <Link to="/b2b/addability">建立新活動資料aaaaaaaaaa</Link>
       <br />
     </>
   )
