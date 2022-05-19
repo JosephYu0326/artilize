@@ -1,20 +1,26 @@
-import React from 'react'
-import {FaStar,FaAngleRight } from 'react-icons/fa'
+import React from "react";
+import { FaAngleRight } from "react-icons/fa";
+import "../styles/AsideBar.scss";
 
-function AsideBar(){
-    return(
-        <>
-        <input type="checkbox" name="" id="sideMenu-switch"></input>
-            <aside className="pb-5 px-3 asideBar">
-              <label for="sideMenu-switch" className="align-self-end">
-   	          <FaAngleRight className='faAngleRight'/></label>
-              <button className='btn btn-primary mt-4 mb-4 py-2 px-3 rounded-pill'>{"新增討論"}</button>
-              <button className='btn asideBtn'>{"逛展攻略"}</button>
-              <button className='btn asideBtn'>{"逛展攻略"}</button>
-              <button className='btn asideBtn'>{"逛展攻略"}</button>
-              <button className='btn asideBtn'>{"逛展攻略"}</button>
-            </aside>
-        </>
-    )
+function AsideBar(props) {
+  return (
+    <>
+      <input type="checkbox" name="" id="sideMenu-switch"></input>
+      <aside className="px-3 asideBar">
+        <label
+          htmlFor="sideMenu-switch"
+          className="align-self-end justify-content-center"
+        >
+          <FaAngleRight className="faAngleRight" />
+        </label>
+        <button className="btn asideBtn">{props.btn1}</button>
+        <button className="btn asideBtn">{props.btn2}</button>
+        <button className="btn asideBtn">{props.btn3}</button>
+        <button className="btn asideBtn">{props.btn4}</button>
+        <button className="btn asideBtn">{props.btn5}</button>
+        <button className="btn asideBtn">{props.btn6}</button>
+      </aside>
+    </>
+  );
 }
-export default AsideBar
+export default AsideBar;
