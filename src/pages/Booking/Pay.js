@@ -197,7 +197,6 @@ function Pay(props) {
           </div>
         </form>
       </main>
-      <br />
     </>
   )
 }
