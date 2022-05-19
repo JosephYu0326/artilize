@@ -18,6 +18,7 @@ import Exhibition from './pages/Exhibition/Exhibition'
 import MapSearch from './pages/Exhibition/MapSearch'
 import Introduce from './pages/Exhibition/Introduce'
 import Product from './pages/Product/Product'
+// import IntroduceCategory from './pages/Product/IntroduceCategory'
 import PrIntroduce from './pages/Product/Introduce'
 import Cart from './pages/Booking/Cart'
 import Pay from './pages/Booking/Pay'
@@ -62,6 +63,9 @@ function App() {
         <Route path="/booking/cart">
           <Cart />
         </Route>
+        {/* <Route path="/porduct/InCategory">
+          <IntroduceCategory />
+        </Route> */}
         <Route path="/product/introduce">
           <PrIntroduce />
         </Route>

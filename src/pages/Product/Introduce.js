@@ -4,6 +4,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import Header from '../../component/Header'
+import Footer from '../../component/Footer'
 import p_IntroImg from '../../images/product_Images/productintro/TeaTest.jpg'
 import p_SamesearchImg from '../../images/product_Images/product/ArcherTest.jpeg'
 import p_PopImg from '../../images/product_Images/product/ViewDraw.jpeg'
@@ -164,6 +165,7 @@ function Introduce(props) {
           <div className="row row-cols-xxl-3 row-cols-2">{pBrandCards}</div>
         </div>
       </Container>
+      <Footer />
     </>
   )
 }

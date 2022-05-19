@@ -1,0 +1,36 @@
+@import './global.scss';
+
+.pCategoryCard{
+    margin-top: 30px;
+    max-height: 550px;
+    max-width: 330px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 3px rgb(199, 199, 199) ;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0;
+}
+
+.pCategoryCardimg{
+    background-repeat: no-repeat;
+    width: 330px;
+    height: 395px;
+    background-position: top,center;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.pCategoryCardcontent{
+    width: 330px;
+    height: 155px;
+}
+
+.pCategoryCardlinktopic{
+    text-decoration: none;
+    color: #000;
+}
+
+.pCategoryCardlinkprice{
+    text-decoration: none;
+    color:#000;
+}

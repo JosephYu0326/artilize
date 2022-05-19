@@ -13,6 +13,8 @@
     align-items: center;
     margin-left: 0;
     width: 200px;
+    height:314px;
+    overflow: hidden;
     line-height: 100px;
     border-radius:0 10px 10px 0;
     box-shadow:rgb(110,116,145) 2px 2px 4px;
@@ -49,6 +51,15 @@
     color: rgb(110,116,145);
     position: absolute;
    font-size: 24px;
+}
+
+.asideCategoryLink{
+    text-decoration: none;
+    color:$MiddleGrey;
+}
+
+.asideBarDetails{
+    overflow: hidden;
 }
 
 @media (max-width:768px) {
