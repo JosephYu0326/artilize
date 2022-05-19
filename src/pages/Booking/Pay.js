@@ -6,30 +6,30 @@ import '../../styles/Pay.scss'
 function Pay(props) {
   return (
     <>
-      {/* <Link to="/booking/purchasesuccess">購買完成</Link> */}
+      <Link to="/booking/purchasesuccess">購買完成</Link>
       <main>
-        <div className="contaniner allstep">
+        <div className="contaniner allTextStep">
           <div className="row d-flex justify-content-center">
             <div className="col-4 p-0">
-              <div className="textstep1">
-                <h3>確認商品</h3>
+              <div className="textStep1">
+                <h3 className="ExtraBold">確認商品</h3>
               </div>
             </div>
             <div className="col-4 p-0">
-              <div className="textstep2">
-                <h3>確認付款</h3>
+              <div className="textStep2">
+                <h3 className="ExtraBold">確認付款</h3>
               </div>
             </div>
             <div className="col-4 p-0">
-              <div className="textstep3">
-                <h3>購買完成</h3>
+              <div className="textStep3">
+                <h3 className="ExtraBold">購買完成</h3>
               </div>
             </div>
           </div>
         </div>
         <ul className="step">
           <li></li>
-          <li></li>
+          <li classname="stepActive"></li>
           <li></li>
         </ul>
         <div className="container ">
