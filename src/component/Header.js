@@ -86,7 +86,7 @@ function Header(props) {
               <Nav.Link href="/product">
                 <h6 className="">商品</h6>
               </Nav.Link>
-              <Nav.Link to="/forum">
+              <Nav.Link href="/forum">
                 <h6 className="">討論區</h6>
               </Nav.Link>
 
