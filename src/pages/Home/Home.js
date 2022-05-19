@@ -15,6 +15,15 @@ import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 import 'swiper/css/autoplay'
 import CountUp from 'react-countup'
+import HomeSwiper1 from '../../images/homeSwiper1.svg'
+import HomeSwiper2 from '../../images/homeSwiper2.svg'
+import HomeSwiper3 from '../../images/homeSwiper3.svg'
+import HomeSwiperRight1 from '../../images/homeSwiper1Right.svg'
+import HomeSwiperRight2 from '../../images/homeSwiper2Right.svg'
+import HomeSwiperRight3 from '../../images/homeSwiper3Right.svg'
+import HomeSwiperLeft1 from '../../images/homeSwiper1left.svg'
+import HomeSwiperLeft2 from '../../images/homeSwiper2left.svg'
+import HomeSwiperLeft3 from '../../images/homeSwiper3left.svg'
 import Rank1 from '../../images/Rank1.svg'
 import Rank2 from '../../images/Rank2.svg'
 import Rank3 from '../../images/Rank3.svg'
@@ -99,7 +108,7 @@ function Home(props) {
       <Header />
       <section>
         <Container fluid>
-          <Row className=" d-flex">
+          <Row>
             <Swiper
               modules={[Navigation, Pagination, Autoplay]}
               slidesPerView={'1'}
@@ -107,35 +116,48 @@ function Home(props) {
               autoplay={{
                 display: 2500,
                 disableOnInteraction: false,
-                pauseOnMouseEnter: true,
+                allowTouchMove: false,
+                // pauseOnMouseEnter: true,
               }}
+              allowTouchMove={false}
               style={{ height: 466 }}
               className="ps-0 pe-0 align-self-end homeSwiperLeft"
             >
-              {createSlideleft()}
-              {createSlideleft()}
-              {createSlideleft()}
-              {createSlideleft()}
+              <SwiperSlide className="swiperImg">
+                <img src={HomeSwiperLeft1} alt=""></img>
+              </SwiperSlide>
+              <SwiperSlide className="swiperImg">
+                <img src={HomeSwiperLeft2} alt=""></img>
+              </SwiperSlide>
+              <SwiperSlide className="swiperImg">
+                <img src={HomeSwiperLeft3} alt=""></img>
+              </SwiperSlide>
             </Swiper>
 
             <Swiper
               modules={[Navigation, Pagination, Autoplay]}
               slidesPerView={'1'}
-              navigation
+              // navigation
               loop={true}
               autoplay={{
                 display: 2500,
                 disableOnInteraction: false,
-                pauseOnMouseEnter: true,
+                // pauseOnMouseEnter: true,
               }}
-              pagination={{ clickable: true }}
+              // pagination={{ clickable: true }}
+              allowTouchMove={false}
               style={{ height: 890 }}
               className="ps-0 pe-0 homeSwiper"
             >
-              {createSlide()}
-              {createSlide()}
-              {createSlide()}
-              {createSlide()}
+              <SwiperSlide className="swiperImg">
+                <img src={HomeSwiper1} alt=""></img>
+              </SwiperSlide>
+              <SwiperSlide className="swiperImg">
+                <img src={HomeSwiper2} alt=""></img>
+              </SwiperSlide>
+              <SwiperSlide className="swiperImg">
+                <img src={HomeSwiper3} alt=""></img>
+              </SwiperSlide>
             </Swiper>
 
             <Swiper
@@ -145,15 +167,21 @@ function Home(props) {
               autoplay={{
                 display: 2500,
                 disableOnInteraction: false,
-                pauseOnMouseEnter: true,
+                // pauseOnMouseEnter: true,
               }}
+              allowTouchMove={false}
               style={{ height: 547 }}
               className="ps-0 pe-0 homeSwiperRight"
             >
-              {createSlideRight()}
-              {createSlideRight()}
-              {createSlideRight()}
-              {createSlideRight()}
+              <SwiperSlide className="swiperImg">
+                <img src={HomeSwiperRight1} alt=""></img>
+              </SwiperSlide>
+              <SwiperSlide className="swiperImg">
+                <img src={HomeSwiperRight2} alt=""></img>
+              </SwiperSlide>
+              <SwiperSlide className="swiperImg">
+                <img src={HomeSwiperRight3} alt=""></img>
+              </SwiperSlide>
             </Swiper>
           </Row>
         </Container>

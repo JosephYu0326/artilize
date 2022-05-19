@@ -1,11 +1,21 @@
 @import "./global.scss";
 @import "../../node_modules/swiper/modules/navigation/navigation.scss";
+@mixin home1794 {
+    @media (max-width: 1794px) {
+        @content;
+    }
+}
+@mixin home1364 {
+    @media (max-width: 1364px) {
+        @content;
+    }
+}
 
 .swiperImg {
     img {
         overflow: hidden;
         max-width: 100%;
-        height: 100%;
+        // height: 100%;
     }
 }
 
@@ -14,16 +24,22 @@
 }
 .homeSwiperRight {
     max-width: 430px !important;
+    @include home1794 {
+        display: none;
+    }
 }
 .homeSwiperLeft {
     max-width: 104px !important;
+    @include home1364 {
+        display: none;
+    }
 }
 
 .homeMap {
     background: url(../images/HomeMap.svg) no-repeat;
     background-color: rgba(0, 0, 0, 0.35);
     background-blend-mode: multiply;
-    background-size: 100%;
+    background-size: 100% auto;
     height: 451px;
 
     .homeMapInside {
