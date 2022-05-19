@@ -1,0 +1,231 @@
+@import "./global.scss";
+
+// .usersForm{
+//     border-bottom: 1px solid $DarkGrey;
+//     border-radius: $BorderRadius;
+//     box-shadow: $BoxShadow;
+//     input {
+//         border: 1px solid $DarkGrey;
+//         border-radius: $BorderRadius;
+//     }
+//     select{
+//         border-radius: $BorderRadius;
+//     }
+//     textarea{
+//         border-radius: $BorderRadius;
+//     }
+//     button{
+//         border-radius: $BorderRadius;
+//     }
+// }
+
+.usersBackground{
+    background-color: #FFFFFF;
+    box-shadow: $BoxShadow;
+}
+
+.usersContentcolor{
+    color: $DarkGrey;
+}
+
+
+
+// .swiperImg {
+//     img {
+//         overflow: hidden;
+//         max-width: 100%;
+//         height: 100%;
+//     }
+// }
+
+// .homeSwiper {
+//     max-width: 1243px !important;
+// }
+// .homeSwiperRight {
+//     max-width: 430px !important;
+// }
+// .homeSwiperLeft {
+//     max-width: 104px !important;
+// }
+
+// .homeMap {
+//     background: url(../images/HomeMap.svg) no-repeat;
+//     background-color: rgba(0, 0, 0, 0.35);
+//     background-blend-mode: multiply;
+//     background-size: 100%;
+//     height: 451px;
+
+//     .homeMapInside {
+//         height: 451px;
+//         div {
+//             // border: 1px solid black;
+
+//             h1 {
+//                 font-size: 64px;
+//             }
+//         }
+//         .homeMapButton {
+//             // border: 1px solid black;
+//             max-width: 503px;
+//             button {
+//                 border-radius: 32px;
+//                 padding: 15px 50px;
+//                 h2 {
+//                     margin: 0;
+//                 }
+//             }
+//             button:nth-child(2) {
+//                 border: 3px solid #fff;
+//                 color: #fff;
+//             }
+//         }
+//         .homeMapSearchBar {
+//             margin-top: 12px;
+//             max-width: 503px;
+//             gap: 16px;
+//             form {
+//                 border: 1px solid $DarkGrey;
+//                 border-radius: 37px;
+//                 box-shadow: $BoxShadow;
+//                 background-color: #fff;
+//                 width: 100%;
+//                 height: 74px;
+
+//                 input {
+//                     background: transparent;
+//                     border: 1px solid transparent;
+//                     width: 85%;
+//                     height: 44px;
+//                     // border: 1px solid black;
+//                 }
+
+//                 input:focus {
+//                     outline: none;
+//                 }
+
+//                 button {
+//                     text-indent: -999px;
+//                     overflow: hidden;
+//                     width: 42px;
+//                     padding: 0;
+//                     margin: 0;
+//                     border: none;
+//                     background: transparent url(../../src/images/searchIcon.svg) no-repeat center;
+//                     cursor: pointer;
+//                     opacity: 0.7;
+//                 }
+//             }
+//         }
+//     }
+// }
+// .homeRank {
+//     background: #1a1c21;
+//     height: 688px;
+
+//     .homeRankContainer {
+//         // border: 1px solid white;
+//         height: 688px;
+//     }
+
+//     .homeRankHeader {
+//         max-width: 300px;
+//         // border: 1px solid white;
+
+//         h1 span {
+//             color: white;
+//             text-align: center;
+//             border-bottom: 3px solid white;
+//         }
+//     }
+//     h6 {
+//         color: #c4c4c4;
+//     }
+//     button {
+//         border: 1px solid #fff;
+//         border-radius: 31px;
+//         width: 371px;
+//         h6 {
+//             color: white;
+//             margin: 0;
+//         }
+//         height: 62px;
+//         &:hover {
+//             background-color: white;
+//             h6 {
+//                 color: black;
+//             }
+//         }
+//     }
+//     button::after {
+//         display: block;
+//         width: 16px;
+//         min-width: 16px;
+//         height: 9px;
+//         margin-left: 10px;
+//         // margin-top: 5px;
+//         background: url(../images/Vector.svg);
+//         background-size: 16px 9px;
+//         content: "";
+//     }
+//     .homeRank123 {
+//         // border: 1px solid white;
+//         width: 1020px;
+//         height: 688px;
+
+//         ul {
+//             // border: 1px solid white;
+//             width: 100%;
+//             height: 100%;
+//             a:-webkit-any-link {
+//                 text-decoration: none;
+//                 img {
+//                     transition: 0.5s;
+//                 }
+//                 &:hover {
+//                     img {
+//                         opacity: 0.5;
+//                     }
+//                 }
+//             }
+//             h6 {
+//                 color: #fff;
+//             }
+//         }
+//     }
+// }
+// .homeHotSale {
+//     height: 688px;
+//     // border: 1px solid black;
+
+//     h1 {
+//         text-align: center;
+//         border-bottom: 3px solid black;
+//         width: 160px;
+//         margin: 0;
+//     }
+//     .homeHotSaleCardGroup {
+//         // border: 1px solid black;
+//         height: 557px;
+//         a:-webkit-any-link {
+//             text-decoration: none;
+//             transition: 0.5;
+//             &:hover {
+//                 transform: scale(1.1);
+//             }
+//         }
+//         .homeHotSaleCard {
+//             border-radius: $BorderRadius;
+//             height: 447px;
+//             // border: 1px solid black;
+//             box-shadow: $BoxShadow;
+
+//             h6 {
+//                 color: black;
+//             }
+
+//             h5 {
+//                 color: $DarkGrey;
+//             }
+//         }
+//     }
+// }
