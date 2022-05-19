@@ -60,33 +60,6 @@ function Home(props) {
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
 
-  function imgUrl() {
-    const id = rand(1, 200)
-    return `https://picsum.photos/id/${id}/1920/1080`
-  }
-
-  function createSlide() {
-    return (
-      <SwiperSlide className="swiperImg">
-        <img src={imgUrl()} alt="" />
-      </SwiperSlide>
-    )
-  }
-  function createSlideRight() {
-    return (
-      <SwiperSlide className="swiperImg">
-        <img src={imgUrl()} alt="" />
-      </SwiperSlide>
-    )
-  }
-  function createSlideleft() {
-    return (
-      <SwiperSlide className="swiperImg">
-        <img src={imgUrl()} alt="" />
-      </SwiperSlide>
-    )
-  }
-
   return (
     <>
       {/* <div>首頁</div>
