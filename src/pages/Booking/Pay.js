@@ -6,25 +6,23 @@ import '../../styles/Pay.scss'
 function Pay(props) {
   return (
     <>
-      <Link to="/booking/purchasesuccess">購買完成</Link>
+      {/* <Link to="/booking/purchasesuccess">購買完成</Link> */}
       <main>
         <div className="contaniner allstep">
-          <div className="row ">
-            <div className=" d-flex justify-content-center p-0">
-              <div className="col-4 p-0">
-                <div className="textstep1">
-                  <h3>確認商品</h3>
-                </div>
+          <div className="row d-flex justify-content-center">
+            <div className="col-4 p-0">
+              <div className="textstep1">
+                <h3>確認商品</h3>
               </div>
-              <div className="col-4 p-0">
-                <div className="textstep2">
-                  <h3>確認付款</h3>
-                </div>
+            </div>
+            <div className="col-4 p-0">
+              <div className="textstep2">
+                <h3>確認付款</h3>
               </div>
-              <div className="col-4 p-0">
-                <div className="textstep3">
-                  <h3>購買完成</h3>
-                </div>
+            </div>
+            <div className="col-4 p-0">
+              <div className="textstep3">
+                <h3>購買完成</h3>
               </div>
             </div>
           </div>
@@ -35,16 +33,16 @@ function Pay(props) {
           <li></li>
         </ul>
         <div className="container ">
-          <div className="row d-flex justify-content-center row-cols-1">
-            <div className="col-6">
-              <h1 className="payyes">確認付款</h1>
+          <div className="row d-flex justify-content-center ">
+            <div className="col-10 payyes">
+              <h1>確認付款</h1>
             </div>
           </div>
         </div>
         <form>
           <div className="container ">
             <div className="row d-flex justify-content-center ">
-              <div className="col-8 col-md-8  ">
+              <div className="col-8 paywidth">
                 <section className="payForm pb-4 mb-5">
                   <h1>付款方式</h1>
 
@@ -104,8 +102,8 @@ function Pay(props) {
 
           <div className="container">
             <div className="row d-flex justify-content-center">
-              <div className="col-8 ">
-                <section className="payForm pb-4 mb-5">
+              <div className="col-8 paywidth">
+                <section className="payForm pb-4 mb-5 ">
                   <h3>收件人資料</h3>
 
                   <label
@@ -159,7 +157,7 @@ function Pay(props) {
           </div>
 
           <div className="container">
-            <div className="row d-flex justify-content-center">
+            <div className="row d-flex justify-content-center paywidth">
               <div className="col-8 ">
                 <div className="d-flex flex-row bd-highlight mb-3 justify-content-between  ">
                   <div className="p-2 bd-highlight">
@@ -183,8 +181,8 @@ function Pay(props) {
 
           <div className="container">
             <div className="row d-flex justify-content-center">
-              <div className="col-8 ">
-                <section className="payForm pb-4 mb-5">
+              <div className="col-8 paywidth">
+                <section className="payForm pb-4 mb-5 ">
                   <div className="d-grid gap-2 ">
                     <button className="btn btn-primary " type="button">
                       上一步

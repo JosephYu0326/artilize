@@ -25,16 +25,19 @@
 
     // <576px //手機板才樣式
     @include media-breakpoint-down(sm) {  
-        .payyes{
-            // width: 330px;
+        div .payyes{
+            min-width: 330px;
             margin:34px auto;
             padding: 0;
             text-align: center;
             border-bottom: 1px solid $DarkGrey;
             box-shadow: $BoxShadow;
-            border-radius: $BorderRadius;
+            // border-radius: $BorderRadius;
         }
-        
+        .paywidth{
+            min-width: 327px;
+        }
+
         // 影藏css
         .step {
             display: none;
