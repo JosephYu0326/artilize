@@ -120,6 +120,7 @@ header{
         height: 40px;
     }
     
+    
     .selectlink{
         text-decoration: none;
         color: black;
@@ -127,10 +128,54 @@ header{
     .accordion{
         border: 0px;
     }
+    
+    .categoryAllText{
+        opacity: 0;
+        transition: .4s;
+        
+        &.expand{
+            opacity: 1;
+        }
+    }
+    
+    .galleryOption{
+        width: 100%;
+        height: 205px;
+    }
+    
+    .categoryheight{
+        height: 205px;
+        transition: .5s;
+        &.expand{
+            height: 315px;
+        }
+    }
     .option-expand{
         width: 25px;
         height: 25px;
     }
+    .plusIcon1{
+        height:20px;
+        width: 5px;
+        background: black;
+        transition: transform .3s;
+        &.expand{
+            transform: rotate(-90deg);
+        }
+    }
+    .plusIcon2{
+        height: 20px;
+        width: 5px;
+        background: black;
+        transform: rotate(90deg);
+        position: absolute;
+        transition: opacity .3s;
+        &.expand{
+            opacity: 0;
+        }
+      }
+
+
 
     .exhibitioncard{
         margin-top: 30px;
@@ -265,12 +310,18 @@ header{
         .searchinput{
             width: 500px !important;
         }
+        .web-window{
+            display: none;
+        }
     }
 }
 
 @media (min-width: 992px){
     .exlist-frame{
         nav{
+            display: none;
+        }
+        .mobile-window{
             display: none;
         }
     }
@@ -281,6 +332,7 @@ header{
         .searchinput{
             width: 400px !important;
         }
+        
     }
 }
 

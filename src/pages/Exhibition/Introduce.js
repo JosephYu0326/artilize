@@ -1,11 +1,16 @@
 //展覽介紹
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Accordion, AccordionItem } from 'react-light-accordion'
 import 'react-light-accordion/demo/css/index.css'
 import '../../styles/exhibition-introduce.scss'
 import exhibitionimg from './images/exhibition-intro1.png'
+import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
 function Introduce(props) {
+  const [active, setActive] = useState(false)
+  const setHeight = useRef()
+
   const imgurl = {
     backgroundImage: `url(${exhibitionimg})`,
   }
@@ -24,13 +29,60 @@ function Introduce(props) {
   
   `
   var bookInformation = `
-  1.本次展出觀展者需建立ENGAGE帳戶 (https://engagevr.io/)。
-  2.完成購票後，您將收到一組入場序號，請使用入場序號綁定您的ENGAGE帳戶，綁定後將無法變更或轉移。操作說明請參閱
+  1.本次展出觀展者需建立ENGAGE帳戶(https://engagevr.io/)。
+  2.完成購票後，您將收到一組入場序號，請使用入場序號綁定您的ENGAGE帳戶，綁定後將無法
+    變更或轉移。操作說明請參閱
   https://service.viveport.com/hc/zh-tw/categories/4409265621389
   3.消費者於活動期間內，可使用綁定之帳戶無限次數入場觀展（本展覽入場截止日為
   2022年5月31日）。
   4.一組票券序號，僅提供一位序號持有者綁定與入場。消費者應妥善私密保存虛擬票券序號，若被第三方使用，此損失需由消費者自行承擔。
   5.使用者應注意展覽中與其他觀展者之互動禮節，若有違反善良風俗之行為，管理員有權取消其入場資格。`
+
+  function expand(e) {
+    setActive(!active)
+
+    let thetarget =
+      e.target.parentNode.childNodes[0].childNodes[0].childNodes[1]
+
+    let textheight = e.target.parentNode.childNodes[2]
+    let text = textheight.childNodes[0]
+    let icon1 = thetarget.childNodes[0]
+    let icon2 = thetarget.childNodes[1]
+
+    if (active) {
+      textheight.setAttribute('class', 'optionText expand')
+      text.setAttribute('class', 'textheight expand')
+      icon1.setAttribute('class', 'plusIcon1 expand')
+      icon2.setAttribute('class', 'plusIcon2 expand')
+    } else {
+      textheight.setAttribute('class', 'optionText')
+      text.setAttribute('class', 'textheight')
+      icon1.setAttribute('class', 'plusIcon1')
+      icon2.setAttribute('class', 'plusIcon2')
+    }
+  }
+
+  const optionText = ['購票資訊', '如何訂購', '票價', '開放時間']
+  const information = optionText.map((v, i) => {
+    return (
+      <div key={i} className="position-relative">
+        <Link to="#" className="expand-link">
+          <div className="optionframe">
+            <div className="h4 my-0">{optionText[i]}</div>
+
+            <div className="option-expand">
+              <div className="plusIcon1"></div>
+              <div className="plusIcon2"></div>
+            </div>
+          </div>
+        </Link>
+        <Link to="#" onClick={expand} className="testlink"></Link>
+        <div className="optionText content-introduce">
+          <pre className="textheight">{bookInformation}</pre>
+        </div>
+      </div>
+    )
+  })
 
   return (
     <>
@@ -49,17 +101,11 @@ function Introduce(props) {
         </div>
         <div className="content-background">
           <div className="content-page BoxShadow">
-            <div className="h5">展覽介紹</div>
-            <pre className="content-introduce pBig">{exhibitionContent}</pre>
-            <Accordion atomic={true}>
-              <AccordionItem title="Title 1">
-                <pre className="content-introduce pBig">{bookInformation}</pre>
-              </AccordionItem>
-
-              <AccordionItem title="Title 2"></AccordionItem>
-
-              <AccordionItem title="Title 3"></AccordionItem>
-            </Accordion>
+            <div className="contentpadding">
+              <div className="h5">展覽介紹</div>
+              <pre className="content-introduce pBig">{exhibitionContent}</pre>
+            </div>
+            <div className="information-frame">{information}</div>
           </div>
         </div>
       </div>
