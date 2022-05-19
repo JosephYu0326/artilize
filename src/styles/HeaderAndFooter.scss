@@ -1,6 +1,13 @@
 @import './global.scss';
 
-
+// .test{
+//     height: 0 !important;
+//     background-color: aqua;
+//     transition: .3s !important;
+//     &.expand{
+//         height: 200px !important;    
+//     }
+// }
 
 .displayY{
     display: none;
@@ -13,7 +20,7 @@
     background-image:linear-gradient(to top, transparent, $PurpleBlue);
 }
 
-.nav-item{
+.nav-link{
     margin: 20px;
     vertical-align: middle;
     //height: 88px;
