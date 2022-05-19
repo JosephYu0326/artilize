@@ -7,7 +7,10 @@ function PurchaseSuccess(props) {
   return (
     <>
       <div>購買完成</div>
-      <div className="contaniner allTextStep">
+      <div
+        className="container allTextStep"
+        style={{ border: '1px solid black' }}
+      >
         <div className="row d-flex justify-content-center">
           <div className="col-4 p-0">
             <div className="textStep1">
