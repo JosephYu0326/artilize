@@ -1,5 +1,5 @@
 //首頁
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Navbar, Container, Row, Col, Card } from 'react-bootstrap'
 import logo from '../../images/logo.svg'
@@ -56,10 +56,6 @@ import HomeMuseum9 from '../../images/homeMuseum9.svg'
 import HomeMuseum10 from '../../images/homeMuseum10.svg'
 
 function Home(props) {
-  function rand(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min)
-  }
-
   return (
     <>
       {/* <div>首頁</div>
@@ -200,8 +196,8 @@ function Home(props) {
         <Container fluid className="homeRank">
           <Row>
             <div>
-              <Container className="d-flex">
-                <div className="d-flex flex-column justify-content-center homeRankContainer align-items-center">
+              <Container className="d-flex flex-column flex-xl-row">
+                <div className="d-flex flex-column justify-content-xl-center justify-content-evenly homeRankContainer align-items-center">
                   <div className="homeRankHeader">
                     <h1 className="SemiBold">
                       <span>展覽活動排行榜</span>
@@ -214,9 +210,9 @@ function Home(props) {
                     <h6>更多展覽活動</h6>
                   </button>
                 </div>
-                <div className="homeRank123">
-                  <ul className="d-flex justify-content-end">
-                    <li className="align-self-end">
+                <div className="homeRank123 align-self-center">
+                  <ul className="d-flex justify-content-center justify-content-xl-end">
+                    <li className="align-self-xl-end align-self-start">
                       <Link to="*">
                         <figure>
                           <img src={Rank1} alt=""></img>
@@ -226,7 +222,7 @@ function Home(props) {
                         </figure>
                       </Link>
                     </li>
-                    <li className="align-self-center ms-4 me-4">
+                    <li className="align-self-xl-center align-self-start ms-4 me-4">
                       <Link to="*">
                         <figure>
                           <img src={Rank2} alt=""></img>
@@ -236,7 +232,7 @@ function Home(props) {
                         </figure>
                       </Link>
                     </li>
-                    <li className="align-self-baseline mt-4">
+                    <li className="align-self-xl-baseline align-self-start mt-xl-4 ">
                       <Link to="*">
                         <figure>
                           <img src={Rank3} alt=""></img>
