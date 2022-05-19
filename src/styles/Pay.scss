@@ -1,10 +1,6 @@
 @import './global.scss';
-// *{
-//     margin: 0;
-//     padding: 0;
-// }
-
-.payForm{
+    //Form 表單樣式
+    .payForm{
     border-bottom: 1px solid $DarkGrey;
     border-radius: $BorderRadius;
     box-shadow: $BoxShadow;
@@ -21,7 +17,7 @@
     button{
         border-radius: $BorderRadius;
     }
-}
+    }
 
     // <576px //手機板才樣式
     @include media-breakpoint-down(sm) {  
@@ -102,9 +98,7 @@
             }
 
           }
-    
-        
-        
+           
         .payyes{
             display: none;
         }
