@@ -23,44 +23,6 @@
     }
 }
 
-
-// .step {
-//     width: 650px;
-//     margin:100px auto;
-//     padding: 0;
-//     outline: 1px solid $DarkGrey;
-//     display: flex;
-//     justify-content: space-between;
-// }
-// .step li{
-//     list-style: none;
-//     width: 40px;
-//     height: 40px;
-//     border-radius: 50%;
-//     background-color: $DarkGrey;
-//     position: relative;
-// }
-// .step li:not(:first-child):before{
-//     content: '';
-//     position: absolute;
-//     width: 265px;
-//     height: 10px;
-//     background-color: #aaa;
-//     top: 0;
-//     bottom: 0;
-//     right: 100%;
-//     margin: auto;
-// }
-
-    // @media (max-width:391px) {
-    //     .step {
-    //         display: none;
-    //     }
-    //     .step li{
-    //         display:none;
-    //     }
-  
-    // }
     // <576px //手機板才樣式
     @include media-breakpoint-down(sm) {  
         .payyes{
@@ -91,7 +53,7 @@
             width: 650px;
             margin:0px auto 100px;
             padding: 0;
-            outline: 1px solid $DarkGrey;
+            // outline: 1px solid $DarkGrey;
             display: flex;
             justify-content: space-between;
         }

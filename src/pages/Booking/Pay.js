@@ -30,9 +30,9 @@ function Pay(props) {
           </div>
         </div>
         <ul className="step">
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
+          <li></li>
+          <li></li>
+          <li></li>
         </ul>
         <div className="container ">
           <div className="row d-flex justify-content-center row-cols-1">
