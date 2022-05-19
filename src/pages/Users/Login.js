@@ -3,11 +3,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import '../../styles/users.scss'
-import { Container, Form, Button, Row, Col } from 'react-bootstrap'
+import Header from '../../component/Header'
+import { Container, Form, Button, Row } from 'react-bootstrap'
 
 function Login(props) {
   return (
     <>
+      <Header />
       <div className="bg-background">
         <section>
           <Container>
@@ -16,7 +18,7 @@ function Login(props) {
               style={{ height: '100vh' }}
             >
               <div
-                className=" BorderRadius usersBackground "
+                className=" BorderRadius usersBackground p-5"
                 style={{ maxWidth: '568px', minWidth: '390px' }}
               >
                 <Form className="">
@@ -50,9 +52,9 @@ function Login(props) {
                     <Form.Label>忘記密碼</Form.Label>
                   </Form.Group>
                   {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-      <Form.Check type="checkbox" label="記住我" />
-    </Form.Group> */}
-                  <div className="d-flex justify-content-around pb-3">
+                        <Form.Check type="checkbox" label="記住我" />
+                      </Form.Group> */}
+                  <div className="d-flex justify-content-around">
                     <Link to="/users/">
                       <Button variant="primary rounded-pill" type="submit">
                         登入
@@ -75,4 +77,3 @@ function Login(props) {
 }
 
 export default Login
-
