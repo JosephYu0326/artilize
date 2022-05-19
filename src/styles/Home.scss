@@ -298,6 +298,29 @@
         }
     }
 }
-.homeMuseumScroll::-webkit-scrollbar {
-    width: 0;
+
+.homeFooter {
+    height: 530px;
+    background: url(../images/homeFooter.svg) no-repeat;
+    // background-size: 100% auto;
+    div:first-child {
+        max-width: 680px;
+    }
+    h1,
+    h4 {
+        color: $DarkGrey;
+    }
+    button {
+        border: 3px solid $DarkGrey;
+        border-radius: 47px;
+        width: 248px;
+        height: 94px;
+        h2 {
+            color: $DarkGrey;
+            margin: 0;
+        }
+        &:hover {
+            background-color: $LightGrey;
+        }
+    }
 }

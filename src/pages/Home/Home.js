@@ -569,6 +569,23 @@ function Home(props) {
           </div>
         </Container>
       </section>
+      <section>
+        <Container>
+          <div className="homeFooter d-flex justify-content-end align-items-center ">
+            <div className="d-flex flex-column">
+              <div className="align-self-center">
+                <h1 className="SemiBold">立即加入最受歡迎的展覽售票平台</h1>
+                <h4 className="SemiBold">讓您的展覽被更多人看到</h4>
+              </div>
+              <div className="align-self-end">
+                <button className="btn ">
+                  <h2 className="Regular">成為夥伴</h2>
+                </button>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
 
       <Footer />
     </>
