@@ -1,12 +1,11 @@
 import React from 'react'
 import '../styles/SearchBar.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { FaSearch } from 'react-icons/fa'
 
 function SearchBar() {
   return (
     <>
-      <div className="d-flex searchbar">
+      <div className="searchbar displayN">
         <input
           className="form-control searchinput"
           type="search"
@@ -14,7 +13,7 @@ function SearchBar() {
           aria-label="Search"
         />
         <button className="btn searchbtn" type="submit">
-          <FontAwesomeIcon icon={faSearch} />
+          <FaSearch />
         </button>
       </div>
     </>
