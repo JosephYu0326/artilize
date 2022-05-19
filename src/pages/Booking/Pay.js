@@ -101,7 +101,7 @@ function Pay(props) {
           </div>
 
           <div className="container">
-            <div className="row d-flex justify-content-center">
+            <div className="row d-flex justify-content-center ">
               <div className="col-8 paywidth">
                 <section className="payForm pb-4 mb-5 ">
                   <h3>收件人資料</h3>
@@ -157,8 +157,8 @@ function Pay(props) {
           </div>
 
           <div className="container">
-            <div className="row d-flex justify-content-center paywidth">
-              <div className="col-8 ">
+            <div className="row d-flex justify-content-center ">
+              <div className="col-8 paywidth">
                 <div className="d-flex flex-row bd-highlight mb-3 justify-content-between  ">
                   <div className="p-2 bd-highlight">
                     <h6>優惠券哲扣</h6>
@@ -180,8 +180,8 @@ function Pay(props) {
           </div>
 
           <div className="container">
-            <div className="row d-flex justify-content-center">
-              <div className="col-8 paywidth">
+            <div className="row d-flex justify-content-center ">
+              <div className="col-8  paywidth">
                 <section className="payForm pb-4 mb-5 ">
                   <div className="d-grid gap-2 ">
                     <button className="btn btn-primary " type="button">
