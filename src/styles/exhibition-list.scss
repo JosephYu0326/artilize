@@ -143,12 +143,10 @@ header{
         height: 205px;
     }
     
-    .categoryheight{
-        height: 205px;
-        transition: .5s;
-        &.expand{
-            height: 315px;
-        }
+    .frameheight{
+        height: 0;
+        transition: height 0.4s;
+        
     }
     .option-expand{
         width: 25px;

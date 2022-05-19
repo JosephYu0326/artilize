@@ -14,6 +14,7 @@ import Price from './Price'
 import Map from './Map'
 import DateTime from './DateTime'
 import Card from './Card'
+import Accordion from '../../component/Accordion'
 
 function Exhibition(props) {
   return (

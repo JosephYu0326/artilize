@@ -4,8 +4,6 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
-import Accordion from './Accordion'
-import AccordionItem from './AccordionItem'
 
 function Category() {
   const frameheight = useRef()
@@ -65,20 +63,20 @@ function Category() {
           </div>
         </div>
       </Link>
-      <Accordion />
-      <AccordionItem />
 
-      <div
-        className="web-window categoryheight"
-        ref={frameheight}
-        style={
-          active
-            ? { height: frameheight.current.scrollHeight }
-            : { height: frameheight.scrollHeight }
-        }
-      >
+      <div className="web-window categoryheight">
         {category}
-        <div className="categoryAllText">{categoryAll}</div>
+        <div
+          className="frameheight"
+          ref={frameheight}
+          style={
+            active
+              ? { height: frameheight.current.scrollHeight }
+              : { height: frameheight.scrollHeight }
+          }
+        >
+          <div className="categoryAllText">{categoryAll}</div>
+        </div>
       </div>
       <div className="mobile-window window-size">{category}</div>
     </>
