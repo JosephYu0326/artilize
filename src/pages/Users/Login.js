@@ -1,5 +1,4 @@
 //會員登入
-//會員登入
 import React from 'react'
 import { Link } from 'react-router-dom'
 import '../../styles/users.scss'
@@ -37,7 +36,6 @@ function Login(props) {
                       請輸入正確的帳號
                     </Form.Text>
                   </Form.Group>
-
                   <Form.Group className="mb-3" controlId="formBasicPassword">
                     {/* <Form.Label>密碼</Form.Label> */}
                     <Form.Control type="password" placeholder="密碼" />
