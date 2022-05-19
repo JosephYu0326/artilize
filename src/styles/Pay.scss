@@ -21,6 +21,7 @@
 
     // <576px //手機板才樣式
     @include media-breakpoint-down(sm) {  
+        //
         .payyes{
             min-width: 330px;
             
@@ -32,12 +33,12 @@
                 box-shadow: $BoxShadow;
             }
         }
-           
+        // 最小寬度
         .paywidth{
             min-width: 330px;
         }
 
-        // 影藏 step 進度 css
+        // 影藏 Step 進度條
         .step {
             display: none;
         }
@@ -51,6 +52,7 @@
     
     // ≥576px //桌機板樣式
     @include media-breakpoint-up(sm) {
+        // 圓圈圈進度條
         .step {
             width: 650px;
             margin:0px auto 100px;
@@ -78,7 +80,7 @@
             right: 100%;
             margin: auto;
         }
-
+        // 圓圈圈進度條 的文字
         .allTextStep{
             width: 750px;
             // border:1px solid green;
@@ -101,7 +103,7 @@
             }
 
           }
-           
+        
         .payyes{
             display: none;
         }
