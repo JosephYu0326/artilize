@@ -47,7 +47,9 @@ function Login(props) {
                     className="mb-3 usersContentcolor Regular"
                     controlId=""
                   >
-                    <Form.Label>忘記密碼</Form.Label>
+                    <Link to="/users/ForgetPassword/">
+                      <Form.Label>忘記密碼</Form.Label>
+                    </Link>
                   </Form.Group>
                   {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
                         <Form.Check type="checkbox" label="記住我" />
