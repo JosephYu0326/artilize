@@ -2,20 +2,32 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import '../../styles/B2B.scss'
-// import { useState } from 'react'
+import { useState } from 'react'
 
 function B2B(props) {
-  // const [inputs, setInputs] = useState({})
-
-  // const handleChange = (event) => {
-  //   const name = event.target.name
-  //   const value = event.target.value
-  //   setInputs((values) => ({ ...values, [name]: value }))
-  // }
+  //活動名稱
+  const [exhibition, setExhibition] = useState('123456')
+  // select 縣市
+  const [selectedValue, setSelectedValue] = useState('')
+  const carOptions = ['volvo', 'saab', 'mercedes', 'audi']
+  //活動日期
+  //開始
+  //結束
+  //詳細地址
+  const [address, setAddress] = useState('123456')
+  //活動內容介紹
+  const [activities, setActivities] = useState('123456')
+  //票券名稱
+  const [ticketName, setTicketName] = useState('123456')
+  //票券數量
+  const [amount, setAmount] = useState('123456')
+  //票券價格
+  const [price, setPrice] = useState('123456')
+  //票券說明
+  const [ticketDescription, setTicketDescription] = useState('123456')
 
   return (
     <>
-      {/*  */}
       <div>廠商後臺</div>
       <Link to="/b2b/addability">建立新活動資料</Link>
       <main className="container ">
@@ -25,13 +37,13 @@ function B2B(props) {
             <h1>開始建立活動資訊</h1>
             <h6>請創建一個活動展覽資訊</h6>
 
-            <figure className="figure d-flex justify-content-center ">
+            {/* <figure className="figure d-flex justify-content-center ">
               <img
                 src="../images/logo.svg"
                 className="figure-img img-fluid rounded"
                 alt="..."
               />
-            </figure>
+            </figure> */}
 
             <div className="mb-3">
               <label htmlFor="exampleFormControlInput1" className="form-label">
@@ -42,6 +54,11 @@ function B2B(props) {
                 className="form-control"
                 id="exampleFormControlInput1"
                 placeholder="活動名稱"
+                name=""
+                value={exhibition}
+                onChange={(e) => {
+                  setExhibition(e.target.value)
+                }}
               />
             </div>
 
@@ -84,14 +101,33 @@ function B2B(props) {
             </section>
 
             <section>
-              <label htmlFor="exampleDataList" className="form-label">
+              <label htmlFor="Place" className="form-label">
                 活動地點
               </label>
-              <select className="form-select" id="sel1" name="Place">
+              {/* <select className="form-select" id="sel1" name="Place">
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
                 <option>4</option>
+              </select> */}
+              <select
+                className="form-select"
+                name="Place"
+                id="Place"
+                value={selectedValue}
+                onChange={(e) => {
+                  setSelectedValue(e.target.value)
+                }}
+              >
+                <option value="">請選擇</option>
+                {carOptions.map((v, i) => {
+                  return (
+                    <option key={i} value={v}>
+                      {/* 開頭轉為大寫英文 */}
+                      {v.charAt(0).toUpperCase() + v.slice(1)}
+                    </option>
+                  )
+                })}
               </select>
             </section>
 
@@ -101,15 +137,19 @@ function B2B(props) {
                 詳細地址（鄉鎮市區、道路、街名、巷弄號、樓層）
               </label>
               <input
-                type="value"
+                type="text"
                 className="form-control"
                 id="exampleFormControlInput1"
+                value={address}
+                onChange={(e) => {
+                  setAddress(e.target.value)
+                }}
                 placeholder="例如:中山區中山北路二段106-2號6樓"
               />
             </div>
             <h6>請輸入詳細活動地址</h6>
             {/* 活動內容介紹 */}
-            <div className="mb-3">
+            <section className="mb-3">
               <label
                 htmlFor="exampleFormControlTextarea1"
                 className="form-label"
@@ -120,60 +160,64 @@ function B2B(props) {
                 className="form-control"
                 id="exampleFormControlTextarea1"
                 rows="10"
-                value={``}
-              >
-                活動內容
-              </textarea>
-            </div>
+                value={activities}
+                onChange={(e) => {
+                  setActivities(e.target.value)
+                }}
+              />
+            </section>
 
             <section>
               <div className="row justify-content-center">
                 <h5>新增活動票券</h5>
                 <div className="col-3 ">
                   <div className="mb-3">
-                    <label
-                      htmlFor="exampleFormControlInput1"
-                      className="form-label"
-                    >
+                    <label htmlFor="ticketName" className="form-label">
                       票券名稱
                     </label>
                     <input
                       type="text"
                       className="form-control"
-                      id="exampleFormControlInput1"
+                      id="ticketName"
                       placeholder="活動名稱"
+                      value={ticketName}
+                      onChange={(e) => {
+                        setTicketName(e.target.value)
+                      }}
                     />
                   </div>
                 </div>
                 <div className="col-3 ">
                   <div className="mb-3">
-                    <label
-                      htmlFor="exampleFormControlInput1"
-                      className="form-label"
-                    >
+                    <label htmlFor="amount" className="form-label">
                       票券數量
                     </label>
                     <input
                       type="value"
                       className="form-control"
-                      id="exampleFormControlInput1"
+                      id="amount"
                       placeholder="1000"
+                      value={amount}
+                      onChange={(e) => {
+                        setAmount(e.target.value)
+                      }}
                     />
                   </div>
                 </div>
                 <div className="col-3 ">
                   <div className="mb-3">
-                    <label
-                      htmlFor="exampleFormControlInput1"
-                      className="form-label"
-                    >
+                    <label htmlFor="price" className="form-label">
                       票券價格
                     </label>
                     <input
                       type="value"
                       className="form-control"
-                      id="exampleFormControlInput1"
+                      id="price"
                       placeholder="1000"
+                      value={price}
+                      onChange={(e) => {
+                        setPrice(e.target.value)
+                      }}
                     />
                   </div>
                 </div>
@@ -196,20 +240,18 @@ function B2B(props) {
                 </div>
               </div>
               <div className="mb-3">
-                <label
-                  htmlFor="exampleFormControlTextarea1"
-                  className="form-label"
-                >
+                <label htmlFor="TicketDescription" className="form-label">
                   票券說明
                 </label>
                 <textarea
                   className="form-control"
-                  id="exampleFormControlTextarea1"
+                  id="TicketDescription"
                   rows="10"
-                  value={``}
-                >
-                  請輸入票券說明
-                </textarea>
+                  value={ticketDescription}
+                  onChange={(e) => {
+                    setTicketDescription(e.target.value)
+                  }}
+                />
               </div>
             </section>
 
