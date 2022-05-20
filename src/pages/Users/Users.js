@@ -62,23 +62,14 @@ function Users(props) {
                   <Form.Group className="mb-3" controlId="formBasicAccount">
                     {/* <Form.Label>帳號</Form.Label> */}
                     <Form.Control type="account" placeholder="帳號" />
-                    <Form.Text className="text-secondary">
-                      請輸入正確的帳號
-                    </Form.Text>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicEmail">
                     {/* <Form.Label>帳號</Form.Label> */}
                     <Form.Control type="email" placeholder="信箱" />
-                    <Form.Text className="text-secondary">
-                      請輸入正確的信箱
-                    </Form.Text>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicPassword">
                     {/* <Form.Label>密碼</Form.Label> */}
                     <Form.Control type="password" placeholder="密碼" />
-                    <Form.Text className="text-secondary">
-                      請輸入正確的密碼
-                    </Form.Text>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="">
                     {/* <Form.Label>密碼</Form.Label> */}
@@ -87,9 +78,6 @@ function Users(props) {
                   <Form.Group className="mb-3" controlId="">
                     {/* <Form.Label>密碼</Form.Label> */}
                     <Form.Control type="" placeholder="手機" />
-                    <Form.Text className="text-secondary">
-                      請輸入正確的手機
-                    </Form.Text>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="">
                     {/* <Form.Label>密碼</Form.Label> */}
