@@ -22,9 +22,14 @@ function Accordion() {
 
   useEffect(() => {
     const activeArray = []
+    let heightArray = []
+
     for (let i = 0; i < title.length; i++) {
       activeArray.push(0)
+      let height = document.querySelectorAll('.optionheight')[i].scrollHeight
+      heightArray.push(height)
     }
+    setHeight(heightArray)
     setActiveState(activeArray)
   }, [])
 
@@ -45,7 +50,9 @@ function Accordion() {
         </div>
         <div
           className="optionheight"
-          style={activeState[i] ? { height: `${height}px` } : { height: '0px' }}
+          style={
+            activeState[i] ? { height: `${height[i]}px` } : { height: '0px' }
+          }
         >
           {content[i] &&
             content[i].map((v, j) => {
@@ -90,9 +97,6 @@ function Accordion() {
     }
 
     // 找目標物的高度
-    let height = document.querySelectorAll('.optionheight')[index]
-    height = height.scrollHeight
-    setHeight(height)
 
     // 設定目標物旁的圖示
     let icon1 = thetarget.childNodes[0]
