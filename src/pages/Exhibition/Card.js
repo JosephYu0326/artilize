@@ -1,15 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 import exhibitionimg from './images/exhibition1.jpeg'
+import Book from '../Exhibition/Book'
 
 function Card() {
+  const [isOpen, setIsOpen] = useState(false)
   const cards = ['1', '2', '3', '4', '5', '6']
 
   const imgurl = {
     backgroundImage: `url(${exhibitionimg})`,
+  }
+  function handleClick() {
+    setIsOpen(!isOpen)
   }
 
   const card = cards.map((v, i) => {
@@ -58,12 +63,14 @@ function Card() {
               <button
                 type="button"
                 className="btn btn-secondary book h5 text-web"
+                onClick={handleClick}
               >
                 訂票
               </button>
               <button
                 type="button"
                 className="btn btn-secondary book pRegular text-mobile"
+                onClick={handleClick}
               >
                 訂票
               </button>
@@ -73,7 +80,13 @@ function Card() {
       </div>
     )
   })
-  return <>{card}</>
+  return (
+    <>
+      <Book isOpen={isOpen} />
+
+      {card}
+    </>
+  )
 }
 
 export default Card

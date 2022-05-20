@@ -95,9 +95,6 @@ function Accordion() {
     } else {
       activeState[index] = 0
     }
-
-    // 找目標物的高度
-
     // 設定目標物旁的圖示
     let icon1 = thetarget.childNodes[0]
     let icon2 = thetarget.childNodes[1]

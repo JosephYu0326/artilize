@@ -1,62 +1,87 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
+import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 
 function Gallery() {
+  const frameheight = useRef()
   const [active, setActive] = useState(false)
 
-  const galleries = {
-    0: ['故宮博物院', '台北市立美術館', '台北當代藝術館', '奇美博物館'],
-    1: [
-      '故宮博物院',
-      '台北市立美術館',
-      '台北當代藝術館',
-      '奇美博物館',
-      '高雄市立美術館',
-      '台中市立美術館',
-      '台南市立美術館',
-    ],
-  }
+  const galleries = [
+    '故宮博物院',
+    '台北市立美術館',
+    '台北當代藝術館',
+    '奇美博物館',
+  ]
+  const moreGallery = ['高雄市立美術館', '台中市立美術館', '台南市立美術館']
 
-  const [galleryState, setGalleryState] = useState(galleries[0])
+  useEffect(() => {
+    let thetarget = document.querySelector('.galleryAllTextText')
 
-  const gallery = galleryState.map((v, i) => {
+    if (active) {
+      thetarget.setAttribute('class', 'galleryAllTextText expand')
+    } else {
+      thetarget.setAttribute('class', 'galleryAllTextText')
+    }
+  }, [active])
+
+  const gallery = galleries.map((v, i) => {
     return (
       <div key={i}>
         <Link to="#" className="selectlink" onClick={optionChange}>
           <div className="d-flex align-items-center selectframe">
             <div className="selectsquare"></div>
-
-            <div>{galleryState[i]}</div>
+            <div>{galleries[i]}</div>
           </div>
         </Link>
       </div>
     )
   })
-  function expand() {
+
+  const galleryAll = moreGallery.map((v, i) => {
+    return (
+      <div key={i}>
+        <Link to="#" className="selectlink" onClick={optionChange}>
+          <div className="d-flex align-items-center selectframe">
+            <div className="selectsquare"></div>
+            <div>{moreGallery[i]}</div>
+          </div>
+        </Link>
+      </div>
+    )
+  })
+
+  function expand(e) {
     setActive(!active)
-    if (active) {
-      setGalleryState(galleries[0])
-    } else {
-      setGalleryState(galleries[1])
-    }
   }
 
   return (
     <>
-      <div className="d-flex justify-content-between align-items-center">
-        <div className="h4 my-0">館所</div>
-        <div className="option-expand">
-          <Link to="#" className="expand-link" onClick={expand}>
-            <div className="option-expand position-relative d-flex justify-content-center align-items-center">
-              <div className={active ? 'plusIcon1 expand' : 'plusIcon1'}></div>
-              <div className={active ? 'plusIcon2 expand' : 'plusIcon2'}></div>
-            </div>
-          </Link>
+      <Link to="#" className="selectlink" onClick={expand}>
+        <div className="d-flex justify-content-between align-items-center">
+          <div className="h4 my-0">館所</div>
+
+          <div className="option-expand position-relative d-flex justify-content-center align-items-center">
+            <div className={active ? 'plusIcon1 expand' : 'plusIcon1'}></div>
+            <div className={active ? 'plusIcon2 expand' : 'plusIcon2'}></div>
+          </div>
+        </div>
+      </Link>
+      <div className="web-window categoryheight">
+        {gallery}
+        <div
+          className="frameheight"
+          ref={frameheight}
+          style={
+            active
+              ? { height: frameheight.current.scrollHeight }
+              : { height: frameheight.scrollHeight }
+          }
+        >
+          <div className="galleryAllTextText">{galleryAll}</div>
         </div>
       </div>
 
-      <div className="web-window">{gallery}</div>
       <div className="mobile-window window-size">{gallery}</div>
     </>
   )

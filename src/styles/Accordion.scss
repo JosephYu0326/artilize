@@ -37,6 +37,31 @@
     }
 }
 
+.option-expand{
+    width: 25px;
+    height: 25px;
+}
+.plusIcon1{
+    height:20px;
+    width: 5px;
+    background: black;
+    transition: transform .3s;
+    &.expand{
+        transform: rotate(-90deg);
+    }
+}
+.plusIcon2{
+    height: 20px;
+    width: 5px;
+    background: black;
+    transform: rotate(90deg);
+    position: absolute;
+    transition: opacity .3s;
+    &.expand{
+        opacity: 0;
+    }
+}
+
 
 
 .testlink{

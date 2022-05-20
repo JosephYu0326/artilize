@@ -1,5 +1,3 @@
-import { height } from '@mui/system'
-import { doc } from 'prettier'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useRef } from 'react'
@@ -27,7 +25,7 @@ function Category() {
       <div key={i}>
         <Link to="#" className="selectlink" onClick={optionChange}>
           <div className="d-flex align-items-center selectframe">
-            <div className="selectsquare" id={`option` + i}></div>
+            <div className="selectsquare"></div>
             <div>{categories[i]}</div>
           </div>
         </Link>

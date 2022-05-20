@@ -129,13 +129,25 @@ header{
         border: 0px;
     }
     
+    .galleryAllTextText{
+        opacity: 0;
+        transition: .4s;
+        visibility: hidden;        
+        
+        &.expand{
+            visibility:visible;
+            opacity: 1;
+        }
+    }
     .categoryAllText{
         opacity: 0;
         transition: .4s;
-        
+        visibility: hidden;        
         &.expand{
+            visibility:visible;        
             opacity: 1;
         }
+        
     }
     
     .galleryOption{
@@ -191,9 +203,7 @@ header{
             background-size:550px,300px;
             overflow: hidden;
         }
-        .imgframe-link:hover{
-            opacity: .6;
-        }
+        
         // 卡片內容
         .content{
             justify-content: center;
@@ -229,6 +239,27 @@ header{
             border-radius: 20px !important;
             width: 100px;
         }   
+        
+    }
+    .book-window{
+        position: fixed;
+        z-index: 4;
+
+
+        background: rgb(162, 95, 95);
+        width: 400px;
+        height: 200px;
+        border-radius: 20px;
+    }
+    .book-window-frame{
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background:rgba(0,0,0,0.2);
+        width: 450px;
+        height: 350px;
+        left: 50%;
     }
 }
 
@@ -311,6 +342,7 @@ header{
         .web-window{
             display: none;
         }
+        
     }
 }
 
@@ -321,6 +353,9 @@ header{
         }
         .mobile-window{
             display: none;
+        }
+        .imgframe-link:hover{
+            opacity: .6;
         }
     }
 }
