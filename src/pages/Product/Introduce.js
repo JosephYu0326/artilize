@@ -9,6 +9,7 @@ import p_IntroImg from '../../images/product_Images/productintro/TeaTest.jpg'
 import p_SamesearchImg from '../../images/product_Images/product/ArcherTest.jpeg'
 import p_PopImg from '../../images/product_Images/product/ViewDraw.jpeg'
 import p_BrandImg from '../../images/product_Images/brand/Chimei.png'
+import Accordion from '../../component/Accordion'
 
 function Introduce(props) {
   const ptIntroCards = ['1', '2', '3']
@@ -79,6 +80,7 @@ function Introduce(props) {
   return (
     <>
       <Header />
+      <Accordion />
       <Container>
         <div className="productIntro d-flex">
           <div className="pIntroImg">
@@ -93,7 +95,7 @@ function Introduce(props) {
               </div>
               <div className="pIntroDetailmain">
                 <div className="pIntroMaincontenttopic d-inline-flex">
-                  <p className="pRegular pIntroMaincontenttopictext">
+                  <p className="pbig Regular pIntroMaincontenttopictext">
                     【送禮最適的伴手禮盒】
                   </p>
                 </div>
@@ -105,8 +107,8 @@ function Introduce(props) {
                   </p>
                 </div>
                 <div className="pIntroMaincontenttopic d-inline-flex">
-                  <p className="pRegular pIntroMaincontenttopictext">
-                    【【奇種烏龍｜包種】 】
+                  <p className="pbig Regular pIntroMaincontenttopictext">
+                    【奇種烏龍｜包種】
                   </p>
                 </div>
                 <div className="pIntroMaincontentdetail">
@@ -116,7 +118,7 @@ function Introduce(props) {
                   </p>
                 </div>
                 <div className="pIntroMaincontenttopic d-inline-flex">
-                  <p className="pRegular pIntroMaincontenttopictext">
+                  <p className="pbig Regular pIntroMaincontenttopictext">
                     【奇種烏龍｜高山】
                   </p>
                 </div>
@@ -148,6 +150,7 @@ function Introduce(props) {
                 </button>
               </div>
             </div>
+            <div className="pIntroPurchaseBar"></div>
           </div>
         </div>
       </Container>
