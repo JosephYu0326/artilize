@@ -31,6 +31,7 @@ import HomeHotSale1 from '../../images/homeHotSale1.svg'
 import HomeHotSale2 from '../../images/homeHotSale2.svg'
 import HomeHotSale3 from '../../images/homeHotSale3.svg'
 import HomeSologan from '../../images/homeSologan.svg'
+import HomeSologan1 from '../../images/homeSologan1.svg'
 import HomeTour from '../../images/homeTour.jpg'
 import HomeSponsor1 from '../../images/homeSponsor1.png'
 import HomeSponsor2 from '../../images/homeSponsor2.png'
@@ -56,6 +57,8 @@ import HomeMuseum9 from '../../images/homeMuseum9.svg'
 import HomeMuseum10 from '../../images/homeMuseum10.svg'
 
 function Home(props) {
+  const [homeMapSearch, sethomeMapSearch] = useState('')
+
   return (
     <>
       {/* <div>首頁</div>
@@ -74,6 +77,7 @@ function Home(props) {
       <h1>
         <Link to="/style">樣式</Link>
       </h1> */}
+
       <Header />
       <section>
         <Container fluid>
@@ -159,8 +163,8 @@ function Home(props) {
         <Container fluid className="homeMap">
           <Row>
             <div>
-              <Container className="homeMapInside d-flex flex-column  justify-content-center">
-                <div className="d-flex align-items-center">
+              <Container className="homeMapInside d-flex flex-column  justify-content-center ">
+                <div className="d-flex align-items-center justify-content-sm-start justify-content-center">
                   <CountUp start={0} end={1689} delay={0} duration={5}>
                     {({ countUpRef }) => (
                       <h1 className="ExtraBold">
@@ -168,12 +172,9 @@ function Home(props) {
                       </h1>
                     )}
                   </CountUp>
-                  <h5 className="ExtraBold ">
-                    場展覽在此舉
-                    <br />行
-                  </h5>
+                  <h5 className="ExtraBold ">場展覽在此舉行</h5>
                 </div>
-                <div className="d-flex homeMapButton justify-content-between ">
+                <div className="d-flex homeMapButton justify-content-sm-between justify-content-around  ">
                   <button className=" btn btn-primary">
                     <h2>關鍵字搜尋</h2>
                   </button>
@@ -183,7 +184,14 @@ function Home(props) {
                 </div>
                 <div className="homeMapSearchBar d-flex  align-items-stretch">
                   <form className="d-flex align-items-center justify-content-center ">
-                    <input type="search" placeholder="" />
+                    <input
+                      type="search"
+                      placeholder=""
+                      value={homeMapSearch}
+                      onChange={(e) => {
+                        sethomeMapSearch(e.target.value)
+                      }}
+                    />
                     <button type="submit">Search</button>
                   </form>
                 </div>
@@ -258,9 +266,9 @@ function Home(props) {
             >
               <h1 className="SemiBold">熱銷商品</h1>
             </div>
-            <div className="d-flex justify-content-between align-items-center homeHotSaleCardGroup">
-              <Link to="*">
-                <Card style={{ width: '345px' }} className="homeHotSaleCard">
+            <div className="d-flex justify-content-sm-between justify-content-center align-items-center homeHotSaleCardGroup ">
+              <Link to="*" className="card1">
+                <Card className="homeHotSaleCard">
                   <Card.Img
                     variant="top"
                     src={HomeHotSale1}
@@ -279,8 +287,8 @@ function Home(props) {
                   </Card.Body>
                 </Card>
               </Link>
-              <Link to="*">
-                <Card style={{ width: '345px' }} className="homeHotSaleCard">
+              <Link to="*" className="card2">
+                <Card className="homeHotSaleCard">
                   <Card.Img
                     variant="top"
                     src={HomeHotSale2}
@@ -299,8 +307,8 @@ function Home(props) {
                   </Card.Body>
                 </Card>
               </Link>
-              <Link to="">
-                <Card style={{ width: '345px' }} className="homeHotSaleCard">
+              <Link to="" className="card3">
+                <Card className="homeHotSaleCard">
                   <Card.Img
                     variant="top"
                     src={HomeHotSale3}
@@ -332,7 +340,7 @@ function Home(props) {
                 <h1 className="ExtraBold">自我的光彩</h1>
               </div>
               <div>
-                <img src={HomeSologan} alt=""></img>
+                <img src={HomeSologan1} alt=""></img>
               </div>
             </div>
           </Row>
@@ -340,8 +348,8 @@ function Home(props) {
       </section>
       <section>
         <Container>
-          <div className="homeTour d-flex justify-content-between">
-            <div className="align-self-center">
+          <div className="homeTour d-flex justify-content-lg-between justify-content-center align-items-center flex-lg-row flex-column-reverse">
+            <div className="align-self-center mt-lg-0 mt-2">
               <img src={HomeTour} alt=""></img>
             </div>
             <div className="d-flex flex-column align-items-center justify-content-around">
@@ -357,7 +365,7 @@ function Home(props) {
           </div>
         </Container>
       </section>
-      <section>
+      <section className="hoemAppRwd">
         <Container fluid>
           <Row>
             <div className="homeApp"></div>
@@ -366,9 +374,9 @@ function Home(props) {
       </section>
       <section>
         <Container>
-          <div className="homeSponsor d-flex flex-column justify-content-between mt-5">
+          <div className="homeSponsor d-flex flex-column justify-content-between align-items-sm-start align-items-center mt-5">
             <h1 className="SemiBold">合作單位</h1>
-            <div className="row-cols-6">
+            <div className="row-cols--6 ">
               <div className="card">
                 <img
                   src={HomeSponsor1}
@@ -480,7 +488,183 @@ function Home(props) {
               spaceBetween={30}
               navigation={true}
               modules={[Pagination, Navigation]}
-              className="mt-5"
+              className="mt-5 swiper1"
+            >
+              <SwiperSlide className="homeMuseumSwiperSlide">
+                <div className="homeMuseumCircle d-flex flex-column justify-content-between align-items-center">
+                  <div>
+                    <img src={HomeMuseum1} alt=""></img>
+                  </div>
+                  <h6 className="Regular">高雄美術館</h6>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="homeMuseumCircle d-flex flex-column justify-content-between align-items-center">
+                  <div>
+                    <img src={HomeMuseum2} alt=""></img>
+                  </div>
+                  <h6 className="Regular">奇美博物館</h6>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="homeMuseumCircle d-flex flex-column justify-content-between align-items-center">
+                  <div>
+                    <img src={HomeMuseum3} alt=""></img>
+                  </div>
+                  <h6 className="Regular">台北當代藝術館</h6>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="homeMuseumCircle d-flex flex-column justify-content-between align-items-center">
+                  <div>
+                    <img src={HomeMuseum4} alt=""></img>
+                  </div>
+                  <h6 className="Regular">故宮博物院</h6>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="homeMuseumCircle d-flex flex-column justify-content-between align-items-center">
+                  <div>
+                    <img src={HomeMuseum5} alt=""></img>
+                  </div>
+                  <h6 className="Regular">台北美術館</h6>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="homeMuseumCircle d-flex flex-column justify-content-between align-items-center">
+                  <div>
+                    <img src={HomeMuseum6} alt=""></img>
+                  </div>
+                  <h6 className="Regular">台中美術館</h6>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="homeMuseumCircle d-flex flex-column justify-content-between align-items-center">
+                  <div>
+                    <img src={HomeMuseum7} alt=""></img>
+                  </div>
+                  <h6 className="Regular">蘭陽博物館</h6>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="homeMuseumCircle d-flex flex-column justify-content-between align-items-center">
+                  <div>
+                    <img src={HomeMuseum8} alt=""></img>
+                  </div>
+                  <h6 className="Regular">北師美術館</h6>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="homeMuseumCircle d-flex flex-column justify-content-between align-items-center">
+                  <div>
+                    <img src={HomeMuseum9} alt=""></img>
+                  </div>
+                  <h6 className="Regular">嘉義美術館</h6>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="homeMuseumCircle d-flex flex-column justify-content-between align-items-center">
+                  <div>
+                    <img src={HomeMuseum10} alt=""></img>
+                  </div>
+                  <h6 className="Regular">澎湖生活博物館</h6>
+                </div>
+              </SwiperSlide>
+            </Swiper>
+            <Swiper
+              slidesPerView={4}
+              spaceBetween={30}
+              navigation={true}
+              modules={[Pagination, Navigation]}
+              className="mt-5 swiper2"
+            >
+              <SwiperSlide className="homeMuseumSwiperSlide">
+                <div className="homeMuseumCircle d-flex flex-column justify-content-between align-items-center">
+                  <div>
+                    <img src={HomeMuseum1} alt=""></img>
+                  </div>
+                  <h6 className="Regular">高雄美術館</h6>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="homeMuseumCircle d-flex flex-column justify-content-between align-items-center">
+                  <div>
+                    <img src={HomeMuseum2} alt=""></img>
+                  </div>
+                  <h6 className="Regular">奇美博物館</h6>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="homeMuseumCircle d-flex flex-column justify-content-between align-items-center">
+                  <div>
+                    <img src={HomeMuseum3} alt=""></img>
+                  </div>
+                  <h6 className="Regular">台北當代藝術館</h6>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="homeMuseumCircle d-flex flex-column justify-content-between align-items-center">
+                  <div>
+                    <img src={HomeMuseum4} alt=""></img>
+                  </div>
+                  <h6 className="Regular">故宮博物院</h6>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="homeMuseumCircle d-flex flex-column justify-content-between align-items-center">
+                  <div>
+                    <img src={HomeMuseum5} alt=""></img>
+                  </div>
+                  <h6 className="Regular">台北美術館</h6>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="homeMuseumCircle d-flex flex-column justify-content-between align-items-center">
+                  <div>
+                    <img src={HomeMuseum6} alt=""></img>
+                  </div>
+                  <h6 className="Regular">台中美術館</h6>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="homeMuseumCircle d-flex flex-column justify-content-between align-items-center">
+                  <div>
+                    <img src={HomeMuseum7} alt=""></img>
+                  </div>
+                  <h6 className="Regular">蘭陽博物館</h6>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="homeMuseumCircle d-flex flex-column justify-content-between align-items-center">
+                  <div>
+                    <img src={HomeMuseum8} alt=""></img>
+                  </div>
+                  <h6 className="Regular">北師美術館</h6>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="homeMuseumCircle d-flex flex-column justify-content-between align-items-center">
+                  <div>
+                    <img src={HomeMuseum9} alt=""></img>
+                  </div>
+                  <h6 className="Regular">嘉義美術館</h6>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="homeMuseumCircle d-flex flex-column justify-content-between align-items-center">
+                  <div>
+                    <img src={HomeMuseum10} alt=""></img>
+                  </div>
+                  <h6 className="Regular">澎湖生活博物館</h6>
+                </div>
+              </SwiperSlide>
+            </Swiper>
+            <Swiper
+              slidesPerView={2}
+              spaceBetween={10}
+              navigation={true}
+              modules={[Pagination, Navigation]}
+              className="mt-5 swiper3"
             >
               <SwiperSlide className="homeMuseumSwiperSlide">
                 <div className="homeMuseumCircle d-flex flex-column justify-content-between align-items-center">
