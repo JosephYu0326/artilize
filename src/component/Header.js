@@ -33,13 +33,13 @@ function Header(props) {
             className="d-flex  align-items-center"
             style={{ width: 236, height: 42, gap: 16 }}
           >
-            <Link>
+            <Link to="">
               <h6 className="Regular">展覽活動</h6>
             </Link>
-            <Link>
+            <Link to="">
               <h6 className="Regular">商品</h6>
             </Link>
-            <Link>
+            <Link to="">
               <h6 className="Regular">討論區</h6>
             </Link>
           </div>
