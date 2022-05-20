@@ -10,28 +10,28 @@ import 'react-datepicker/dist/react-datepicker.css'
 
 function B2B(props) {
   //活動名稱
-  const [exhibition, setExhibition] = useState('123456')
+  const [exhibition, setExhibition] = useState('')
   // select 縣市
   const [selectedValue, setSelectedValue] = useState('')
   const carOptions = ['volvo', 'saab', 'mercedes', 'audi']
   //活動日期
   //開始
-  
+
   const [startDate, setStartDate] = useState(new Date())
-  
+
   //結束
   //詳細地址
-  const [address, setAddress] = useState('123456')
+  const [address, setAddress] = useState('')
   //活動內容介紹
-  const [activities, setActivities] = useState('123456')
+  const [activities, setActivities] = useState('')
   //票券名稱
-  const [ticketName, setTicketName] = useState('123456')
+  const [ticketName, setTicketName] = useState('')
   //票券數量
-  const [amount, setAmount] = useState('123456')
+  const [amount, setAmount] = useState('')
   //票券價格
-  const [price, setPrice] = useState('123456')
+  const [price, setPrice] = useState('')
   //票券說明
-  const [ticketDescription, setTicketDescription] = useState('123456')
+  const [ticketDescription, setTicketDescription] = useState('')
 
   return (
     <>
@@ -47,10 +47,15 @@ function B2B(props) {
               selected={startDate}
               onChange={(date) => setStartDate(date)}
             />
+
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+            />
             {/* <figure className="figure d-flex justify-content-center ">
               <img
                 src="../images/logo.svg"
-                className="figure-img img-fluid rounded"
+                className="figure-img img-  rounded"
                 alt="..."
               />
             </figure> */}

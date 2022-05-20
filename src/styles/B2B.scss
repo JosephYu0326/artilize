@@ -4,6 +4,8 @@
     border-bottom: 1px solid $DarkGrey;
     border-radius: $BorderRadius;
     box-shadow: $BoxShadow;
+    padding:40px !important;
+
     input {
         border: 1px solid $DarkGrey;
         border-radius: $BorderRadius;
@@ -17,4 +19,54 @@
     button{
         border-radius: $BorderRadius;
     }
+}
+
+
+// <576px //手機板才樣式
+@include media-breakpoint-down(md) {  
+    .b2bForm{
+        border-bottom: 1px solid $DarkGrey;
+        border-radius: $BorderRadius;
+        box-shadow: $BoxShadow;
+        padding:40px !important;
+        min-width: 330px;
+    
+        input {
+            border: 1px solid $DarkGrey;
+            border-radius: $BorderRadius;
+        }
+        select{
+            border-radius: $BorderRadius;
+        }
+        textarea{
+            border-radius: $BorderRadius;
+        }
+        button{
+            border-radius: $BorderRadius;
+        }
+    }
+}
+
+// ≥576px //桌機板樣式
+@include media-breakpoint-up(sm) {
+.b2bForm{
+    border-bottom: 1px solid $DarkGrey;
+    border-radius: $BorderRadius;
+    box-shadow: $BoxShadow;
+    padding:40px !important;
+
+    input {
+        border: 1px solid $DarkGrey;
+        border-radius: $BorderRadius;
+    }
+    select{
+        border-radius: $BorderRadius;
+    }
+    textarea{
+        border-radius: $BorderRadius;
+    }
+    button{
+        border-radius: $BorderRadius;
+    }
+}
 }
