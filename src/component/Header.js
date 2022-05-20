@@ -95,7 +95,7 @@ function Header(props) {
                   <SearchBar />
                   <Button variant="primary rounded-pill px-4">辦展覽</Button>
                   <button className="align-items-center d-flex pb-2">
-                    <Link to="/forum">
+                    <Link to="/users">
                       <FaUserCircle />
                     </Link>
                   </button>
