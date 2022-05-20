@@ -3,6 +3,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import '../../styles/B2B.scss'
 import { useState } from 'react'
+//套件 datepicker
+import DatePicker from 'react-datepicker'
+
+import 'react-datepicker/dist/react-datepicker.css'
 
 function B2B(props) {
   //活動名稱
@@ -12,6 +16,9 @@ function B2B(props) {
   const carOptions = ['volvo', 'saab', 'mercedes', 'audi']
   //活動日期
   //開始
+  
+  const [startDate, setStartDate] = useState(new Date())
+  
   //結束
   //詳細地址
   const [address, setAddress] = useState('123456')
@@ -36,7 +43,10 @@ function B2B(props) {
           <form className="col-6 b2bForm ">
             <h1>開始建立活動資訊</h1>
             <h6>請創建一個活動展覽資訊</h6>
-
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+            />
             {/* <figure className="figure d-flex justify-content-center ">
               <img
                 src="../images/logo.svg"
