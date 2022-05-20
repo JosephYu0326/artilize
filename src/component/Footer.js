@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import {Button} from "react-bootstrap";
 import bwLogo from "../images/ARTILIZE_logo_bl.svg";
 import {
@@ -9,7 +10,7 @@ import {
 import "../styles/HeaderAndFooter.scss";
 
 function Footer(props) {
-    return (
+   return (
         <footer>
         {/* social media */}
         <div className="fourword">
@@ -32,9 +33,9 @@ function Footer(props) {
         <div className="fourword">
           <div className="d-flex align-items-center">
             <div>
-              <a href="#" className="txtGray">
+              <Link to="/PrivacyPolicy" className="txtGray">
                 隱私政策
-              </a>
+              </Link>
               <a href="#" className="txtGray">
                 購票須知
               </a>
@@ -43,7 +44,7 @@ function Footer(props) {
               </a>
             </div>
             <div>
-              <Button variant="outline-primary rounded-pill">聯絡我們</Button>
+              <Button variant="outline-primary rounded-pill" >聯絡我們</Button>
             </div>
           </div>
 
