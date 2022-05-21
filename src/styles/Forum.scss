@@ -91,6 +91,9 @@
 }
 .perContentHead {
   align-items: center;
+  h5{
+    cursor: pointer;
+  }
   p {
     margin: 0;
     color: $MiddleGrey;

@@ -2,9 +2,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaStar, FaCommentDots } from "react-icons/fa";
+import FadeIn from "react-fade-in";
 import Header from "../../component/Header";
 import Footer from "../../component/Footer";
 import AsideBar from "../../component/AsideBar";
+import Article from "../../component/Article";
 
 function ArticleCollect(props) {
   const btnList = 
@@ -46,47 +48,27 @@ function ArticleCollect(props) {
       comment: "21",
       avrtarId: "100",
     },
+    {
+      category: "心得分享",
+      title: "新竹300博覽會：展區拍照心得",
+      author: "Ivy",
+      content:
+        "總之我原本沒有要寫展區心得的\r\n\r\n但因為策展人傳來一份網上流傳的網美拍照攻略.....\r\n\r\n我覺得那份心得真對不起製作組跟網美們\r\n\r\n \r\n\r\n莫名想問老師是沒看過真的網美嗎...\r\n\r\n所以決定來發我的拍照點\r\n\r\n \r\n\r\n像一樓\r\n\r\n巨大球球跟後面的形象牆當然是很好拍\r\n\r\n但是遠景這種拍法根本就不網美呀\r\n\r\n請看一樓我們家的網美\r\n\r\n \r\n\r\n  \r\n\r\n然後我說真的，要拍照的網紅點才不是一樓好嗎？\r\n\r\n請到三樓積木區\r\n\r\n\r\n\r\n \r\n\r\n覺得積木區人太多\r\n\r\n也可以選擇有美美新竹背景的播放區拍：\r\n\r\n\r\n\r\n \r\n\r\n再不然\r\n\r\n你還有手扶梯旁邊的展區形象牆\r\n\r\n\r\n\r\n \r\n\r\n喔!!展區太大逛累了，還可以到外面吹吹風\r\n\r\n\r\n\r\n \r\n\r\n快來\r\n\r\n新竹三百博覽會當網美\r\n\r\n \r\n\r\n還有網紅必備超繽紛筆記本  \r\n\r\n\r\n\r\n跟網紅必點的超推薦甜點\r\n\r\n \r\n\r\n\r\n還有很多網紅去了不會告訴你的焦點小吃XD\r\n\r\n\r\n\r\n營業時間 7/21-29 10:00-18:00\r\n\r\n \r\n\r\n＞有人跟我說新竹300博覽會怎麼把新竹拍得這麼美\r\n\r\n＞我要說你錯了\r\n\r\n＞是新竹原本就這麼美XD",
+      comment: "21",
+      avrtarId: "100",
+    },
   ];
   return (
     <>
       <Header />
       <AsideBar btn={btnList} />
       <div className="container">
-        <div className="userPage frContent">
+        <div className="frContent">
           <h3>文章收藏</h3>
-          {articleList.map((v, i) => {
-            return (
-              <div  key={i}>
-                <div className="perContentHead my-4 d-flex justify-content-between">
-                  <div className="text-start d-flex align-items-center ">
-                    <div>
-                      <img
-                        className="avatar m-1"
-                        src="https://picsum.photos/200"
-                        alt=""
-                      />
-                      <p className="pBig text-center">{v.author}</p>
-                    </div>
-                    <h5 className="h5 ExtraBold mx-auto ms-2 mb-0 title">
-                      {v.title}
-                    </h5>
-                  </div>
-                  <div>
-                    <p className="category pBig">-{v.category}</p>
-                  </div>
-                </div>
-                <div className="comment">
-                  <pre>{v.content}</pre>
-                </div>
-                <div className="social d-flex justify-content-end align-items-center">
-                  <FaCommentDots />
-                  <div className="p-2">{v.comment}</div>
-                  <FaStar />
-                </div>
-                <hr />
-              </div>
-            );
-          })}
+          <FadeIn>
+
+          <Article articDetails={articleList}/>
+          </FadeIn>
         </div>
       </div>
       <Footer />

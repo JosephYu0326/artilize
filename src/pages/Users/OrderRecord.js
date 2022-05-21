@@ -3,6 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Card, Button, Container, Row, Col } from "react-bootstrap";
 import { FaMapMarkerAlt, FaCalendarAlt } from "react-icons/fa";
+import FadeIn from "react-fade-in";
 import Header from "../../component/Header";
 import Footer from "../../component/Footer";
 import AsideBar from "../../component/AsideBar";
@@ -34,7 +35,7 @@ function OrderRecord(props) {
       <div className="container">
         <div className="userPage frContent">
           <h3>訂單紀錄 </h3>
-          <div className="orderRecord w-100">
+          <FadeIn className="orderRecord w-100">
             <Container className=" d-flex flex-wrap">
               <Row className="orderRecordCard m-1">
                 <Col className="p-0" sm="12" md="3">
@@ -106,7 +107,7 @@ function OrderRecord(props) {
                 </Col>
               </Row>
             </Container>
-          </div>
+          </FadeIn>
         </div>
       </div>
     <Footer/>

@@ -6,6 +6,8 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { Form, Button } from "react-bootstrap";
 
 function AddArticle(props) {
+
+  
   const editorRef = useRef(null);
   const log = () => {
     if (editorRef.current) {
@@ -15,10 +17,11 @@ function AddArticle(props) {
   return (
     <>
       <div className="backBtn displayN">
-        <a href="/forum">
-          回討論區
+
+        <Link to="/forum">回討論區
           <FaAngleLeft />
-        </a>
+        </Link>
+
       </div>
       <div className="container">
         <div className="frContent">

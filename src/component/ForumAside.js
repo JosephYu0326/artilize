@@ -3,7 +3,14 @@ import {FaAngleRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import"../styles/ForumAside.scss"
 
-function AsideBar(props){
+function ForumAside(props){
+    const btnlist = props.btn
+    const btn = btnlist.map((v,i)=>{
+        return(
+            <button key={i} className='btn asideBtn'>{btnlist[i]}</button>
+        )
+    })
+
     
     return(
         <>
@@ -11,13 +18,12 @@ function AsideBar(props){
             <aside className="pb-4 px-3 forumAside">
               <label htmlFor="sideMenu-switch" className="align-self-end">
    	          <FaAngleRight className='faAngleRight'/></label>
-              <Link to="/forum/addarticle" className='btn btn-primary mt-4 mb-4 py-2 px-3 rounded-pill'>{props.btn}</Link>
-              <button  className='btn asideBtn'>{props.btn1}</button>
-              <button className='btn asideBtn'>{props.btn2}</button>
-              <button className='btn asideBtn'>{props.btn3}</button>
-              <button className='btn asideBtn'>{props.btn4}</button>
+              <Link to="/forum/addarticle" className='btn btn-primary mt-4 mb-4 py-2 px-3 rounded-pill'>新增討論</Link>
+              
+                 {btn}
+              
             </aside>
         </>
     )
 }
-export default AsideBar
+export default ForumAside

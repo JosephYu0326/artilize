@@ -1,6 +1,7 @@
 //討論區列表
-import React from "react";
-import { Link } from "react-router-dom";
+import React,{useEffect, useState} from "react";
+import { Link, useParams } from "react-router-dom";
+import FadeIn from "react-fade-in";
 import "../../styles/Forum.scss";
 import "../../styles/AsideBar.scss";
 import ForumAside from "../../component/ForumAside";
@@ -9,8 +10,11 @@ import Footer from "../../component/Footer";
 import Article from "../../component/Article";
 
 function Forum(props) {
+
+  const btn = ["逛展攻略","心得分享","小資旅遊"]
   const articleList = [
     {
+      id:1,
       category: "逛展攻略",
       title: "南美館一日遊及南美館1、2館觀展心得",
       author: "Wendy",
@@ -20,6 +24,7 @@ function Forum(props) {
       avrtarId: "100",
     },
     {
+      id:2,
       category: "心得分享",
       title: "新竹300博覽會：展區拍照心得",
       author: "Jack899",
@@ -34,15 +39,15 @@ function Forum(props) {
     <>
       <Header />
       <Link to="/forum/article">檢視文章</Link>
-      <ForumAside btn="新增討論" btn1="02" btn4="01" />
+      <ForumAside btn={btn} />
 
-      <div className="container h-100 ">
+      <FadeIn className="container h-100 ">
         <div className="frContent">
           
           <Article articDetails={articleList}/>
-          
+
         </div>
-      </div>
+      </FadeIn>
       <Footer />
     </>
   );

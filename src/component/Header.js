@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Nav, Navbar, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logo from "../images/logo.png";
@@ -23,12 +23,12 @@ function Header(props) {
   //     setCollapse("navbar-collapse collapse show");
   //     setAriaExpanded("true");
   //     setNavbarToggler("navbar-toggler");
-     
+
   //   } else {
   //     setCollapse("navbar-collapse collapse");
   //     setAriaExpanded("false");
   //     setNavbarToggler("navbar-toggler collapsed");
-    
+
   //   }
   // }
 
@@ -93,11 +93,11 @@ function Header(props) {
               <li className="nav-item">
                 <div className="homeSearchBar justify-content-center align-items-stretch">
                   <SearchBar />
-                  <Button variant="primary rounded-pill px-4">辦展覽</Button>
+                  <Button variant="primary rounded-pill px-4">
+                    <Link to="/b2b">辦展覽</Link>
+                  </Button>
                   <button className="align-items-center d-flex pb-2">
-                    <Link to="/users">
-                      <FaUserCircle />
-                    </Link>
+                    <Link to="/users"><FaUserCircle /></Link>
                   </button>
                 </div>
               </li>
@@ -139,9 +139,9 @@ function Header(props) {
             <FaSearch className="displayY fs-2" onClick={clickToSearch} />
           </div> */}
 
-   
 
-          {/* <div className={collapse} id="navbarTogglerDemo03">
+
+      {/* <div className={collapse} id="navbarTogglerDemo03">
             <ul className="test navbar-nav mx-auto mb-5 mb-lg-0 align-items-center">
               <li className="nav-item">
                 <Link to="/exhibition">
