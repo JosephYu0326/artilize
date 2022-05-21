@@ -2,7 +2,7 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { FaAngleLeft} from "react-icons/fa";
 import { Form, Button } from "react-bootstrap";
 import Header from "../../component/Header";
 import Footer from "../../component/Footer";
