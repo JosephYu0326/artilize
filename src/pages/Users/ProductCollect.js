@@ -39,6 +39,7 @@ function ProductCollect(props) {
         <div className="userPage frContent">
           <h3>商品收藏</h3>
           <div>
+            {/* 麻煩改成你的CARDㄌ! */}
             <Card />
           </div>
         </div>
