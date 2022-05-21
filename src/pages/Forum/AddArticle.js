@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { Form, Button } from "react-bootstrap";
+import Header from "../../component/Header";
+import Footer from "../../component/Footer";
 
 function AddArticle(props) {
 
-  
   const editorRef = useRef(null);
   const log = () => {
     if (editorRef.current) {
@@ -16,6 +17,7 @@ function AddArticle(props) {
   };
   return (
     <>
+    <Header/>
       <div className="backBtn displayN">
 
         <Link to="/forum">回討論區
@@ -72,9 +74,9 @@ function AddArticle(props) {
                   <option value="2">u</option>
                   <option value="3">u</option>
                 </Form.Select>
-                <Button variant="secondary col-sm-12 col-md-5 rounded-pill my-5 mx-auto">
+                {/* <Button variant="secondary col-sm-12 col-md-5 rounded-pill my-5 mx-auto">
                   儲存草稿
-                </Button>
+                </Button> */}
                 <Button variant="primary col-sm-12 col-md-5 rounded-pill my-5 mx-auto">
                   新增討論
                 </Button>
@@ -85,6 +87,7 @@ function AddArticle(props) {
           </form>
         </div>
       </div>
+      <Footer/>
     </>
   );
 }

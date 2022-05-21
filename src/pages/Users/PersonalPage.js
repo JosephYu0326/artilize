@@ -51,9 +51,9 @@ function PersonalPage(props) {
                 <div className="h6">作者</div>
                 <div className="displayN m-3">{"6篇文章"}</div>
               </div>
-              <Button variant="btn btn-primary rounded-pill BorderRadius">
+              {/* <Button variant="btn btn-primary rounded-pill BorderRadius">
                 FOLLOW
-              </Button>
+              </Button> */}
             </div>
           </div>
         </div>
@@ -61,7 +61,7 @@ function PersonalPage(props) {
           <div className="frContent">
             <div className="perContentHead pt-4 d-flex justify-content-between align-items-center">
               <div className="">
-                <p className="">{"作者"}</p>
+                <p className="displayN">{"作者"}</p>
                 <h3 className="mb-5">{title}</h3>
               </div>
               <p className="category">-心得分享</p>

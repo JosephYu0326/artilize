@@ -40,16 +40,14 @@ function Article(props) {
     <>
       <Header />
       <div className="backBtn displayN">
-
         <Link to="/forum">回討論區
           <FaAngleLeft />
         </Link>
-
       </div>
       <div className="container">
         <div className="row">
-          <div className="col-lg-3 liquidLeft"></div>
-          <div className="liquid col-lg-9 col-sm-12">
+          <div className="col-lg-1 liquidLeft"></div>
+          <div className="liquid col-lg-10 col-sm-12">
             <section className="frContent mb-5">
               <div className="articleHead d-flex align-items-start justify-content-between">
                 <div className="d-flex align-items-center">

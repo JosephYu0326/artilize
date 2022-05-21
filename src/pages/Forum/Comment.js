@@ -22,16 +22,16 @@ function Comment(props) {
             <FaCommentDots />
           </div>
           <div>
-            <FaReply />
+            {/* <FaReply /> */}
           </div>
           </div>
 
           {/* reply */}
-          <hr className="replyHr MiddleGrey"/>
+          {/* <hr className="replyHr MiddleGrey"/>
           <div className="d-flex align-items-center">
             <div className="h6">{'replyUser'}</div>
           </div>
-          <div className="my-3">{"Awesome!"}</div>
+          <div className="my-3">{"Awesome!"}</div> */}
           <hr />
         </section>
       </div>
