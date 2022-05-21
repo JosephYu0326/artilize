@@ -3,6 +3,9 @@ import { FaStar, FaCommentDots } from "react-icons/fa";
 
 function Article(props) {
     const articleDetails = props.articDetails
+    function which(e) {
+        console.log(e.target);
+    }
     const article = articleDetails.map((v, i) => {
         return (
             <div key={i}>
@@ -16,7 +19,7 @@ function Article(props) {
                             />
                             <p className="pBig text-center">{articleDetails[i].author}</p>
                         </div>
-                        <h5 className="h5 ExtraBold mx-auto ms-2 mb-0 title">
+                        <h5 className="h5 ExtraBold mx-auto ms-2 mb-0 title" onClick={which}>
                             {articleDetails[i].title}
                         </h5>
                     </div>
