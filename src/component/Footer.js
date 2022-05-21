@@ -14,15 +14,15 @@ function Footer(props) {
         <footer>
         {/* social media */}
         <div className="fourword">
-          <a className="displayN" href="#">
+          <a className="displayN" href="/">
             <img className=" mb-3" src={bwLogo} alt="websiteLogo" />
           </a>
           <div className= "d-flex footerSocial justify-content-between">
             <div>
-              <FaFacebookSquare className="txtGray" />
+              <a href="https://zh-tw.facebook.com/"><FaFacebookSquare className="txtGray" /></a>
             </div>
             <div className="">
-              <FaTwitterSquare className="txtGray" />
+              <a href='https://twitter.com'><FaTwitterSquare className="txtGray" /></a>
             </div>
             <div>
               <FaInstagramSquare className="txtGray" />

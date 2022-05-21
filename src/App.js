@@ -30,6 +30,7 @@ import NotFoundPage from './pages/Home/NotFoundPage'
 import B2B from './pages/B2B/B2B'
 import AddAbility from './pages/B2B/AddAbility'
 import Style from './pages/Style'
+import PrivacyPolicy from './pages/PrivacyPolicy'
 
 function App() {
   return (
@@ -118,6 +119,9 @@ function App() {
         </Route>
         <Route path="/style">
           <Style />
+        </Route>
+        <Route path="/privacypolicy">
+          <PrivacyPolicy />
         </Route>
         <Route path="/" exact>
           <Home />
