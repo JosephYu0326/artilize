@@ -93,6 +93,9 @@ function Article(props) {
                 </div>
               </section>
               <Comment />
+              <Comment />
+              <Comment />
+              <Comment />
             </section>
           </div>
         </div>

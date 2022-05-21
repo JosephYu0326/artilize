@@ -42,10 +42,13 @@
   margin-top: 20px;
   border-radius: 10px;
   box-shadow: rgb(110, 116, 145) 2px 2px 4px;
-  .comment {
-    max-height: 20vh;
-    overflow: hidden;
-  }
+    .comment {
+      overflow: hidden;
+    }
+    .preViewContent{
+      max-height: 20vh;
+      overflow: hidden;
+    }
 }
 
 .newComment {
