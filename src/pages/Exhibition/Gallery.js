@@ -16,12 +16,12 @@ function Gallery() {
   const moreGallery = ['高雄市立美術館', '台中市立美術館', '台南市立美術館']
 
   useEffect(() => {
-    let thetarget = document.querySelector('.galleryAllTextText')
+    let thetarget = document.querySelector('.galleryAllText')
 
     if (active) {
-      thetarget.setAttribute('class', 'galleryAllTextText expand')
+      thetarget.setAttribute('class', 'galleryAllText expand')
     } else {
-      thetarget.setAttribute('class', 'galleryAllTextText')
+      thetarget.setAttribute('class', 'galleryAllText')
     }
   }, [active])
 
@@ -78,7 +78,7 @@ function Gallery() {
               : { height: frameheight.scrollHeight }
           }
         >
-          <div className="galleryAllTextText">{galleryAll}</div>
+          <div className="galleryAllText">{galleryAll}</div>
         </div>
       </div>
 

@@ -79,6 +79,7 @@ function Accordion() {
     // 尋找目標物的父元素
     let thetarget =
       e.target.parentNode.childNodes[0].childNodes[0].childNodes[1]
+
     // 父元素與子元素
     let object1 = e.target.parentNode.parentNode.parentNode
     let object2 = e.target.parentNode.parentNode
@@ -90,6 +91,7 @@ function Accordion() {
         break
       }
     }
+
     if (!activeState[index]) {
       activeState[index] = 1
     } else {

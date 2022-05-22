@@ -82,7 +82,7 @@ function Card() {
   })
   return (
     <>
-      <Book isOpen={isOpen} />
+      <Book isOpen={isOpen} setIsOpen={setIsOpen} />
 
       {card}
     </>

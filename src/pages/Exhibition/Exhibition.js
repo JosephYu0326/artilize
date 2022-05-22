@@ -54,6 +54,7 @@ function Exhibition(props) {
           <div className="asideframe BoxShadow">
             <Location />
           </div>
+
           <div>
             <Accordion />
           </div>

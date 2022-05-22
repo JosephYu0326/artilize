@@ -129,9 +129,10 @@ header{
         border: 0px;
     }
     
-    .galleryAllTextText{
+    .galleryAllText{
         opacity: 0;
-        transition: .4s;
+        transition: .3s opacity;
+        transition-delay: .2s;
         visibility: hidden;        
         
         &.expand{
@@ -141,8 +142,10 @@ header{
     }
     .categoryAllText{
         opacity: 0;
-        transition: .4s;
-        visibility: hidden;        
+        transition: .3s opacity;
+        transition-delay: .2s;
+        visibility: hidden;      
+     
         &.expand{
             visibility:visible;        
             opacity: 1;
@@ -157,7 +160,7 @@ header{
     
     .frameheight{
         height: 0;
-        transition: height 0.4s;
+        transition: height 0.6s;
         
     }
     .option-expand{
@@ -241,25 +244,29 @@ header{
         }   
         
     }
-    .book-window{
-        position: fixed;
-        z-index: 4;
-
-
-        background: rgb(162, 95, 95);
-        width: 400px;
-        height: 200px;
-        border-radius: 20px;
-    }
     .book-window-frame{
         position: fixed;
         display: flex;
         justify-content: center;
         align-items: center;
         background:rgba(0,0,0,0.2);
-        width: 450px;
-        height: 350px;
-        left: 50%;
+        width: 100vw;
+        height: 100vh;
+        left: 0;
+        top: 0;
+    }
+    
+    .book-window{
+        position: fixed;
+        z-index: 4;
+        padding: 30px;
+        border-radius: 20px;
+        border:#B4A79E solid 1px;
+        background: #fff;
+        width: 400px;
+        height: 560px;
+        border-radius: 20px;
+
     }
 }
 
