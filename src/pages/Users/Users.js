@@ -29,7 +29,7 @@ function Users(props) {
       <br />
       <Link to="users/mycoupon">我的優惠券</Link>
       <Header />
-      {/* <AsideBar /> */}
+      <AsideBar />
       <div className="bg-background">
         <section>
           <Container>

@@ -1,0 +1,20 @@
+@import './global.scss';
+
+.b2bForm{
+    border-bottom: 1px solid $DarkGrey;
+    border-radius: $BorderRadius;
+    box-shadow: $BoxShadow;
+    input {
+        border: 1px solid $DarkGrey;
+        border-radius: $BorderRadius;
+    }
+    select{
+        border-radius: $BorderRadius;
+    }
+    textarea{
+        border-radius: $BorderRadius;
+    }
+    button{
+        border-radius: $BorderRadius;
+    }
+}

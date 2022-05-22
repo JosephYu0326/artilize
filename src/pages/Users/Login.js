@@ -3,9 +3,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import '../../styles/users.scss'
 import Header from '../../component/Header'
-import { Container, Form, Button, Row } from 'react-bootstrap'
+import { Container, Row } from 'react-bootstrap'
+import { useState } from 'react'
 
 function Login(props) {
+  const [account, setAccount] = useState('')
+  const [password, setPassword] = useState('')
+
   return (
     <>
       <Header />
@@ -20,53 +24,69 @@ function Login(props) {
                 className=" BorderRadius usersBackground p-5"
                 style={{ maxWidth: '568px', minWidth: '390px' }}
               >
-                <Form className="">
+                <form>
                   <div style={{ paddingLeft: '12px' }}>
-                    <h4 className="ph_title row ExtraBold text-primary">
-                      登入
-                    </h4>
-                    <h6 className="ph_title row Regular usersContentcolor mb-3 ">
+                    <h4 class="ph_title row ExtraBold text-primary">登入</h4>
+                    <h6 class="ph_title row Regular usersContentcolor mb-3 ">
                       使用您的Artilize帳號
                     </h6>
                   </div>
-                  <Form.Group className="mb-3" controlId="formBasicEmail">
-                    {/* <Form.Label>帳號</Form.Label> */}
-                    <Form.Control type="email" placeholder="帳號" />
-                    <Form.Text className="text-secondary">
+                  <div id="input-text" class="mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="exampleFormControlInput1"
+                      placeholder="帳號"
+                      value={account}
+                      onChange={(e) => {
+                        setAccount(e.target.value)
+                      }}
+                    />
+                    <div id="emailHelp" class="form-text text-secondary">
                       請輸入正確的帳號
-                    </Form.Text>
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formBasicPassword">
-                    {/* <Form.Label>密碼</Form.Label> */}
-                    <Form.Control type="password" placeholder="密碼" />
-                    <Form.Text className="text-secondary">
+                    </div>
+                  </div>
+                  <div id="input-text" class="mb-3 usersContentcolor Regular">
+                    <input
+                      type="text"
+                      class="form-control "
+                      id="exampleFormControlInput1"
+                      placeholder="密碼"
+                      value={password}
+                      onChange={(e) => {
+                        setPassword(e.target.value)
+                      }}
+                    />
+                    <div id="emailHelp" class="form-text text-secondary">
                       請輸入正確的密碼
-                    </Form.Text>
-                  </Form.Group>
-                  <Form.Group
-                    className="mb-3 usersContentcolor Regular"
-                    controlId=""
-                  >
-                    <Link to="/users/ForgetPassword/">
-                      <Form.Label>忘記密碼</Form.Label>
-                    </Link>
-                  </Form.Group>
-                  {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                        <Form.Check type="checkbox" label="記住我" />
-                      </Form.Group> */}
-                  <div className="d-flex justify-content-around">
-                    <Link to="/users/">
-                      <Button variant="primary rounded-pill" type="submit">
-                        登入
-                      </Button>
-                    </Link>
-                    <Link to="/users/signup/">
-                      <Button variant="primary rounded-pill" type="submit">
-                        註冊
-                      </Button>
+                    </div>
+                  </div>
+                  <div>
+                    <Link to="/users/forgetpassword/">
+                      <label class="form-text mb-3 usersContentcolor Regular">
+                        忘記密碼
+                      </label>
                     </Link>
                   </div>
-                </Form>
+                  <div className="d-flex justify-content-around">
+                    <Link to="/users/">
+                      <button
+                        type="submit"
+                        class="btn btn-primary rounded-pill"
+                      >
+                        登入
+                      </button>
+                    </Link>
+                    <Link to="/users/signup/">
+                      <button
+                        type="submit"
+                        class="btn btn-primary rounded-pill"
+                      >
+                        註冊
+                      </button>
+                    </Link>
+                  </div>
+                </form>
               </div>
             </Row>
           </Container>

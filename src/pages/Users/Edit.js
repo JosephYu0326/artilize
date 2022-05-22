@@ -29,7 +29,7 @@ function Edit(props) {
       <br />
       <Link to="users/mycoupon">我的優惠券</Link>
       <Header />
-      {/* <AsideBar /> */}
+      <AsideBar btn1="123" />
       <div className="bg-background">
         <section>
           <Container>
