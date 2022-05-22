@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaStar, FaCommentDots } from "react-icons/fa";
-
+import { Link, useParams } from "react-router-dom";
 function Article(props) {
     const isSignIn = true
     const articleDetails = props.articDetails
@@ -8,14 +8,10 @@ function Article(props) {
     //     console.log(e.target);
     // }
 
-    function getPerArticle(e){
-        console.log(e.target);
-    }
-
     function handleLike() {
-        if(isSignIn){
+        if (isSignIn) {
             alert("收藏文章")
-        }else{
+        } else {
             alert("請先登入！")
         }
     }
@@ -32,26 +28,28 @@ function Article(props) {
                                 src="https://picsum.photos/id/222/200"
                                 alt=""
                             />
-                            <p className="pBig text-center">{articleDetails[i].author}</p>
+                            <p className="pBig text-center">{articleDetails[i].nickname}</p>
                         </div>
-                        <h5 className="h5 ExtraBold mx-auto ms-2 mb-0 title">
-                            <Link to="/forum/article/id=2}">{articleDetails[i].title}</Link>
-                        </h5>
+                        {/* <h5 as={Link} to={`/forum/${articleDetails[i].fr_article_id}`} className="h5 ExtraBold mx-auto ms-2 mb-0 title"> */}
+                        <Link to={`/forum/${articleDetails[i].article_id}`} className="h5 ExtraBold mx-auto ms-2 mb-0 title ">
+                            {articleDetails[i].title}
+                        </Link>
+                        {/* </h5> */}
                     </div>
                     <div>
-                        <p className="category pBig">-{articleDetails[i].category}</p>
+                        <p className="category pBig">{articleDetails[i].thema}</p>
                     </div>
                 </div>
                 <div className="preViewContent">
-                    <pre>{articleDetails[i].content}</pre>
+                    {articleDetails[i].content}
                 </div>
                 <div className="social d-flex justify-content-end align-items-center">
                     <FaCommentDots />
-                    <div className="p-2">{articleDetails[i].comment}</div>
+                    <div className="p-2">{'articleDetails[i].comment'}</div>
                     <FaStar onClick={handleLike} />
                 </div>
                 <hr />
-            </div>
+            </div >
         )
     })
     return (

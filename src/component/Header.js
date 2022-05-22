@@ -23,20 +23,20 @@ function Header(props) {
   return (
     <>
       <Navbar expand="lg" className=" justify-content-between">
-        <Container>
+        <Container id="top">
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Brand
             className="d-flex align-items-center"
             style={{ height: 45, width: 45 }}
           >
             <Link to="/">
-            <img
-              src={logo}
-              width="45"
-              height="45"
-              className="d-inline-block"
+              <img
+                src={logo}
+                width="45"
+                height="45"
+                className="d-inline-block"
               />
-              </Link>
+            </Link>
           </Navbar.Brand>
           <div className="d-flex justify-content-center align-items-center">
             <FaSearch className="displayY fs-2" onClick={clickToSearch} />

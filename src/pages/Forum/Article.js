@@ -1,5 +1,6 @@
-import React,{useState, useEffect} from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import FadeIn from "react-fade-in/lib/FadeIn";
 import {
   FaStar,
   FaAngleLeft,
@@ -14,10 +15,19 @@ import "../../styles/global.scss";
 import "../../styles/Forum.scss";
 
 function Article(props) {
-  const content = `在有感謝順帶一讓我生活⋯九是我是太真的很你你會咖啡廳個，了嗎日向因為我的沒⋯次的邊還有為有沒有暴，跟而到最叫。是很想學住了一部分以沒有能，在一起這麼是心小心練不是：排球年輕女兒。一直到了。對方過了⋯不過我當更多，什麼會不會其他嗚嗚，就是我個決者的分開，買洗澡懷念不能接。會在他的想什麼都，我還道該怎舒適圈以後發現自己，得小的，之後恩我沒有⋯都是的本怎麼想當他不，黏土人。可能要記得但是，神有不做什麼。`;
-  const [perArticle,setPerArticle] = useState([{}])
+  const [perArticle, setPerArticle] = useState({})
+  const { forumid } = useParams()
 
-  
+  useEffect(() => {
+    fetch(`/forum/${forumid}`).then(
+      res => res.json()
+    ).then(
+      data => {
+        setPerArticle(data)
+        console.log(data);
+      }
+    )
+  }, [])
   return (
     <>
       <Header />
@@ -27,7 +37,7 @@ function Article(props) {
         </Link>
       </div>
       <div className="container">
-        <div className="row">
+        <FadeIn className="row">
           <div className="col-lg-1 liquidLeft"></div>
           <div className="liquid col-lg-10 col-sm-12">
             <section className="frContent mb-5">
@@ -39,8 +49,8 @@ function Article(props) {
                     alt="userpicture"
                   />
                   <div>
-                    <div className="p txtGray">{'123'}</div>
-                    <div className="h4 Regular">標題標題標題標題</div>
+                    <div className="p txtGray">{perArticle.nickname}</div>
+                    <div className="h4 Regular">{perArticle.article_title}</div>
                   </div>
                 </div>
                 <div className="like d-flex justify-content-center align-items-center">
@@ -49,12 +59,12 @@ function Article(props) {
                 </div>
               </div>
               <div className="articleBody">
-                <p>{content}</p>
+                <pre>{perArticle.content}</pre>
               </div>
               <div className="articleFoot">
                 <div>
                   <div className="d-flex justify-content-between">
-                    <p className="category">分類：{"心得分享"}</p>
+                    <p className="category pSmall">分類：{perArticle.thema}</p>
                     <div className="d-flex align-items-center">
                       <FaCommentDots />
                       <div className="px-2">25</div>
@@ -94,11 +104,12 @@ function Article(props) {
                   </button>
                 </div>
               </section>
+
               <Comment />
-              <Comment />
+
             </section>
           </div>
-        </div>
+        </FadeIn>
       </div>
       <Footer />
     </>

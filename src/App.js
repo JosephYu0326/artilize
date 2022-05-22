@@ -48,6 +48,9 @@ function App() {
         <Route path="/forum/addarticle">
           <AddArticle />
         </Route>
+        <Route path="/forum/:forumid">
+          <Article />
+        </Route>
         <Route path="/forum/article">
           <Article />
         </Route>

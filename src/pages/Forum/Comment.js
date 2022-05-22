@@ -1,9 +1,12 @@
 import React from "react";
 import {
-    FaReply,
-    FaCommentDots,
-  } from "react-icons/fa";
+  FaReply,
+  FaCommentDots,
+} from "react-icons/fa";
 function Comment(props) {
+
+  const commentDetails = props.commentDetails
+
   return (
     <>
       <div className="comment">
@@ -18,12 +21,12 @@ function Comment(props) {
           </div>
           <div className="my-3">{"Awesome!"}</div>
           <div className="d-flex align-self-end  fs-5">
-          <div className="px-3">
-            <FaCommentDots />
-          </div>
-          <div>
-            {/* <FaReply /> */}
-          </div>
+            <div className="px-3">
+              <FaCommentDots />
+            </div>
+            <div>
+              {/* <FaReply /> */}
+            </div>
           </div>
 
           {/* reply */}
