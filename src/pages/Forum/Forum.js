@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import FadeIn from 'react-fade-in'
 import '../../styles/Forum.scss'
 import '../../styles/AsideBar.scss'
@@ -9,9 +9,13 @@ import Footer from '../../component/Footer'
 import Article from '../../component/Article'
 
 function Forum(props) {
+  const location = useLocation()
+  const urlSearchParams = new URLSearchParams(location.search)
+  const currentTopic = urlSearchParams.get("topic")
+  const forBkCurrentTopic = encodeURI(currentTopic)
   const [btn, setBtn] = useState([])
   const [articleList, setArticleList] = useState([{}])
-
+  // 側邊類別按鈕
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/forum/category`)
       .then((res) => res.json())
@@ -19,7 +23,7 @@ function Forum(props) {
         setBtn(data)
       })
   }, [])
-
+  //顯示所有文章
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/forum`)
       .then((res) => res.json())
@@ -27,6 +31,15 @@ function Forum(props) {
         setArticleList(data)
       })
   }, [])
+  //文章類別篩選
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/forum?topic=${forBkCurrentTopic}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setArticleList(data)
+      })
+  }, [currentTopic])
+
 
   return (
     <>

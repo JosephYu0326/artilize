@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom'
 function Article(props) {
     const isSignIn = true
     const articleDetails = props.articDetails
-    console.log(articleDetails)
+    // console.log(articleDetails)
     // function which(e) {
     //     console.log(e.target);
     // }

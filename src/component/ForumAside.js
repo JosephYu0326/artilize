@@ -1,16 +1,20 @@
 import React from 'react'
 import { FaAngleRight } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import "../styles/ForumAside.scss"
 
 function ForumAside(props) {
+    const location = useLocation()
+    const urlSearchParams = new URLSearchParams(location.search)
+    const currentTopic = urlSearchParams.get("topic")
     const btnlist = props.btn
     const btn = btnlist.map((v, i) => {
-        console.log(btnlist);
         return (
-            <button key={i} className='btn asideBtn'>
+            // <button  >
+            <Link key={i} to={`forum?topic=${btnlist[i].thema}`} className={`btn asideBtn ${currentTopic === btnlist[i].thema ? "active" : ""}`}>
                 {btnlist[i].thema}
-            </button>
+            </Link>
+            // </button>
         )
     })
 
@@ -22,9 +26,9 @@ function ForumAside(props) {
                 <label htmlFor="sideMenu-switch" className="align-self-end">
                     <FaAngleRight className='faAngleRight' /></label>
                 <Link to="/forum/addarticle" className='btn btn-primary mt-4 mb-4 py-2 px-3 rounded-pill'>新增討論</Link>
-
+                <Link to={`forum?topic=${null}`} className="btn asideBtn">所有討論
+                </Link>
                 {btn}
-
             </aside>
         </>
     )
