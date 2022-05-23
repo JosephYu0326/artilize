@@ -2,36 +2,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import '../../styles/Pay.scss'
+import progressBar from './image/progressBar.png'
 
 function Pay(props) {
   return (
     <>
       <Link to="/booking/purchasesuccess">購買完成</Link>
       <main>
-        <div className="contaniner allTextStep">
+        <div className="container allTextStep">
           <div className="row d-flex justify-content-center">
-            <div className="col-4 p-0">
-              <div className="textStep1">
-                <h3 className="ExtraBold">確認商品</h3>
-              </div>
-            </div>
-            <div className="col-4 p-0">
-              <div className="textStep2">
-                <h3 className="ExtraBold">確認付款</h3>
-              </div>
-            </div>
-            <div className="col-4 p-0">
-              <div className="textStep3">
-                <h3 className="ExtraBold">購買完成</h3>
-              </div>
+            <div className="col-6">
+              <img src={progressBar} className="img-fluid" alt="progressBar" />
             </div>
           </div>
         </div>
-        <ul className="step">
-          <li></li>
-          <li classname="stepActive"></li>
-          <li></li>
-        </ul>
+        {/* 手機才會出現 */}
         <div className="container ">
           <div className="row d-flex justify-content-center ">
             <div className="col-10 payyes">
@@ -39,11 +24,12 @@ function Pay(props) {
             </div>
           </div>
         </div>
+
         <form>
           <div className="container ">
             <div className="row d-flex justify-content-center ">
               <div className="col-8 paywidth">
-                <section className="payForm pb-4 mb-5">
+                <section className="payForm  mb-5">
                   <h1>付款方式</h1>
 
                   <label
@@ -103,7 +89,7 @@ function Pay(props) {
           <div className="container">
             <div className="row d-flex justify-content-center ">
               <div className="col-8 paywidth">
-                <section className="payForm pb-4 mb-5 ">
+                <section className="payForm  mb-5 ">
                   <h3>收件人資料</h3>
 
                   <label
@@ -117,17 +103,47 @@ function Pay(props) {
                     placeholder="姓名 冰川沙耶"
                   />
                   <h6>請輸入正確的卡號</h6>
-
-                  <label
-                    htmlFor="exampleFormControlInput1"
-                    className="form-label"
-                  ></label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="exampleFormControlInput1"
-                    placeholder="持卡人姓名 CHUNG HSIEN YU"
-                  />
+                  <div className="row">
+                    <div className="col-3 p-1">
+                      {' '}
+                      <label
+                        htmlFor="exampleFormControlInput1"
+                        className="form-label"
+                      ></label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="exampleFormControlInput1"
+                        placeholder="持卡人姓名 CHUNG HSIEN YU"
+                      />
+                    </div>
+                    <div className="col-3 p-1">
+                      {' '}
+                      <label
+                        htmlFor="exampleFormControlInput1"
+                        className="form-label"
+                      ></label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="exampleFormControlInput1"
+                        placeholder="持卡人姓名 CHUNG HSIEN YU"
+                      />
+                    </div>
+                    <div className="col-6 p-1">
+                      <label
+                        htmlFor="exampleFormControlInput1"
+                        className="form-label"
+                      ></label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="exampleFormControlInput1"
+                        placeholder="持卡人姓名 CHUNG HSIEN YU"
+                      />
+                    </div>
+                  </div>
+                  {/* ******************* */}
                   <h6>請輸入正確地址</h6>
                   <label
                     htmlFor="exampleFormControlInput1"
@@ -154,40 +170,41 @@ function Pay(props) {
                 </section>
               </div>
             </div>
-          </div>
+            {/* </div> */}
 
-          <div className="container">
+            {/* <div className="container"> */}
             <div className="row d-flex justify-content-center ">
               <div className="col-8 paywidth">
                 <div className="d-flex flex-row bd-highlight mb-3 justify-content-between  ">
                   <div className="p-2 bd-highlight">
-                    <h6>優惠券哲扣</h6>
+                    <h5>優惠券哲扣</h5>
                   </div>
                   <div className="p-2 bd-highlight">
-                    <h6>-$10</h6>
+                    <h5>-$10</h5>
                   </div>
                 </div>
                 <div className="d-flex flex-row bd-highlight mb-3 justify-content-between  ">
                   <div className="p-2 bd-highlight">
-                    <h6>總金額</h6>
+                    <h5>總金額</h5>
                   </div>
-                  <div className="p-2 bd-highlight">
-                    <h6>$190</h6>
+                  <div className="p-2 bd-highlight" style={{ color: 'red' }}>
+                    <h5>$190</h5>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+            {/* </div> */}
 
-          <div className="container">
+            {/* <div className="container"> */}
             <div className="row d-flex justify-content-center ">
               <div className="col-8  paywidth">
-                <section className="payForm pb-4 mb-5 ">
+                <section className="payForm  mb-5 ">
                   <div className="d-grid gap-2 ">
                     <button className="btn btn-primary " type="button">
                       上一步
                     </button>
-                    <button className="btn btn-primary" type="button">
+                    <button className="btn btn-primary" type="submit">
+                      <Link to="/booking/purchasesuccess" />
                       送出訂單
                     </button>
                   </div>
@@ -195,6 +212,7 @@ function Pay(props) {
               </div>
             </div>
           </div>
+          {/* </div> */}
         </form>
       </main>
     </>

@@ -2,42 +2,23 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import '../../styles/PurchaseSuccess.scss'
+import progressBar from './image/progressBar.png'
 
 function PurchaseSuccess(props) {
   return (
     <>
       <div>購買完成</div>
-      <div
-        className="container allTextStep"
-        style={{ border: '1px solid black' }}
-      >
-        <div className="row d-flex justify-content-center">
-          <div className="col-4 p-0">
-            <div className="textStep1">
-              <h3 className="ExtraBold">確認商品</h3>
+      <div className="container ">
+        <div className="container allTextStep">
+          <div className="row d-flex justify-content-center">
+            <div className="col-6 mb-5">
+              <img src={progressBar} class="img-fluid" alt="progressBar" />
             </div>
           </div>
-          <div className="col-4 p-0">
-            <div className="textStep2">
-              <h3 className="ExtraBold">確認付款</h3>
-            </div>
-          </div>
-          <div className="col-4 p-0">
-            <div className="textStep3">
-              <h3 className="ExtraBold">購買完成</h3>
-            </div>
-          </div>
-        </div>
-        <div className="row d-flex justify-content-center">
-          <ul className="stepPurchaseSuccess p-0">
-            <li></li>
-            <li classname="stepActive"></li>
-            <li></li>
-          </ul>
         </div>
         <div className="row d-flex justitfy-content-center">
           <div className="col p-0">
-            <div className="centerSvg">
+            {/* <div className="centerSvg">
               <svg
                 width="82"
                 height="82"
@@ -50,14 +31,14 @@ function PurchaseSuccess(props) {
                   fill="#00B569"
                 />
               </svg>
-            </div>
+            </div> */}
           </div>
         </div>
-        <div className="row d-flex justitfy-content-center">
-          <div className="col ">
+        <div className="row ">
+          <div className="col-12 ">
             <div className="greeting">
-              <h3 className="pRegular">感謝您的訂購</h3>
-              <h3 className="pRegular">訂單明細已寄到您的e-mail</h3>
+              <h3 className="Regular">感謝您的訂購</h3>
+              <h3 className="Regular">訂單明細已寄到您的e-mail</h3>
             </div>
           </div>
         </div>

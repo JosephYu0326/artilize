@@ -1,6 +1,10 @@
 @import './global.scss';
+    h6 {
+        color: $WarnYellow !important
+    }
     //Form 表單樣式
     .payForm{
+    padding:40px !important;
     border-bottom: 1px solid $DarkGrey;
     border-radius: $BorderRadius;
     box-shadow: $BoxShadow;
@@ -39,12 +43,7 @@
         }
 
         // 影藏 Step 進度條
-        .step {
-            display: none;
-        }
-        .checkstep{
-            display: none;
-        }
+        
         .allTextStep{
             display: none;
         }
@@ -52,57 +51,7 @@
     
     // ≥576px //桌機板樣式
     @include media-breakpoint-up(sm) {
-        // 圓圈圈進度條
-        .step {
-            width: 650px;
-            margin:0px auto 100px;
-            padding: 0;
-            // outline: 1px solid $DarkGrey;
-            display: flex;
-            justify-content: space-between;
-        }
-        .step li{
-            list-style: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: $MiddleGrey;
-            position: relative;
-        }
-        .step li:not(:first-child):before{
-            content: '';
-            position: absolute;
-            width: 265px;
-            height: 10px;
-            background-color: $LightGrey;
-            top: 0;
-            bottom: 0;
-            right: 100%;
-            margin: auto;
-        }
-        // 圓圈圈進度條 的文字
-        .allTextStep{
-            width: 750px;
-            // border:1px solid green;
-            margin: 100px auto 0px;
-            padding: 0;
-            h3{  
-            //   border: 1px solid red;
-              padding: 0;
-              margin: 0;  
-            }
-            
-            .textStep1{
-                text-align:left ;
-            }
-            .textStep2{
-                text-align:center ;
-            }
-            .textStep3{
-                text-align:right ;
-            }
 
-          }
         
         .payyes{
             display: none;
