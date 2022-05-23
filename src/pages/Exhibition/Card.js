@@ -8,12 +8,22 @@ import Book from '../Exhibition/Book'
 
 function Card() {
   const [isOpen, setIsOpen] = useState(false)
-  const cards = ['1', '2', '3', '4', '5', '6']
+  const [title, setTitle] = useState('')
+
+  const cards = [
+    '《掘光而行│洪瑞麟的展覽》- 1',
+    '《掘光而行│洪瑞麟的展覽》- 2',
+    '《掘光而行│洪瑞麟的展覽》- 3',
+    '《掘光而行│洪瑞麟的展覽》- 4',
+    '《掘光而行│洪瑞麟的展覽》- 5',
+    '《掘光而行│洪瑞麟的展覽》- 6',
+  ]
 
   const imgurl = {
     backgroundImage: `url(${exhibitionimg})`,
   }
-  function handleClick() {
+  function handleClick(e) {
+    setTitle(e.target.dataset.title)
     setIsOpen(!isOpen)
   }
 
@@ -28,13 +38,13 @@ function Card() {
             <div className="d-flex content">
               <div className="title mt-2">
                 <Link to="/exhibition/introduce" className="selectlink">
-                  <h5 className="titletext text-web pt-2">
-                    《掘光而行│洪瑞麟的展覽-{i}
+                  <h5 id={`cardTitle${i}`} className="titletext text-web pt-2">
+                    {cards[i]}
                   </h5>
                 </Link>
                 <Link to="/exhibition/introduce" className="selectlink">
                   <h6 className="pRegular titletext text-mobile my-2">
-                    《掘光而行│洪瑞麟的展覽-{i}
+                    {cards[i]}
                   </h6>
                 </Link>
               </div>
@@ -64,6 +74,7 @@ function Card() {
                 type="button"
                 className="btn btn-secondary book h5 text-web"
                 onClick={handleClick}
+                data-title={cards[i]}
               >
                 訂票
               </button>
@@ -82,7 +93,7 @@ function Card() {
   })
   return (
     <>
-      <Book isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Book isOpen={isOpen} setIsOpen={setIsOpen} title={title} />
 
       {card}
     </>

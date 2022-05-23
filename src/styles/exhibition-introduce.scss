@@ -140,11 +140,45 @@
         &.expand{
             height: 440px;
         }
-    } 
-    
-    
-    
+    }
+      
 }
+
+.bottom-navbar{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 60%;
+    height: 88px;
+    border-top: 1px solid gray;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .bottom-btn-frame{
+        width: 400px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .bottom-btn{
+        border: 2px solid $PurpleBlue;
+        display: flex;
+        align-items: center;
+        font-size: 22px;
+        font-weight: bold;
+        svg{
+            font-size: 34px;
+        }
+    }
+    .book-btn{
+        width: 100px;
+        color: #fff;
+
+    }
+
+} 
 
 
 

@@ -7,6 +7,9 @@ import exhibitionimg from './images/exhibition-intro1.png'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
+import { FiChevronLeft } from 'react-icons/fi'
+import { FiChevronRight } from 'react-icons/fi'
+
 function Introduce(props) {
   const [active, setActive] = useState(false)
   const setHeight = useRef()
@@ -108,6 +111,21 @@ function Introduce(props) {
             <div className="information-frame">{information}</div>
           </div>
         </div>
+      </div>
+      <div className="bottom-navbar">
+        <div className="bottom-btn-frame">
+          <button className="btn btn-outline-primary rounded-pill bottom-btn">
+            <FiChevronLeft />
+            上一場展覽
+          </button>
+          <button className="btn btn-outline-primary rounded-pill bottom-btn">
+            下一場展覽
+            <FiChevronRight />
+          </button>
+        </div>
+        <button className="btn btn-secondary rounded-pill book-btn">
+          訂票
+        </button>
       </div>
     </>
   )

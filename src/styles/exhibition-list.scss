@@ -255,19 +255,99 @@ header{
         left: 0;
         top: 0;
     }
+    .book-set{
+        display: flex;
+        flex-direction: column;
+        .book-title{
+            margin-bottom: 10px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            h3{
+                margin: 0;
+            }
+            .title-frame{
+                width: 300px;
+                text-align: center;
+            }
+        }
+    }
+    .closeBtn{
+        width: 40px;
+        border-radius: 20px;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    .ticket-frame{
+        display: flex;
+        width: 240px;
+        height: 50px;
+        justify-content: space-between;
+    }
     
     .book-window{
+        display: flex;
+        justify-items: center;
+        align-items: center;
         position: fixed;
         z-index: 4;
         padding: 30px;
         border-radius: 20px;
         border:#B4A79E solid 1px;
         background: #fff;
-        width: 400px;
-        height: 560px;
+        width: 700px;
         border-radius: 20px;
 
+        .ticket{
+            width: 100px;
+            background: #6E7491;
+            border-radius: 30px;
+            border: 0;
+            color: #fff;
+            &.selected{
+                background: #CBD4E6;
+                color:#6E7491;
+                border: 0;
+            }
+        }
+        .information{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: 300px;
+            .count{
+                display: flex;
+                width: 200px;
+                justify-content: space-between;
+            }
+            .btn-frame{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 140px;
+
+                button{
+                    width: 40px;
+                    height: 40px;
+                    border: 1.5px solid black;
+                    border-radius: 10px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+            .line{
+                width: 260px;
+                height: 1px;
+                background: black;
+            }
+        }
+       
     }
+    
 }
 
 // 手機版

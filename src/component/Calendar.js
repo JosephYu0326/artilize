@@ -6,7 +6,7 @@ import { FiChevronRight } from 'react-icons/fi'
 
 import '../styles/Calendar.scss'
 
-function Calendar() {
+function Calendar(props) {
   const now = new Date()
   const [myYear, setMyYear] = useState()
   const [myMonth, setMyMonth] = useState()
@@ -104,6 +104,12 @@ function Calendar() {
     let year = Math.floor((myMonth + 1) / 13)
     setMyMonth((myMonth % 12) + 1)
     setMyYear(nowY + year)
+
+    // 清空前面選擇的
+    let select = document.querySelectorAll('.select')
+    for (let i = 0; i < select.length; i++) {
+      select[i].setAttribute('class', '')
+    }
   }
   function prevMonth() {
     let year = Math.floor((myMonth - 1) / 13)
@@ -112,11 +118,16 @@ function Calendar() {
     }
     setMyMonth(myMonth - 1)
     setMyYear(nowY + year)
+
+    // 清空前面選擇的
+    let select = document.querySelectorAll('.select')
+    for (let i = 0; i < select.length; i++) {
+      select[i].setAttribute('class', '')
+    }
   }
 
   return (
     <>
-      <h1>請選擇日期</h1>
       <div className="calendar-frame">
         <div className="title-frame">
           <h4 className="title-text">
