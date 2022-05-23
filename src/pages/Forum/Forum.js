@@ -1,39 +1,31 @@
-//討論區列表
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import FadeIn from "react-fade-in";
-import "../../styles/Forum.scss";
-import "../../styles/AsideBar.scss";
-import ForumAside from "../../component/ForumAside";
-import Header from "../../component/Header";
-import Footer from "../../component/Footer";
-import Article from "../../component/Article";
-
+import React, { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import FadeIn from 'react-fade-in'
+import '../../styles/Forum.scss'
+import '../../styles/AsideBar.scss'
+import ForumAside from '../../component/ForumAside'
+import Header from '../../component/Header'
+import Footer from '../../component/Footer'
+import Article from '../../component/Article'
 
 function Forum(props) {
-
   const [btn, setBtn] = useState([])
   const [articleList, setArticleList] = useState([{}])
 
   useEffect(() => {
-    fetch('/Forum/Btn').then(
-      res => res.json()
-    ).then(
-      data => {
+    fetch(`${process.env.REACT_APP_API_URL}/forum/category`)
+      .then((res) => res.json())
+      .then((data) => {
         setBtn(data)
-      }
-    )
+      })
   }, [])
 
   useEffect(() => {
-    fetch('/Forum').then(
-      res => res.json()
-    ).then(
-      data => {
+    fetch(`${process.env.REACT_APP_API_URL}/forum`)
+      .then((res) => res.json())
+      .then((data) => {
         setArticleList(data)
-        console.log(data);
-      }
-    )
+      })
   }, [])
 
   return (
@@ -47,7 +39,7 @@ function Forum(props) {
       </FadeIn>
       <Footer />
     </>
-  );
+  )
 }
 
-export default Forum;
+export default Forum

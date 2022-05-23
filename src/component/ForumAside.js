@@ -6,9 +6,10 @@ import "../styles/ForumAside.scss"
 function ForumAside(props) {
     const btnlist = props.btn
     const btn = btnlist.map((v, i) => {
+        console.log(btnlist);
         return (
             <button key={i} className='btn asideBtn'>
-                {btnlist[i]}
+                {btnlist[i].thema}
             </button>
         )
     })

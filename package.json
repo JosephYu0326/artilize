@@ -1,7 +1,6 @@
 {
   "name": "artilize",
   "version": "0.1.0",
-  "proxy": "0.0.0.0:5000",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",

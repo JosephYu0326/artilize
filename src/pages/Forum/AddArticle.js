@@ -1,35 +1,57 @@
 //新增文章
-import React, { useRef } from "react";
-import { Link } from "react-router-dom";
-import { Editor } from "@tinymce/tinymce-react";
-import { FaAngleLeft} from "react-icons/fa";
-import { Form, Button } from "react-bootstrap";
-import Header from "../../component/Header";
-import Footer from "../../component/Footer";
+import React, { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Editor } from '@tinymce/tinymce-react'
+import { FaAngleLeft } from 'react-icons/fa'
+import { Form, Button } from 'react-bootstrap'
+import Header from '../../component/Header'
+import Footer from '../../component/Footer'
 
 function AddArticle(props) {
-
-  const editorRef = useRef(null);
+  const [category, setCategory] = useState([])
+  const editorRef = useRef(null)
   const log = () => {
     if (editorRef.current) {
-      console.log(editorRef.current.getContent());
+      console.log(editorRef.current.getContent())
     }
-  };
+  }
+  const categoryChoice = category.map((v, i) => {
+    return (
+      <>
+        <option key={i} value={i}>
+          {category[i].thema}
+        </option>
+      </>
+    )
+  })
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/forum/category`)
+      .then((res) => res.json())
+      .then((data) => {
+        setCategory(data)
+      })
+  }, [])
+
   return (
     <>
-    <Header/>
+      <Header />
       <div className="backBtn displayN">
-
-        <Link to="/forum">回討論區
+        <Link to="/forum">
+          回討論區
           <FaAngleLeft />
         </Link>
-
       </div>
       <div className="container">
         <div className="frContent">
           <h3>新增討論</h3>
-          <form>
-            <Form.Control className="my-5" size="lg" type="text" placeholder="請輸入標題" />
+          <form action="">
+            <Form.Control
+              className="my-5"
+              size="lg"
+              type="text"
+              placeholder="請輸入標題"
+            />
             <Editor
               apiKey="lx36ygwprus1n4asjcpxlw72wjnkjsm90cs4xl68rlcj2qff"
               onInit={(evt, editor) => (editorRef.current = editor)}
@@ -37,31 +59,29 @@ function AddArticle(props) {
               init={{
                 height: 600,
                 menubar: false,
-                language: "zh_TW",
+                language: 'zh_TW',
                 plugins: [
-                  "advlist",
-                  "autolink",
-                  "lists",
-                  "link",
-                  "image",
-                  "charmap",
-                  "anchor",
-                  "searchreplace",
-                  "visualblocks",
-                  "code",
-                  "fullscreen",
-                  "insertdatetime",
-                  "media",
-                  "table",
-                  "preview",
-                  "help",
-                  "wordcount",
+                  'advlist',
+                  'autolink',
+                  'lists',
+                  'link',
+                  'image',
+                  'charmap',
+                  'anchor',
+                  'searchreplace',
+                  'visualblocks',
+                  'code',
+                  'fullscreen',
+                  'insertdatetime',
+                  'table',
+                  'preview',
+                  'wordcount',
                 ],
                 toolbar:
-                  "undo redo | blocks | " +
-                  "bold italic forecolor | alignleft aligncenter " +
-                  "alignright alignjustify | bullist numlist outdent indent | " +
-                  "removeformat | help",
+                  'undo redo | blocks | image | ' +
+                  'bold italic forecolor | alignleft aligncenter ' +
+                  'alignright alignjustify | bullist numlist outdent indent | ' +
+                  'removeformat | help',
                 content_style:
                   "body { font-family: 'Noto Sans TC', sans-serif; font-size:14px }",
               }}
@@ -70,26 +90,27 @@ function AddArticle(props) {
               <div className="row mx-auto">
                 <Form.Select className="mt-5" aria-label="">
                   <option>文章分類</option>
-                  <option value="1">{'1'}</option>
-                  <option value="2">u</option>
-                  <option value="3">u</option>
+                  {categoryChoice}
                 </Form.Select>
+
                 {/* <Button variant="secondary col-sm-12 col-md-5 rounded-pill my-5 mx-auto">
                   儲存草稿
                 </Button> */}
-                <Button variant="primary col-sm-12 col-md-5 rounded-pill my-5 mx-auto">
+                <Button
+                  type="submit"
+                  variant="primary col-sm-12 col-md-5 rounded-pill my-5 mx-auto"
+                >
                   新增討論
                 </Button>
-
               </div>
             </div>
             {/* <button onClick={log}>Log editor content</button> */}
           </form>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
-  );
+  )
 }
 
-export default AddArticle;
+export default AddArticle

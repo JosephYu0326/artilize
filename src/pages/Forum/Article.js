@@ -1,38 +1,37 @@
-import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import FadeIn from "react-fade-in/lib/FadeIn";
+import React, { useState, useEffect } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import FadeIn from 'react-fade-in/lib/FadeIn'
 import {
   FaStar,
   FaAngleLeft,
   FaAngleRight,
   FaCommentDots,
-} from "react-icons/fa";
-import Comment from "./Comment";
-import Header from "../../component/Header";
-import Footer from "../../component/Footer";
-import "../../styles/AsideBar.scss";
-import "../../styles/global.scss";
-import "../../styles/Forum.scss";
+} from 'react-icons/fa'
+import Comment from './Comment'
+import Header from '../../component/Header'
+import Footer from '../../component/Footer'
+import '../../styles/AsideBar.scss'
+import '../../styles/global.scss'
+import '../../styles/Forum.scss'
 
 function Article(props) {
   const [perArticle, setPerArticle] = useState({})
   const { forumid } = useParams()
 
   useEffect(() => {
-    fetch(`/forum/${forumid}`).then(
-      res => res.json()
-    ).then(
-      data => {
+    fetch(`${process.env.REACT_APP_API_URL}/forum/${forumid}`)
+      .then((res) => res.json())
+      .then((data) => {
         setPerArticle(data)
-        console.log(data);
-      }
-    )
+        console.log(data)
+      })
   }, [])
   return (
     <>
       <Header />
       <div className="backBtn displayN">
-        <Link to="/forum">回討論區
+        <Link to="/forum">
+          回討論區
           <FaAngleLeft />
         </Link>
       </div>
@@ -50,7 +49,7 @@ function Article(props) {
                   />
                   <div>
                     <div className="p txtGray">{perArticle.nickname}</div>
-                    <div className="h4 Regular">{perArticle.article_title}</div>
+                    <div className="h4 Regular">{perArticle.title}</div>
                   </div>
                 </div>
                 <div className="like d-flex justify-content-center align-items-center">
@@ -106,14 +105,13 @@ function Article(props) {
               </section>
 
               <Comment />
-
             </section>
           </div>
         </FadeIn>
       </div>
       <Footer />
     </>
-  );
+  )
 }
 
-export default Article;
+export default Article
