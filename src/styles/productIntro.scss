@@ -1,13 +1,25 @@
 @import './global.scss';
 @import './style.scss';
 
+.productIntro{
+    height: 868px;
+    overflow: hidden;
+    position: relative;
+}
+
+.pIntroDetail{
+    // position: relative;
+}
+
 .pIntroDetailcard{
+    height: 800px;
     margin-top: 50px;
     width: 635px;
     border-radius: 20px;
     box-shadow: 5px 5px 3px rgb(199, 199, 199) ;
     flex-direction: column;
     padding: 0;
+    overflow: hidden;
 }
 .pIntroMaincontenttopictext{
     color: $PurpleBlue;
@@ -16,9 +28,31 @@
     color:$PurpleBlue;
 }
 
-// .pIntroMaincontentdetailtext{
-//     text-size: 12px;
-// }
+.pIntroMaincontentdetailtext{
+    margin: 0px 15px 10px 10px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 12px;
+    line-height: 22px;
+    letter-spacing: 2px;
+}
+
+.pExintrocontent{
+    margin: 0px 15px 10px 10px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font: size 12px;
+    line-height: 22px;
+    letter-spacing: 2px;
+}
+
+.pIntroPurchaseBar{
+    position: fixed;
+    width: 635px;
+    height: 80px;
+    display:flex;
+    justify-content: space-evenly;
+    box-shadow: 5px 5px 3px rgb(199, 199, 199) ;
+    padding: 0;
+}
 
 .pSamesearchCard{
     margin-top: 30px;
