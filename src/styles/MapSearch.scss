@@ -4,7 +4,7 @@
     border: 1px solid black;
     .mapSearchBar {
         // margin-top: 12px;
-        width: 420px;
+        width: 454px;
 
         gap: 16px;
         form {
@@ -49,8 +49,11 @@
         text-decoration: none;
         color: black;
     }
+    #scrollableDiv::-webkit-scrollbar {
+        display: none;
+    }
     .card {
-        width: 406px;
+        max-width: 454px;
         min-height: 139px;
         border-radius: $BorderRadius;
         box-shadow: $BoxShadow;
@@ -60,6 +63,25 @@
         }
     }
 }
+.gm-style-iw,
+.gm-style-iw-c,
+.gm-style-iw-d {
+    padding: 0px !important;
+}
+.gm-style-iw-d {
+    overflow: hidden !important;
+}
 .mapSearchMap {
     border: 1px solid black;
+
+    .card {
+        max-width: 454px;
+        min-height: 139px;
+        border-radius: $BorderRadius;
+        box-shadow: $BoxShadow;
+
+        .card-body {
+            height: 139px;
+        }
+    }
 }
