@@ -49,7 +49,7 @@ function Article(props) {
                   />
                   <div>
                     <div className="p txtGray">{perArticle.nickname}</div>
-                    <div className="h4 Regular">{perArticle.title}</div>
+                    <div className="h4 ps-3 Regular">{perArticle.title}</div>
                   </div>
                 </div>
                 <div className="like d-flex justify-content-center align-items-center">
@@ -57,7 +57,7 @@ function Article(props) {
                   <div className="px-2">收藏</div>
                 </div>
               </div>
-              <div className="articleBody">
+              <div className="articleBody py-5">
                 <pre>{perArticle.content}</pre>
               </div>
               <div className="articleFoot">

@@ -32,7 +32,7 @@ function Footer(props) {
           </div>
         </div>
       </div>
-      <a href="#top"><FaAngleUp className="position-absolute top-0 start-100 translate-middle" /></a>
+      <a href="#top"><FaAngleUp className="displayN position-absolute top-0 start-100 translate-middle" /></a>
       {/* four word */}
       <div className="fourword">
         <div className="d-flex align-items-center">
