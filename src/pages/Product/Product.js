@@ -13,7 +13,7 @@ import p_Images from '../../images/product_Images/product/tea_L2.jpg'
 import p_brandImages from '../../images/product_Images/brand/nationalpalace.png'
 import p_saleImages from '../../images/product_Images/product/whiteveg.jpeg'
 import p_saleIconsfreight from '../../images/product_Images/icons/freeFreight.png'
-import p_saleIconsdicount from '../../images/product_Images/icons/sale.png'
+import p_saleIconsdiscount from '../../images/product_Images/icons/sale.png'
 
 function Product(props) {
   const ptCards = ['1', '2', '3']
@@ -22,8 +22,8 @@ function Product(props) {
   const pBrandImg = { backgroundImage: `url(${p_brandImages})` }
   const ptSaleCards = ['1', '2', '3']
   const pSaleImg = { backgroundImage: `url(${p_saleImages})` }
-  const pSaleImgfreight = { backgroundImage: `url(${p_saleIconsfreight})` }
-  const pSaleImgdiscount = { backgroundImage: `url(${p_saleIconsdicount})` }
+  // const pSaleImgfreight = { backgroundImage: `url(${p_saleIconsfreight})` }
+  // const pSaleImgdiscount = { backgroundImage: `url(${p_saleIconsdiscount})` }
 
   const pCards = ptCards.map((v, i) => {
     return (
@@ -77,25 +77,35 @@ function Product(props) {
   const pSaleCards = ptSaleCards.map((v, i) => {
     return (
       <div key={i}>
-        <div className="productDiscountCards d-flex">
-          <Link to="">
-            <div style={pSaleImg} className="pSaleImg"></div>
+        <div className="pCardTest">
+          <Link to="/Product/Introduce">
+            <div style={pSaleImg} className="pTestSaleImg"></div>
           </Link>
-          <div className="d-flex pSaleContent">
-            <div className="d-flex pSaleContentdetail">
-              <Link to="" className="pSaleLinktitle">
-                <h6 className="ExtraBold pSaleTitletext">
-                  琉璃 - 翠玉白菜-{i}
-                </h6>
-              </Link>
-              <p className="orignPrice Regular">10000-{i}</p>
-              <Link to="" className="discountPrice">
-                <p className="ExtraBold salePrice">8500-{i}</p>
-              </Link>
+          <div className="pCardTestContent">
+            <div className="pCardTestContentPrice">
+              <h6 className="ExtraBold pCardTestContentTopic">
+                琉璃 - 翠玉白菜-{i}
+              </h6>
+              <p className="pRegular pCardTestContentOrignPrice">10000</p>
+              <p className="pBig ExtraBold pCardTestContentSalePrice">
+                NT $7800
+              </p>
             </div>
-            <div className="d-flex pSaleDiscounticon">
-              <div style={pSaleImgfreight} className="pSaleIconfreight"></div>
-              <div style={pSaleImgdiscount} className="pSaleIcondiscount"></div>
+            <div className="pCardTestContentSaleIcon">
+              <div>
+                <img
+                  className="pCardTestContentSaleIconImg"
+                  src={p_saleIconsfreight}
+                  alt=""
+                ></img>
+              </div>
+              <div>
+                <img
+                  className="pCardTestContentSaleIconImg"
+                  src={p_saleIconsdiscount}
+                  alt=""
+                ></img>
+              </div>
             </div>
           </div>
         </div>

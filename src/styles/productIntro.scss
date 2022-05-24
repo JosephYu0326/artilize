@@ -3,23 +3,33 @@
 
 .productIntro{
     height: 868px;
-    overflow: hidden;
+    overflow: scroll;
     position: relative;
 }
 
 .pIntroDetail{
-    // position: relative;
+    background: $LighterGrey;
+    position: relative;
+    height: 822px;
+    overflow: hidden;
 }
 
 .pIntroDetailcard{
-    height: 800px;
-    margin-top: 50px;
+    height: 1000px;
     width: 635px;
     border-radius: 20px;
     box-shadow: 5px 5px 3px rgb(199, 199, 199) ;
     flex-direction: column;
     padding: 0;
-    overflow: hidden;
+    overflow: scroll;
+    background: white;
+    margin: 50px 10px;
+}
+.pIntroDetailCardcontent{
+    padding: 0 45px;
+    margin-top: 50px;
+    height: 650px;
+    overflow: scroll;
 }
 .pIntroMaincontenttopictext{
     color: $PurpleBlue;
@@ -45,13 +55,36 @@
 }
 
 .pIntroPurchaseBar{
-    position: fixed;
-    width: 635px;
+    position: absolute;
+    bottom: 0px;
+    background:white;
+    right: 0px;
+    width: 660px;
     height: 80px;
     display:flex;
-    justify-content: space-evenly;
-    box-shadow: 5px 5px 3px rgb(199, 199, 199) ;
+    align-items: center;
+    justify-content: space-between;
     padding: 0;
+}
+
+.PurchaseBarPrice{
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    font-family: 'Noto SansTC', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: #B4A79E;
+}
+
+.PurchaseBarCarticon{
+    margin-right: 30px;
+}
+
+.PurchaseBarDiscountPrice{
+    font-size: 20px;
+    color:$primary;
 }
 
 .pSamesearchCard{
