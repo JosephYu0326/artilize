@@ -18,6 +18,9 @@ function Article(props) {
     }
 
     const article = articleDetails.map((v, i) => {
+        const temp = articleDetails[i].created_time
+        // .slice(0, 10)
+        console.log(temp)
         return (
             <div key={i}>
                 <div className="perContentHead my-4 d-flex justify-content-between">

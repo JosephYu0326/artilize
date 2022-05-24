@@ -15,17 +15,54 @@ import '../../styles/global.scss'
 import '../../styles/Forum.scss'
 
 function Article(props) {
-  const [perArticle, setPerArticle] = useState({})
+  const [perArticle, setPerArticle] = useState([])
+  const [preArticle, setPreArticle] = useState([])
+  const [nextArticle, setNextArticle] = useState([])
   const { forumid } = useParams()
+
+  // useEffect(() => {
+  //   fetch(`${process.env.REACT_APP_API_URL}/forum`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setArticleList(data)
+  //     })
+  // }, [])
+
+
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/forum/${forumid}`)
       .then((res) => res.json())
       .then((data) => {
-        setPerArticle(data)
+        setPerArticle(data[1])
+        setPreArticle(data[0])
+        setNextArticle(data[2])
         console.log(data)
       })
   }, [])
+
+  function next() {
+    // fetch(`${process.env.REACT_APP_API_URL}/forum/${nextArticle.article_id}`)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setPerArticle(data[1])
+    //     setPreArticle(data[0])
+    //     setNextArticle(data[2])
+    console.log(nextArticle.title)
+    // })
+  }
+
+  function pre() {
+    // fetch(`${process.env.REACT_APP_API_URL}/forum/${preArticle.article_id}`)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setPerArticle(data[1])
+    //     setPreArticle(data[0])
+    //     setNextArticle(data[2])
+    console.log(preArticle.title)
+    // })
+  }
+
   return (
     <>
       <Header />
@@ -73,11 +110,11 @@ function Article(props) {
                   <div className="d-flex justify-content-between">
                     <div className="d-flex align-items-center">
                       <FaAngleLeft />
-                      <div>上一篇文章</div>
+                      <div onClick={next}>{nextArticle.title}</div>
                     </div>
                     <div className="d-flex align-items-center">
+                      <div onClick={pre}>{preArticle.title}</div>
                       <FaAngleRight />
-                      <div>下一篇文章</div>
                     </div>
                   </div>
                 </div>
