@@ -1,0 +1,215 @@
+@import '../styles/style.scss';
+@import '~bootstrap/scss/bootstrap';
+
+.step1{
+    width: 650px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-325px);
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.cart-frame{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    position: relative;
+    left: 15%;
+}
+.cart-option{
+    display: flex;
+    justify-content: space-around;
+    width: 200px;
+    
+}
+.cart-option-line{
+    width: 200px;
+    display: flex;
+}
+.cart-option-color{
+    margin-top: 15px;
+    width: 100px;
+    height: 3px;
+    background: #CBD4E6;
+    &.select{
+        background: $PurpleBlue;
+    }
+}
+
+.cart-content-frame{
+    border-radius: 10px;
+    max-width: 1000px;
+    height: 900px;
+    margin: 10px auto 50px auto;
+    padding-top: 15px;
+    box-shadow: $BoxShadow;
+}
+.cart-option-title{
+    display: flex;
+    width: 90%;
+    margin: 20px auto 30px auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    justify-content: space-between;
+    border-radius: 20px;
+    box-shadow: $BoxShadow;
+
+}
+
+.exhibition-title{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cart-title-other{
+    display: flex;
+    width: 360px;
+    justify-content: space-around;
+    align-items: center;
+    .style{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+    }
+}
+
+.cart-card-frame{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: #CBD4E6 solid 2px;
+    margin: 10px auto 10px auto;
+
+    .trash{
+        color: #7C8DB0;
+        font-size: 28px;
+    }
+    .exhibition-img{
+        width: 150px;
+    }
+
+    .cart-card-left{
+        width: 50%;
+        margin-left: 20px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .cart-content{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 300px;
+        .date-frame{
+            width: 250px;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            .date-process-icon{
+                width: 20px;
+                text-align: center;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-10px);
+            }
+        }
+    }
+
+    .cart-card-right{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        width: 40%;
+
+        .ticket-kind{
+            width: 125px;
+            flex-direction: column;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .count{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 125px;
+            .count-btn{
+                background: #7C8DB0;
+                color: #fff;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                font-size: 32px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+        .total{
+            width: 125px;
+            flex-direction: column;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .total-text{
+                color: red;
+            }
+        }
+    }
+
+}
+.input-frame{
+    margin: 40px auto 20px auto;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    input{
+        width: 70%;
+        border-radius: 20px;
+        border: 0;
+        box-shadow: $BoxShadow;
+    }
+}
+.bottom-frame{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 60%;
+    height: 300px;
+    margin: 80px auto 40px auto;
+    padding: 40px;
+    box-shadow: $BoxShadow;
+    border-radius: 10px;
+    .total-frame{
+        display: flex;
+        width: 80%;
+        margin: 0 auto;
+        justify-content: space-between;
+        .final-total{
+            font-size: 26px;
+        }
+        .final-total-text{
+            font-size: 26px;
+            color: red;
+        }
+    }
+    .total-line{
+        width: 80%;
+        margin: 10px auto 10px auto;
+        height: 3px;
+        background: #CBD4E6;
+    }
+    .next-step-btn{
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+
+
+
+

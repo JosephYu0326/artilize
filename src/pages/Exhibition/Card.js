@@ -37,10 +37,8 @@ function Card() {
             </Link>
             <div className="d-flex content">
               <div className="title mt-2">
-                <Link to="/exhibition/introduce" className="selectlink">
-                  <h5 id={`cardTitle${i}`} className="titletext text-web pt-2">
-                    {cards[i]}
-                  </h5>
+                <Link to="/exhibition/introduce/title" className="selectlink">
+                  <h5 className="titletext text-web pt-2">{cards[i]}</h5>
                 </Link>
                 <Link to="/exhibition/introduce" className="selectlink">
                   <h6 className="pRegular titletext text-mobile my-2">
