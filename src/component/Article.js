@@ -44,10 +44,13 @@ function Article(props) {
                     </div>
                 </div>
                 <div className="preViewContent">{articleDetails[i].content}</div>
-                <div className="social d-flex justify-content-end align-items-center">
-                    <FaCommentDots />
-                    <div className="p-2">{'articleDetails[i].comment'}</div>
-                    <FaStar onClick={handleLike} />
+                <div className="social d-flex justify-content-between align-items-center">
+                    <div>{articleDetails[i].created_time}</div>
+                    <div className='d-flex align-items-center'>
+                        <FaCommentDots />
+                        <div className="p-2">{'articleDetails[i].comment'}</div>
+                        <FaStar onClick={handleLike} />
+                    </div>
                 </div>
                 <hr />
             </div>

@@ -26,9 +26,9 @@ function ForumAside(props) {
                 <label htmlFor="sideMenu-switch" className="align-self-end">
                     <FaAngleRight className='faAngleRight' /></label>
                 <Link to="/forum/addarticle" className='btn btn-primary mt-4 mb-4 py-2 px-3 rounded-pill'>新增討論</Link>
+                {btn}
                 <Link to={`forum?topic=${null}`} className="btn asideBtn">所有討論
                 </Link>
-                {btn}
             </aside>
         </>
     )
