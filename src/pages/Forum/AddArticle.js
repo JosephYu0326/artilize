@@ -4,7 +4,7 @@ import { Link, useHistory } from 'react-router-dom'
 import tinymce from 'tinymce/tinymce'
 import { Editor } from '@tinymce/tinymce-react'
 import { FaAngleLeft } from 'react-icons/fa'
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Alert } from 'react-bootstrap'
 import Header from '../../component/Header'
 import Footer from '../../component/Footer'
 
@@ -16,7 +16,7 @@ function AddArticle(props) {
   //     console.log(editorRef.current.getContent())
   //   }}
   // ========tinyMCE東東======
-
+  const [Show, setShow] = useState(false);
   const created_time = new Date()
   const [category, setCategory] = useState([])
   const [title, setTitle] = useState("")
@@ -39,7 +39,7 @@ function AddArticle(props) {
     )
   })
 
-  console.log(ChioseCategory);
+
 
   // --------
   let headers = {
@@ -51,6 +51,7 @@ function AddArticle(props) {
     "title": title,
     "content": content,
     "category": ChioseCategory,
+    "userid": props.id
   }
   console.log(created_time);
   function handleClick(e) {
@@ -58,11 +59,12 @@ function AddArticle(props) {
     fetch(`${process.env.REACT_APP_API_URL}/forum/addarticle`, {
       method: "POST",
       headers: headers,
-      //別忘了把主體参數轉成字串，否則資料會變成[object Object]，它無法被成功儲存在後台
       body: JSON.stringify(body)
     })
-      .then(response => response.json())
-      .then(json => console.log(json));
+      .then(setShow(true))
+    // .then(json => console.log(json));
+    // .then(response => response.json())
+    // .then(json => console.log(json));
   }
   // --------
 
@@ -77,6 +79,19 @@ function AddArticle(props) {
 
   return (
     <>
+      <Alert show={Show} variant="primary">
+        <Alert.Heading>新增成功!</Alert.Heading>
+        <p>
+          您的討論已經成功發布
+        </p>
+        <hr />
+        <div className="d-flex justify-content-end">
+          <Button onClick={() => setShow(false)} variant="primary">
+            知道了
+          </Button>
+        </div>
+      </Alert>
+
       <Header />
       <div className="backBtn displayN" onClick={goBack}>
         回討論區

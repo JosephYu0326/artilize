@@ -25,6 +25,7 @@ import PurchaseSuccess from './pages/Booking/PurchaseSuccess'
 import Forum from './pages/Forum/Forum'
 import Article from './pages/Forum/Article'
 import AddArticle from './pages/Forum/AddArticle'
+import EditArticle from './pages/Forum/EditArticle'
 import FrPersonalPage from './pages/Forum/FrPersonalPage'
 import NotFoundPage from './pages/Home/NotFoundPage'
 import B2B from './pages/B2B/B2B'
@@ -33,7 +34,7 @@ import Style from './pages/Style'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 
 function App() {
-  const userID = 11
+  const userID = 2
 
   return (
     <Router>
@@ -48,7 +49,10 @@ function App() {
           <FrPersonalPage />
         </Route>
         <Route path="/forum/addarticle">
-          <AddArticle />
+          <AddArticle id={userID} />
+        </Route>
+        <Route path="/forum/editArticle/:articleid">
+          <EditArticle />
         </Route>
         <Route path="/forum/:forumid">
           <Article />

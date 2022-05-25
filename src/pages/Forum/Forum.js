@@ -29,6 +29,7 @@ function Forum(props) {
       .then((res) => res.json())
       .then((data) => {
         setArticleList(data)
+        console.log("所有文章");
       })
   }, [])
   //文章類別篩選
