@@ -212,8 +212,9 @@
   }
 
   .perContentHead {
-    flex-direction: column-reverse;
-    align-items: end;
+
+    flex-direction: row;
+    align-items: center;
 
     p {
       font-size: small;

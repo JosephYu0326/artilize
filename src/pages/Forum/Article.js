@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Link, useParams, useHistory } from 'react-router-dom'
 import FadeIn from 'react-fade-in/lib/FadeIn'
 import {
+  FaTrashAlt,
+  FaEdit,
   FaStar,
   FaAngleLeft,
   FaAngleRight,
@@ -40,7 +42,7 @@ function Article(props) {
           setPreArticle(data[0])
           setPerArticle(data[1])
           setNextArticle(data[2])
-          console.log(data);
+          console.log(perArticle);
         } else {
           setPreArticle(data[0])
           setPerArticle(data[1])
@@ -49,6 +51,36 @@ function Article(props) {
       }
       )
   }, [])
+
+  function hnadleEdit() {
+    console.log('123');
+
+  }
+
+  // var yes = confirm('你確定嗎？');
+
+  // if (yes) {
+  //     alert('你按了確定按鈕');
+  // } else {
+  //     alert('你按了取消按鈕');
+  // }
+
+  // ======文章刪除
+  function hnadleDel() {
+
+    fetch(`${process.env.REACT_APP_API_URL}/forum/${forumid}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: (`id:${forumid}`)
+    }).then(response => response.json())
+      .then(json => console.log(json))
+      .catch(err => console.log(err));
+  }
+
+
 
   function next() {
     fetch(`${process.env.REACT_APP_API_URL}/forum/${nextArticle.article_id}`)
@@ -93,7 +125,7 @@ function Article(props) {
     <>
       <Header />
       <div className="backBtn displayN" onClick={goBack}>
-        回討論區
+        回前一頁
         <FaAngleLeft />
       </div>
       <div className="container">
@@ -118,8 +150,9 @@ function Article(props) {
                   </div>
                 </div>
                 <div className="like d-flex justify-content-center align-items-center">
-                  <FaStar className="fs-5" />
-                  <div className="px-2">收藏</div>
+                  <FaStar className="fs-5 mx-2" />
+                  <FaEdit onClick={hnadleEdit} className="fs-5 mx-2" />
+                  <FaTrashAlt onClick={hnadleDel} className="fs-5 mx-2" />
                 </div>
               </div>
               <div className="articleBody py-5">

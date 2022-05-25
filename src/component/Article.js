@@ -1,6 +1,6 @@
 import React from 'react'
 import { Alert } from 'react-bootstrap'
-import { FaStar, FaCommentDots } from 'react-icons/fa'
+import { FaStar, FaCommentDots, FaTrashAlt } from 'react-icons/fa'
 import { Link, useParams } from 'react-router-dom'
 function Article(props) {
     const isSignIn = false
@@ -58,7 +58,9 @@ function Article(props) {
                     <div className='d-flex align-items-center'>
                         <FaCommentDots />
                         <div className="p-2">{'articleDetails[i].comment'}</div>
+
                         <FaStar onClick={handleLike} />
+
                     </div>
                 </div>
                 <hr />
