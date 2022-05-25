@@ -1,13 +1,20 @@
-//個人主頁
-import React from 'react'
-import { Link } from 'react-router-dom';
-import { FaStar, FaAngleRight, FaCommentDots } from "react-icons/fa";
-import { Button } from "react-bootstrap";
+//會員下的個人主頁
+import React, { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom';
 import AsideBar from "../../component/AsideBar";
 import Header from "../../component/Header";
 import Footer from "../../component/Footer";
+import Article from '../../component/Article'
 
 function PersonalPage(props) {
+  // 從appjs暫時設定使用者id
+  const userID = props.id
+  console.log(`目前登入使用者id=${userID}`);
+
+  const [articleList, setArticleList] = useState([{}])
+  console.log(articleList);
+
+  // 按鈕好像有更聰明的做法我再想想看
   const btnList =
   {
     btnTitle: [
@@ -27,9 +34,25 @@ function PersonalPage(props) {
       "/users/mycoupon"
     ],
   }
-  let title = "標題標題標題";
-  let content =
-    "內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文，內文內文內文內文內文內文，內文內文內文內文內文內文內文內文內文內文內文，內文內文內文內文內文內文內文內文內文內文內文";
+
+  // 顯示該用戶發表文章
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/users/personalpage`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      //別忘了把主體参數轉成字串，否則資料會變成[object Object]，它無法被成功儲存在後台
+      body: JSON.stringify({ userID: `${userID}` })
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setArticleList(data)
+        console.log(articleList);
+      })
+  }, [])
+
   return (
     <>
       <Header />
@@ -38,7 +61,7 @@ function PersonalPage(props) {
       />
       <div className="personalPage justify-content-center">
         <div className="container personalPageHead justify-content-center my-5">
-          <div className="row justify-content-center">
+          <div className="row justify-content-center align-items-center">
             <div className="col-lg-3 col-md-4 col-sm-12 text-center">
               <img
                 className="avatar"
@@ -48,8 +71,9 @@ function PersonalPage(props) {
             </div>
             <div className="col-lg-2 col-md-3 col-sm-12 text-center">
               <div>
-                <div className="h6">作者</div>
-                <div className="displayN m-3">{"6篇文章"}</div>
+                <div className="h5">{articleList[0].nickname}</div>
+                <div className="h6 txtGray">( {articleList[0].username} )</div>
+                <div className="displayN m-3">{articleList.length}篇文章</div>
               </div>
               {/* <Button variant="btn btn-primary rounded-pill BorderRadius">
                 FOLLOW
@@ -59,20 +83,7 @@ function PersonalPage(props) {
         </div>
         <section>
           <div className="frContent">
-            <div className="perContentHead pt-4 d-flex justify-content-between align-items-center">
-              <div className="">
-                <p className="displayN">{"作者"}</p>
-                <h3 className="mb-5">{title}</h3>
-              </div>
-              <p className="category">-心得分享</p>
-            </div>
-            <div className="displayN">{content}</div>
-            <div className="d-flex displayN justify-content-end align-items-center">
-              <FaCommentDots />
-              <div className="p-2 pBig">25</div>
-              <FaStar />
-            </div>
-            <hr />
+            <Article articDetails={articleList} />
           </div>
         </section>
       </div>
