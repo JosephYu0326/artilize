@@ -1,6 +1,6 @@
 //新增文章
 import React, { useEffect, useRef, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import tinymce from 'tinymce/tinymce'
 import { Editor } from '@tinymce/tinymce-react'
 import { FaAngleLeft } from 'react-icons/fa'
@@ -50,7 +50,7 @@ function AddArticle(props) {
   let body = {
     "title": title,
     "content": content,
-    "category": 2,
+    "category": ChioseCategory,
   }
   console.log(created_time);
   function handleClick(e) {
