@@ -2,28 +2,21 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
-function CartItem(props) {
-  const {
-    id,
-    title,
-    date,
-    category,
-    image,
-    price,
-    count,
-    setCount,
-    handleDelete,
-  } = props
+function CartItemPro(props) {
+  const { id, title, image, price, count, setProCount, handleDelete } = props
 
   return (
     <>
       <div className="cart-card-frame">
         <div className="cart-card-left">
-          <FontAwesomeIcon
-            className="trash"
-            icon={faTrashAlt}
-            onClick={handleDelete}
-          />
+          <button className="trash-btn">
+            <FontAwesomeIcon
+              className="trash"
+              icon={faTrashAlt}
+              onClick={handleDelete}
+            />
+          </button>
+
           <img
             src={require(`${image}`)}
             className="exhibition-img"
@@ -31,23 +24,17 @@ function CartItem(props) {
           />
           <div className="cart-content">
             <div>{title}</div>
-            <div className="date-frame">
-              <div>{date[0]}</div>
-              <div>{date[1]}</div>
-              <div className="date-process-icon">~</div>
-            </div>
           </div>
         </div>
         <div className="cart-card-right">
           <div className="ticket-kind">
-            <div>{category}</div>
             <div>${price}</div>
           </div>
           <div className="count">
             <button
               className="btn count-btn"
               onClick={() => {
-                setCount(count + 1)
+                setProCount(count + 1)
               }}
             >
               +
@@ -56,7 +43,7 @@ function CartItem(props) {
             <button
               className="btn count-btn"
               onClick={() => {
-                if (count - 1 >= 1) setCount(count - 1)
+                if (count - 1 >= 1) setProCount(count - 1)
               }}
             >
               -
@@ -64,7 +51,7 @@ function CartItem(props) {
           </div>
           <div className="total">
             <div>小計</div>
-            <div className="total-text">${price}</div>
+            <div className="total-text">${price * count}</div>
           </div>
         </div>
       </div>
@@ -72,4 +59,4 @@ function CartItem(props) {
   )
 }
 
-export default CartItem
+export default CartItemPro

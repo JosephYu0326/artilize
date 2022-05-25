@@ -1,4 +1,4 @@
-export const shoppingList = [
+export const shoppingListEx = [
   {
     id: 0,
     title: '「掘光而行」洪瑞麟展覽票券1',
