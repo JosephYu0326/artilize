@@ -10,11 +10,9 @@ function ForumAside(props) {
     const btnlist = props.btn
     const btn = btnlist.map((v, i) => {
         return (
-            // <button  >
             <Link key={i} to={`forum?topic=${btnlist[i].thema}`} className={`btn asideBtn ${currentTopic === btnlist[i].thema ? "active" : ""}`}>
                 {btnlist[i].thema}
             </Link>
-            // </button>
         )
     })
 
@@ -27,7 +25,7 @@ function ForumAside(props) {
                     <FaAngleRight className='faAngleRight' /></label>
                 <Link to="/forum/addarticle" className='btn btn-primary mt-4 mb-4 py-2 px-3 rounded-pill'>新增討論</Link>
                 {btn}
-                <Link to={`forum?topic=${null}`} className="btn asideBtn">所有討論
+                <Link to={`/forum`} className="btn asideBtn">所有討論
                 </Link>
             </aside>
         </>

@@ -1,6 +1,6 @@
 //新增文章
 import React, { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import tinymce from 'tinymce/tinymce'
 import { Editor } from '@tinymce/tinymce-react'
 import { FaAngleLeft } from 'react-icons/fa'
@@ -22,6 +22,10 @@ function AddArticle(props) {
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
   const [ChioseCategory, setChioseCategory] = useState("")
+  const history = useHistory()
+  const goBack = () => {
+    history.goBack()
+  }
   console.log(title);
   console.log(content);
 
@@ -74,11 +78,9 @@ function AddArticle(props) {
   return (
     <>
       <Header />
-      <div className="backBtn displayN">
-        <Link to="/forum">
-          回討論區
-          <FaAngleLeft />
-        </Link>
+      <div className="backBtn displayN" onClick={goBack}>
+        回討論區
+        <FaAngleLeft />
       </div>
       <div className="container">
         <div className="frContent">

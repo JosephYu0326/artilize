@@ -1,8 +1,9 @@
 import React from 'react'
+import { Alert } from 'react-bootstrap'
 import { FaStar, FaCommentDots } from 'react-icons/fa'
 import { Link, useParams } from 'react-router-dom'
 function Article(props) {
-    const isSignIn = true
+    const isSignIn = false
     const articleDetails = props.articDetails
     // console.log(articleDetails)
     // function which(e) {
@@ -13,14 +14,19 @@ function Article(props) {
         if (isSignIn) {
             alert('收藏文章')
         } else {
-            alert('請先登入！')
+            return (
+                <Alert variant="primary">
+                    "FU"
+                </Alert>
+            )
+
         }
     }
 
     const article = articleDetails.map((v, i) => {
-        const temp = articleDetails[i].created_time
+        //const temp = articleDetails[i].created_time
         // .slice(0, 10)
-        console.log(temp)
+        //console.log(temp)
         return (
             <div key={i}>
                 <div className="perContentHead my-4 d-flex justify-content-between">

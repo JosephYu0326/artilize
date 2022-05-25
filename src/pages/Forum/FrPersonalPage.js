@@ -1,17 +1,28 @@
 //個人頁面
-import React from "react";
-import { FaStar, FaCommentDots, FaAngleLeft } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react'
+import { FaAngleLeft } from "react-icons/fa";
+import { Link, useLocation, useParams } from 'react-router-dom'
 import "../../styles/Forum.scss";
 import "../../styles/global.scss";
 import { Button } from "react-bootstrap";
 import Header from "../../component/Header";
 import Footer from "../../component/Footer";
+import Article from '../../component/Article'
 import ForumAside from "../../component/ForumAside";
 
 function FrPersonalPage(props) {
-  const btn = ["逛展攻略","心得分享","小資旅遊"]
-  
+  const btn = ["逛展攻略", "心得分享", "小資旅遊"]
+  const [articleList, setArticleList] = useState([{}])
+  const { userID } = useParams()
+
+  //顯示該用戶發表文章
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/forum/FrPersonalPage/${userID}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setArticleList(data)
+      })
+  }, [])
   return (
     <>
       <Header />
@@ -34,7 +45,7 @@ function FrPersonalPage(props) {
             </div>
             <div className="col-lg-2 col-md-3 col-sm-12 text-center">
               <div>
-                <div className="h6">作者</div>
+                <div className="h6">{articleList[0].nickname}</div>
                 <div className="displayN m-3">{"6篇文章"}</div>
               </div>
               {/* <Button variant="btn btn-primary rounded-pill BorderRadius">
@@ -46,20 +57,7 @@ function FrPersonalPage(props) {
         <ForumAside btn={btn} />
         <section>
           <div className="frContent">
-            <div className="perContentHead pt-4 d-flex justify-content-between align-items-center">
-              <div className="">
-                <p className="">{"作者"}</p>
-                <h3 className="mb-5">{}</h3>
-              </div>
-              <p className="category">-心得分享</p>
-            </div>
-            <div className="displayN">{}</div>
-            <div className="d-flex displayN justify-content-end align-items-center">
-              <FaCommentDots />
-              <div className="p-2 pBig">25</div>
-              <FaStar />
-            </div>
-            <hr />
+            <Article articDetails={articleList} />
           </div>
         </section>
       </div>
