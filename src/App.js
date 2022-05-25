@@ -42,7 +42,7 @@ function App() {
         <Route path="/b2b">
           <B2B />
         </Route>
-        <Route path="/forum/frpersonalpage">
+        <Route path="/forum/frpersonalpage/:userID">
           <FrPersonalPage />
         </Route>
         <Route path="/forum/addarticle">
