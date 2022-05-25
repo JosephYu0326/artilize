@@ -1,7 +1,7 @@
 //展覽地圖搜尋
 //https://medium.com/seokjunhong/how-to-build-a-google-maps-web-application-using-react-js-google-maps-api-ea8036029e63
 //https://www.youtube.com/watch?v=UKdQjQX1Pko
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link, render } from 'react-router-dom'
 import { Container, Row } from 'react-bootstrap'
 import '../../styles/MapSearch.scss'
@@ -14,17 +14,22 @@ import {
   Marker,
   InfoWindow,
 } from '@react-google-maps/api'
+import { data } from 'jquery'
 
-const center = { lat: 22.6281, lng: 120.2927 }
+// const center = { lat: 22.6281, lng: 120.2927 }
 
 function MapSearch(props) {
   const [activeMarker, setActiveMarker] = useState(null)
   const [datas, setDatas] = useState([])
+  const [datas1, setDatas1] = useState([])
   const [markerID, setMarkerID] = useState('')
+  const [center, setCenter] = useState({ lat: 22.6281, lng: 120.2927 })
+  const mapSearchInput = useRef()
   const fetchData = async () => {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/MapSearch`)
     const results = await response.json()
     setDatas(results)
+    setDatas1(results)
     console.log(results)
   }
   useEffect(() => {
@@ -33,7 +38,6 @@ function MapSearch(props) {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   })
-  const refs = useMemo(() => datas.map(() => React.createRef()), [])
   if (!isLoaded) {
     return 'Unable to load googlle_maps_api'
   }
@@ -44,7 +48,7 @@ function MapSearch(props) {
     setActiveMarker(marker)
   }
   console.log(markerID)
-  console.log(refs)
+
   // const handleOnLoad = (map) => {
   //   // eslint-disable-next-line no-undef
   //   const bounds = new google.maps.LatLngBounds()
@@ -61,7 +65,23 @@ function MapSearch(props) {
           <section className="col-3 mapSearchList d-flex flex-column justify-content-evenly align-items-stretch mt-3">
             <div className="mapSearchBar d-flex  align-items-stretch">
               <form className="d-flex align-items-center justify-content-center ">
-                <input type="search" placeholder="" />
+                <input
+                  type="text"
+                  placeholder=""
+                  onChange={function (e) {
+                    // setMapSearchText(mapSearchInput.current.value)
+                    const mapSearchInputValue = mapSearchInput.current.value
+                    console.log(mapSearchInputValue)
+                    const mapSearchResult = datas1.filter((v, i) =>
+                      v.location.includes(mapSearchInputValue)
+                    )
+                    if (mapSearchResult.length > 0) {
+                      setDatas(mapSearchResult)
+                      console.log(mapSearchResult)
+                    }
+                  }}
+                  ref={mapSearchInput}
+                />
                 <button type="submit">Search</button>
               </form>
             </div>
@@ -74,14 +94,21 @@ function MapSearch(props) {
               style={{ height: '77.5vh', overflow: 'auto' }}
             >
               {datas.map((exhibition, i) => {
-                const { id, name, date, location } = exhibition
+                const { id, name, date, location, latitude, longitude } =
+                  exhibition
                 return (
                   <div
                     key={i}
                     style={{ cursor: 'pointer' }}
-                    onClick={() => setMarkerID(id)}
+                    onClick={function () {
+                      setMarkerID(id)
+                      setCenter({
+                        lat: parseFloat(latitude),
+                        lng: parseFloat(longitude),
+                      })
+                      handleActiveMarker(id)
+                    }}
                     id={`MapCard${id}`}
-                    ref={refs[i]}
                   >
                     <div className="card mb-3">
                       <div className="row g-0">
@@ -126,7 +153,7 @@ function MapSearch(props) {
               }}
               onClick={() => setActiveMarker(null)}
             >
-              <Marker position={center}></Marker>
+              <Marker position={{ lat: 22.6281, lng: 120.2927 }}></Marker>
               {datas.map(
                 ({ id, name, latitude, location, date, longitude }) => (
                   <Marker
@@ -138,7 +165,25 @@ function MapSearch(props) {
                     onClick={function () {
                       handleActiveMarker(id)
                       setMarkerID(id)
-                      console.log(`refs${id - 1}`.current)
+                      datas.forEach(function (item, i) {
+                        if (item.id === id) {
+                          datas.splice(i, 1)
+                          datas.unshift(item)
+                        }
+                      })
+                      setCenter({
+                        lat: parseFloat(latitude),
+                        lng: parseFloat(longitude),
+                      })
+                      // setDatas(datas)
+                      // // setInterval(
+                      // //   document.getElementById(`MapCard${id}`).scrollIntoView({
+                      // //     behavior: 'smooth',
+                      // //     block: 'start',
+                      // //     inline: 'start',
+                      // //   }),
+                      // //   1000
+                      // // )
                     }}
                     icon="https://cdn-icons-png.flaticon.com/64/806/806652.png"
                     id={`MapMarker${id}`}
