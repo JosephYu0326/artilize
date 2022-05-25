@@ -51,36 +51,29 @@ function Article(props) {
       }
       )
   }, [])
+  // ======文章編輯
+  // function hnadleEdit() {
+  //   console.log('編輯文章');
 
-  function hnadleEdit() {
-    console.log('123');
-
-  }
-
-  // var yes = confirm('你確定嗎？');
-
-  // if (yes) {
-  //     alert('你按了確定按鈕');
-  // } else {
-  //     alert('你按了取消按鈕');
   // }
 
   // ======文章刪除
   function hnadleDel() {
-
-    fetch(`${process.env.REACT_APP_API_URL}/forum/${forumid}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-      },
-      body: JSON.stringify({ "id": forumid })
-    }).then(response => response.json())
-      .then(json => console.log(json))
-      .catch(err => console.log(`沒有成功刪除，因為${err}`));
+    if (window.confirm(`確定要刪除「${perArticle.title}」?`)) {
+      fetch(`${process.env.REACT_APP_API_URL}/forum/${forumid}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({ "id": forumid })
+        //怎麼轉址的時候取回用戶id回到個人頁面?
+      }).then(window.location.href = "/uesrs/")
+        .then(json => console.log(json))
+        .catch(err => console.log(`沒有成功刪除，因為${err}`));
+    } else {
+    }
   }
-
-
 
   function next() {
     fetch(`${process.env.REACT_APP_API_URL}/forum/${nextArticle.article_id}`)
@@ -151,7 +144,7 @@ function Article(props) {
                 </div>
                 <div className="like d-flex justify-content-center align-items-center">
                   <FaStar className="fs-5 mx-2" />
-                  <FaEdit onClick={hnadleEdit} className="fs-5 mx-2" />
+                  <Link to={`/forum/EditArticle${perArticle.article_id}`}><FaEdit className="fs-5 mx-2" /></Link>
                   <FaTrashAlt onClick={hnadleDel} className="fs-5 mx-2" />
                 </div>
               </div>
