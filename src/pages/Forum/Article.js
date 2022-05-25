@@ -74,10 +74,10 @@ function Article(props) {
         "Content-Type": "application/json",
         "Accept": "application/json",
       },
-      body: (`id:${forumid}`)
+      body: JSON.stringify({ "id": forumid })
     }).then(response => response.json())
       .then(json => console.log(json))
-      .catch(err => console.log(err));
+      .catch(err => console.log(`沒有成功刪除，因為${err}`));
   }
 
 
