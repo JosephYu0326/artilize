@@ -33,6 +33,8 @@ import Style from './pages/Style'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 
 function App() {
+  const userID = 11
+
   return (
     <Router>
       <Switch>
@@ -42,7 +44,7 @@ function App() {
         <Route path="/b2b">
           <B2B />
         </Route>
-        <Route path="/forum/frpersonalpage/:userID">
+        <Route path="/forum/frpersonalpage:userID">
           <FrPersonalPage />
         </Route>
         <Route path="/forum/addarticle">
@@ -85,7 +87,7 @@ function App() {
           <MyCoupon />
         </Route>
         <Route path="/users/personalpage">
-          <PersonalPage />
+          <PersonalPage id={userID} />
         </Route>
         <Route path="/users/productcollect">
           <ProductCollect />
