@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import Header from '../../component/Header'
 import { FcLike } from 'react-icons/fc'
+import p_purchasebaramount from '../../images/product_Images/icons/select.png'
+import p_purchasebarjoincart from '../../images/product_Images/icons/joincart.png'
 import Footer from '../../component/Footer'
 import p_IntroImg from '../../images/product_Images/productintro/TeaTest.jpg'
 import p_SamesearchImg from '../../images/product_Images/product/ArcherTest.jpeg'
@@ -162,8 +164,12 @@ function Introduce(props) {
               <div className="PurchaseBarCollect">
                 <FcLike />
               </div>
-              <div className="PurchaseBarAmount">數量</div>
-              <div className="PurchaseBarCarticon">購物車</div>
+              <div className="PurchaseBarAmount">
+                <img src={p_purchasebaramount} alt=""></img>
+              </div>
+              <div className="PurchaseBarCarticon">
+                <img src={p_purchasebarjoincart} alt=""></img>
+              </div>
             </div>
           </div>
         </div>
