@@ -117,6 +117,7 @@ function MapSearch(props) {
                         lng: parseFloat(longitude),
                       })
                       handleActiveMarker(id)
+                      setActiveHighlight(-1)
                     }}
                     id={`MapCard${id}`}
                   >
