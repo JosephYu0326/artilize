@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useHistory } from 'react-router-dom'
 import FadeIn from 'react-fade-in/lib/FadeIn'
 import {
   FaTrashAlt,
@@ -12,32 +12,38 @@ import {
 import Comment from './Comment'
 import Header from '../../component/Header'
 import Footer from '../../component/Footer'
-import BackBtn from '../../component/BackBtn'
 import '../../styles/AsideBar.scss'
 import '../../styles/global.scss'
 import '../../styles/Forum.scss'
 
 function Article(props) {
-  const userId = true
+  const userId = 11
   // 文章收藏狀態
   const [favorited, setFavorited] = useState(true)
+  //留言
   const [comments, setComments] = useState([{}])
-  const [nowArticle, setNowArticle] = useState({})
+  const [comment_msg, setComment_msg] = useState("")
+  //追蹤留言內容
+  const [commentInput, setCommentInput] = useState("")
+  //文章關聯(好像有bug)
   const [preArticle, setPreArticle] = useState([{}])
+  const [nowArticle, setNowArticle] = useState({})
   const [nextArticle, setNextArticle] = useState([{}])
-  const { forumid } = useParams()
 
+  const { forumid } = useParams()
+  const history = useHistory()
 
   //===跟據param拿到當前文章，以及前後篇文章
   const getNowArticle = async () => {
     const res = await fetch(`${process.env.REACT_APP_API_URL}/forum/${forumid}`)
     const data = await res.json()
     if (data.length == 3) {
-      console.log(data);
       setPreArticle(data[0])
       setNowArticle(data[1])
       setNextArticle(data[2])
-      console.log(`現在頁面${forumid} ，文章:${nowArticle.title}`)
+      //首次進入拿不到!!
+      console.log("此頁文章")
+      console.log(nowArticle)
     } else {
       setPreArticle(data[0])
       setNowArticle(data[1])
@@ -51,15 +57,15 @@ function Article(props) {
       .then((res) => res.json())
       .then((data) => {
         setComments(data)
+        console.log("留言:");
         console.log(comments);
       })
   }, [nowArticle])
 
-
-  // didMount
   useEffect(() => {
+    setCommentInput('')
     getNowArticle()
-  }, [])
+  }, [forumid])
 
   // ----------CLICK觸發的事件
   // ======文章收藏
@@ -69,59 +75,58 @@ function Article(props) {
       window.location.href = `${process.env.REACT_APP_API_URL}/forum`
       return
     }
-    if (favorited) {
-      // 已經收藏
-      const remove = async () => {
-        const url = `${process.env.REACT_APP_API_URL}/forum/ArticleLike/remove`
-        const request = new Request(url, {
-          method: 'POST',
-          body: JSON.stringify({
-            articleId: forumid,
-            userId: userId,
-          }),
-          headers: new Headers({
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          }),
-        })
-        const response = await fetch(request)
-        const data = await response.json()
-        if (data.success) {
-          setFavorited(!favorited)
-          console.log(data, 'remove from Favorite')
-        } else {
-          alert('Failed to remove from Favorite')
-        }
-      }
-      remove()
-    } else {
-      // 未收藏
-      const add = async () => {
-        const url = `${process.env.REACT_APP_API_URL}/forum/ArticleLike/add`
-        const request = new Request(url, {
-          method: 'POST',
-          body: JSON.stringify({
-            bookId: forumid,
-            userId: userId,
-          }),
-          headers: new Headers({
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          }),
-        })
-        const response = await fetch(request)
-        const data = await response.json()
-        if (data.success) {
-          setFavorited(!favorited)
-          console.log(data, 'Add to Favorite')
-        } else {
-          alert('Failed to add to Favorite')
-        }
-      }
-      add()
-    }
+    // if (favorited) {
+    //   // 已經收藏
+    //   const remove = async () => {
+    //     const url = `${process.env.REACT_APP_API_URL}/forum/ArticleLike/remove`
+    //     const request = new Request(url, {
+    //       method: 'POST',
+    //       body: JSON.stringify({
+    //         articleId: forumid,
+    //         userId: userId,
+    //       }),
+    //       headers: new Headers({
+    //         Accept: 'application/json',
+    //         'Content-Type': 'application/json',
+    //       }),
+    //     })
+    //     const response = await fetch(request)
+    //     const data = await response.json()
+    //     if (data.success) {
+    //       setFavorited(!favorited)
+    //       console.log(data, 'remove from Favorite')
+    //     } else {
+    //       alert('Failed to remove from Favorite')
+    //     }
+    //   }
+    //   remove()
+    // } else {
+    // 未收藏
+    //     const add = async () => {
+    //       const url = `${process.env.REACT_APP_API_URL}/forum/ArticleLike/add`
+    //       const request = new Request(url, {
+    //         method: 'POST',
+    //         body: JSON.stringify({
+    //           bookId: forumid,
+    //           userId: userId,
+    //         }),
+    //         headers: new Headers({
+    //           Accept: 'application/json',
+    //           'Content-Type': 'application/json',
+    //         }),
+    //       })
+    //       const response = await fetch(request)
+    //       const data = await response.json()
+    //       if (data.success) {
+    //         setFavorited(!favorited)
+    //         console.log(data, 'Add to Favorite')
+    //       } else {
+    //         alert('Failed to add to Favorite')
+    //       }
+    //     }
+    //     add()
+    //   }
   }
-
 
   // ======文章刪除
   function hnadleDel() {
@@ -134,7 +139,7 @@ function Article(props) {
         },
         body: JSON.stringify({ "id": forumid })
         //怎麼轉址的時候取回用戶id回到個人頁面?
-      }).then(window.location.href = "/uesrs/")
+      }).then(history.goBack())
         .then(json => console.log(json))
         .catch(err => console.log(`沒有成功刪除，因為${err}`));
     } else {
@@ -159,6 +164,7 @@ function Article(props) {
       })
   }
   // ======上一篇
+
   function pre() {
     fetch(`${process.env.REACT_APP_API_URL}/forum/${preArticle.article_id}`)
       .then((res) => res.json())
@@ -173,15 +179,73 @@ function Article(props) {
           setNowArticle(data[1])
           setNextArticle({ title: '', created_time: '', content: '' })
         }
-        console.log(preArticle.title)
+
       })
   }
+  // ======新增留言
+  let body = {
+    "comment": commentInput,
+    "userid": userId,
+    "article": forumid
+  }
+  // function postComment(e) {
+  //   e.preventDefault()
+  //   fetch(`${process.env.REACT_APP_API_URL}/ArticleComment`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "Accept": "application/json",
+  //     },
+  //     body: JSON.stringify(body)
+  //   })
+  //     .then(alert('susses'))
+  // .then(json => console.log(json));
+  // .then(response => response.json())
+  // .then(json => console.log(json));
+  // }
 
+
+  function postComment(e) {
+    e.preventDefault();
+    console.log(commentInput.value);
+    let isPass = true; // 有沒有通過檢查
+    setComment_msg(''); // 清空訊息
+
+    //表單資料送出之前, 做格式檢查
+    if (commentInput.length < 3) {
+      isPass = false;
+      setComment_msg('留言字數需10字以上，請重新輸入')
+    }
+
+    if (isPass) {
+      fetch(`${process.env.REACT_APP_API_URL}/ArticleComment`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify(body)
+      }).then(r => r.json())
+        .then(obj => {
+          console.log(obj);
+          if (obj.success) {
+            alert('新增成功');
+            // location.href = 'Blog_home.php';
+          }
+        }).catch(function (error) {
+          alert('新增失敗，網站忙碌中，請再試一次');
+        })
+    }
+  }
 
   return (
     <>
       <Header />
-      <BackBtn />
+      <div className="backBtn displayN">
+        <Link to="/forum">回討論區
+          <FaAngleLeft />
+        </Link>
+      </div>
       <div className="container">
         <FadeIn className="row">
           <div className="col-lg-1 liquidLeft"></div>
@@ -229,7 +293,7 @@ function Article(props) {
                       <div onClick={next}><Link className='text-decoration-none' to={`/forum/${nextArticle.article_id}`}>{nextArticle.title}</Link></div>
                     </div>
                     <div className="d-flex align-items-center">
-                      <div onClick={pre}><Link className='text-decoration-none' to={`/forum/${nextArticle.article_id}`}>{preArticle.title}</Link></div>
+                      <div onClick={pre}><Link className='text-decoration-none' to={`/forum/${preArticle.article_id}`}>{preArticle.title}</Link></div>
                       <FaAngleRight />
                     </div>
                   </div>
@@ -245,13 +309,17 @@ function Article(props) {
                   />
                   <div>Me</div>
                 </div>
+
                 <textarea
                   id="inputBox"
                   type="text"
+                  value={commentInput}
                   className="my-3 form-control"
+                  onChange={(e) => setCommentInput(e.target.value)}
                 ></textarea>
+                <div style={{ color: 'red' }}>{comment_msg}</div>
                 <div className="align-self-end">
-                  <button className="btn btn-primary rounded-pill">
+                  <button onClick={postComment} className="btn btn-primary rounded-pill">
                     新增回覆
                   </button>
                 </div>

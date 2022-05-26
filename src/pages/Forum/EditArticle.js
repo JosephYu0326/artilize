@@ -5,6 +5,7 @@ import { FaAngleLeft } from 'react-icons/fa'
 import { Form, Button, Alert } from 'react-bootstrap'
 import Header from '../../component/Header'
 import Footer from '../../component/Footer'
+import BackBtn from '../../component/BackBtn'
 
 function EditArticle(props) {
     //讀出文章
@@ -14,14 +15,7 @@ function EditArticle(props) {
     const [article, setArticle] = useState({})
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/forum/${forumid}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-            },
-            body: JSON.stringify(body)
-        })
+        fetch(`${process.env.REACT_APP_API_URL}/forum/${forumid}`,)
             .then((res) => res.json())
             .then((data) => {
                 setArticle(data)
@@ -101,10 +95,7 @@ function EditArticle(props) {
             </Alert>
 
             <Header />
-            <div className="backBtn displayN" onClick={goBack}>
-                回討論區
-                <FaAngleLeft />
-            </div>
+            <BackBtn />
             <div className="container">
                 <div className="frContent">
                     <h3>修改討論</h3>

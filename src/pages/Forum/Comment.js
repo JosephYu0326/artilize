@@ -8,7 +8,7 @@ import {
 function Comment(props) {
 
   const comment = props.comment
-  console.log(comment)
+  // console.log(comment)
 
 
 

@@ -1,5 +1,5 @@
 //新增文章
-import React, { useEffect, useRef, useState, Component } from 'react'
+import React, { useEffect, useState, Component } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 // import tinymce from 'tinymce/tinymce'
 // import { Editor } from '@tinymce/tinymce-react'
@@ -19,13 +19,11 @@ function AddArticle(props) {
   // ========tinyMCE東東======
   const [Show, setShow] = useState(false);
   const created_time = new Date()
+  const [content_msg, setContent_msg] = useState("")
   const [category, setCategory] = useState([])
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
   const [ChioseCategory, setChioseCategory] = useState("")
-
-  console.log(title);
-  console.log(content);
 
   const categoryChoice = category.map((v, i) => {
     return (
@@ -37,34 +35,55 @@ function AddArticle(props) {
     )
   })
 
-
-
-  // --------
-  let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-  }
-
   let body = {
     "title": title,
     "content": content,
     "category": ChioseCategory,
     "userid": props.id
   }
-  console.log(created_time);
-  function handleClick(e) {
-    e.preventDefault()
-    fetch(`${process.env.REACT_APP_API_URL}/forum/addarticle`, {
-      method: "POST",
-      headers: headers,
-      body: JSON.stringify(body)
-    })
-      .then(setShow(true))
-    // .then(json => console.log(json));
-    // .then(response => response.json())
-    // .then(json => console.log(json));
+  // 新增文章
+  function postArticle(e) {
+    e.preventDefault();
+    let isPass = true; // 有沒有通過檢查
+    setContent_msg(""); // 清空訊息
+
+    //表單資料送出之前, 做格式檢查
+    if (content.length < 50) {
+      isPass = false;
+      setContent_msg('討論區字數需50字以上，請重新輸入')
+    }
+    if (isPass) {
+      fetch(`${process.env.REACT_APP_API_URL}/forum/addarticle`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify(body)
+      }).then(
+        setShow(true),
+        alert('新增成功')
+      )
+        .catch(function (error) {
+          alert('新增失敗，網站忙碌中，請再試一次');
+        })
+    }
   }
-  // --------
+
+
+  // function postArticle(e) {
+  //   e.preventDefault()
+  //   fetch(`${process.env.REACT_APP_API_URL}/forum/addarticle`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "Accept": "application/json",
+  //     },
+  //     body: JSON.stringify(body)
+  //   })
+  //     .then(setShow(true))
+  // }
+
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/forum/category`)
@@ -112,6 +131,7 @@ function AddArticle(props) {
               as='textarea'
               onChange={(e) => setContent(e.target.value)}
             />
+            <div style={{ color: 'red' }}>{content_msg}</div>
 
             {/* ========tinyMCE東東====== */}
             {/* <Editor
@@ -157,7 +177,7 @@ function AddArticle(props) {
                   <option>文章分類</option>
                   {categoryChoice}
                 </Form.Select>
-                <Button onClick={handleClick} variant="primary col-sm-12 col-md-5 rounded-pill my-5 mx-auto">
+                <Button onClick={postArticle} variant="primary col-sm-12 col-md-5 rounded-pill my-5 mx-auto">
                   新增討論
                 </Button>
               </div>
