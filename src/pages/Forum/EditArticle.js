@@ -8,6 +8,8 @@ import Footer from '../../component/Footer'
 
 function EditArticle(props) {
     //讀出文章
+    const [title, setTitle] = useState("")
+    const [content, setContent] = useState("")
     const forumid = props.Articleid
     const [article, setArticle] = useState({})
 
@@ -18,22 +20,20 @@ function EditArticle(props) {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
             },
-            body: JSON.stringify(`id:${forumid}`)
+            body: JSON.stringify(body)
         })
             .then((res) => res.json())
             .then((data) => {
                 setArticle(data)
-                console.log(`id為${forumid}的文章`);
+                console.log(article);
             })
+            .then(console.log(`id為${forumid}的文章`))
+            .then(console.log(article))
+        // .then(setTitle(article[1].title), setContent(article[1].content));
     }, [])
-    console.log(article);
+
 
     const [Show, setShow] = useState(false);
-
-
-
-    const [title, setTitle] = useState("")
-    const [content, setContent] = useState("")
     const [category, setCategory] = useState([])
     const [ChioseCategory, setChioseCategory] = useState("")
 
@@ -55,27 +55,25 @@ function EditArticle(props) {
 
 
     // --------
-    let headers = {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-    }
     let body = {
+        "id": forumid,
         "title": title,
         "content": content,
         //"category": ChioseCategory,
     }
-    function handleClick(e) {
-        e.preventDefault()
-        fetch(`${process.env.REACT_APP_API_URL}/forum`, {
-            method: "PUT",
-            headers: headers,
-            body: JSON.stringify(body)
-        })
-            .then(setShow(true))
-            .then(json => console.log(json));
-        // .then(response => response.json())
-        // .then(json => console.log(json));
-    }
+
+    // function handleClick(e) {
+    //     e.preventDefault()
+    //     fetch(`${process.env.REACT_APP_API_URL}/forum`, {
+    //         method: "PUT",
+    //         headers: headers,
+    //         body: JSON.stringify(body)
+    //     })
+    //         .then(setShow(true))
+    //         .then(json => console.log(json));
+    //     // .then(response => response.json())
+    //     // .then(json => console.log(json));
+    // }
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/forum/category`)

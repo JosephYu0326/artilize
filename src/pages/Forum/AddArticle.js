@@ -7,6 +7,7 @@ import { FaAngleLeft } from 'react-icons/fa'
 import { Form, Button, Alert } from 'react-bootstrap'
 import Header from '../../component/Header'
 import Footer from '../../component/Footer'
+import BackBtn from '../../component/BackBtn'
 
 function AddArticle(props) {
   // ========tinyMCE東東======
@@ -22,13 +23,7 @@ function AddArticle(props) {
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
   const [ChioseCategory, setChioseCategory] = useState("")
-  const history = useHistory()
 
-
-
-  const goBack = () => {
-    history.goBack()
-  }
   console.log(title);
   console.log(content);
 
@@ -96,10 +91,7 @@ function AddArticle(props) {
       </Alert>
 
       <Header />
-      <div className="backBtn displayN" onClick={goBack}>
-        回討論區
-        <FaAngleLeft />
-      </div>
+      <BackBtn />
       <div className="container">
         <div className="frContent">
           <h3>新增討論</h3>

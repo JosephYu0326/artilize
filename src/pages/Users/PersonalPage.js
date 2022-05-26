@@ -43,13 +43,11 @@ function PersonalPage(props) {
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
-      //別忘了把主體参數轉成字串，否則資料會變成[object Object]，它無法被成功儲存在後台
       body: JSON.stringify({ userID: `${userID}` })
     })
       .then((res) => res.json())
       .then((data) => {
         setArticleList(data)
-        console.log(articleList);
       })
   }, [])
 

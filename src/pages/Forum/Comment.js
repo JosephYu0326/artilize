@@ -3,40 +3,40 @@ import {
   FaReply,
   FaCommentDots,
 } from "react-icons/fa";
+
+
 function Comment(props) {
 
-  const commentDetails = props.commentDetails
+  const comment = props.comment
+  console.log(comment)
 
-  return (
-    <>
-      <div className="comment">
-        <section className="d-flex flex-column my-5 p-4 ">
+
+
+  const Reply = comment.map((v, i) => {
+    return (
+      <>
+        <section key={i} className="d-flex flex-column my-5 p-4 ">
           <div className="d-flex align-items-center">
             <img
               className="avatar m-3"
               src="https://picsum.photos/id/555/200/"
               alt="userpicture"
             />
-            <div>otherUser</div>
+            <div>{comment[i].nickname}</div>
           </div>
-          <div className="my-3">{"Awesome!"}</div>
-          <div className="d-flex align-self-end  fs-5">
-            <div className="px-3">
-              <FaCommentDots />
-            </div>
-            <div>
-              {/* <FaReply /> */}
-            </div>
-          </div>
-
-          {/* reply */}
-          {/* <hr className="replyHr MiddleGrey"/>
-          <div className="d-flex align-items-center">
-            <div className="h6">{'replyUser'}</div>
-          </div>
-          <div className="my-3">{"Awesome!"}</div> */}
+          <div className="my-3">{comment[i].Blog_comment_content}</div>
           <hr />
         </section>
+      </>
+    )
+  })
+
+
+
+  return (
+    <>
+      <div className="comment">
+        {Reply}
       </div>
     </>
   );
