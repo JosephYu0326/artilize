@@ -28,14 +28,17 @@ function SignUp(props) {
               >
                 <form>
                   <div style={{ paddingLeft: '12px' }}>
-                    <h4 class="ph_title row ExtraBold text-primary mb-4">
+                    <h4 className="ph_title row ExtraBold text-primary mb-4">
                       新會員註冊
                     </h4>
                   </div>
-                  <div id="input-text" class="mb-3 usersContentcolor Regular">
+                  <div
+                    id="input-text"
+                    className="mb-3 usersContentcolor Regular"
+                  >
                     <input
                       type="text"
-                      class="form-control "
+                      className="form-control "
                       id="exampleFormControlInput1"
                       placeholder="帳號"
                       value={account}
@@ -43,14 +46,17 @@ function SignUp(props) {
                         setAccount(e.target.value)
                       }}
                     />
-                    <div id="emailHelp" class="form-text text-secondary">
+                    <div id="emailHelp" className="form-text text-secondary">
                       請輸入正確的帳號
                     </div>
                   </div>
-                  <div id="input-text" class="mb-3 usersContentcolor Regular">
+                  <div
+                    id="input-text"
+                    className="mb-3 usersContentcolor Regular"
+                  >
                     <input
-                      type="mail"
-                      class="form-control "
+                      type="email"
+                      className="form-control "
                       id="exampleFormControlInput1"
                       placeholder="信箱"
                       value={email}
@@ -58,14 +64,17 @@ function SignUp(props) {
                         setEmail(e.target.value)
                       }}
                     />
-                    <div id="emailHelp" class="form-text text-secondary">
+                    <div id="emailHelp" className="form-text text-secondary">
                       請輸入正確的信箱
                     </div>
                   </div>
-                  <div id="input-text" class="mb-3 usersContentcolor Regular">
+                  <div
+                    id="input-text"
+                    className="mb-3 usersContentcolor Regular"
+                  >
                     <input
-                      type="text"
-                      class="form-control "
+                      type="password"
+                      className="form-control "
                       id="exampleFormControlInput1"
                       placeholder="密碼"
                       value={password}
@@ -73,14 +82,17 @@ function SignUp(props) {
                         setPassword(e.target.value)
                       }}
                     />
-                    <div id="emailHelp" class="form-text text-secondary">
+                    <div id="emailHelp" className="form-text text-secondary">
                       請輸入正確的密碼
                     </div>
                   </div>
-                  <div id="input-text" class="mb-3 usersContentcolor Regular">
+                  <div
+                    id="input-text"
+                    className="mb-3 usersContentcolor Regular"
+                  >
                     <input
-                      type="text"
-                      class="form-control "
+                      type="password"
+                      className="form-control "
                       id="exampleFormControlInput1"
                       placeholder="請再次輸入密碼"
                       value={password2}
@@ -88,7 +100,7 @@ function SignUp(props) {
                         setPassword2(e.target.value)
                       }}
                     />
-                    <div id="emailHelp" class="form-text text-secondary">
+                    <div id="emailHelp" className="form-text text-secondary">
                       請再次輸入正確的密碼
                     </div>
                   </div>
@@ -96,7 +108,7 @@ function SignUp(props) {
                     <Link to="//">
                       <button
                         type="submit"
-                        class="btn btn-primary rounded-pill mt-4"
+                        className="btn btn-primary rounded-pill mt-4"
                       >
                         送出
                       </button>

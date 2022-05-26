@@ -25,14 +25,17 @@ function ForgetPassword(props) {
               >
                 <form>
                   <div style={{ paddingLeft: '12px' }}>
-                    <h4 class="ph_title row ExtraBold text-primary mb-4">
+                    <h4 className="ph_title row ExtraBold text-primary mb-4">
                       忘記密碼
                     </h4>
                   </div>
-                  <div id="input-text" class="mb-3 usersContentcolor Regular">
+                  <div
+                    id="input-text"
+                    className="mb-3 usersContentcolor Regular"
+                  >
                     <input
                       type="text"
-                      class="form-control "
+                      className="form-control "
                       id="exampleFormControlInput1"
                       placeholder="密碼"
                       value={password}
@@ -40,7 +43,7 @@ function ForgetPassword(props) {
                         setPassword(e.target.value)
                       }}
                     />
-                    <div id="emailHelp" class="form-text text-secondary">
+                    <div id="emailHelp" className="form-text text-secondary">
                       請輸入正確的密碼
                     </div>
                   </div>
@@ -48,7 +51,7 @@ function ForgetPassword(props) {
                     <Link to="//">
                       <button
                         type="submit"
-                        class="btn btn-primary rounded-pill mt-4"
+                        className="btn btn-primary rounded-pill mt-4"
                       >
                         送出
                       </button>

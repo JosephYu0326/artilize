@@ -4,32 +4,26 @@ import { Link } from 'react-router-dom'
 import '../../styles/users.scss'
 import Header from '../../component/Header'
 import AsideBar from '../../component/AsideBar'
-import { Container, Form, Button, Row, Image } from 'react-bootstrap'
+import { Container, Row, Image } from 'react-bootstrap'
+import { useState } from 'react'
 import logo from 'C:/Users/FU/Documents/react/artilize/src/images/logo.png'
 
 function Edit(props) {
+  const [account, setAccount] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [address, setAddress] = useState('')
+  const [nickname, setNickname] = useState('')
+  const [birthday, setBirthday] = useState('')
+  const [gender, setGender] = useState('')
+
   return (
     <>
-      <div>會員資料</div>
-      <Link to="users/login">會員登入</Link>
-      <br />
-      <Link to="users/edit">編輯會員資料</Link>
-      <br />
-      <Link to="users/signup">新會員註冊</Link>
-      <br />
-      <Link to="users/forgetpassword">會員忘記密碼</Link>
-      <br />
-      <Link to="users/orderrecord">訂單紀錄</Link>
-      <br />
-      <Link to="users/articlecollect">文章收藏</Link>
-      <br />
-      <Link to="users/productcollect">商品收藏</Link>
-      <br />
-      <Link to="users/personalpage">個人主頁</Link>
-      <br />
-      <Link to="users/mycoupon">我的優惠券</Link>
       <Header />
-      <AsideBar btn1="123" />
+      {/* <AsideBar btn1="123" /> */}
+
       <div className="bg-background">
         <section>
           <Container>
@@ -50,80 +44,170 @@ function Edit(props) {
                     // className="d-inline-block"
                   />
                 </figure>
-                <Form className="">
+                <form>
                   <div style={{ paddingLeft: '12px' }}>
-                    <h4 className="ph_title row ExtraBold text-primary mb-3">
+                    <h4 className="ph_title row ExtraBold text-primary mb-4">
                       編輯會員資料
                     </h4>
-                    {/* <h6 className="ph_title row Regular usersContentcolor mb-3 ">
-                      使用您的Artilize帳號
-                    </h6> */}
                   </div>
-                  <Form.Group className="mb-3" controlId="formBasicAccount">
-                    {/* <Form.Label>帳號</Form.Label> */}
-                    <Form.Control type="account" placeholder="帳號" />
-                    <Form.Text className="text-secondary">
-                      請輸入正確的帳號
-                    </Form.Text>
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formBasicEmail">
-                    {/* <Form.Label>帳號</Form.Label> */}
-                    <Form.Control type="email" placeholder="信箱" />
-                    <Form.Text className="text-secondary">
-                      請輸入正確的信箱
-                    </Form.Text>
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formBasicPassword">
-                    {/* <Form.Label>密碼</Form.Label> */}
-                    <Form.Control type="password" placeholder="密碼" />
-                    <Form.Text className="text-secondary">
-                      請輸入正確的密碼
-                    </Form.Text>
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="">
-                    {/* <Form.Label>密碼</Form.Label> */}
-                    <Form.Control type="" placeholder="姓名" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="">
-                    {/* <Form.Label>密碼</Form.Label> */}
-                    <Form.Control type="" placeholder="手機" />
-                    <Form.Text className="text-secondary">
-                      請輸入正確的手機
-                    </Form.Text>
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="">
-                    {/* <Form.Label>密碼</Form.Label> */}
-                    <Form.Control type="" placeholder="地址" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="">
-                    {/* <Form.Label>密碼</Form.Label> */}
-                    <Form.Control type="" placeholder="暱稱" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="">
-                    {/* <Form.Label>密碼</Form.Label> */}
-                    <Form.Control type="" placeholder="生日" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="">
-                    {/* <Form.Label>密碼</Form.Label> */}
-                    <Form.Control type="" placeholder="性別" />
-                  </Form.Group>
-                  {/* <Form.Group
+                  <div
+                    id="input-text"
                     className="mb-3 usersContentcolor Regular"
-                    controlId=""
                   >
-                    <Form.Label>忘記密碼</Form.Label>
-                  </Form.Group> */}
-                  {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                        <Form.Check type="checkbox" label="記住我" />
-                      </Form.Group> */}
+                    <input
+                      type="text"
+                      className="form-control "
+                      id="exampleFormControlInput1"
+                      placeholder="帳號"
+                      value={account}
+                      onChange={(e) => {
+                        setAccount(e.target.value)
+                      }}
+                    />
+                    <div id="emailHelp" className="form-text text-secondary">
+                      請輸入正確的帳號
+                    </div>
+                  </div>
+                  <div
+                    id="input-text"
+                    className="mb-3 usersContentcolor Regular"
+                  >
+                    <input
+                      type="email"
+                      className="form-control "
+                      id="exampleFormControlInput1"
+                      placeholder="信箱"
+                      value={email}
+                      onChange={(e) => {
+                        setEmail(e.target.value)
+                      }}
+                    />
+                    <div id="emailHelp" className="form-text text-secondary">
+                      請輸入正確的信箱
+                    </div>
+                  </div>
+                  <div
+                    id="input-text"
+                    className="mb-3 usersContentcolor Regular"
+                  >
+                    <input
+                      type="password"
+                      className="form-control "
+                      id="exampleFormControlInput1"
+                      placeholder="密碼"
+                      value={password}
+                      onChange={(e) => {
+                        setPassword(e.target.value)
+                      }}
+                    />
+                    <div id="emailHelp" className="form-text text-secondary">
+                      請輸入正確的密碼
+                    </div>
+                  </div>
+                  <div
+                    id="input-text"
+                    className="mb-3 usersContentcolor Regular"
+                  >
+                    <input
+                      type="text"
+                      className="form-control "
+                      id="exampleFormControlInput1"
+                      placeholder="姓名"
+                      value={name}
+                      onChange={(e) => {
+                        setName(e.target.value)
+                      }}
+                    />
+                  </div>
+                  <div
+                    id="input-text"
+                    className="mb-3 usersContentcolor Regular"
+                  >
+                    <input
+                      type="tel"
+                      className="form-control "
+                      id="exampleFormControlInput1"
+                      placeholder="手機"
+                      value={phone}
+                      onChange={(e) => {
+                        setPhone(e.target.value)
+                      }}
+                    />
+                    <div id="emailHelp" className="form-text text-secondary">
+                      請再次輸入正確的手機
+                    </div>
+                  </div>
+                  <div
+                    id="input-text"
+                    className="mb-3 usersContentcolor Regular"
+                  >
+                    <input
+                      type="text"
+                      className="form-control "
+                      id="exampleFormControlInput1"
+                      placeholder="地址"
+                      value={address}
+                      onChange={(e) => {
+                        setAddress(e.target.value)
+                      }}
+                    />
+                  </div>
+                  <div
+                    id="input-text"
+                    className="mb-3 usersContentcolor Regular"
+                  >
+                    <input
+                      type="text"
+                      className="form-control "
+                      id="exampleFormControlInput1"
+                      placeholder="暱稱"
+                      value={nickname}
+                      onChange={(e) => {
+                        setNickname(e.target.value)
+                      }}
+                    />
+                  </div>
+                  <div
+                    id="input-text"
+                    className="mb-3 usersContentcolor Regular"
+                  >
+                    <input
+                      type="date"
+                      className="form-control "
+                      id="exampleFormControlInput1"
+                      placeholder="生日"
+                      value={birthday}
+                      onChange={(e) => {
+                        setBirthday(e.target.value)
+                      }}
+                    />
+                  </div>
+                  <div
+                    id="input-text"
+                    className="mb-3 usersContentcolor Regular"
+                  >
+                    <input
+                      type="radio"
+                      className="form-control "
+                      id="exampleFormControlInput1"
+                      placeholder="性別"
+                      value={gender}
+                      onChange={(e) => {
+                        setGender(e.target.value)
+                      }}
+                    />
+                  </div>
                   <div className="d-flex justify-content-around">
-                    <Link to="/users/edit/">
-                      <Button variant="primary rounded-pill" type="submit">
+                    <Link to="//">
+                      <button
+                        type="submit"
+                        className="btn btn-primary rounded-pill mt-4"
+                      >
                         送出
-                      </Button>
+                      </button>
                     </Link>
                   </div>
-                </Form>
+                </form>
               </div>
             </Row>
           </Container>
