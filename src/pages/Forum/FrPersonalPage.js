@@ -15,9 +15,10 @@ function FrPersonalPage(props) {
   const [articleList, setArticleList] = useState([{}])
   const { userID } = useParams()
   console.log(articleList);
+  console.log(userID)
   //顯示該用戶發表文章
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/forum/FrPersonalPage/${userID}`)
+    fetch(`${process.env.REACT_APP_API_URL}/forum/FrPersonalPage/2`)
       .then((res) => res.json())
       .then((data) => {
         setArticleList(data)
@@ -27,11 +28,9 @@ function FrPersonalPage(props) {
     <>
       <Header />
       <div className="backBtn displayN">
-
         <Link to="/forum">回討論區
           <FaAngleLeft />
         </Link>
-
       </div>
       <div className="personalPage justify-content-center">
         <div className="container personalPageHead justify-content-center my-5">
