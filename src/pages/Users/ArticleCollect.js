@@ -1,7 +1,5 @@
 //文章收藏
 import React from "react";
-import { Link } from "react-router-dom";
-import { FaStar, FaCommentDots } from "react-icons/fa";
 import FadeIn from "react-fade-in";
 import Header from "../../component/Header";
 import Footer from "../../component/Footer";
@@ -40,6 +38,10 @@ function ArticleCollect(props) {
       avrtarId: "100",
     }
   ];
+
+
+
+
   return (
     <>
       <Header />

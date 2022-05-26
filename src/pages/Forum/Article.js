@@ -18,9 +18,10 @@ import '../../styles/Forum.scss'
 
 
 function Article(props) {
-  const [perArticle, setPerArticle] = useState([])
-  const [preArticle, setPreArticle] = useState([])
-  const [nextArticle, setNextArticle] = useState([])
+  const [page, setPage] = useState("")
+  const [perArticle, setPerArticle] = useState({})
+  const [preArticle, setPreArticle] = useState([{}])
+  const [nextArticle, setNextArticle] = useState([{}])
   const { forumid } = useParams()
   const history = useHistory()
   const goBack = () => {
@@ -34,15 +35,20 @@ function Article(props) {
   //     })
   // }, [])
 
+  // ======文章換頁
+  //  function changePage() {
+  //   setPage(forumid)
+  // }
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/forum/${forumid}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.length == 3) {
+          console.log(data);
           setPreArticle(data[0])
           setPerArticle(data[1])
           setNextArticle(data[2])
-          console.log(perArticle);
+          console.log(`現在頁面${page} ，文章:${perArticle.title}`)
         } else {
           setPreArticle(data[0])
           setPerArticle(data[1])
@@ -89,7 +95,7 @@ function Article(props) {
           setPerArticle(data[1])
           setNextArticle({ title: '', created_time: '', content: '' })
         }
-        console.log(nextArticle.title)
+        console.log(` ${nextArticle.title}`)
       })
   }
 
@@ -107,6 +113,7 @@ function Article(props) {
           setPerArticle(data[1])
           setNextArticle({ title: '', created_time: '', content: '' })
         }
+
         console.log(preArticle.title)
       })
   }
@@ -144,12 +151,13 @@ function Article(props) {
                 </div>
                 <div className="like d-flex justify-content-center align-items-center">
                   <FaStar className="fs-5 mx-2" />
-                  <Link to={`/forum/EditArticle${perArticle.article_id}`}><FaEdit className="fs-5 mx-2" /></Link>
+                  <Link to={`/forum/EditArticle/${perArticle.article_id}`}><FaEdit className="fs-5 mx-2" /></Link>
                   <FaTrashAlt onClick={hnadleDel} className="fs-5 mx-2" />
                 </div>
               </div>
               <div className="articleBody py-5">
-                <pre>{perArticle.content}</pre>
+                <div dangerouslySetInnerHTML={{ __html: `${perArticle.content}` }}></div>
+                {/* <pre>{perArticle.content}</pre> */}
               </div>
               <div className="articleFoot">
                 <div>

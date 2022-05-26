@@ -23,15 +23,17 @@ function Forum(props) {
         setBtn(data)
       })
   }, [])
-  //顯示所有文章
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/forum`)
-      .then((res) => res.json())
-      .then((data) => {
-        setArticleList(data)
-        console.log("所有文章");
-      })
-  }, [])
+  //顯示所有文章(這邊沒有好像也好好的)
+  // useEffect(() => {
+  //   fetch(`${process.env.REACT_APP_API_URL}/forum`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setArticleList(data)
+  //       console.log("所有文章");
+  //     })
+  // }, [])
+
+
   //文章類別篩選
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/forum?topic=${forBkCurrentTopic}`)

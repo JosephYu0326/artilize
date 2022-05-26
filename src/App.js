@@ -51,13 +51,13 @@ function App() {
         <Route path="/forum/addarticle">
           <AddArticle id={userID} />
         </Route>
-        <Route path="/forum/editArticle/:articleid">
-          <EditArticle />
+        <Route path="/forum/editArticle">
+          <EditArticle Articleid='110' />
         </Route>
-        <Route path="/forum/:forumid">
+        {/* <Route path="/forum/article">
           <Article />
-        </Route>
-        <Route path="/forum/article">
+        </Route> */}
+        <Route path="/forum/:forumid">
           <Article />
         </Route>
         <Route path="/forum">

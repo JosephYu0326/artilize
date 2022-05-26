@@ -1,8 +1,8 @@
 //新增文章
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, Component } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import tinymce from 'tinymce/tinymce'
-import { Editor } from '@tinymce/tinymce-react'
+// import tinymce from 'tinymce/tinymce'
+// import { Editor } from '@tinymce/tinymce-react'
 import { FaAngleLeft } from 'react-icons/fa'
 import { Form, Button, Alert } from 'react-bootstrap'
 import Header from '../../component/Header'
@@ -23,6 +23,9 @@ function AddArticle(props) {
   const [content, setContent] = useState("")
   const [ChioseCategory, setChioseCategory] = useState("")
   const history = useHistory()
+
+
+
   const goBack = () => {
     history.goBack()
   }
@@ -117,6 +120,7 @@ function AddArticle(props) {
               as='textarea'
               onChange={(e) => setContent(e.target.value)}
             />
+
             {/* ========tinyMCE東東====== */}
             {/* <Editor
               id='inputContent'
