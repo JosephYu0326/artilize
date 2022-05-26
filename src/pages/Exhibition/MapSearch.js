@@ -14,7 +14,6 @@ import {
   Marker,
   InfoWindow,
 } from '@react-google-maps/api'
-import { data } from 'jquery'
 
 // const center = { lat: 22.6281, lng: 120.2927 }
 
@@ -24,6 +23,7 @@ function MapSearch(props) {
   const [datas1, setDatas1] = useState([])
   const [markerID, setMarkerID] = useState('')
   const [center, setCenter] = useState({ lat: 22.6281, lng: 120.2927 })
+  const [activeHighlight, setActiveHighlight] = useState(-1)
   const mapSearchInput = useRef()
   const fetchData = async () => {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/MapSearch`)
@@ -68,16 +68,26 @@ function MapSearch(props) {
                 <input
                   type="text"
                   placeholder=""
-                  onChange={function (e) {
+                  onChange={function () {
                     // setMapSearchText(mapSearchInput.current.value)
                     const mapSearchInputValue = mapSearchInput.current.value
                     console.log(mapSearchInputValue)
-                    const mapSearchResult = datas1.filter((v, i) =>
-                      v.location.includes(mapSearchInputValue)
+                    const mapSearchResult = datas1.filter(
+                      (v, i) =>
+                        v.location.includes(mapSearchInputValue) ||
+                        v.name.includes(mapSearchInputValue)
                     )
                     if (mapSearchResult.length > 0) {
                       setDatas(mapSearchResult)
-                      console.log(mapSearchResult)
+                      // console.log(mapSearchResult)
+                      const resultCenter = {
+                        lat: parseFloat(mapSearchResult[0].latitude),
+                        lng: parseFloat(mapSearchResult[0].longitude),
+                      }
+                      // console.log(resultCenter)
+                      setCenter(resultCenter)
+                      setActiveMarker(null)
+                      console.log(datas)
                     }
                   }}
                   ref={mapSearchInput}
@@ -110,7 +120,11 @@ function MapSearch(props) {
                     }}
                     id={`MapCard${id}`}
                   >
-                    <div className="card mb-3">
+                    <div
+                      className={`card mb-3 ${
+                        activeHighlight === id ? 'mapCardActive' : ''
+                      }`}
+                    >
                       <div className="row g-0">
                         <div className="col-md-3">
                           <img
@@ -137,6 +151,7 @@ function MapSearch(props) {
                   </div>
                 )
               })}
+              <div style={{ height: '61.5vh' }}></div>
             </div>
           </section>
           {/* 地圖 */}
@@ -165,25 +180,23 @@ function MapSearch(props) {
                     onClick={function () {
                       handleActiveMarker(id)
                       setMarkerID(id)
-                      datas.forEach(function (item, i) {
-                        if (item.id === id) {
-                          datas.splice(i, 1)
-                          datas.unshift(item)
-                        }
-                      })
+                      // datas.forEach(function (item, i) {
+                      //   if (item.id === id) {
+                      //     datas.splice(i, 1)
+                      //     datas.unshift(item)
+                      //   }
+                      // })
                       setCenter({
                         lat: parseFloat(latitude),
                         lng: parseFloat(longitude),
                       })
                       // setDatas(datas)
-                      // // setInterval(
-                      // //   document.getElementById(`MapCard${id}`).scrollIntoView({
-                      // //     behavior: 'smooth',
-                      // //     block: 'start',
-                      // //     inline: 'start',
-                      // //   }),
-                      // //   1000
-                      // // )
+                      document.getElementById(`MapCard${id}`).scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start',
+                        inline: 'start',
+                      })
+                      setActiveHighlight(id)
                     }}
                     icon="https://cdn-icons-png.flaticon.com/64/806/806652.png"
                     id={`MapMarker${id}`}
