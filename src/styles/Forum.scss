@@ -43,6 +43,10 @@
   border-radius: 10px;
   box-shadow: rgb(110, 116, 145) 2px 2px 4px;
 
+  .likeIt {
+    color: $WarnYellow;
+  }
+
   .comment {
     overflow: hidden;
   }
