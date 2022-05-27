@@ -11,6 +11,8 @@ import CartItemEx from './CartItemEx'
 import CartItemPro from './CartItemPro'
 import Summary from './Summary'
 
+let storage = localStorage
+
 function Cart(props) {
   const [exhibitionInorder, setExhibitionInorder] = useState(shoppingListEx)
   const [productInorder, setProductInorder] = useState(shoppingListPro)
@@ -48,10 +50,11 @@ function Cart(props) {
   const totalPriceEx = () => {
     let total = 0
     for (let i = 0; i < exhibitionInorder.length; i++) {
-      total += exhibitionInorder[i].count * exhibitionInorder[i].price
+      total += exhibitionInorder[i].count * exhibitionInorder[i].TicketPrice
     }
     return total
   }
+
   // 商品總價
   const totalPricePro = () => {
     let total = 0
@@ -60,12 +63,18 @@ function Cart(props) {
     }
     return total
   }
+
   // 展覽刪除
-  const handleDeleteEx = (id) => {
+  const handleDeleteEx = (title) => {
     alert('確定要刪除該筆資料嗎？')
+
+    storage['totalNum'] -= 1
+    storage.removeItem(title)
+    storage['addItemList'] = storage['addItemList'].replace(`${title},`, '')
     const newExhibitionInorder = [...exhibitionInorder].filter((v, i) => {
-      return v.id !== id
+      return v.title !== title
     })
+
     setExhibitionInorder(newExhibitionInorder)
   }
   // 商品刪除
@@ -105,16 +114,16 @@ function Cart(props) {
           {exhibitionInorder.map((v, i) => {
             return (
               <CartItemEx
-                key={v.id}
-                id={v.id}
+                key={i}
                 title={v.title}
-                date={v.date}
-                category={v.category}
-                price={v.price}
+                start={v.start}
+                end={v.end}
+                category={v.TicketKind}
+                price={v.TicketPrice}
                 image={v.image}
                 count={v.count}
                 handleDelete={() => {
-                  handleDeleteEx(v.id)
+                  handleDeleteEx(v.title)
                 }}
                 setExCount={(newCount) => {
                   setExCount(newCount, i)

@@ -1,3 +1,5 @@
+import { selectClasses } from '@mui/material'
+import { data } from 'jquery'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useRef } from 'react'
@@ -6,9 +8,29 @@ import { Link } from 'react-router-dom'
 function Category() {
   const frameheight = useRef()
   const [active, setActive] = useState(false)
-  const categories = ['古董文物', '油畫', '雕塑', '攝影']
 
-  const moreCategory = ['水彩', '書法']
+  const select = []
+  const [temp1, setTemp1] = useState(select)
+
+  const [datas, setDatas] = useState([])
+  const fetchData = async () => {
+    const response = await fetch('http://localhost:5050/exhibition/categories')
+    const results = await response.json()
+    setDatas(results)
+  }
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  for (let i = 0; i < datas.length; i++) {
+    select.push(0)
+  }
+
+  // console.log(temp1)
+
+  let temp = datas.slice(0, 4)
+  let thelength = datas.length
+  let all = datas.slice(4, thelength)
 
   useEffect(() => {
     let thetarget = document.querySelector('.categoryAllText')
@@ -20,25 +42,31 @@ function Category() {
     }
   }, [active])
 
-  const category = categories.map((v, i) => {
+  const category = temp.map((v, i) => {
     return (
-      <div key={i}>
-        <Link to="#" className="selectlink" onClick={optionChange}>
+      <div key={v.kid}>
+        <Link
+          to={
+            temp1[v.kid - 1] ? '/exhibition' : `/exhibition/categories/${v.kid}`
+          }
+          className="selectlink"
+          onClick={optionChange}
+        >
           <div className="d-flex align-items-center selectframe">
             <div className="selectsquare"></div>
-            <div>{categories[i]}</div>
+            <div>{v.kind}</div>
           </div>
         </Link>
       </div>
     )
   })
-  const categoryAll = moreCategory.map((v, i) => {
+  const categoryAll = all.map((v, i) => {
     return (
-      <div key={i}>
+      <div key={v.kid}>
         <Link to="#" className="selectlink" onClick={optionChange}>
           <div className="d-flex align-items-center selectframe">
             <div className="selectsquare"></div>
-            <div>{moreCategory[i]}</div>
+            <div>{v.kind}</div>
           </div>
         </Link>
       </div>
@@ -47,6 +75,48 @@ function Category() {
 
   function expand(e) {
     setActive(!active)
+  }
+
+  function optionChange(e) {
+    let thetarget = e.target.parentNode.childNodes[0]
+
+    // 找到該層的 <div class="selectsquare"></div>
+    if (thetarget.hasChildNodes()) {
+      thetarget = thetarget.childNodes[0]
+    }
+
+    // 找第幾個
+    let temp = thetarget.parentNode.parentNode.parentNode.parentNode
+    let tempson = thetarget.parentNode.parentNode.parentNode
+    var index
+    for (let i = 0; i < 17; i++) {
+      if (temp.childNodes[i] === tempson) {
+        index = i
+        break
+      }
+    }
+    // 設定哪個選項啟動
+    if (temp1[index] === 1) {
+      select[index] = 0
+    } else {
+      select[index] = 1
+    }
+    setTemp1(select)
+
+    let changeicon = thetarget.getAttribute('class')
+
+    if (changeicon === 'selectsquare') {
+      // 將其他選的屏蔽掉
+      if (document.querySelector('.selectedsquare')) {
+        let other = document.querySelectorAll('.selectedsquare')
+        for (let i = 0; i < other.length; i++) {
+          other[i].setAttribute('class', 'selectsquare')
+        }
+      }
+      thetarget.setAttribute('class', 'selectedsquare')
+    } else {
+      thetarget.setAttribute('class', 'selectsquare')
+    }
   }
 
   return (
@@ -79,21 +149,6 @@ function Category() {
       <div className="mobile-window window-size">{category}</div>
     </>
   )
-}
-function optionChange(e) {
-  let thetarget = e.target.parentNode.childNodes[0]
-  // 找到該層的 <div class="selectsquare"></div>
-  if (thetarget.hasChildNodes()) {
-    thetarget = thetarget.childNodes[0]
-  }
-
-  let changeicon = thetarget.getAttribute('class')
-
-  if (changeicon === 'selectsquare') {
-    thetarget.setAttribute('class', 'selectedsquare')
-  } else {
-    thetarget.setAttribute('class', 'selectsquare')
-  }
 }
 
 export default Category

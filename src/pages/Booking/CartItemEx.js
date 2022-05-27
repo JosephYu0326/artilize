@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { display } from '@mui/system'
+import { shoppingListEx } from './Cart-ex'
+
+let storage = localStorage
 
 function CartItemEx(props) {
   const {
-    id,
     title,
-    date,
-    category,
+    start,
+    end,
     image,
+    category,
     price,
     count,
     setExCount,
@@ -28,15 +32,15 @@ function CartItemEx(props) {
           </button>
 
           <img
-            src={require(`${image}`)}
-            className="exhibition-img"
-            alt="exhibitionImg"
+            src={require(`./image/${image}`)}
+            className="exhibition-img mx-3"
+            alt={image}
           />
           <div className="cart-content">
             <div>{title}</div>
             <div className="date-frame">
-              <div>{date[0]}</div>
-              <div>{date[1]}</div>
+              <div>{start}</div>
+              <div>{end}</div>
               <div className="date-process-icon">~</div>
             </div>
           </div>
@@ -67,7 +71,7 @@ function CartItemEx(props) {
           </div>
           <div className="total">
             <div>小計</div>
-            <div className="total-text">${price * count}</div>
+            <div className="total-text">${count * price}</div>
           </div>
         </div>
       </div>

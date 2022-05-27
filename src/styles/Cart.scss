@@ -37,9 +37,10 @@
 .cart-content-frame{
     border-radius: 10px;
     max-width: 1000px;
-    height: 900px;
+    // height: 900px;
     margin: 10px auto 50px auto;
     padding-top: 15px;
+    padding-bottom: 40px;
     box-shadow: $BoxShadow;
 }
 .cart-option-title{
@@ -105,7 +106,7 @@
         display: flex;
         align-items: center;
         flex-direction: column;
-        width: 300px;
+        width: 60%;
         .date-frame{
             width: 250px;
             display: flex;

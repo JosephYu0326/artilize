@@ -49,6 +49,10 @@
     tbody{
         width: 100%;
         // height: 288px;
+        a{
+            text-decoration: none;
+            color:black;
+        }
         tr{
             width: 100%;
             display: flex;

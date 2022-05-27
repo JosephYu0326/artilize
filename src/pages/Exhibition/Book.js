@@ -4,18 +4,23 @@ import { Link } from 'react-router-dom'
 import Calendar from '../../component/Calendar'
 import closePng from '../Exhibition/images/Category.png'
 
+let storage = localStorage
+
 function Book(props) {
   const [Ticket, setTicket] = useState([0, 0])
-  const TicketPriceArray = [30, 50]
+  const TicketPriceArray = [50, 30]
   const [TicketPrice, setTicketPrice] = useState()
   const TicketCategory = ['全票', '優待票']
   const [TicketKind, setTicketKind] = useState('')
   const [count, setCount] = useState(1)
-  const [total, setTotal] = useState('')
+  const [buyTime, setBuyTime] = useState([])
 
   const isOpen = props.isOpen
   const setIsOpen = props.setIsOpen
   const title = props.title
+  const image = props.image
+  const start = props.start
+  const end = props.end
 
   function numPlus() {
     setCount(count + 1)
@@ -35,6 +40,7 @@ function Book(props) {
     setCount(1)
     setTicketPrice('')
     setIsOpen(false)
+    setBuyTime([])
   }
   function selectTicket(e) {
     let thetarget = e.target
@@ -75,6 +81,37 @@ function Book(props) {
     setCount(1)
   }
 
+  function buyTicket() {
+    if (storage['addItemList'] == null) {
+      storage['addItemList'] = []
+    }
+    storage['addItemList'] += `${title},`
+
+    let titleArray = storage['addItemList'].split(',')
+
+    titleArray.pop()
+    storage['totalNum'] = titleArray.length
+    let index = parseInt(storage.getItem('totalNum')) - 1
+
+    let storageJson = {
+      index: index,
+      title: titleArray[index],
+      start: start,
+      end: end,
+      buyTime: buyTime,
+      image: image,
+      count: count,
+      TicketPrice: TicketPrice,
+      TicketKind: TicketKind,
+    }
+    storage.setItem(title, JSON.stringify(storageJson))
+
+    setIsOpen(false)
+    setCount(1)
+    setTicket([0, 0])
+    setTicketPrice('')
+  }
+
   return isOpen ? (
     <div className="book-window-frame">
       <div className="book-window">
@@ -86,7 +123,7 @@ function Book(props) {
             </div>
           </div>
           <div className="d-flex">
-            <Calendar />
+            <Calendar setBuyTime={setBuyTime} />
             <div className="information">
               <div className="ticket-frame">
                 <button className="btn ticket" onClick={selectTicket}>
@@ -114,7 +151,12 @@ function Book(props) {
                 <div>總金額</div>
                 <div>TWD {TicketPrice ? count * TicketPrice : 0}元</div>
               </div>
-              <button className="btn btn-primary rounded-pill">立即訂購</button>
+              <button
+                className="btn btn-primary rounded-pill"
+                onClick={buyTicket}
+              >
+                立即訂購
+              </button>
             </div>
           </div>
         </div>

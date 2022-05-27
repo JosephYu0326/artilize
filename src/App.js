@@ -68,11 +68,14 @@ function App() {
         <Route path="/product">
           <Product />
         </Route>
-        <Route path="/exhibition/introduce">
+        <Route path="/exhibition/introduce/:exhibitionId">
           <Introduce />
         </Route>
         <Route path="/exhibition/mapsearch">
           <MapSearch />
+        </Route>
+        <Route path="/exhibition/categories/:kid">
+          <Exhibition />
         </Route>
         <Route path="/exhibition">
           <Exhibition />

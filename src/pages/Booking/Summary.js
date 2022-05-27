@@ -8,7 +8,7 @@ function Summary(props) {
       <div className="bottom-frame">
         <div className="total-frame">
           <div>展覽</div>
-          <div>${totalPriceEx}</div>
+          <div>${totalPriceEx ? totalPriceEx : 0}</div>
         </div>
         <div className="total-frame">
           <div>商品</div>
@@ -22,7 +22,10 @@ function Summary(props) {
         <div className="total-frame">
           <div className="final-total">總金額</div>
           <div className="final-total-text">
-            ${totalPriceEx + totalPricePro - discount}
+            $
+            {totalPriceEx
+              ? totalPriceEx + totalPricePro - discount
+              : totalPricePro - discount}
           </div>
         </div>
         <button className="btn btn-primary rounded-pill next-step-btn">

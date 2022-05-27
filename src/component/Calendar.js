@@ -7,6 +7,7 @@ import { FiChevronRight } from 'react-icons/fi'
 import '../styles/Calendar.scss'
 
 function Calendar(props) {
+  const setBuyTime = props.setBuyTime
   const now = new Date()
   const [myYear, setMyYear] = useState()
   const [myMonth, setMyMonth] = useState()
@@ -47,6 +48,8 @@ function Calendar(props) {
 
   // 創一個陣列，決定日期是否被選取
   const selectState = []
+  const [temp1, setTemp1] = useState(selectState)
+
   for (let i = 0; i < days; i++) {
     selectState.push(0)
   }
@@ -83,13 +86,22 @@ function Calendar(props) {
     let selectedDay = parseInt(e.target.innerText)
     let setStyle = e.target.parentNode
 
-    if (selectState[selectedDay] === 1) {
+    if (temp1[selectedDay] === 1) {
       selectState[selectedDay] = 0
+      setBuyTime([])
     } else {
       selectState[selectedDay] = 1
+      setBuyTime([myYear, myMonth, selectedDay])
     }
+    setTemp1(selectState)
 
     if (selectState[selectedDay] === 1) {
+      if (document.querySelector('.select')) {
+        let select = document.querySelectorAll('.select')
+        for (let i = 0; i < select.length; i++) {
+          select[i].setAttribute('class', '')
+        }
+      }
       setStyle.setAttribute('class', 'select')
     } else {
       setStyle.setAttribute('class', '')

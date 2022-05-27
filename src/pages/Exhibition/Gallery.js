@@ -51,6 +51,29 @@ function Gallery() {
     )
   })
 
+  function optionChange(e) {
+    let thetarget = e.target.parentNode.childNodes[0]
+    // 找到該層的 <div class="selectsquare"></div>
+    if (thetarget.hasChildNodes()) {
+      thetarget = thetarget.childNodes[0]
+    }
+
+    let changeicon = thetarget.getAttribute('class')
+
+    if (changeicon === 'selectsquare') {
+      // 將其他選的屏蔽掉
+      if (document.querySelector('.selectedsquare')) {
+        let other = document.querySelectorAll('.selectedsquare')
+        for (let i = 0; i < other.length; i++) {
+          other[i].setAttribute('class', 'selectsquare')
+        }
+      }
+      thetarget.setAttribute('class', 'selectedsquare')
+    } else {
+      thetarget.setAttribute('class', 'selectsquare')
+    }
+  }
+
   function expand(e) {
     setActive(!active)
   }
@@ -86,19 +109,5 @@ function Gallery() {
     </>
   )
 }
-function optionChange(e) {
-  let thetarget = e.target.parentNode.childNodes[0]
-  // 找到該層的 <div class="selectsquare"></div>
-  if (thetarget.hasChildNodes()) {
-    thetarget = thetarget.childNodes[0]
-  }
 
-  let changeicon = thetarget.getAttribute('class')
-
-  if (changeicon === 'selectsquare') {
-    thetarget.setAttribute('class', 'selectedsquare')
-  } else {
-    thetarget.setAttribute('class', 'selectsquare')
-  }
-}
 export default Gallery
