@@ -1,7 +1,7 @@
 @import "./global.scss";
 
 .mapSearchList {
-    border: 1px solid black;
+    // border: 1px solid black;
     .mapSearchBar {
         // margin-top: 12px;
         width: 454px;
@@ -76,16 +76,16 @@
     max-width: 454px !important;
 }
 .mapSearchMap {
-    border: 1px solid black;
+    // border: 1px solid black;
 
     .card {
         max-width: 454px;
         min-height: 139px;
         border-radius: $BorderRadius;
         box-shadow: $BoxShadow;
-
-        .card-body {
-            height: 139px;
-        }
+    }
+    .card-body {
+        max-height: 200px;
+        max-width: 204px !important;
     }
 }

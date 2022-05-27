@@ -8,6 +8,7 @@ import '../../styles/MapSearch.scss'
 import { FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa'
 import Header from '../../component/Header'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import Geocode from 'react-geocode'
 import {
   useJsApiLoader,
   GoogleMap,
@@ -21,19 +22,43 @@ function MapSearch(props) {
   const [activeMarker, setActiveMarker] = useState(null)
   const [datas, setDatas] = useState([])
   const [datas1, setDatas1] = useState([])
+  const [exhibitiondatas, setExhibitionDatas] = useState([])
+  const [abilitydatas, setAbilityDatas] = useState([])
   const [markerID, setMarkerID] = useState('')
   const [center, setCenter] = useState({ lat: 22.6281, lng: 120.2927 })
   const [activeHighlight, setActiveHighlight] = useState(-1)
+  const [mapSearchButton, setMapSearchButton] = useState('exhibition')
+  const [MapStyle, setMapStyle] = useState()
   const mapSearchInput = useRef()
-  const fetchData = async () => {
+  const fetchExhibitionData = async () => {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/MapSearch`)
     const results = await response.json()
     setDatas(results)
     setDatas1(results)
+    setExhibitionDatas(results)
     console.log(results)
   }
+  const fetchAbilityData = async () => {
+    const response1 = await fetch(
+      `${process.env.REACT_APP_API_URL}/MapSearch/ability`
+    )
+    const results1 = await response1.json()
+    setAbilityDatas(results1)
+  }
+  const fetchMapStyle = async () => {
+    const responseMapStyle = await fetch('http://localhost:3000/MapStyle.json')
+    const resultMapStyle = await responseMapStyle.json()
+    console.log(resultMapStyle)
+    setMapStyle(resultMapStyle)
+  }
   useEffect(() => {
-    fetchData()
+    fetchExhibitionData()
+  }, [])
+  useEffect(() => {
+    fetchAbilityData()
+  }, [])
+  useEffect(() => {
+    fetchMapStyle()
   }, [])
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -47,7 +72,8 @@ function MapSearch(props) {
     }
     setActiveMarker(marker)
   }
-  console.log(markerID)
+  // console.log(markerID)
+  // console.log(MapStyle)
 
   // const handleOnLoad = (map) => {
   //   // eslint-disable-next-line no-undef
@@ -89,6 +115,23 @@ function MapSearch(props) {
                       setActiveMarker(null)
                       console.log(datas)
                     }
+                    Geocode.setApiKey(
+                      `${process.env.REACT_APP_GOOGLE_MAPS_API_KEY1}`
+                    )
+                    Geocode.setLanguage('zh-TW')
+                    Geocode.setRegion('tw')
+                    Geocode.setLocationType('ROOFTOP')
+                    Geocode.enableDebug()
+                    Geocode.fromAddress(mapSearchInputValue).then(
+                      (response) => {
+                        const { lat, lng } =
+                          response.results[0].geometry.location
+                        console.log(lat, lng)
+                      },
+                      (error) => {
+                        console.error(error)
+                      }
+                    )
                   }}
                   ref={mapSearchInput}
                 />
@@ -96,8 +139,56 @@ function MapSearch(props) {
               </form>
             </div>
             <div className="mapButton d-flex justify-content-evenly mt-2 mb-2">
-              <button className="btn btn-dark">展覽</button>
-              <button className="btn btn-light">活動</button>
+              <button
+                className={`btn ${
+                  mapSearchButton === 'exhibition' ? 'btn-dark' : 'btn-light'
+                }`}
+                onClick={function () {
+                  setMapSearchButton('exhibition')
+                  setDatas(exhibitiondatas)
+                  setDatas1(exhibitiondatas)
+                  setActiveMarker(null)
+                  setCenter({
+                    lat: parseFloat(exhibitiondatas[0].latitude),
+                    lng: parseFloat(exhibitiondatas[0].longitude),
+                  })
+                  setActiveHighlight(-1)
+                  document
+                    .getElementById(`scrollableDiv`)
+                    .firstChild.scrollIntoView({
+                      behavior: 'smooth',
+                      block: 'start',
+                      inline: 'start',
+                    })
+                }}
+              >
+                展覽
+              </button>
+              <button
+                className={`btn ${
+                  mapSearchButton === 'ability' ? 'btn-dark' : 'btn-light'
+                }`}
+                onClick={function () {
+                  setMapSearchButton('ability')
+                  setDatas(abilitydatas)
+                  setDatas1(abilitydatas)
+                  setActiveMarker(null)
+                  setCenter({
+                    lat: parseFloat(abilitydatas[0].latitude),
+                    lng: parseFloat(abilitydatas[0].longitude),
+                  })
+                  setActiveHighlight(-1)
+                  document
+                    .getElementById(`scrollableDiv`)
+                    .firstChild.scrollIntoView({
+                      behavior: 'smooth',
+                      block: 'start',
+                      inline: 'start',
+                    })
+                }}
+              >
+                活動
+              </button>
             </div>
             <div
               id="scrollableDiv"
@@ -166,6 +257,8 @@ function MapSearch(props) {
                 mapTypeControl: false,
                 fullscreenControl: false,
                 clickableIcons: false,
+                disableDefaultUI: true,
+                styles: MapStyle,
               }}
               onClick={() => setActiveMarker(null)}
             >
@@ -208,7 +301,7 @@ function MapSearch(props) {
                         className="card p-0"
                       >
                         <div className="row g-0">
-                          <div className="col-md-4">
+                          <div className="col-md-4 d-flex justify-content-center align-items-center">
                             <img
                               src="https://picsum.photos/106/139"
                               className="img-fluid rounded-start"
@@ -216,7 +309,7 @@ function MapSearch(props) {
                             />
                           </div>
                           <div className="col-md-8 ">
-                            <div className="card-body d-flex flex-column justify-content-evenly">
+                            <div className="card-body d-flex flex-column justify-content-beteween ">
                               <h6 className="card-title SemiBold">{name}</h6>
                               <div className="d-flex">
                                 <FaMapMarkerAlt />
