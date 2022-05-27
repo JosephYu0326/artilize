@@ -17,12 +17,6 @@ import p_saleImages from '../../images/product_Images/product/whiteveg.jpeg'
 import p_saleIconsfreight from '../../images/product_Images/icons/freeFreight.png'
 import p_saleIconsdiscount from '../../images/product_Images/icons/sale.png'
 
-const fetchData = async () => {
-  const res = await fetch(API_GET_DATA)
-  const data = await res.json()
-  console.log(data)
-}
-
 function Product(props) {
   const ptCards = ['1', '2', '3']
   const pImg = { backgroundImage: `url(${p_Images})` }
@@ -33,44 +27,47 @@ function Product(props) {
   const pInCartImg = { backgroundImage: `url(${p_Images})` }
 
   const [pCardData, setData] = useState([])
-  // const fetchData = async () => {
-  //   const res = await fetch(API_GET_DATA)
-  //   const results = await res.json()
-  //   console.log(results)
-  //   // setData(results)
-  // }
-  // console.log(pCardData)
-
+  const fetchData = async () => {
+    const res = await fetch('http://localhost:5000/product')
+    const data = await res.json()
+    // console.log(data)
+    setData(data)
+  }
   useEffect(() => {
     fetchData()
   }, [])
 
-  // const pCards = pCardData.map(({ id, title, pimg, orignprice, price }) => (
-  //   <div key={id}>
-  //     <div className="col d-flex justify-content-center">
-  //       <div className="productCards d-flex">
-  //         <Link to="/Product/Introduce">
-  //           <div
-  //             style={require(`../../images/product_Images/${pimg}`)}
-  //             className="pImg"
-  //           ></div>
-  //         </Link>
-  //         <div className="d-flex pContent">
-  //           <div className="pTitle mt-2">
-  //             <Link to="/Product/Introduce" className="pLinkTitle">
-  //               <h6 className="pTitletext text-web pt-2 ExtraBold">{title}</h6>
-  //             </Link>
-  //           </div>
-  //           <div className="price text-web">
-  //             <Link to="/Product/Introduce" className="pLinkPrice">
-  //               <p className="ExtraBold">{price}</p>
-  //             </Link>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   </div>
-  // ))
+  const pCards = pCardData.map(
+    ({ product_id, product_name, product_img, product_price }) => (
+      <div key={product_id}>
+        <div className="col d-flex justify-content-center">
+          <div className="productCards d-flex">
+            <Link to="/Product/Introduce">
+              <img
+                src={`http://localhost:3000/${product_img}`}
+                className="pImg"
+                alt=""
+              ></img>
+            </Link>
+            <div className="d-flex pContent">
+              <div className="pTitle mt-2">
+                <Link to="/Product/Introduce" className="pLinkTitle">
+                  <h6 className="pTitletext text-web pt-2 ExtraBold">
+                    {product_name}
+                  </h6>
+                </Link>
+              </div>
+              <div className="price text-web">
+                <Link to="/Product/Introduce" className="pLinkPrice">
+                  <p className="ExtraBold">{product_price}</p>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  )
 
   // const pCards = ptCards.map((v, i) => {
   //   return (
@@ -179,7 +176,7 @@ function Product(props) {
               熱銷 TOP10
             </h5>
           </div>
-          {/* <div className="row row-cols-xxl-3 row-cols-2">{pCards}</div> */}
+          <div className="row row-cols-xxl-3 row-cols-2">{pCards}</div>
         </div>
         <div className="mt-5">
           <div className="d-flex justify-content-center">
