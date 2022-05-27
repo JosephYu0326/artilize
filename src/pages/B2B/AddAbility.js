@@ -6,10 +6,7 @@ import '../../styles/AddAbility.scss'
 import { FiSettings } from 'react-icons/fi'
 
 function AddAbility(props) {
-  const [exhibition, setExhibition] = useState({username:'',})
-
-
-
+  const [exhibition, setExhibition] = useState({ username: '' })
 
   // select 縣市
   const [selectedValue, setSelectedValue] = useState('')
@@ -26,10 +23,25 @@ function AddAbility(props) {
   const [price, setPrice] = useState('')
   //票券說明
   const [ticketDescription, setTicketDescription] = useState('')
+  // const handleSubmit = (e) => {
+  //   e.preventDefault()
+  //   sendData()
+  // }
+  // async function sendData() {
+  //   const myForm = document.getElementById('myForm')
+  //   const formData = new FormData(myForm)
+  //   const response = await fetch(`http://localhost:5000/users`, {
+  //     method: 'POST',
+  //     body: formData,
+  //   })
+  //   const results = await response.json()
+  //   console.log(results)
+  // }
   return (
     <>
+      {/* onSubmit={handleSubmit} */}
       <div>建立新活動資料</div>
-      <form>
+      <form id="myForm">
         <div className="container d-flex justify-content-center">
           <div className="row formwidth">
             <div className="col-12 ">
@@ -50,7 +62,7 @@ function AddAbility(props) {
                   className="form-control"
                   id="exampleFormControlInput1"
                   placeholder="活動名稱"
-                  name=""
+                  name="abilityName"
                   value={exhibition}
                   onChange={(e) => {
                     setExhibition(e.target.value)
