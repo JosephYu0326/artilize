@@ -13,9 +13,9 @@
 .cart-frame{
     display: flex;
     flex-direction: column;
-    width: 200px;
+    max-width: 1000px;
     position: relative;
-    left: 15%;
+    margin: 0 auto;
 }
 .cart-option{
     display: flex;
