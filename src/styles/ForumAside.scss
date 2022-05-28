@@ -95,6 +95,11 @@
             scroll-snap-align: center;
             border-radius: 50rem !important;
         }
+
+        .active {
+            color: #fff;
+            background: $DarkGrey;
+        }
     }
 
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import '../../styles/Forum.scss'
 function Comment(props) {
 
   const comment = props.comment
@@ -17,6 +18,7 @@ function Comment(props) {
             <div>{comment[i].nickname}</div>
           </div>
           <div className="my-3">{comment[i].Blog_comment_content}</div>
+          <div className="align-self-end txtGray">{comment[i].COMMENT_time}</div>
           <hr />
         </section>
       </>

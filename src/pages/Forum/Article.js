@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams, useHistory } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import FadeIn from 'react-fade-in/lib/FadeIn'
 import {
   FaTrashAlt,
@@ -17,9 +18,10 @@ import '../../styles/global.scss'
 import '../../styles/Forum.scss'
 
 function Article(props) {
-  const userId = 11
+  const userId = 2
+  const [show, setShow] = useState(false)
   // 文章收藏狀態
-  const [favorited, setFavorited] = useState(true)
+  const [favorited, setFavorited] = useState(false)
   //留言
   const [comments, setComments] = useState([{}])
   const [comment_msg, setComment_msg] = useState("")
@@ -41,7 +43,7 @@ function Article(props) {
       setPreArticle(data[0])
       setNowArticle(data[1])
       setNextArticle(data[2])
-      //首次進入拿不到!!
+
       console.log("此頁文章")
       console.log(nowArticle)
     } else {
@@ -51,11 +53,6 @@ function Article(props) {
     }
   }
 
-//   useEffect(()=>{
-// const fetchData = async()=>{
-//   const[]
-// }
-//   })
 
   // ======留言匯入
   useEffect(() => {
@@ -66,10 +63,10 @@ function Article(props) {
         console.log("留言:");
         console.log(comments);
       })
-      //UPDATE WITH ARTICLE TITLE
+    //UPDATE WITH ARTICLE TITLE
   }, [nowArticle])
 
-  
+
   useEffect(() => {
     getNowArticle()
   }, [])
@@ -77,85 +74,137 @@ function Article(props) {
   useEffect(() => {
     setCommentInput('')
   }, [forumid])
- 
+
   // ----------CLICK觸發的事件
   // ======文章收藏
   function hnadleLike() {
     // 如果會員沒登入退回討論區
     if (!userId) {
-      window.location.href = `${process.env.REACT_APP_API_URL}/forum`
+      Swal.fire({
+        position: 'top-end',
+        icon: 'warning',
+        title: '您尚未登入，請登入後再操作',
+        showConfirmButton: false,
+        timer: 1500
+      })
       return
+    } else {
+      // 已經收藏
+      if (favorited) {
+        // const remove = async () => {
+        //   const url = `${process.env.REACT_APP_API_URL}/ArticleCollection/remove`
+        //   const request = new Request(url, {
+        //     method: 'POST',
+        //     body: JSON.stringify({
+        //       articleId: forumid,
+        //       userId: userId,
+        //     }),
+        //     headers: new Headers({
+        //       Accept: 'application/json',
+        //       'Content-Type': 'application/json',
+        //     }),
+        //   })
+        //   const response = await fetch(request)
+        //   const data = await response.json()
+        //   if (data.success) {
+        //     setFavorited(!favorited)
+        //     console.log(data, 'remove from Favorite')
+        //   } else {
+        //     alert('Failed to remove from Favorite')
+        //   }
+        // }
+        // remove()
+      } else {
+        // 未收藏
+        const add = async () => {
+          fetch(`${process.env.REACT_APP_API_URL}/ArticleCollection/add`, {
+            method: 'POST',
+            body: JSON.stringify({
+              "articleId": forumid,
+              "userId": userId,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json",
+            }
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.ok) {
+                setFavorited(!favorited)
+                console.log(data, 'Add to Favorite')
+              } else {
+                alert('失敗')
+              }
+            })
+        }
+        add()
+      }
     }
-    // if (favorited) {
-    //   // 已經收藏
-    //   const remove = async () => {
-    //     const url = `${process.env.REACT_APP_API_URL}/forum/ArticleLike/remove`
-    //     const request = new Request(url, {
-    //       method: 'POST',
-    //       body: JSON.stringify({
-    //         articleId: forumid,
-    //         userId: userId,
-    //       }),
-    //       headers: new Headers({
-    //         Accept: 'application/json',
-    //         'Content-Type': 'application/json',
-    //       }),
-    //     })
-    //     const response = await fetch(request)
-    //     const data = await response.json()
-    //     if (data.success) {
-    //       setFavorited(!favorited)
-    //       console.log(data, 'remove from Favorite')
-    //     } else {
-    //       alert('Failed to remove from Favorite')
-    //     }
-    //   }
-    //   remove()
-    // } else {
-    // 未收藏
-    //     const add = async () => {
-    //       const url = `${process.env.REACT_APP_API_URL}/forum/ArticleLike/add`
-    //       const request = new Request(url, {
-    //         method: 'POST',
-    //         body: JSON.stringify({
-    //           bookId: forumid,
-    //           userId: userId,
-    //         }),
-    //         headers: new Headers({
-    //           Accept: 'application/json',
-    //           'Content-Type': 'application/json',
-    //         }),
-    //       })
-    //       const response = await fetch(request)
-    //       const data = await response.json()
-    //       if (data.success) {
-    //         setFavorited(!favorited)
-    //         console.log(data, 'Add to Favorite')
-    //       } else {
-    //         alert('Failed to add to Favorite')
-    //       }
-    //     }
-    //     add()
-    //   }
+  }
+  // ------
+  // const add = async () => {
+  //   const url = `${process.env.REACT_APP_API_URL}/ArticleCollection/add`
+  //   const request = new Request(url, {
+  //     method: 'POST',
+  //     body: JSON.stringify({
+  //       "articleId": forumid,
+  //       "userId": userId,
+  //     }),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "Accept": "application/json",
+  //     },
+  //   })
+  //   const response = await fetch(request)
+  //   const data = await response.json()
+  //   if (data.success) {
+  //     setFavorited(!favorited)
+  //     console.log(data, 'Add to Favorite')
+  //   } else {
+  //     alert('失敗')
+  //   }
+  // }
+  // add()
+  // ======文章刪除
+  function hnadleDel(e) {
+    e.preventDefault()
+    setShow(true)
+    if (show) {
+      Swal.fire({
+        title: `確定刪除「${nowArticle.title}」?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#4153bb',
+        cancelButtonColor: '#f4b942',
+        confirmButtonText: '確定'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetch(`${process.env.REACT_APP_API_URL}/forum/${forumid}`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json",
+            },
+            body: JSON.stringify({ "id": forumid })
+            //怎麼轉址的時候取回用戶id回到個人頁面?
+          }).then(setShow(false))
+          Swal.fire(
+            '刪除成功!',
+            '',
+            'success'
+          )
+            .catch(err => console.log(`沒有成功刪除，因為${err}`));
+
+        }
+      })
+    }
+
   }
 
-  // ======文章刪除
-  function hnadleDel() {
-    if (window.confirm(`確定要刪除「${nowArticle.title}」?`)) {
-      fetch(`${process.env.REACT_APP_API_URL}/forum/${forumid}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-        body: JSON.stringify({ "id": forumid })
-        //怎麼轉址的時候取回用戶id回到個人頁面?
-      }).then(history.goBack())
-        .then(json => console.log(json))
-        .catch(err => console.log(`沒有成功刪除，因為${err}`));
-    } else {
-    }
-  }
+
+
+
   // ======下一篇
   function next() {
     fetch(`${process.env.REACT_APP_API_URL}/forum/${nextArticle.article_id}`)
@@ -193,28 +242,13 @@ function Article(props) {
 
       })
   }
+
   // ======新增留言
   let body = {
     "comment": commentInput,
     "userid": userId,
     "article": forumid
   }
-  // function postComment(e) {
-  //   e.preventDefault()
-  //   fetch(`${process.env.REACT_APP_API_URL}/ArticleComment`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Accept": "application/json",
-  //     },
-  //     body: JSON.stringify(body)
-  //   })
-  //     .then(alert('susses'))
-  // .then(json => console.log(json));
-  // .then(response => response.json())
-  // .then(json => console.log(json));
-  // }
-
 
   function postComment(e) {
     e.preventDefault();
@@ -222,11 +256,10 @@ function Article(props) {
     setComment_msg(''); // 清空訊息
 
     //表單資料送出之前, 做格式檢查
-    if (commentInput.length < 3) {
+    if (commentInput.length < 10) {
       isPass = false;
       setComment_msg('留言字數需10字以上，請重新輸入')
     }
-
     if (isPass) {
       fetch(`${process.env.REACT_APP_API_URL}/ArticleComment`, {
         method: "POST",
@@ -236,14 +269,23 @@ function Article(props) {
         },
         body: JSON.stringify(body)
       })
-      // .then(alert('增新成功'))
-      .then(r => r.json())
+        // .then(alert('增新成功'))
+        .then(r => r.json())
         .then(obj => {
-         // console.log(obj.serverStatus);
-          if ((obj.serverStatus)===2) {
-            alert('新增成功');
-            getNowArticle()
-            // location.href = 'Blog_home.php';
+          // console.log(obj.serverStatus);
+          if ((obj.serverStatus) === 2) {
+            let commentSuccsee = true
+            if (commentSuccsee) {
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: '評論發表成功',
+                showConfirmButton: false,
+                timer: 1500
+              })
+              getNowArticle()
+              setCommentInput('')
+            }
           }
         })
         .catch(function (error) {
@@ -251,6 +293,8 @@ function Article(props) {
         })
     }
   }
+
+
 
   return (
     <>
@@ -289,15 +333,14 @@ function Article(props) {
               </div>
               <div className="articleBody py-5">
                 <div dangerouslySetInnerHTML={{ __html: `${nowArticle.content}` }}></div>
-                {/* <pre>{nowArticle.content}</pre> */}
               </div>
               <div className="articleFoot">
                 <div>
                   <div className="d-flex justify-content-between">
-                    <p className="category pSmall">分類：{nowArticle.thema}</p>
+                    <p className="category pRegular">分類：{nowArticle.thema}</p>
                     <div className="d-flex align-items-center">
                       <FaCommentDots />
-                      <div className="px-2">25</div>
+                      <div className="px-2">{comments.length}</div>
                     </div>
                   </div>
                   <hr />

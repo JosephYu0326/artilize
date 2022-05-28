@@ -1,5 +1,6 @@
 //新增文章
 import React, { useEffect, useState, Component } from 'react'
+import Swal from 'sweetalert2'
 import { Link, useHistory } from 'react-router-dom'
 // import tinymce from 'tinymce/tinymce'
 // import { Editor } from '@tinymce/tinymce-react'
@@ -17,7 +18,7 @@ function AddArticle(props) {
   //     console.log(editorRef.current.getContent())
   //   }}
   // ========tinyMCE東東======
-  const [Show, setShow] = useState(false);
+  const [show, setShow] = useState(false)
   const created_time = new Date()
   const [content_msg, setContent_msg] = useState("")
   const [category, setCategory] = useState([])
@@ -53,22 +54,37 @@ function AddArticle(props) {
       setContent_msg('討論區字數需50字以上，請重新輸入')
     }
     if (isPass) {
-      fetch(`${process.env.REACT_APP_API_URL}/forum/addarticle`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-        body: JSON.stringify(body)
-      }).then(
-        setShow(true),
-        alert('新增成功')
-      )
-        .catch(function (error) {
-          alert('新增失敗，網站忙碌中，請再試一次');
+      setShow(true)
+      if (show) {
+        Swal.fire({
+          title: '確定新增討論?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#4153bb',
+          cancelButtonColor: '#f4b942',
+          confirmButtonText: '確定'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            fetch(`${process.env.REACT_APP_API_URL}/forum/addarticle`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+              },
+              body: JSON.stringify(body)
+            })
+              .then(json => console.log(json))
+            Swal.fire(
+              '新增成功!',
+              '',
+              'success'
+            ).catch(err => console.log(`沒有成功新增，因為${err}`));
+          }
         })
+      }
     }
   }
+
 
 
   // function postArticle(e) {
@@ -96,19 +112,6 @@ function AddArticle(props) {
 
   return (
     <>
-      <Alert show={Show} variant="primary">
-        <Alert.Heading>新增成功!</Alert.Heading>
-        <p>
-          您的討論已經成功發布
-        </p>
-        <hr />
-        <div className="d-flex justify-content-end">
-          <Button onClick={() => setShow(false)} variant="primary">
-            知道了
-          </Button>
-        </div>
-      </Alert>
-
       <Header />
       <BackBtn />
       <div className="container">
@@ -173,7 +176,8 @@ function AddArticle(props) {
             /> */}
             <div className="container">
               <div className="row mx-auto">
-                <Form.Select id='pp' className="mt-5" aria-label="" onChange={(e) => setChioseCategory(e.target.value)}>
+                <Form.Select id='pp' className="mt-5" aria-label=""
+                  onChange={(e) => setChioseCategory(e.target.value)}>
                   <option>文章分類</option>
                   {categoryChoice}
                 </Form.Select>
