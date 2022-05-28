@@ -17,13 +17,29 @@ function FrPersonalPage(props) {
   console.log(articleList);
   console.log(userID)
   //顯示該用戶發表文章
+  // useEffect(() => {
+  //   fetch(`${process.env.REACT_APP_API_URL}/forum/FrPersonalPage/2`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setArticleList(data)
+  //     })
+  // }, [])
+
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/forum/FrPersonalPage/2`)
+    fetch(`${process.env.REACT_APP_API_URL}/users/personalpage`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({ userID: `${userID}` })
+    })
       .then((res) => res.json())
       .then((data) => {
         setArticleList(data)
       })
   }, [])
+
   return (
     <>
       <Header />
@@ -44,8 +60,8 @@ function FrPersonalPage(props) {
             </div>
             <div className="col-lg-2 col-md-3 col-sm-12 text-center">
               <div>
-                {/* <div className="h6">{articleList[0].nickname}</div> */}
-                <div className="displayN m-3">{"6篇文章"}</div>
+                <div className="h6">{articleList[0].nickname}</div>
+                <div className="displayN m-3">{articleList.length}  篇文章</div>
               </div>
               {/* <Button variant="btn btn-primary rounded-pill BorderRadius">
                 FOLLOW
@@ -56,7 +72,7 @@ function FrPersonalPage(props) {
         <ForumAside btn={btn} />
         <section>
           <div className="frContent">
-            {/* <Article articDetails={articleList} /> */}
+            <Article articDetails={articleList} />
           </div>
         </section>
       </div>

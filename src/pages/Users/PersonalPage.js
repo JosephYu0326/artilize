@@ -71,7 +71,7 @@ function PersonalPage(props) {
               <div>
                 <div className="h5">{articleList[0].nickname}</div>
                 <div className="h6 txtGray">( {articleList[0].username} )</div>
-                <div className="displayN m-3">{articleList.length}篇文章</div>
+                <div className="displayN m-3">{articleList.length}  篇文章</div>
               </div>
               {/* <Button variant="btn btn-primary rounded-pill BorderRadius">
                 FOLLOW
