@@ -54,7 +54,7 @@ function Article(props) {
                 </div>
                 <div className="preViewContent">{articleDetails[i].content}</div>
                 <div className="social d-flex justify-content-between align-items-center">
-                    <div>{articleDetails[i].created_time}</div>
+                    <time>{articleDetails[i].created_time}</time>
                     <div className='d-flex align-items-center'>
                         <FaCommentDots />
                         <div className="p-2">{'articleDetails[i].comment'}</div>
