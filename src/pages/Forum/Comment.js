@@ -1,16 +1,8 @@
 import React from "react";
-import {
-  FaReply,
-  FaCommentDots,
-} from "react-icons/fa";
-
-
 function Comment(props) {
 
   const comment = props.comment
   // console.log(comment)
-
-
 
   const Reply = comment.map((v, i) => {
     return (
