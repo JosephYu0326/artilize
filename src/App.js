@@ -1,11 +1,14 @@
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import React from 'react'
+// 首頁與入口
 import Home from './pages/Home/Home'
 import Entrance from './pages/Home/Entrance'
+// 會員註冊登入相關
 import Users from './pages/Users/Users'
 import Login from './pages/Users/Login'
 import Edit from './pages/Users/Edit'
 import SignUp from './pages/Users/SignUp'
+// 會員中心功能
 import ForgetPassword from './pages/Users/ForgetPassword'
 import ChangePassword from './pages/Users/ChangePassword'
 import OrderRecord from './pages/Users/OrderRecord'
@@ -13,7 +16,9 @@ import ArticleCollect from './pages/Users/ArticleCollect'
 import ProductCollect from './pages/Users/ProductCollect'
 import PersonalPage from './pages/Users/PersonalPage'
 import MyCoupon from './pages/Users/MyCoupon'
+//搜尋
 import Serach from './pages/Home/Search'
+// 展覽相關
 import Exhibition from './pages/Exhibition/Exhibition'
 import MapSearch from './pages/Exhibition/MapSearch'
 import Introduce from './pages/Exhibition/Introduce'
@@ -22,15 +27,21 @@ import PrIntroduce from './Product/Introduce'
 import Cart from './pages/Booking/Cart'
 import Pay from './pages/Booking/Pay'
 import PurchaseSuccess from './pages/Booking/PurchaseSuccess'
+//討論區相關
 import Forum from './pages/Forum/Forum'
 import Article from './pages/Forum/Article'
 import AddArticle from './pages/Forum/AddArticle'
 import EditArticle from './pages/Forum/EditArticle'
 import FrPersonalPage from './pages/Forum/FrPersonalPage'
+//404page
 import NotFoundPage from './pages/Home/NotFoundPage'
+//後台
 import B2B from './pages/B2B/B2B'
 import AddAbility from './pages/B2B/AddAbility'
+
+//樣式展示
 import Style from './pages/Style'
+//隱私政策
 import PrivacyPolicy from './pages/PrivacyPolicy'
 
 function App() {
@@ -45,14 +56,14 @@ function App() {
         <Route path="/b2b">
           <B2B />
         </Route>
-        <Route path="/forum/frpersonalpage:userID">
+        <Route path="/forum/frpersonalpage/:userID">
           <FrPersonalPage />
         </Route>
         <Route path="/forum/addarticle">
           <AddArticle id={userID} />
         </Route>
-        <Route path="/forum/editArticle">
-          <EditArticle Articleid='110' />
+        <Route path="/forum/EditArticle/:EditArticleID">
+          <EditArticle  />
         </Route>
         {/* <Route path="/forum/article">
           <Article />
