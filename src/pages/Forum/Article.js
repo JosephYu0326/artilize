@@ -25,7 +25,7 @@ function Article(props) {
   const [comment_msg, setComment_msg] = useState("")
   //追蹤留言內容
   const [commentInput, setCommentInput] = useState("")
-  //文章關聯(好像有bug)
+  //文章關聯(好像dosn't work)
   const [preArticle, setPreArticle] = useState([{}])
   const [nowArticle, setNowArticle] = useState({})
   const [nextArticle, setNextArticle] = useState([{}])
@@ -37,7 +37,7 @@ function Article(props) {
   const getNowArticle = async () => {
     const res = await fetch(`${process.env.REACT_APP_API_URL}/forum/${forumid}`)
     const data = await res.json()
-    if (data.length == 3) {
+    if (data.length === 3) {
       setPreArticle(data[0])
       setNowArticle(data[1])
       setNextArticle(data[2])
@@ -51,6 +51,12 @@ function Article(props) {
     }
   }
 
+//   useEffect(()=>{
+// const fetchData = async()=>{
+//   const[]
+// }
+//   })
+
   // ======留言匯入
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/forum/comments/${forumid}`)
@@ -60,13 +66,18 @@ function Article(props) {
         console.log("留言:");
         console.log(comments);
       })
+      //UPDATE WITH ARTICLE TITLE
   }, [nowArticle])
+
+  
+  useEffect(() => {
+    getNowArticle()
+  }, [])
 
   useEffect(() => {
     setCommentInput('')
-    getNowArticle()
   }, [forumid])
-
+ 
   // ----------CLICK觸發的事件
   // ======文章收藏
   function hnadleLike() {
@@ -169,7 +180,7 @@ function Article(props) {
     fetch(`${process.env.REACT_APP_API_URL}/forum/${preArticle.article_id}`)
       .then((res) => res.json())
       .then((data) => {
-        if (data.length == 3) {
+        if (data.length === 3) {
           setPreArticle(data[0])
           setNowArticle(data[1])
           setNextArticle(data[2])
@@ -207,7 +218,6 @@ function Article(props) {
 
   function postComment(e) {
     e.preventDefault();
-    console.log(commentInput.value);
     let isPass = true; // 有沒有通過檢查
     setComment_msg(''); // 清空訊息
 
@@ -225,14 +235,18 @@ function Article(props) {
           "Accept": "application/json",
         },
         body: JSON.stringify(body)
-      }).then(r => r.json())
+      })
+      // .then(alert('增新成功'))
+      .then(r => r.json())
         .then(obj => {
-          console.log(obj);
-          if (obj.success) {
+         // console.log(obj.serverStatus);
+          if ((obj.serverStatus)===2) {
             alert('新增成功');
+            getNowArticle()
             // location.href = 'Blog_home.php';
           }
-        }).catch(function (error) {
+        })
+        .catch(function (error) {
           alert('新增失敗，網站忙碌中，請再試一次');
         })
     }
