@@ -1,23 +1,21 @@
 //新增文章
-import React, { useEffect, useState, Component } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Swal from 'sweetalert2'
 import { Link, useHistory } from 'react-router-dom'
 // import tinymce from 'tinymce/tinymce'
-// import { Editor } from '@tinymce/tinymce-react'
-import { FaAngleLeft } from 'react-icons/fa'
+import { Editor } from '@tinymce/tinymce-react'
 import { Form, Button, Alert } from 'react-bootstrap'
 import Header from '../../component/Header'
 import Footer from '../../component/Footer'
 import BackBtn from '../../component/BackBtn'
 
 function AddArticle(props) {
-  // ========tinyMCE東東======
-  // const editorRef = useRef(null)
-  // const log = () => {
-  //   if (editorRef.current) {
-  //     console.log(editorRef.current.getContent())
-  //   }}
-  // ========tinyMCE東東======
+  const history = useHistory()
+  const goBack = () => {
+    history.goBack()
+  }
+  //TinyMCE setting
+  const editorRef = useRef(null)
   const [show, setShow] = useState(false)
   const created_time = new Date()
   const [content_msg, setContent_msg] = useState("")
@@ -55,50 +53,34 @@ function AddArticle(props) {
     }
     if (isPass) {
       setShow(true)
-      if (show) {
-        Swal.fire({
-          title: '確定新增討論?',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#4153bb',
-          cancelButtonColor: '#f4b942',
-          confirmButtonText: '確定'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            fetch(`${process.env.REACT_APP_API_URL}/forum/addarticle`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-              },
-              body: JSON.stringify(body)
-            })
-              .then(json => console.log(json))
-            Swal.fire(
-              '新增成功!',
-              '',
-              'success'
-            ).catch(err => console.log(`沒有成功新增，因為${err}`));
-          }
-        })
-      }
+      Swal.fire({
+        title: '確定新增討論?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#4153bb',
+        cancelButtonColor: '#f4b942',
+        confirmButtonText: '確定'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetch(`${process.env.REACT_APP_API_URL}/forum/addarticle`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json",
+            },
+            body: JSON.stringify(body)
+          })
+            .then(json => console.log(json))
+          Swal.fire(
+            '新增成功!',
+            '',
+            'success'
+          ).then(goBack())
+            .catch(err => console.log(`沒有成功新增，因為${err}`));
+        }
+      })
     }
   }
-
-
-
-  // function postArticle(e) {
-  //   e.preventDefault()
-  //   fetch(`${process.env.REACT_APP_API_URL}/forum/addarticle`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Accept": "application/json",
-  //     },
-  //     body: JSON.stringify(body)
-  //   })
-  //     .then(setShow(true))
-  // }
 
 
   useEffect(() => {
@@ -126,24 +108,22 @@ function AddArticle(props) {
               type="text"
               onChange={(e) => setTitle(e.target.value)}
             />
-            <Form.Control
+            {/* <Form.Control
               value={content}
               form='articleForm'
               neme="content"
               style={{ height: '300px' }}
               as='textarea'
               onChange={(e) => setContent(e.target.value)}
-            />
+            /> */}
             <div style={{ color: 'red' }}>{content_msg}</div>
-
-            {/* ========tinyMCE東東====== */}
-            {/* <Editor
+            <Editor
               id='inputContent'
-              //onEditorChange={(e) => setContent(e.target.value)}
-              value={content}
-              apiKey="lx36ygwprus1n4asjcpxlw72wjnkjsm90cs4xl68rlcj2qff"
+              onEditorChange={(e) => setContent(editorRef.current.getContent())}
+              //value={content}
+              apiKey="e4s1xgrvd4r96o20xx1rznb6s86xopp4ex9qrle63uvyvhoq"
               onInit={(evt, editor) => (editorRef.current = editor)}
-              initialValue="<p>請輸入內文</p>"
+              initialValue=""
               init={{
                 height: 600,
                 menubar: false,
@@ -173,7 +153,7 @@ function AddArticle(props) {
                 content_style:
                   "body { font-family: 'Noto Sans TC', sans-serif; font-size:14px }",
               }}
-            /> */}
+            />
             <div className="container">
               <div className="row mx-auto">
                 <Form.Select id='pp' className="mt-5" aria-label=""
@@ -186,8 +166,7 @@ function AddArticle(props) {
                 </Button>
               </div>
             </div>
-            {/* ========tinyMCE東東====== */}
-            {/* <button onClick={log}>Log editor content</button> */}
+
           </form>
         </div>
       </div>

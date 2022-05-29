@@ -1,23 +1,27 @@
 //新增文章
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
 import Swal from 'sweetalert2'
-import { FaAngleLeft } from 'react-icons/fa'
+import { Editor } from '@tinymce/tinymce-react'
 import { Form, Button, Alert } from 'react-bootstrap'
 import Header from '../../component/Header'
 import Footer from '../../component/Footer'
 import BackBtn from '../../component/BackBtn'
 
 function EditArticle(props) {
+    const history = useHistory()
+    const goBack = () => {
+        history.goBack()
+    }
     const [show, setShow] = useState(false)
     const { EditArticleID } = useParams()
     const [ChioseCategory, setChioseCategory] = useState("")
     const [title, setTitle] = useState("")
     const [content, setContent] = useState("")
     const [value, setValue] = useState("")
-
+    const editorRef = useRef(null)
     //========讀出文章
-    useEffect(() => {
+    function readArticle() {
         fetch(`${process.env.REACT_APP_API_URL}/forum/${EditArticleID}`)
             .then((res) => res.json())
             .then((data) => {
@@ -26,6 +30,18 @@ function EditArticle(props) {
                 setValue(data[1].category)
                 setChioseCategory(data[1].category)
             }).catch(console.log("讀取失敗"))
+    }
+    function readCategory() {
+        fetch(`${process.env.REACT_APP_API_URL}/forum/category`)
+            .then((res) => res.json())
+            .then((data) => {
+                setCategory(data)
+            })
+    }
+
+    useEffect(() => {
+        readArticle()
+        readCategory()
     }, [])
 
     //文章類別
@@ -37,13 +53,6 @@ function EditArticle(props) {
             </option>
         )
     })
-    useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/forum/category`)
-            .then((res) => res.json())
-            .then((data) => {
-                setCategory(data)
-            })
-    }, [])
 
 
 
@@ -83,7 +92,7 @@ function EditArticle(props) {
                         '修改成功!',
                         '',
                         'success'
-                    )
+                    ).then(goBack())
                 }
             })
         }
@@ -106,15 +115,51 @@ function EditArticle(props) {
                             type="text"
                             onChange={(e) => setTitle(e.target.value)}
                         />
-                        <Form.Control
+                        {/* <Form.Control
                             value={content}
                             form='articleForm'
                             neme="content"
                             style={{ height: '300px' }}
                             as='textarea'
                             onChange={(e) => setContent(e.target.value)}
+                        /> */}
+                        <Editor
+                            id='inputContent'
+                            onEditorChange={(e) => setContent(editorRef.current.getContent())}
+                            //value={content}
+                            apiKey="e4s1xgrvd4r96o20xx1rznb6s86xopp4ex9qrle63uvyvhoq"
+                            onInit={(evt, editor) => (editorRef.current = editor)}
+                            initialValue={content}
+                            init={{
+                                height: 600,
+                                menubar: false,
+                                language: 'zh_TW',
+                                plugins: [
+                                    'advlist',
+                                    'autolink',
+                                    'lists',
+                                    'link',
+                                    'image',
+                                    'charmap',
+                                    'anchor',
+                                    'searchreplace',
+                                    'visualblocks',
+                                    'code',
+                                    'fullscreen',
+                                    'insertdatetime',
+                                    'table',
+                                    'preview',
+                                    'wordcount',
+                                ],
+                                toolbar:
+                                    'undo redo | blocks | image | ' +
+                                    'bold italic forecolor | alignleft aligncenter ' +
+                                    'alignright alignjustify | bullist numlist outdent indent | ' +
+                                    'removeformat | help',
+                                content_style:
+                                    "body { font-family: 'Noto Sans TC', sans-serif; font-size:14px }",
+                            }}
                         />
-
                         <div className="container">
                             <div className="row mx-auto">
                                 <Form.Select id='pp' className="mt-5" aria-label=""

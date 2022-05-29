@@ -6,7 +6,7 @@ function Article(props) {
     const isSignIn = false
     const articleDetails = props.articDetails
     console.log(articleDetails)
-    const [comments, setComments] = useState([{}])
+
 
 
     function handleLike() {
@@ -20,30 +20,32 @@ function Article(props) {
     }
     const [temp, setTemp] = useState([])
 
-    const CallComment = async (props) => {
-        fetch(`${process.env.REACT_APP_API_URL}/forum/comments/${temp}`)
-            .then((res) => res.json())
-            .then((data) => {
-                setComments(data)
-                console.log(temp);
-                console.log("留言:");
-                console.log(comments);
-            })
-        return (<>
-            <div>{comments.length}</div>
-        </>)
-    }
+    // console.log(temp)
+    // const CallComment = () => {
+    //     fetch(`${process.env.REACT_APP_API_URL}/forum/comments/${temp}`)
+    //         .then((res) => res.json())
+    //         .then((data) => {
+    //             setComments(data)
+    //             console.log(temp);
+    //             console.log("留言:");
+    //             console.log(comments);
+    //         })
+    //     return (<>
+    //         <div>{comments.length}</div>
+    //     </>)
+    // }
 
-    useEffect(() => {
-        CallComment()
-    }, [])
+    // useEffect(() => {
+    //     CallComment()
+    // }, [])
+
 
     // ===========
     const article = articleDetails.map((v, i) => {
         // const temp = articleDetails[i].created_time.slice(0, 10)
         // console.log(temp)
         // ======留言匯入
-        setTemp(articleDetails[i].article_id)
+        // setTemp(articleDetails[i].article_id)
         return (
             <div key={i}>
                 <div className="perContentHead my-4 d-flex justify-content-between">
@@ -65,13 +67,14 @@ function Article(props) {
                         <p className="category pBig">{articleDetails[i].thema}</p>
                     </div>
                 </div>
-                <div className="preViewContent">{articleDetails[i].content}</div>
+                <div className="preViewContent pb-3" dangerouslySetInnerHTML={{ __html: `${articleDetails[i].content}` }}></div>
+                {/* <pre className="preViewContent pb-3">{articleDetails[i].content}</pre> */}
                 <div className="social d-flex justify-content-between align-items-center">
                     <time>{articleDetails[i].created_time}</time>
                     <div className='d-flex align-items-center'>
                         <FaCommentDots />
                         <div className="p-2">
-                            <CallComment />
+                            {/* <Comment id={articleDetails[i]} /> */}
                         </div>
                         <FaStar onClick={handleLike} />
 
