@@ -8,10 +8,9 @@ import ForumAside from '../../component/ForumAside'
 import Header from '../../component/Header'
 import Footer from '../../component/Footer'
 import Article from '../../component/Article'
-import Loading from '../../component/Loading';
 
 function Forum(props) {
-  const [isLoading,setIsLoading] =useState(true) 
+  const [isLoading, setIsLoading] = useState(true)
   const location = useLocation()
   const urlSearchParams = new URLSearchParams(location.search)
   const currentTopic = urlSearchParams.get("topic")
@@ -19,9 +18,9 @@ function Forum(props) {
   const [btn, setBtn] = useState([])
   const [articleList, setArticleList] = useState([{}])
 
-function toggle(){
-  setIsLoading(false)
-}
+  // function toggle() {
+  //   setIsLoading(false)
+  // }
 
   // 側邊類別按鈕
   useEffect(() => {
@@ -31,16 +30,6 @@ function toggle(){
         setBtn(data)
       })
   }, [])
-  //顯示所有文章(這邊沒有好像也好好的)
-  // useEffect(() => {
-  //   fetch(`${process.env.REACT_APP_API_URL}/forum`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setArticleList(data)
-  //       console.log("所有文章");
-  //     })
-  // }, [])
-
 
   //文章類別篩選
   useEffect(() => {
@@ -54,7 +43,7 @@ function toggle(){
 
   return (
     <>
-    {/* <Spinner variant='primary'/>
+      {/* <Spinner variant='primary'/>
       <Loading className={`{(${isLoading}) ? "" : visually-hidden}`} />
 <button onClick={toggle}>toggle</button> */}
       <Header />

@@ -43,113 +43,117 @@ import AddAbility from './pages/B2B/AddAbility'
 import Style from './pages/Style'
 //隱私政策
 import PrivacyPolicy from './pages/PrivacyPolicy'
+import ScrollToTop from "../src/component/ScrollToTop"
+
 
 function App() {
   const userID = 2
 
   return (
     <Router>
-      <Switch>
-        <Route path="/b2b/addability">
-          <AddAbility />
-        </Route>
-        <Route path="/b2b">
-          <B2B />
-        </Route>
-        <Route path="/forum/frpersonalpage/:userID">
-          <FrPersonalPage />
-        </Route>
-        <Route path="/forum/addarticle">
-          <AddArticle id={userID} />
-        </Route>
-        <Route path="/forum/EditArticle/:EditArticleID">
-          <EditArticle  />
-        </Route>
-        {/* <Route path="/forum/article">
+      <ScrollToTop>
+        <Switch>
+          <Route path="/b2b/addability">
+            <AddAbility />
+          </Route>
+          <Route path="/b2b">
+            <B2B />
+          </Route>
+          <Route path="/forum/frpersonalpage/:userID">
+            <FrPersonalPage />
+          </Route>
+          <Route path="/forum/addarticle">
+            <AddArticle id={userID} />
+          </Route>
+          <Route path="/forum/EditArticle/:EditArticleID">
+            <EditArticle />
+          </Route>
+          {/* <Route path="/forum/article">
           <Article />
         </Route> */}
-        <Route path="/forum/:forumid">
-          <Article />
-        </Route>
-        <Route path="/forum">
-          <Forum />
-        </Route>
-        <Route path="/booking/purchasesuccess">
-          <PurchaseSuccess />
-        </Route>
-        <Route path="/booking/pay">
-          <Pay />
-        </Route>
-        <Route path="/booking/cart">
-          <Cart />
-        </Route>
-        <Route path="/product/introduce">
-          <PrIntroduce />
-        </Route>
-        <Route path="/product">
-          <Product />
-        </Route>
-        <Route path="/exhibition/introduce">
-          <Introduce />
-        </Route>
-        <Route path="/exhibition/mapsearch">
-          <MapSearch />
-        </Route>
-        <Route path="/exhibition">
-          <Exhibition />
-        </Route>
-        <Route path="/users/mycoupon">
-          <MyCoupon />
-        </Route>
-        <Route path="/users/personalpage">
-          <PersonalPage id={userID} />
-        </Route>
-        <Route path="/users/productcollect">
-          <ProductCollect />
-        </Route>
-        <Route path="/users/articlecollect">
-          <ArticleCollect />
-        </Route>
-        <Route path="/users/orderrecord">
-          <OrderRecord />
-        </Route>
-        <Route path="/users/changepassword">
-          <ChangePassword />
-        </Route>
-        <Route path="/users/forgetpassword">
-          <ForgetPassword />
-        </Route>
-        <Route path="/users/signup">
-          <SignUp />
-        </Route>
-        <Route path="/users/edit">
-          <Edit />
-        </Route>
-        <Route path="/users/login">
-          <Login />
-        </Route>
-        <Route path="/users">
-          <Users />
-        </Route>
-        <Route path="/search">
-          <Serach />
-        </Route>
-        <Route path="/entrance">
-          <Entrance />
-        </Route>
-        <Route path="/style">
-          <Style />
-        </Route>
-        <Route path="/privacypolicy">
-          <PrivacyPolicy />
-        </Route>
-        <Route path="/" exact>
-          <Home />
-        </Route>
-        <Route path="*">
-          <NotFoundPage />
-        </Route>
-      </Switch>
+          <Route path="/forum/:forumid">
+            <Article />
+          </Route>
+          <Route path="/forum">
+            <Forum />
+          </Route>
+          <Route path="/booking/purchasesuccess">
+            <PurchaseSuccess />
+          </Route>
+          <Route path="/booking/pay">
+            <Pay />
+          </Route>
+          <Route path="/booking/cart">
+            <Cart />
+          </Route>
+          <Route path="/product/introduce">
+            <PrIntroduce />
+          </Route>
+          <Route path="/product">
+            <Product />
+          </Route>
+          <Route path="/exhibition/introduce">
+            <Introduce />
+          </Route>
+          <Route path="/exhibition/mapsearch">
+            <MapSearch />
+          </Route>
+          <Route path="/exhibition">
+            <Exhibition />
+          </Route>
+          <Route path="/users/mycoupon">
+            <MyCoupon />
+          </Route>
+          <Route path="/users/personalpage">
+            <PersonalPage id={userID} />
+          </Route>
+          <Route path="/users/productcollect">
+            <ProductCollect />
+          </Route>
+          <Route path="/users/articlecollect">
+            <ArticleCollect />
+          </Route>
+          <Route path="/users/orderrecord">
+            <OrderRecord />
+          </Route>
+          <Route path="/users/changepassword">
+            <ChangePassword />
+          </Route>
+          <Route path="/users/forgetpassword">
+            <ForgetPassword />
+          </Route>
+          <Route path="/users/signup">
+            <SignUp />
+          </Route>
+          <Route path="/users/edit">
+            <Edit />
+          </Route>
+          <Route path="/users/login">
+            <Login />
+          </Route>
+          <Route path="/users">
+            <Users />
+          </Route>
+          <Route path="/search">
+            <Serach />
+          </Route>
+          <Route path="/entrance">
+            <Entrance />
+          </Route>
+          <Route path="/style">
+            <Style />
+          </Route>
+          <Route path="/privacypolicy">
+            <PrivacyPolicy />
+          </Route>
+          <Route path="/" exact>
+            <Home />
+          </Route>
+          <Route path="*">
+            <NotFoundPage />
+          </Route>
+        </Switch>
+      </ScrollToTop>
     </Router>
   )
 }

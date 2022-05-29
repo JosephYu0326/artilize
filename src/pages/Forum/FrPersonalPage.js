@@ -61,7 +61,8 @@ function FrPersonalPage(props) {
             <div className="col-lg-2 col-md-3 col-sm-12 text-center">
               <div>
                 <div className="h6">{articleList[0].nickname}</div>
-                <div className="displayN m-3">{articleList.length}  篇文章</div>
+                <div className="h6 txtGray">{articleList[0].username}</div>
+                <div className="displayN m-3">{articleList.length}  篇討論</div>
               </div>
               {/* <Button variant="btn btn-primary rounded-pill BorderRadius">
                 FOLLOW
@@ -69,7 +70,7 @@ function FrPersonalPage(props) {
             </div>
           </div>
         </div>
-        <ForumAside btn={btn} />
+        {/* <ForumAside btn={btn} /> */}
         <section>
           <div className="frContent">
             <Article articDetails={articleList} />
