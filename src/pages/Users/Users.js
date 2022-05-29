@@ -10,6 +10,7 @@ import logo from 'C:/Users/FU/Documents/react/artilize/src/images/logo.png'
 function Users(props) {
   return (
     <>
+      <Header />
       {/* <div>會員資料</div>
       <Link to="users/login">會員登入</Link>
       <br />
