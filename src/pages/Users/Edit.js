@@ -17,7 +17,9 @@ function Edit(props) {
   const [address, setAddress] = useState('')
   const [nickname, setNickname] = useState('')
   const [birthday, setBirthday] = useState('')
+  // 記錄選中了哪個值
   const [gender, setGender] = useState('')
+  const genderOptions = ['男', '女', '不提供']
 
   return (
     <>
@@ -54,10 +56,11 @@ function Edit(props) {
                     id="input-text"
                     className="mb-3 usersContentcolor Regular"
                   >
+                    <h6 className="Regular">帳號</h6>
                     <input
                       type="text"
                       className="form-control "
-                      id="exampleFormControlInput1"
+                      //id="exampleFormControlInput1"
                       placeholder="帳號"
                       value={account}
                       onChange={(e) => {
@@ -72,15 +75,17 @@ function Edit(props) {
                     id="input-text"
                     className="mb-3 usersContentcolor Regular"
                   >
+                    <h6 className="Regular">信箱</h6>
                     <input
                       type="email"
                       className="form-control "
-                      id="exampleFormControlInput1"
+                      //id="exampleFormControlInput1"
                       placeholder="信箱"
                       value={email}
                       onChange={(e) => {
                         setEmail(e.target.value)
                       }}
+                      required
                     />
                     <div id="emailHelp" className="form-text text-secondary">
                       請輸入正確的信箱
@@ -90,10 +95,11 @@ function Edit(props) {
                     id="input-text"
                     className="mb-3 usersContentcolor Regular"
                   >
+                    <h6 className="Regular">密碼</h6>
                     <input
                       type="password"
                       className="form-control "
-                      id="exampleFormControlInput1"
+                      //id="exampleFormControlInput1"
                       placeholder="密碼"
                       value={password}
                       onChange={(e) => {
@@ -108,10 +114,11 @@ function Edit(props) {
                     id="input-text"
                     className="mb-3 usersContentcolor Regular"
                   >
+                    <h6 className="Regular">姓名</h6>
                     <input
                       type="text"
                       className="form-control "
-                      id="exampleFormControlInput1"
+                      //id="exampleFormControlInput1"
                       placeholder="姓名"
                       value={name}
                       onChange={(e) => {
@@ -123,10 +130,11 @@ function Edit(props) {
                     id="input-text"
                     className="mb-3 usersContentcolor Regular"
                   >
+                    <h6 className="Regular">手機</h6>
                     <input
                       type="tel"
                       className="form-control "
-                      id="exampleFormControlInput1"
+                      //id="exampleFormControlInput1"
                       placeholder="手機"
                       value={phone}
                       onChange={(e) => {
@@ -141,10 +149,11 @@ function Edit(props) {
                     id="input-text"
                     className="mb-3 usersContentcolor Regular"
                   >
+                    <h6 className="Regular">地址</h6>
                     <input
                       type="text"
                       className="form-control "
-                      id="exampleFormControlInput1"
+                      //id="exampleFormControlInput1"
                       placeholder="地址"
                       value={address}
                       onChange={(e) => {
@@ -156,10 +165,11 @@ function Edit(props) {
                     id="input-text"
                     className="mb-3 usersContentcolor Regular"
                   >
+                    <h6 className="Regular">暱稱</h6>
                     <input
                       type="text"
                       className="form-control "
-                      id="exampleFormControlInput1"
+                      //id="exampleFormControlInput1"
                       placeholder="暱稱"
                       value={nickname}
                       onChange={(e) => {
@@ -171,10 +181,11 @@ function Edit(props) {
                     id="input-text"
                     className="mb-3 usersContentcolor Regular"
                   >
+                    <h6 className="Regular">生日</h6>
                     <input
                       type="date"
                       className="form-control "
-                      id="exampleFormControlInput1"
+                      //id="exampleFormControlInput1"
                       placeholder="生日"
                       value={birthday}
                       onChange={(e) => {
@@ -183,19 +194,25 @@ function Edit(props) {
                     />
                   </div>
                   <div
-                    id="input-text"
+                    id="input-radio"
                     className="mb-3 usersContentcolor Regular"
                   >
-                    <input
-                      type="radio"
-                      className="form-control "
-                      id="exampleFormControlInput1"
-                      placeholder="性別"
-                      value={gender}
-                      onChange={(e) => {
-                        setGender(e.target.value)
-                      }}
-                    />
+                    <h6 className="Regular">性別</h6>
+                    {genderOptions.map((v, i) => {
+                      return (
+                        <div key={i}>
+                          <input
+                            type="radio"
+                            checked={gender === v}
+                            value={v}
+                            onChange={(e) => {
+                              setGender(e.target.value)
+                            }}
+                          />
+                          <label>{v}</label>
+                        </div>
+                      )
+                    })}
                   </div>
                   <div className="d-flex justify-content-around">
                     <Link to="//">
