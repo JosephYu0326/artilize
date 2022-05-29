@@ -11,7 +11,7 @@
     background-image: linear-gradient(to top, transparent, $PurpleBlue);
 }
 
-.nav-item {
+.nav-link {
     margin: 20px;
     vertical-align: middle;
     //height: 88px;
@@ -89,37 +89,34 @@ footer {
     }
 
     // ===footer===
-    .fourword {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-    }
-
     .fourword > .align-items-center {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
     }
 
-    .fourword button {
-        margin: 30px;
-        width: 60vw;
-        color: $background;
-        border: $background 1px solid;
-    }
-
-    .fourword button:hover {
-        color: $DarkGrey;
-        background: $background;
-        border: $background 1px solid;
-    }
-
-    .fourword button:active {
-        color: $DarkGrey;
-        background: $background;
-        border: $background 1px solid;
-        box-shadow: none !important;
+    .fourword {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        button {
+            margin: 30px;
+            width: 60vw;
+            color: $background;
+            border: $background 1px solid;
+        }
+        button:hover {
+            color: $DarkGrey;
+            background: $background;
+            border: $background 1px solid;
+        }
+        button:active {
+            color: $DarkGrey;
+            background: $background;
+            border: $background 1px solid;
+            box-shadow: none !important;
+        }
     }
 
     footer {

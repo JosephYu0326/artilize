@@ -1,30 +1,77 @@
 @import "./global.scss";
 @import "../../node_modules/swiper/modules/navigation/navigation.scss";
+@mixin home1794 {
+    @media (max-width: 1794px) {
+        @content;
+    }
+}
+@mixin home1392 {
+    @media (max-width: 1392px) {
+        @content;
+    }
+}
+@mixin home1364 {
+    @media (max-width: 1364px) {
+        @content;
+    }
+}
+@mixin home1201 {
+    @media (max-width: 1201px) {
+        @content;
+    }
+}
+@mixin home996 {
+    @media (max-width: 996px) {
+        @content;
+    }
+}
+@mixin home768 {
+    @media (max-width: 768px) {
+        @content;
+    }
+}
+@mixin home601 {
+    @media (max-width: 601px) {
+        @content;
+    }
+}
+@mixin home545 {
+    @media (max-width: 545px) {
+        @content;
+    }
+}
 
 .swiperImg {
     img {
         overflow: hidden;
         max-width: 100%;
-        height: 100%;
+        min-height: 5% !important;
     }
 }
 
 .homeSwiper {
     max-width: 1243px !important;
+    height: 5% !important;
 }
 .homeSwiperRight {
     max-width: 430px !important;
+    @include home1794 {
+        display: none;
+    }
 }
 .homeSwiperLeft {
     max-width: 104px !important;
+    @include home1364 {
+        display: none;
+    }
 }
 
 .homeMap {
     background: url(../images/HomeMap.svg) no-repeat;
     background-color: rgba(0, 0, 0, 0.35);
     background-blend-mode: multiply;
-    background-size: 100%;
-    height: 451px;
+    background-size: cover;
+    max-height: 451px;
 
     .homeMapInside {
         height: 451px;
@@ -44,6 +91,12 @@
                 h2 {
                     margin: 0;
                 }
+                @include home545 {
+                    h2 {
+                        font-size: 12px;
+                        line-height: 16px;
+                    }
+                }
             }
             button:nth-child(2) {
                 border: 3px solid #fff;
@@ -53,6 +106,9 @@
         .homeMapSearchBar {
             margin-top: 12px;
             max-width: 503px;
+            @include home545 {
+                // max-width: 352px;
+            }
             gap: 16px;
             form {
                 border: 1px solid $DarkGrey;
@@ -92,10 +148,19 @@
 .homeRank {
     background: #1a1c21;
     height: 688px;
+    @include home601 {
+        height: 500px;
+    }
 
     .homeRankContainer {
         // border: 1px solid white;
         height: 688px;
+        @include home1201 {
+            height: 182px;
+            h6:nth-child(2) {
+                display: none;
+            }
+        }
     }
 
     .homeRankHeader {
@@ -142,15 +207,33 @@
         // border: 1px solid white;
         width: 1020px;
         height: 688px;
+        @include home1201 {
+            max-width: 535px;
+            min-height: 400px;
+        }
+        @include home601 {
+            max-width: 332px;
+            min-height: 252px;
+        }
 
         ul {
             // border: 1px solid white;
-            width: 100%;
+            max-width: 100%;
             height: 100%;
+            @include home1201 {
+                padding-left: 0;
+            }
             a:-webkit-any-link {
                 text-decoration: none;
                 img {
                     transition: 0.5s;
+                    @include home1201 {
+                        height: 400px;
+                    }
+                    @include home601 {
+                        // max-width: 332px;
+                        height: 252px;
+                    }
                 }
                 &:hover {
                     img {
@@ -160,6 +243,10 @@
             }
             h6 {
                 color: #fff;
+                @include home601 {
+                    font-size: 10px;
+                    line-height: 14px;
+                }
             }
         }
     }
@@ -197,6 +284,13 @@
             h5 {
                 color: $DarkGrey;
             }
+            max-width: 345px;
+        }
+        @include home545 {
+            .card1,
+            .card3 {
+                display: none;
+            }
         }
     }
 }
@@ -209,6 +303,30 @@
     }
     img {
         height: 572.88px;
+    }
+    @include home1392 {
+        h1 {
+            font-size: 70px;
+        }
+        img {
+            width: 500px;
+        }
+    }
+    @include home996 {
+        img {
+            width: 300px;
+        }
+        h1 {
+            font-size: 40px;
+        }
+    }
+    @include home601() {
+        img {
+            width: 150px;
+        }
+        h1 {
+            font-size: 25px;
+        }
     }
 }
 .homeTour {
@@ -241,14 +359,29 @@
             width: 72px;
         }
     }
+    @include home1364 {
+        img {
+            height: 300px;
+        }
+    }
+    @include home1201 {
+        img {
+            height: 250px;
+        }
+    }
+}
+.hoemAppRwd {
+    @include home545 {
+        display: none;
+    }
 }
 .homeApp {
-    height: 675px;
+    min-height: 675px;
     background: url(../images/homeApp.svg) no-repeat;
     background-size: 100% auto;
 }
 .homeSponsor {
-    height: 497px;
+    min-height: 497px;
     // border: 1px solid black;
 
     h1 {
@@ -263,6 +396,12 @@
         height: 213.66px;
         text-align: center;
         border: none;
+    }
+    @include home545 {
+        .card {
+            width: 183px;
+            height: 183px;
+        }
     }
 }
 
@@ -297,7 +436,53 @@
             color: $DarkGrey;
         }
     }
+
+    .swiper2,
+    .swiper3 {
+        display: none;
+    }
+    @include home1201 {
+        .swiper2 {
+            display: block;
+        }
+        .swiper1,
+        .swiper3 {
+            display: none;
+        }
+    }
+    @include home768 {
+        .swiper3 {
+            display: block;
+        }
+        .swiper2,
+        .swiper1 {
+            display: none;
+        }
+    }
 }
-.homeMuseumScroll::-webkit-scrollbar {
-    width: 0;
+
+.homeFooter {
+    height: 530px;
+    background: url(../images/homeFooter.svg) no-repeat;
+    // background-size: 100% auto;
+    div:first-child {
+        max-width: 680px;
+    }
+    h1,
+    h4 {
+        color: $DarkGrey;
+    }
+    button {
+        border: 3px solid $DarkGrey;
+        border-radius: 47px;
+        width: 248px;
+        height: 94px;
+        h2 {
+            color: $DarkGrey;
+            margin: 0;
+        }
+        &:hover {
+            background-color: $LightGrey;
+        }
+    }
 }
