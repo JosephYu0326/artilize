@@ -37,16 +37,17 @@ function Edit(props) {
                 className=" BorderRadius usersBackground p-5"
                 style={{ maxWidth: '568px', minWidth: '390px' }}
               >
-                <figure className="figure d-flex justify-content-center roundedCircle">
-                  <img
-                    alt=""
-                    src={logo}
-                    width="45"
-                    height="45"
-                    // className="d-inline-block"
-                  />
-                </figure>
                 <form>
+                  <div>
+                    <figure className="figure d-flex justify-content-center roundedCircle">
+                      <img alt="" src={logo} width="45" height="45" />
+                    </figure>
+                    <div className="d-flex justify-content-center mb-4">
+                      <button type="" className="btn btn-primary rounded-pill">
+                        更換大頭照
+                      </button>
+                    </div>
+                  </div>
                   <div style={{ paddingLeft: '12px' }}>
                     <h4 className="ph_title row ExtraBold text-primary mb-4">
                       編輯會員資料
@@ -61,11 +62,12 @@ function Edit(props) {
                       type="text"
                       className="form-control "
                       //id="exampleFormControlInput1"
-                      placeholder="帳號"
+                      placeholder="4-20位數的英文或數字"
                       value={account}
                       onChange={(e) => {
                         setAccount(e.target.value)
                       }}
+                      required
                     />
                     <div id="emailHelp" className="form-text text-secondary">
                       請輸入正確的帳號
@@ -80,7 +82,7 @@ function Edit(props) {
                       type="email"
                       className="form-control "
                       //id="exampleFormControlInput1"
-                      placeholder="信箱"
+                      placeholder=""
                       value={email}
                       onChange={(e) => {
                         setEmail(e.target.value)
@@ -100,11 +102,12 @@ function Edit(props) {
                       type="password"
                       className="form-control "
                       //id="exampleFormControlInput1"
-                      placeholder="密碼"
+                      placeholder="6位數以上(需含大寫字母、小寫字母、數字、符號至少各1)"
                       value={password}
                       onChange={(e) => {
                         setPassword(e.target.value)
                       }}
+                      required
                     />
                     <div id="emailHelp" className="form-text text-secondary">
                       請輸入正確的密碼
@@ -119,11 +122,12 @@ function Edit(props) {
                       type="text"
                       className="form-control "
                       //id="exampleFormControlInput1"
-                      placeholder="姓名"
+                      placeholder="真實姓名"
                       value={name}
                       onChange={(e) => {
                         setName(e.target.value)
                       }}
+                      required
                     />
                   </div>
                   <div
@@ -135,11 +139,12 @@ function Edit(props) {
                       type="tel"
                       className="form-control "
                       //id="exampleFormControlInput1"
-                      placeholder="手機"
+                      placeholder="09xxxxxxxx"
                       value={phone}
                       onChange={(e) => {
                         setPhone(e.target.value)
                       }}
+                      required
                     />
                     <div id="emailHelp" className="form-text text-secondary">
                       請再次輸入正確的手機
@@ -154,11 +159,12 @@ function Edit(props) {
                       type="text"
                       className="form-control "
                       //id="exampleFormControlInput1"
-                      placeholder="地址"
+                      placeholder=""
                       value={address}
                       onChange={(e) => {
                         setAddress(e.target.value)
                       }}
+                      required
                     />
                   </div>
                   <div
@@ -170,11 +176,12 @@ function Edit(props) {
                       type="text"
                       className="form-control "
                       //id="exampleFormControlInput1"
-                      placeholder="暱稱"
+                      placeholder=""
                       value={nickname}
                       onChange={(e) => {
                         setNickname(e.target.value)
                       }}
+                      required
                     />
                   </div>
                   <div
@@ -186,11 +193,12 @@ function Edit(props) {
                       type="date"
                       className="form-control "
                       //id="exampleFormControlInput1"
-                      placeholder="生日"
+                      placeholder=""
                       value={birthday}
                       onChange={(e) => {
                         setBirthday(e.target.value)
                       }}
+                      required
                     />
                   </div>
                   <div
@@ -208,6 +216,7 @@ function Edit(props) {
                             onChange={(e) => {
                               setGender(e.target.value)
                             }}
+                            required
                           />
                           <label>{v}</label>
                         </div>

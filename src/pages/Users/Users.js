@@ -10,7 +10,7 @@ import logo from 'C:/Users/FU/Documents/react/artilize/src/images/logo.png'
 function Users(props) {
   return (
     <>
-      <div>會員資料</div>
+      {/* <div>會員資料</div>
       <Link to="users/login">會員登入</Link>
       <br />
       <Link to="users/edit">編輯會員資料</Link>
@@ -28,7 +28,7 @@ function Users(props) {
       <Link to="users/personalpage">個人主頁</Link>
       <br />
       <Link to="users/mycoupon">我的優惠券</Link>
-      <Header />
+      <Header /> */}
       {/* <AsideBar /> */}
       <div className="bg-background">
         <section>
@@ -41,77 +41,97 @@ function Users(props) {
                 className=" BorderRadius usersBackground p-5"
                 style={{ maxWidth: '568px', minWidth: '390px' }}
               >
-                <figure className="figure d-flex justify-content-center roundedCircle">
-                  <img
-                    alt=""
-                    src={logo}
-                    width="45"
-                    height="45"
-                    // className="d-inline-block"
-                  />
-                </figure>
-                <Form className="">
-                  <div style={{ paddingLeft: '12px' }}>
-                    <h4 className="ph_title row ExtraBold text-primary mb-3">
-                      會員資料
-                    </h4>
-                    {/* <h6 className="ph_title row Regular usersContentcolor mb-3 ">
-                      使用您的Artilize帳號
-                    </h6> */}
+                <form>
+                  <div>
+                    <figure className="figure d-flex justify-content-center roundedCircle">
+                      <img alt="" src={logo} width="45" height="45" />
+                    </figure>
                   </div>
-                  <Form.Group className="mb-3" controlId="formBasicAccount">
-                    {/* <Form.Label>帳號</Form.Label> */}
-                    <Form.Control type="account" placeholder="帳號" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formBasicEmail">
-                    {/* <Form.Label>帳號</Form.Label> */}
-                    <Form.Control type="email" placeholder="信箱" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formBasicPassword">
-                    {/* <Form.Label>密碼</Form.Label> */}
-                    <Form.Control type="password" placeholder="密碼" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="">
-                    {/* <Form.Label>密碼</Form.Label> */}
-                    <Form.Control type="" placeholder="姓名" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="">
-                    {/* <Form.Label>密碼</Form.Label> */}
-                    <Form.Control type="" placeholder="手機" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="">
-                    {/* <Form.Label>密碼</Form.Label> */}
-                    <Form.Control type="" placeholder="地址" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="">
-                    {/* <Form.Label>密碼</Form.Label> */}
-                    <Form.Control type="" placeholder="暱稱" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="">
-                    {/* <Form.Label>密碼</Form.Label> */}
-                    <Form.Control type="" placeholder="生日" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="">
-                    {/* <Form.Label>密碼</Form.Label> */}
-                    <Form.Control type="" placeholder="性別" />
-                  </Form.Group>
-                  {/* <Form.Group
+                  <div style={{ paddingLeft: '12px' }}>
+                    <h4 className="ph_title row ExtraBold text-primary mb-4">
+                      編輯會員資料
+                    </h4>
+                  </div>
+                  <div
+                    id="input-text"
                     className="mb-3 usersContentcolor Regular"
-                    controlId=""
                   >
-                    <Form.Label>忘記密碼</Form.Label>
-                  </Form.Group> */}
-                  {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                        <Form.Check type="checkbox" label="記住我" />
-                      </Form.Group> */}
+                    <h6 className="Regular">帳號</h6>
+                    <div className="form-text text-secondary">artilize</div>
+                  </div>
+                  <div
+                    id="input-text"
+                    className="mb-3 usersContentcolor Regular"
+                  >
+                    <h6 className="Regular">信箱</h6>
+                    <div className="form-text text-secondary">
+                      artilize@gmail.com
+                    </div>
+                  </div>
+                  {/* <div
+                    id="input-text"
+                    className="mb-3 usersContentcolor Regular"
+                  >
+                    <h6 className="Regular">密碼</h6>
+                    <div className="form-text text-secondary">
+                      請輸入正確的密碼
+                    </div>
+                  </div> */}
+                  <div
+                    id="input-text"
+                    className="mb-3 usersContentcolor Regular"
+                  >
+                    <h6 className="Regular">姓名</h6>
+                    <div className="form-text text-secondary">王小明</div>
+                  </div>
+                  <div
+                    id="input-text"
+                    className="mb-3 usersContentcolor Regular"
+                  >
+                    <h6 className="Regular">手機</h6>
+                    <div className="form-text text-secondary">0932111222</div>
+                  </div>
+                  <div
+                    id="input-text"
+                    className="mb-3 usersContentcolor Regular"
+                  >
+                    <h6 className="Regular">地址</h6>
+                    <div className="form-text text-secondary">
+                      高雄市前金區中正四路211號8樓之1
+                    </div>
+                  </div>
+                  <div
+                    id="input-text"
+                    className="mb-3 usersContentcolor Regular"
+                  >
+                    <h6 className="Regular">暱稱</h6>
+                    <div className="form-text text-secondary">WANG</div>
+                  </div>
+                  <div
+                    id="input-text"
+                    className="mb-3 usersContentcolor Regular"
+                  >
+                    <h6 className="Regular">生日</h6>
+                    <div className="form-text text-secondary">2000/01/01</div>
+                  </div>
+                  <div
+                    id="input-radio"
+                    className="mb-3 usersContentcolor Regular"
+                  >
+                    <h6 className="Regular">性別</h6>
+                    <div className="form-text text-secondary">男</div>
+                  </div>
                   <div className="d-flex justify-content-around">
                     <Link to="/users/edit/">
-                      <Button variant="primary rounded-pill" type="submit">
+                      <button
+                        type="submit"
+                        className="btn btn-primary rounded-pill mt-4"
+                      >
                         編輯
-                      </Button>
+                      </button>
                     </Link>
                   </div>
-                </Form>
+                </form>
               </div>
             </Row>
           </Container>
