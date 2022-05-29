@@ -3,6 +3,7 @@ import { Link, useParams, useHistory } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import FadeIn from 'react-fade-in/lib/FadeIn'
 import {
+  FaShareAltSquare,
   FaTrashAlt,
   FaEdit,
   FaStar,
@@ -31,14 +32,16 @@ function Article(props) {
   const [preArticle, setPreArticle] = useState([{}])
   const [nowArticle, setNowArticle] = useState({})
   const [nextArticle, setNextArticle] = useState([{}])
-
-  const { forumid } = useParams()
   const history = useHistory()
+  const goBack = () => {
+    history.goBack()
+  }
+  const { forumid } = useParams()
 
   //===跟據param拿到當前文章，以及前後篇文章
   const getNowArticle = async () => {
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/forum/${forumid}`)
-    const data = await res.json()
+    let res = await fetch(`${process.env.REACT_APP_API_URL}/forum/${forumid}`)
+    let data = await res.json()
     if (data.length === 3) {
       setPreArticle(data[0])
       setNowArticle(data[1])
@@ -61,10 +64,10 @@ function Article(props) {
       .then((data) => {
         setComments(data)
         console.log("留言:");
-        console.log(comments);
+        console.log(comments.length);
       })
     //UPDATE WITH ARTICLE TITLE
-  }, [nowArticle])
+  }, [nowArticle, show])
 
 
   useEffect(() => {
@@ -75,10 +78,10 @@ function Article(props) {
     setCommentInput('')
   }, [forumid])
 
-  // ----------CLICK觸發的事件
+  // ----------CLICK觸發的事件------------
   // ======文章收藏
   function hnadleLike() {
-    // 如果會員沒登入退回討論區
+    // 如果會員沒登入退回
     if (!userId) {
       Swal.fire({
         position: 'top-end',
@@ -89,15 +92,31 @@ function Article(props) {
       })
       return
     } else {
-      // 已經收藏
+      //已經收藏
       if (favorited) {
+        fetch(`${process.env.REACT_APP_API_URL}/ArticleCollection/remove`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+          },
+          body: JSON.stringify({ "id": userId, "article": forumid })
+          //怎麼轉址的時候取回用戶id回到個人頁面?
+        }).then(setShow(false))
+        Swal.fire(
+          '移除收藏成功!',
+          '',
+          'success'
+        ).then(setFavorited(!favorited)
+        )
+          .catch(err => console.log(`沒有成功刪除，因為${err}`));
+
         // const remove = async () => {
         //   const url = `${process.env.REACT_APP_API_URL}/ArticleCollection/remove`
         //   const request = new Request(url, {
-        //     method: 'POST',
+        //     method: 'DELETE',
         //     body: JSON.stringify({
-        //       articleId: forumid,
-        //       userId: userId,
+        //       likeID: userId,
         //     }),
         //     headers: new Headers({
         //       Accept: 'application/json',
@@ -115,30 +134,57 @@ function Article(props) {
         // }
         // remove()
       } else {
-        // 未收藏
-        const add = async () => {
-          fetch(`${process.env.REACT_APP_API_URL}/ArticleCollection/add`, {
-            method: 'POST',
-            body: JSON.stringify({
-              "articleId": forumid,
-              "userId": userId,
-            }),
-            headers: {
-              "Content-Type": "application/json",
-              "Accept": "application/json",
-            }
+        //未收藏
+        fetch(`${process.env.REACT_APP_API_URL}/ArticleCollection/add`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+          },
+          body: JSON.stringify({
+            "like": null,
+            "userId": userId,
+            "articleId": forumid
           })
-            .then((res) => res.json())
-            .then((data) => {
-              if (data.ok) {
-                setFavorited(!favorited)
-                console.log(data, 'Add to Favorite')
-              } else {
-                alert('失敗')
-              }
-            })
-        }
-        add()
+        })
+          .then(json => console.log(json))
+        Swal.fire(
+          '新增成功!',
+          '',
+          'success'
+        ).then((data) => {
+          console.log(data);
+          if (data.ok) {
+            setFavorited(!favorited)
+            console.log(data, 'Add to Favorite')
+          } else {
+            alert('失敗')
+          }
+        }).then(setFavorited(!favorited))
+        // .catch(err => console.log(`沒有成功新增，因為${err}`))
+        // const add = async () => {
+        //   fetch(`${process.env.REACT_APP_API_URL}/ArticleCollection/add`, {
+        //     method: 'POST',
+        //     body: JSON.stringify({
+        //       "articleId": 71,
+        //       "userId": 2,
+        //     }),
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //       "Accept": "application/json",
+        //     }
+        //   })
+        //     .then((res) => res.json())
+        //     .then((data) => {
+        //       if (data.ok) {
+        //         setFavorited(!favorited)
+        //         console.log(data, 'Add to Favorite')
+        //       } else {
+        //         alert('失敗')
+        //       }
+        //     })
+        // }
+        // add()
       }
     }
   }
@@ -193,16 +239,13 @@ function Article(props) {
             '刪除成功!',
             '',
             'success'
-          )
+          ).then(goBack())
             .catch(err => console.log(`沒有成功刪除，因為${err}`));
-
         }
       })
     }
 
   }
-
-
 
 
   // ======下一篇
@@ -277,7 +320,7 @@ function Article(props) {
             let commentSuccsee = true
             if (commentSuccsee) {
               Swal.fire({
-                position: 'top-end',
+                position: 'center',
                 icon: 'success',
                 title: '評論發表成功',
                 showConfirmButton: false,
@@ -293,8 +336,6 @@ function Article(props) {
         })
     }
   }
-
-
 
   return (
     <>
@@ -339,6 +380,10 @@ function Article(props) {
                   <div className="d-flex justify-content-between">
                     <p className="category pRegular">分類：{nowArticle.thema}</p>
                     <div className="d-flex align-items-center">
+
+                      <a href="https://www.facebook.com/sharer.php?u=localhost:3000/forum/116&quote=藝化上的這篇文章好有趣，一起加入討論吧！" target="_blank">
+                        <FaShareAltSquare />
+                      </a>
                       <FaCommentDots />
                       <div className="px-2">{comments.length}</div>
                     </div>
