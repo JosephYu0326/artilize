@@ -99,6 +99,10 @@ function AddArticle(props) {
       <div className="container">
         <div className="frContent">
           <h3>新增討論</h3>
+          <form method="post" enctype="multipart/form-data" action={`${process.env.REACT_APP_API_URL}/upload`}>
+            <input type="file" name="abc"></input>
+            <input type="submit" value="Submit"></input>
+          </form>
           <form name='articleForm'>
             <Form.Control
               value={title}
@@ -120,11 +124,43 @@ function AddArticle(props) {
             <Editor
               id='inputContent'
               onEditorChange={(e) => setContent(editorRef.current.getContent())}
-              //value={content}
+              //value={content}file_picker_types: 'image',
               apiKey="e4s1xgrvd4r96o20xx1rznb6s86xopp4ex9qrle63uvyvhoq"
               onInit={(evt, editor) => (editorRef.current = editor)}
               initialValue=""
               init={{
+                automatic_uploads: true,
+                file_picker_types: 'image',
+                images_upload_handler: function (blobInfo, succFun, failFun) {
+                  var xhr, formData;
+                  var file = blobInfo.blob();//转化为易于理解的file对象
+                  xhr = new XMLHttpRequest();
+                  xhr.withCredentials = false;
+
+                  xhr.open('POST', `${process.env.REACT_APP_API_URL}/upload`);
+                  xhr.onload = function () {
+                    var json;
+                    if (xhr.status != 200) {
+                      failFun('HTTP Error: ' + xhr.status);
+                      return;
+                    }
+                    json = JSON.parse(xhr.responseText);
+
+                    if (!json || json.status != 1) {
+                      failFun('Invalid JSON: ' + xhr.responseText);
+                      return;
+                    }
+                    var fullImgUrl = json.data.full_url;
+                    succFun(fullImgUrl);
+                  };
+                  formData = new FormData();
+                  formData.append('file', file, file.name);
+                  xhr.send(formData);
+                },
+                //处理表单ajax提交不保存信息的情况
+                setup: function (editor) {
+                  editor.on('change', function () { editor.save(); });
+                },
                 height: 600,
                 menubar: false,
                 language: 'zh_TW',
@@ -138,7 +174,6 @@ function AddArticle(props) {
                   'anchor',
                   'searchreplace',
                   'visualblocks',
-                  'code',
                   'fullscreen',
                   'insertdatetime',
                   'table',
