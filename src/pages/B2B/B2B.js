@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
 import B2Bliste from './B2Bliste'
-import B2Btotal from './B2Btotal'
+import B2BStartCount from './B2BStartCount'
+import B2BEndCount from './B2BEndCount'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -22,19 +23,25 @@ const extendAbilityEx = (array) => {
     let expire = true
 
     if (+new Date(v.endtime) > +new Date()) {
-      console.log(+new Date())
+      // console.log(+new Date())
       expire = false
     }
 
     return { ...v, expire }
   })
 }
+//排序
+// const orderAbilityEx = (array) =>{
+//    return array.mpa((v,i)=>{
+//      return {}
+//    })
+// }
 
 function B2B(props) {
   const [data, setDate] = useState(extendAbilityEx(abilityEx))
-  const [key, setKey] = useState('all')
+  const [key, setKey] = useState('start')
 
-  console.log(extendAbilityEx(abilityEx))
+  console.log('extendAbilityEx(abilityEx)', extendAbilityEx(abilityEx))
 
   // 設定展覽數
   const setExCount = (newCount, i) => {
@@ -42,14 +49,30 @@ function B2B(props) {
     newExhibitionInorder[i].count = newCount < 1 ? 1 : newCount
     setDate(newExhibitionInorder)
   }
-  // 展覽總數
-  // const totalNumberEx = () => {
-  //   let total = 0
-  //   for (let i = 0; i < exhibitionInorder.length; i++) {
-  //     total += 1
-  //   }
-  //   return total
-  // }
+  // 已發布展覽總數
+  const startNumberEx = () => {
+    let total = data.filter((v, i) => {
+      return v.expire === false
+    }).length
+    console.log('Stotal', total)
+    return total
+  }
+  // 過期展覽總數
+  const endNumberEx = () => {
+    let Etotal = data.filter((v, i) => {
+      return v.expire === true
+    }).length
+    console.log('Etotal', Etotal)
+    return Etotal
+  }
+  // 全部展覽總數
+  const totalNumberEx = () => {
+    let total = 0
+    for (let i = 0; i < data.length; i++) {
+      total += 1
+    }
+    return total
+  }
   // 展覽刪除
   const handleDeleteEx = (id) => {
     alert('確定要刪除該筆資料嗎？')
@@ -62,9 +85,11 @@ function B2B(props) {
     <>
       <div>廠商後臺</div>
       <Link to="/b2b/addability">建立新活動資料</Link>
-      <Container fluid="md">
+      <Container>
         <Row>
-          <Col>123</Col>
+          <Col>
+            <h1>活動展覽列表</h1>
+          </Col>
         </Row>
         <Row>
           <Col>
@@ -75,17 +100,15 @@ function B2B(props) {
               activeKey={key}
               onSelect={(k) => setKey(k)}
             >
-              {/* title={`已發布(${''})` */}
-              <Tab eventKey="start" title={`已發布(${''})`}>
-                <B2Btotal />
+              <Tab eventKey="start" title={`已發布(${startNumberEx()})`}>
+                <B2BStartCount startNumberEx={startNumberEx()} />
                 <div className="exhibitionInorder">
                   {data
                     .filter((v, i) => {
                       return v.expire === false
                     })
                     .map((v, i) => {
-                      console.log(v)
-                      console.log(v, i)
+                      console.log('data', v.id, v.expire, i)
                       return (
                         <B2Bliste
                           key={v.id}
@@ -107,7 +130,8 @@ function B2B(props) {
                     })}
                 </div>
               </Tab>
-              <Tab eventKey="end" title={`已結束(${''})`}>
+              <Tab eventKey="end" title={`已結束(${endNumberEx()})`}>
+                <B2BEndCount endNumberEx={endNumberEx()} />
                 <div className="exhibitionInorder">
                   {data
                     .filter((v, i) => {
@@ -135,7 +159,7 @@ function B2B(props) {
                     })}
                 </div>
               </Tab>
-              <Tab eventKey="all" title={`全部(${''})`}>
+              <Tab eventKey="all" title={`全部(${totalNumberEx()})`}>
                 <div className="exhibitionInorder">
                   {data.map((v, i) => {
                     return (
