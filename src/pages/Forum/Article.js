@@ -161,7 +161,7 @@ function Article(props) {
             alert('失敗')
           }
         }).then(setFavorited(!favorited))
-        // .catch(err => console.log(`沒有成功新增，因為${err}`))
+          .catch(err => console.log(`沒有成功新增，因為${err}`))
         // const add = async () => {
         //   fetch(`${process.env.REACT_APP_API_URL}/ArticleCollection/add`, {
         //     method: 'POST',
