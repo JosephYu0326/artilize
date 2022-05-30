@@ -25,9 +25,9 @@ function Article(props) {
   const [favorited, setFavorited] = useState(false)
   //留言
   const [comments, setComments] = useState([{}])
-  const [comment_msg, setComment_msg] = useState("")
+  const [comment_msg, setComment_msg] = useState('')
   //追蹤留言內容
-  const [commentInput, setCommentInput] = useState("")
+  const [commentInput, setCommentInput] = useState('')
   //文章關聯(好像dosn't work)
   const [preArticle, setPreArticle] = useState([{}])
   const [nowArticle, setNowArticle] = useState({})
@@ -47,7 +47,7 @@ function Article(props) {
       setNowArticle(data[1])
       setNextArticle(data[2])
 
-      console.log("此頁文章")
+      console.log('此頁文章')
       console.log(nowArticle)
     } else {
       setPreArticle(data[0])
@@ -56,19 +56,17 @@ function Article(props) {
     }
   }
 
-
   // ======留言匯入
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/forum/comments/${forumid}`)
       .then((res) => res.json())
       .then((data) => {
         setComments(data)
-        console.log("留言:");
-        console.log(comments.length);
+        console.log('留言:')
+        console.log(comments.length)
       })
     //UPDATE WITH ARTICLE TITLE
   }, [nowArticle, show])
-
 
   useEffect(() => {
     getNowArticle()
@@ -88,28 +86,24 @@ function Article(props) {
         icon: 'warning',
         title: '您尚未登入，請登入後再操作',
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
       })
       return
     } else {
       //已經收藏
       if (favorited) {
         fetch(`${process.env.REACT_APP_API_URL}/ArticleCollection/remove`, {
-          method: "DELETE",
+          method: 'DELETE',
           headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
           },
-          body: JSON.stringify({ "id": userId, "article": forumid })
+          body: JSON.stringify({ id: userId, article: forumid }),
           //怎麼轉址的時候取回用戶id回到個人頁面?
         }).then(setShow(false))
-        Swal.fire(
-          '移除收藏成功!',
-          '',
-          'success'
-        ).then(setFavorited(!favorited)
-        )
-          .catch(err => console.log(`沒有成功刪除，因為${err}`));
+        Swal.fire('移除收藏成功!', '', 'success')
+          .then(setFavorited(!favorited))
+          .catch((err) => console.log(`沒有成功刪除，因為${err}`))
 
         // const remove = async () => {
         //   const url = `${process.env.REACT_APP_API_URL}/ArticleCollection/remove`
@@ -135,33 +129,37 @@ function Article(props) {
         // remove()
       } else {
         //未收藏
+        function alert() {
+          Swal.fire('新增收藏成功!', '', 'success')
+        }
         fetch(`${process.env.REACT_APP_API_URL}/ArticleCollection/add`, {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
+            'Content-Type': 'application/x-www-form-urlencoded',
+            Accept: 'application/json',
           },
           body: JSON.stringify({
-            "like": null,
-            "userId": userId,
-            "articleId": forumid
+            "id": userId,
+            "article": forumid,
           })
         })
-          .then(json => console.log(json))
-        Swal.fire(
-          '新增成功!',
-          '',
-          'success'
-        ).then((data) => {
-          console.log(data);
-          if (data.ok) {
-            setFavorited(!favorited)
-            console.log(data, 'Add to Favorite')
-          } else {
-            alert('失敗')
-          }
-        }).then(setFavorited(!favorited))
-          .catch(err => console.log(`沒有成功新增，因為${err}`))
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((err) => console.log(`沒有成功新增，因為${err}`))
+        // .then((json) => console.log(json))
+
+        // .then((data) => {
+        //   console.log(data)
+        //   if (data.ok) {
+        //     setFavorited(!favorited)
+        //     console.log(data, 'Add to Favorite')
+        //   } else {
+        //     alert('失敗')
+        //   }
+        // })
+
         // const add = async () => {
         //   fetch(`${process.env.REACT_APP_API_URL}/ArticleCollection/add`, {
         //     method: 'POST',
@@ -223,30 +221,25 @@ function Article(props) {
         showCancelButton: true,
         confirmButtonColor: '#4153bb',
         cancelButtonColor: '#f4b942',
-        confirmButtonText: '確定'
+        confirmButtonText: '確定',
       }).then((result) => {
         if (result.isConfirmed) {
           fetch(`${process.env.REACT_APP_API_URL}/forum/${forumid}`, {
-            method: "DELETE",
+            method: 'DELETE',
             headers: {
-              "Content-Type": "application/json",
-              "Accept": "application/json",
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
             },
-            body: JSON.stringify({ "id": forumid })
+            body: JSON.stringify({ id: forumid }),
             //怎麼轉址的時候取回用戶id回到個人頁面?
           }).then(setShow(false))
-          Swal.fire(
-            '刪除成功!',
-            '',
-            'success'
-          ).then(goBack())
-            .catch(err => console.log(`沒有成功刪除，因為${err}`));
+          Swal.fire('刪除成功!', '', 'success')
+            .then(goBack())
+            .catch((err) => console.log(`沒有成功刪除，因為${err}`))
         }
       })
     }
-
   }
-
 
   // ======下一篇
   function next() {
@@ -257,13 +250,13 @@ function Article(props) {
           setPreArticle(data[0])
           setNowArticle(data[1])
           setNextArticle(data[2])
-          console.log(data);
+          //console.log(data)
         } else {
           setPreArticle(data[0])
           setNowArticle(data[1])
           setNextArticle({ title: '', created_time: '', content: '' })
         }
-        console.log(` ${nextArticle.title}`)
+        //console.log(` ${nextArticle.title}`)
       })
   }
   // ======上一篇
@@ -276,47 +269,46 @@ function Article(props) {
           setPreArticle(data[0])
           setNowArticle(data[1])
           setNextArticle(data[2])
-          console.log(data);
+          //console.log(data)
         } else {
           setPreArticle(data[0])
           setNowArticle(data[1])
           setNextArticle({ title: '', created_time: '', content: '' })
         }
-
       })
   }
 
   // ======新增留言
   let body = {
-    "comment": commentInput,
-    "userid": userId,
-    "article": forumid
+    comment: commentInput,
+    userid: userId,
+    article: forumid,
   }
 
   function postComment(e) {
-    e.preventDefault();
-    let isPass = true; // 有沒有通過檢查
-    setComment_msg(''); // 清空訊息
+    e.preventDefault()
+    let isPass = true // 有沒有通過檢查
+    setComment_msg('') // 清空訊息
 
     //表單資料送出之前, 做格式檢查
     if (commentInput.length < 10) {
-      isPass = false;
+      isPass = false
       setComment_msg('留言字數需10字以上，請重新輸入')
     }
     if (isPass) {
       fetch(`${process.env.REACT_APP_API_URL}/ArticleComment`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
-        body: JSON.stringify(body)
+        body: JSON.stringify(body),
       })
         // .then(alert('增新成功'))
-        .then(r => r.json())
-        .then(obj => {
+        .then((r) => r.json())
+        .then((obj) => {
           // console.log(obj.serverStatus);
-          if ((obj.serverStatus) === 2) {
+          if (obj.serverStatus === 2) {
             let commentSuccsee = true
             if (commentSuccsee) {
               Swal.fire({
@@ -324,7 +316,7 @@ function Article(props) {
                 icon: 'success',
                 title: '評論發表成功',
                 showConfirmButton: false,
-                timer: 1500
+                timer: 1500,
               })
               getNowArticle()
               setCommentInput('')
@@ -332,7 +324,7 @@ function Article(props) {
           }
         })
         .catch(function (error) {
-          alert('新增失敗，網站忙碌中，請再試一次');
+          alert('新增失敗，網站忙碌中，請再試一次')
         })
     }
   }
@@ -341,7 +333,8 @@ function Article(props) {
     <>
       <Header />
       <div className="backBtn displayN">
-        <Link to="/forum">回討論區
+        <Link to="/forum">
+          回討論區
           <FaAngleLeft />
         </Link>
       </div>
@@ -360,28 +353,47 @@ function Article(props) {
                     />
                   </Link>
                   <div>
-                    <Link className="p txtGray" to={`/forum/FrPersonalPage/${nowArticle.users_id}`}>
+                    <Link
+                      className="p txtGray"
+                      to={`/forum/FrPersonalPage/${nowArticle.users_id}`}
+                    >
                       {nowArticle.nickname}
                     </Link>
                     <div className="h4 ps-3 Regular">{nowArticle.title}</div>
                   </div>
                 </div>
                 <div className="like d-flex justify-content-center align-items-center">
-                  <FaStar onClick={hnadleLike} className={`${(favorited) ? "likeIt" : ""} text-decoration-none fs-5 mx-2`} />
-                  <Link to={`/forum/EditArticle/${nowArticle.article_id}`} className='text-decoration-none' ><FaEdit className="fs-5 mx-2" /></Link>
+                  <FaStar
+                    onClick={hnadleLike}
+                    className={`${favorited ? 'likeIt' : ''
+                      } text-decoration-none fs-5 mx-2`}
+                  />
+                  <Link
+                    to={`/forum/EditArticle/${nowArticle.article_id}`}
+                    className="text-decoration-none"
+                  >
+                    <FaEdit className="fs-5 mx-2" />
+                  </Link>
                   <FaTrashAlt onClick={hnadleDel} className="fs-5 mx-2" />
                 </div>
               </div>
               <div className="articleBody py-5">
-                <div dangerouslySetInnerHTML={{ __html: `${nowArticle.content}` }}></div>
+                <div
+                  dangerouslySetInnerHTML={{ __html: `${nowArticle.content}` }}
+                ></div>
               </div>
               <div className="articleFoot">
                 <div>
                   <div className="d-flex justify-content-between">
-                    <p className="category pRegular">分類：{nowArticle.thema}</p>
+                    <p className="category pRegular">
+                      分類：{nowArticle.thema}
+                    </p>
                     <div className="d-flex align-items-center">
-
-                      <a href="https://www.facebook.com/sharer.php?u=localhost:3000/forum/116&quote=藝化上的這篇文章好有趣，一起加入討論吧！" target="_blank">
+                      <a
+                        href="https://www.facebook.com/sharer.php?u=localhost:3000/forum/116&quote=藝化上的這篇文章好有趣，一起加入討論吧！"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         <FaShareAltSquare />
                       </a>
                       <FaCommentDots />
@@ -392,10 +404,24 @@ function Article(props) {
                   <div className="d-flex justify-content-between">
                     <div className="d-flex align-items-center">
                       <FaAngleLeft />
-                      <div onClick={next}><Link className='text-decoration-none' to={`/forum/${nextArticle.article_id}`}>{nextArticle.title}</Link></div>
+                      <div onClick={next}>
+                        <Link
+                          className="text-decoration-none"
+                          to={`/forum/${nextArticle.article_id}`}
+                        >
+                          {nextArticle.title}
+                        </Link>
+                      </div>
                     </div>
                     <div className="d-flex align-items-center">
-                      <div onClick={pre}><Link className='text-decoration-none' to={`/forum/${preArticle.article_id}`}>{preArticle.title}</Link></div>
+                      <div onClick={pre}>
+                        <Link
+                          className="text-decoration-none"
+                          to={`/forum/${preArticle.article_id}`}
+                        >
+                          {preArticle.title}
+                        </Link>
+                      </div>
                       <FaAngleRight />
                     </div>
                   </div>
@@ -421,7 +447,10 @@ function Article(props) {
                 ></textarea>
                 <div style={{ color: 'red' }}>{comment_msg}</div>
                 <div className="align-self-end">
-                  <button onClick={postComment} className="btn btn-primary rounded-pill">
+                  <button
+                    onClick={postComment}
+                    className="btn btn-primary rounded-pill"
+                  >
                     新增回覆
                   </button>
                 </div>
