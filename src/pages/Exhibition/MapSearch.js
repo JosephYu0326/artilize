@@ -3,7 +3,7 @@
 //https://www.youtube.com/watch?v=UKdQjQX1Pko
 import React, { useState, useEffect, useRef } from 'react'
 import { Link, render } from 'react-router-dom'
-import { Container, Row } from 'react-bootstrap'
+import { Container, Row, Spinner } from 'react-bootstrap'
 import '../../styles/MapSearch.scss'
 import { FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa'
 import Header from '../../component/Header'
@@ -29,6 +29,7 @@ function MapSearch(props) {
   const [activeHighlight, setActiveHighlight] = useState(-1)
   const [mapSearchButton, setMapSearchButton] = useState('exhibition')
   const [MapStyle, setMapStyle] = useState()
+  const [isLoading, setIsLoading] = useState(false)
   const mapSearchInput = useRef()
   const fetchExhibitionData = async () => {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/MapSearch`)
@@ -81,6 +82,68 @@ function MapSearch(props) {
   //   markers.forEach(({ position }) => bounds.extend(position))
   //   map.fitBounds(bounds)
   // }
+  const mapSpinner = (
+    <div
+      style={{ height: '77.5vh', overflow: 'auto' }}
+      className="d-flex justify-content-center align-items-center"
+    >
+      <Spinner animation="border" variant="primary" />
+    </div>
+  )
+
+  const mapList = (
+    <div id="scrollableDiv" style={{ height: '77.5vh', overflow: 'auto' }}>
+      {datas.map((exhibition, i) => {
+        const { id, name, date, location, latitude, longitude } = exhibition
+        return (
+          <div
+            key={i}
+            style={{ cursor: 'pointer' }}
+            onClick={function () {
+              setMarkerID(id)
+              setCenter({
+                lat: parseFloat(latitude),
+                lng: parseFloat(longitude),
+              })
+              handleActiveMarker(id)
+              setActiveHighlight(-1)
+            }}
+            id={`MapCard${id}`}
+          >
+            <div
+              className={`card mb-3 ${
+                activeHighlight === id ? 'mapCardActive' : ''
+              }`}
+            >
+              <div className="row g-0">
+                <div className="col-md-3">
+                  <img
+                    src="https://picsum.photos/106/139"
+                    className="img-fluid rounded-start"
+                    alt="..."
+                  />
+                </div>
+                <div className="col-md-9">
+                  <div className="card-body d-flex flex-column justify-content-around">
+                    <h6 className="card-title SemiBold">{name}</h6>
+                    <div className="d-flex">
+                      <FaMapMarkerAlt />
+                      <p className="card-text pRegular">{location}</p>
+                    </div>
+                    <div className="d-flex">
+                      <FaCalendarAlt />
+                      <p className="card-text pRegular">{date}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      })}
+      <div style={{ height: '61vh' }}></div>
+    </div>
+  )
 
   return (
     <>
@@ -90,7 +153,10 @@ function MapSearch(props) {
           {/* 清單 */}
           <section className="col-3 mapSearchList d-flex flex-column justify-content-evenly align-items-stretch mt-3">
             <div className="mapSearchBar d-flex  align-items-stretch">
-              <form className="d-flex align-items-center justify-content-center ">
+              <form
+                className="d-flex align-items-center justify-content-center "
+                onSubmit={(e) => e.preventDefault()}
+              >
                 <input
                   type="text"
                   placeholder=""
@@ -103,7 +169,9 @@ function MapSearch(props) {
                         v.location.includes(mapSearchInputValue) ||
                         v.name.includes(mapSearchInputValue)
                     )
+                    setIsLoading(true)
                     if (mapSearchResult.length > 0) {
+                      setIsLoading(false)
                       setDatas(mapSearchResult)
                       // console.log(mapSearchResult)
                       const resultCenter = {
@@ -183,68 +251,14 @@ function MapSearch(props) {
                     .firstChild.scrollIntoView({
                       behavior: 'smooth',
                       block: 'start',
-                      inline: 'start',
+                      inline: 'nearest',
                     })
                 }}
               >
                 活動
               </button>
             </div>
-            <div
-              id="scrollableDiv"
-              style={{ height: '77.5vh', overflow: 'auto' }}
-            >
-              {datas.map((exhibition, i) => {
-                const { id, name, date, location, latitude, longitude } =
-                  exhibition
-                return (
-                  <div
-                    key={i}
-                    style={{ cursor: 'pointer' }}
-                    onClick={function () {
-                      setMarkerID(id)
-                      setCenter({
-                        lat: parseFloat(latitude),
-                        lng: parseFloat(longitude),
-                      })
-                      handleActiveMarker(id)
-                      setActiveHighlight(-1)
-                    }}
-                    id={`MapCard${id}`}
-                  >
-                    <div
-                      className={`card mb-3 ${
-                        activeHighlight === id ? 'mapCardActive' : ''
-                      }`}
-                    >
-                      <div className="row g-0">
-                        <div className="col-md-3">
-                          <img
-                            src="https://picsum.photos/106/139"
-                            className="img-fluid rounded-start"
-                            alt="..."
-                          />
-                        </div>
-                        <div className="col-md-9">
-                          <div className="card-body d-flex flex-column justify-content-around">
-                            <h6 className="card-title SemiBold">{name}</h6>
-                            <div className="d-flex">
-                              <FaMapMarkerAlt />
-                              <p className="card-text pRegular">{location}</p>
-                            </div>
-                            <div className="d-flex">
-                              <FaCalendarAlt />
-                              <p className="card-text pRegular">{date}</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )
-              })}
-              <div style={{ height: '61.5vh' }}></div>
-            </div>
+            {isLoading ? mapSpinner : mapList}
           </section>
           {/* 地圖 */}
           <section className="col-9 mapSearchMap ps-0 pe-0">
