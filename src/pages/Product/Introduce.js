@@ -27,7 +27,7 @@ function Introduce(props) {
       <div key={i}>
         <div className="pBrandCard d-flex">
           <Link to="">
-            <div style={pBrandImg} className="pBrandImg"></div>
+            <div style={pBrandImg} className="pIntroBrandImg"></div>
           </Link>
           <div className="pBrandCardcontent">
             <Link to="" className="pBrandLink">

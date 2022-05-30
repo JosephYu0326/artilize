@@ -9,26 +9,27 @@ import Accordion from '../../component/Accordion'
 import Footer from '../../component/Footer'
 import { Link } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
-import { API_GET_DATA } from './constants'
+import { API_GET_DATA, API_GET_IMG } from './constants'
 import p_adImages from '../../images/product_Images/ad/test_2.jpeg'
 import p_Images from '../../images/product_Images/product/tea_L2.jpg'
-import p_brandImages from '../../images/product_Images/brand/nationalpalace.png'
+// import p_brandImages from '../../images/product_Images/brand/nationalpalace.png'
 import p_saleImages from '../../images/product_Images/product/whiteveg.jpeg'
 import p_saleIconsfreight from '../../images/product_Images/icons/freeFreight.png'
 import p_saleIconsdiscount from '../../images/product_Images/icons/sale.png'
 
 function Product(props) {
-  const ptCards = ['1', '2', '3']
-  const pImg = { backgroundImage: `url(${p_Images})` }
-  const ptBrandCards = ['1', '2', '3']
-  const pBrandImg = { backgroundImage: `url(${p_brandImages})` }
-  const ptSaleCards = ['1', '2', '3']
-  const pSaleImg = { backgroundImage: `url(${p_saleImages})` }
+  // const ptCards = ['1', '2', '3']
+  // const pImg = { backgroundImage: `url(${p_Images})` }
+  // const ptBrandCards = ['1', '2', '3']
+  // const pBrandImg = { backgroundImage: `url(${p_brandImages})` }
+  // const ptSaleCards = ['1', '2', '3']
+  // const pSaleImg = { backgroundImage: `url(${p_saleImages})` }
   const pInCartImg = { backgroundImage: `url(${p_Images})` }
 
   const [pCardData, setData] = useState([])
   const fetchData = async () => {
-    const res = await fetch('http://localhost:5000/product')
+    // const res = await fetch('http://localhost:5000/product')
+    const res = await fetch(`${API_GET_DATA}/product`)
     const data = await res.json()
     // console.log(data)
     setData(data)
@@ -37,31 +38,38 @@ function Product(props) {
     fetchData()
   }, [])
 
+  const [pBrandData, setBrandData] = useState([])
+  const fetchBrandData = async () => {
+    const res = await fetch(`${API_GET_DATA}/product`)
+    const data = await res.json()
+    // console.log(data)
+    setBrandData(data)
+  }
+  useEffect(() => {
+    fetchBrandData()
+  }, [])
+
   const pCards = pCardData.map(
     ({ product_id, product_name, product_img, product_price }) => (
       <div key={product_id}>
-        <div className="col d-flex justify-content-center">
-          <div className="productCards d-flex">
-            <Link to="/Product/Introduce">
-              <img
-                src={`http://localhost:3000/${product_img}`}
-                className="pImg"
-                alt=""
-              ></img>
-            </Link>
-            <div className="d-flex pContent">
-              <div className="pTitle mt-2">
-                <Link to="/Product/Introduce" className="pLinkTitle">
-                  <h6 className="pTitletext text-web pt-2 ExtraBold">
-                    {product_name}
-                  </h6>
-                </Link>
-              </div>
-              <div className="price text-web">
-                <Link to="/Product/Introduce" className="pLinkPrice">
-                  <p className="ExtraBold">{product_price}</p>
-                </Link>
-              </div>
+        <div className="pCard">
+          <Link to="/Product/Introduce">
+            <img
+              src={`${API_GET_IMG}/${product_img}`}
+              className="pCardImg"
+              alt=""
+            ></img>
+          </Link>
+          <div className="pCardContent">
+            <div className="pCardContentPrice">
+              <Link to="/Product/Introduce" className="TextLink">
+                <h6 className="ExtraBold pCardContentTopic">{product_name}</h6>
+              </Link>
+              <Link to="/Product/Introduce" className="TextLink">
+                <p className="pBig ExtraBold pCardContentPrice">
+                  {`NT $${product_price}`}
+                </p>
+              </Link>
             </div>
           </div>
         </div>
@@ -101,6 +109,33 @@ function Product(props) {
   //   )
   // })
 
+  const pBrandCards = pBrandData.map(
+    ({ product_brand_id, product_brand_name, product_brand_img }) => {
+      return (
+        <div key={product_brand_id}>
+          <div className="pBrandCard">
+            <div className="pBrandCardImgcontent">
+              <Link to="/Product/Introduce">
+                <img
+                  src={`${API_GET_IMG}/${product_brand_img}`}
+                  className="pBrandCardImg"
+                  alt=""
+                ></img>
+              </Link>
+            </div>
+            <div className="pBrandCardContent">
+              <Link to="/Product/Introduce" className="TextLink">
+                <h6 className="ExtraBold pBrandCardContentTopic">
+                  {product_brand_name}
+                </h6>
+              </Link>
+            </div>
+          </div>
+        </div>
+      )
+    }
+  )
+
   // const pBrandCards = ptBrandCards.map((v, i) => {
   //   return (
   //     <div key={i}>
@@ -121,6 +156,55 @@ function Product(props) {
   //     </div>
   //   )
   // })
+
+  const pMoresaleCards = pCardData.map((product, index) => {
+    const { product_name, product_img, product_orign_price, product_price } =
+      product
+    return (
+      <div key={index}>
+        <div className="pMoresaleCard">
+          <Link to="/Product/Introduce">
+            <img
+              src={`${API_GET_IMG}/${product_img}`}
+              className="pMoresaleCardImg"
+              alt=""
+            ></img>
+          </Link>
+          <div className="pMoresaleCardContent">
+            <div className="pMoresaleCardContentPrice">
+              <Link to="/Product/Introduce" className="TextLink">
+                <h6 className="ExtraBold pCardTestContentTopic">
+                  {product_name}
+                </h6>
+              </Link>
+              <p className="pRegular pMoresaleCardContentOrignPrice">{`NT $${product_orign_price}`}</p>
+              <Link to="/Product/Introduce" className="TextLink">
+                <p className="pBig ExtraBold pMoresaleCardContentSalePrice">
+                  {`NT $${product_price}`}
+                </p>
+              </Link>
+            </div>
+            <div className="pMoresaleCardContentSaleIcon">
+              <div>
+                <img
+                  className="pMoresaleCardContentSaleIconImg"
+                  src={p_saleIconsfreight}
+                  alt=""
+                ></img>
+              </div>
+              <div>
+                <img
+                  className="pMoresaleCardContentSaleIconImg"
+                  src={p_saleIconsdiscount}
+                  alt=""
+                ></img>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  })
 
   // const pSaleCards = ptSaleCards.map((v, i) => {
   //   return (
@@ -167,7 +251,11 @@ function Product(props) {
       {/* <AsideBar btn0="商品首頁" btn1="Category" /> */}
       <Accordion />
       <div className="container-fulid">
-        <img src={p_adImages} style={{ width: '100%', height: '400px' }}></img>
+        <img
+          src={p_adImages}
+          style={{ width: '100%', height: '400px' }}
+          alt=""
+        ></img>
       </div>
       <Container className="main mt-5 justify-content-center">
         <div>
@@ -184,7 +272,7 @@ function Product(props) {
               精選館別
             </h5>
           </div>
-          <div className="row row-cols-xxl-3 row-cols-2"></div>
+          <div className="row row-cols-xxl-3 row-cols-2">{pBrandCards}</div>
         </div>
         <div className="mt-5">
           <div className="d-flex justify-content-center">
@@ -192,15 +280,9 @@ function Product(props) {
               更多優惠
             </h5>
           </div>
-          <div className="row row-cols-xxl-3 row-cols-2 mb-3"></div>
-        </div>
-      </Container>
-      <Container>
-        <div className="InCart">
-          <div className="InCartImg" style={pInCartImg} height="80"></div>
-          <div className="InCartTopic"></div>
-          <div className="InCartAmount"></div>
-          <div className="InCartTotal"></div>
+          <div className="row row-cols-xxl-3 row-cols-2 mb-3">
+            {pMoresaleCards}
+          </div>
         </div>
       </Container>
       <Footer />
