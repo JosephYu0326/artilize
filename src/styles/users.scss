@@ -1,0 +1,14 @@
+@import "./global.scss";
+
+.usersRow {
+    height: calc(100vh - 93.9px);
+}
+
+.usersBackground {
+    background-color: #ffffff;
+    box-shadow: $BoxShadow;
+}
+
+.usersContentcolor {
+    color: $DarkGrey;
+}
