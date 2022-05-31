@@ -1,18 +1,18 @@
 //商品介紹_內部分頁(類別)
-import '../../styles/products.scss'
+// import '../../../../styles/products.scss'
 // import '../../styles/AsideBar.scss'
-import '../../styles/productCategory.scss'
+import '../../../../styles/productCategory.scss'
 import React from 'react'
-import Header from '../../component/Header'
-import Accordion from '../../component/Accordion'
+import Header from '../../../../component/Header'
+import Accordion from '../../../../component/Accordion'
 // import AsideBar from '../../component/AsideBar'
-import Footer from '../../component/Footer'
+import Footer from '../../../../component/Footer'
 import { Link } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
-import p_adImages from '../../images/product_Images/ad/test_2.jpeg'
-import p_categoryImg from '../../images/product_Images/product/necklace.jpeg'
+import p_adImages from '../../../../images/product_Images/ad/test_2.jpeg'
+import p_categoryImg from '../../../../images/product_Images/product/necklace.jpeg'
 
-function Product(props) {
+function Category(props) {
   const ptCategoryCards = ['1', '2', '3']
   const pCategoryImg = { backgroundImage: `url(${p_categoryImg})` }
   //   const categorys = ['經典藝術', '珍藏瑰寶', '品味生活', '生活禮品']
@@ -102,4 +102,4 @@ function Product(props) {
   )
 }
 
-export default Product
+export default Category

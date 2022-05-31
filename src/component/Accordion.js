@@ -56,7 +56,7 @@ function Accordion() {
               return (
                 <div key={j}>
                   <Link
-                    to="/Product/ProductCategory"
+                    to="product/ProductCategory"
                     className="accordionContentLink"
                   >
                     {' '}
@@ -116,7 +116,14 @@ function Accordion() {
   }
   return (
     <>
-      <div className="accordionFrame BoxShadow">{data}</div>
+      <div className="accordionFrame BoxShadow">
+        <div className="accordionHome">
+          <Link to="/product" className="accordionHomeLink">
+            <h4>首頁</h4>
+          </Link>
+        </div>
+        <div>{data}</div>
+      </div>
     </>
   )
 }

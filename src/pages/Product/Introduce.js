@@ -1,7 +1,7 @@
 //商品介紹
 import '../../styles/productIntro.scss'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import Header from '../../component/Header'
 import { FcLike } from 'react-icons/fc'
@@ -15,6 +15,8 @@ import p_BrandImg from '../../images/product_Images/brand/Chimei.png'
 import Accordion from '../../component/Accordion'
 
 function Introduce(props) {
+  const parmas = useParams()
+  console.log(parmas.product_id)
   const ptIntroCards = ['1', '2', '3']
   const pSamesearchImg = { backgroundImage: `url(${p_SamesearchImg})` }
   const ptPopCards = ['1', '2', '3']
@@ -150,6 +152,7 @@ function Introduce(props) {
                   <button
                     className="btn btn-primary rounded-pill"
                     type="button"
+                    style={{ marginBottom: '30px' }}
                   >
                     商品問題回報
                   </button>
@@ -168,7 +171,13 @@ function Introduce(props) {
                 <img src={p_purchasebaramount} alt=""></img>
               </div>
               <div className="PurchaseBarCarticon">
-                <img src={p_purchasebarjoincart} alt=""></img>
+                <Link to="#">
+                  <img src={p_purchasebarjoincart} alt="" />
+                </Link>
+                {/* <button className="JoinCartBtn">
+                  <img src={p_purchasebarjoincart} alt="" />
+                </button> */}
+                {/* <img src={p_purchasebarjoincart} alt="" /> */}
               </div>
             </div>
           </div>

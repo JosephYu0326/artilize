@@ -8,6 +8,9 @@
 .TextLink {
     color:#000;
     text-decoration: none;
+    &:hover{
+        color: black;
+    }
 }
 .pCard{
     width:320px;
