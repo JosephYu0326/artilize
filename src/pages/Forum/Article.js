@@ -21,8 +21,7 @@ import '../../styles/Forum.scss'
 function Article(props) {
   const userId = 2
   const [show, setShow] = useState(false)
-  // 文章收藏狀態
-  const [favorited, setFavorited] = useState(false)
+
   //留言
   const [comments, setComments] = useState([{}])
   const [comment_msg, setComment_msg] = useState('')
@@ -66,7 +65,7 @@ function Article(props) {
         console.log(comments.length)
       })
     //UPDATE WITH ARTICLE TITLE
-  }, [nowArticle, show])
+  }, [nowArticle])
 
   useEffect(() => {
     getNowArticle()
@@ -91,125 +90,106 @@ function Article(props) {
       return
     } else {
       //已經收藏
-      if (favorited) {
-        fetch(`${process.env.REACT_APP_API_URL}/ArticleCollection/remove`, {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify({ id: userId, article: forumid }),
-          //怎麼轉址的時候取回用戶id回到個人頁面?
-        }).then(setShow(false))
-        Swal.fire('移除收藏成功!', '', 'success')
-          .then(setFavorited(!favorited))
-          .catch((err) => console.log(`沒有成功刪除，因為${err}`))
+      // if (nowArticle.favorited) {
+      //   fetch(`${process.env.REACT_APP_API_URL}/ArticleCollection/remove`, {
+      //     method: 'PUT',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       Accept: 'application/json',
+      //     },
+      //     body: JSON.stringify({ favorited: nowArticle.favorited }),
+      //     //怎麼轉址的時候取回用戶id回到個人頁面?
+      //   }).then(setShow(false))
+      //   Swal.fire('移除收藏成功!', '', 'success')
+      //     // .then(setFavorited(!favorited))
+      //     .catch((err) => console.log(`沒有成功刪除，因為${err}`))
 
-        // const remove = async () => {
-        //   const url = `${process.env.REACT_APP_API_URL}/ArticleCollection/remove`
-        //   const request = new Request(url, {
-        //     method: 'DELETE',
-        //     body: JSON.stringify({
-        //       likeID: userId,
-        //     }),
-        //     headers: new Headers({
-        //       Accept: 'application/json',
-        //       'Content-Type': 'application/json',
-        //     }),
-        //   })
-        //   const response = await fetch(request)
-        //   const data = await response.json()
-        //   if (data.success) {
-        //     setFavorited(!favorited)
-        //     console.log(data, 'remove from Favorite')
-        //   } else {
-        //     alert('Failed to remove from Favorite')
-        //   }
-        // }
-        // remove()
-      } else {
-        //未收藏
-        function alert() {
-          Swal.fire('新增收藏成功!', '', 'success')
-        }
-        fetch(`${process.env.REACT_APP_API_URL}/ArticleCollection/add`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify({
-            "id": userId,
-            "article": forumid,
-          })
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-          })
-          .catch((err) => console.log(`沒有成功新增，因為${err}`))
-        // .then((json) => console.log(json))
-
-        // .then((data) => {
-        //   console.log(data)
-        //   if (data.ok) {
-        //     setFavorited(!favorited)
-        //     console.log(data, 'Add to Favorite')
-        //   } else {
-        //     alert('失敗')
-        //   }
-        // })
-
-        // const add = async () => {
-        //   fetch(`${process.env.REACT_APP_API_URL}/ArticleCollection/add`, {
-        //     method: 'POST',
-        //     body: JSON.stringify({
-        //       "articleId": 71,
-        //       "userId": 2,
-        //     }),
-        //     headers: {
-        //       "Content-Type": "application/json",
-        //       "Accept": "application/json",
-        //     }
-        //   })
-        //     .then((res) => res.json())
-        //     .then((data) => {
-        //       if (data.ok) {
-        //         setFavorited(!favorited)
-        //         console.log(data, 'Add to Favorite')
-        //       } else {
-        //         alert('失敗')
-        //       }
-        //     })
-        // }
-        // add()
+      // const remove = async () => {
+      //   const url = `${process.env.REACT_APP_API_URL}/ArticleCollection/remove`
+      //   const request = new Request(url, {
+      //     method: 'DELETE',
+      //     body: JSON.stringify({
+      //       likeID: userId,
+      //     }),
+      //     headers: new Headers({
+      //       Accept: 'application/json',
+      //       'Content-Type': 'application/json',
+      //     }),
+      //   })
+      //   const response = await fetch(request)
+      //   const data = await response.json()
+      //   if (data.success) {
+      //     setFavorited(!favorited)
+      //     console.log(data, 'remove from Favorite')
+      //   } else {
+      //     alert('Failed to remove from Favorite')
+      //   }
+      // }
+      // remove()
+      // } else {
+      //未收藏
+      function alert() {
+        Swal.fire('修改成功!', '', 'success')
       }
+      fetch(`${process.env.REACT_APP_API_URL}/ArticleCollection`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          favorited: nowArticle.favorited,
+          article: forumid,
+          // "id": userId,
+        })
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          alert()
+          getNowArticle()
+          console.log(data)
+
+        })
+        .catch((err) => console.log(`沒有成功新增，因為${err}`))
+      // .then((json) => console.log(json))
+
+      // .then((data) => {
+      //   console.log(data)
+      //   if (data.ok) {
+      //     setFavorited(!favorited)
+      //     console.log(data, 'Add to Favorite')
+      //   } else {
+      //     alert('失敗')
+      //   }
+      // })
+
+      // const add = async () => {
+      //   fetch(`${process.env.REACT_APP_API_URL}/ArticleCollection/add`, {
+      //     method: 'POST',
+      //     body: JSON.stringify({
+      //       "articleId": 71,
+      //       "userId": 2,
+      //     }),
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       "Accept": "application/json",
+      //     }
+      //   })
+      //     .then((res) => res.json())
+      //     .then((data) => {
+      //       if (data.ok) {
+      //         setFavorited(!favorited)
+      //         console.log(data, 'Add to Favorite')
+      //       } else {
+      //         alert('失敗')
+      //       }
+      //     })
+      // }
+      // add()
     }
   }
-  // ------
-  // const add = async () => {
-  //   const url = `${process.env.REACT_APP_API_URL}/ArticleCollection/add`
-  //   const request = new Request(url, {
-  //     method: 'POST',
-  //     body: JSON.stringify({
-  //       "articleId": forumid,
-  //       "userId": userId,
-  //     }),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Accept": "application/json",
-  //     },
-  //   })
-  //   const response = await fetch(request)
-  //   const data = await response.json()
-  //   if (data.success) {
-  //     setFavorited(!favorited)
-  //     console.log(data, 'Add to Favorite')
-  //   } else {
-  //     alert('失敗')
-  //   }
   // }
-  // add()
+
   // ======文章刪除
   function hnadleDel(e) {
     e.preventDefault()
@@ -365,16 +345,16 @@ function Article(props) {
                 <div className="like d-flex justify-content-center align-items-center">
                   <FaStar
                     onClick={hnadleLike}
-                    className={`${favorited ? 'likeIt' : ''
+                    className={`${nowArticle.favorited ? 'likeIt' : ''
                       } text-decoration-none fs-5 mx-2`}
                   />
                   <Link
                     to={`/forum/EditArticle/${nowArticle.article_id}`}
                     className="text-decoration-none"
                   >
-                    <FaEdit className="fs-5 mx-2" />
+                    <FaEdit className={`${(nowArticle.users_id == userId) ? '' : 'd-none'} fs-5 mx-2`} />
                   </Link>
-                  <FaTrashAlt onClick={hnadleDel} className="fs-5 mx-2" />
+                  <FaTrashAlt onClick={hnadleDel} className={`${(nowArticle.users_id == userId) ? '' : 'd-none'} fs-5 mx-2`} />
                 </div>
               </div>
               <div className="articleBody py-5">
@@ -389,13 +369,6 @@ function Article(props) {
                       分類：{nowArticle.thema}
                     </p>
                     <div className="d-flex align-items-center">
-                      <a
-                        href="https://www.facebook.com/sharer.php?u=localhost:3000/forum/116&quote=藝化上的這篇文章好有趣，一起加入討論吧！"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <FaShareAltSquare />
-                      </a>
                       <FaCommentDots />
                       <div className="px-2">{comments.length}</div>
                     </div>

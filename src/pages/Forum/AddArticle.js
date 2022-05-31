@@ -1,6 +1,7 @@
 //新增文章
 import React, { useEffect, useState, useRef } from 'react'
 import Swal from 'sweetalert2'
+import axios from 'axios'
 import { Link, useHistory } from 'react-router-dom'
 // import tinymce from 'tinymce/tinymce'
 import { Editor } from '@tinymce/tinymce-react'
@@ -90,7 +91,63 @@ function AddArticle(props) {
         setCategory(data)
       })
   }, [])
+  let config = {
+    headers: {
+      "Content-Type": false,
+    }
+  }
+  // function Upload({`${process.env.REACT_APP_API_URL}/upload`)
+  const editorOBJ = {
+    automatic_uploads: true,
+    file_picker_types: 'image',
+    images_upload_handler:
+      function (blobInfo, success, failure) {
+        var formData;
+        let file = blobInfo.blob();
+        formData = new FormData();
+        formData.append('file', file, file.name)
+        console.log(file);
 
+        axios.post(`${process.env.REACT_APP_API_URL}/upload`, {
+          formData
+        }).then(response => {
+          console.log(response.data)
+          const data = response.data.url;
+          success(data)
+        }).catch(error => {
+          const data = error.data;
+          //failure(data.message)
+          console.log(error);
+        })
+
+      },
+    height: 600,
+    menubar: false,
+    language: 'zh_TW',
+    plugins: [
+      'advlist',
+      'autolink',
+      'lists',
+      'link',
+      'image',
+      'charmap',
+      'anchor',
+      'searchreplace',
+      'visualblocks',
+      'fullscreen',
+      'insertdatetime',
+      'table',
+      'preview',
+      'wordcount',
+    ],
+    toolbar:
+      'undo redo | blocks | image | ' +
+      'bold italic forecolor | alignleft aligncenter ' +
+      'alignright alignjustify | bullist numlist outdent indent | ' +
+      'removeformat | help',
+    content_style:
+      "body { font-family: 'Noto Sans TC', sans-serif; font-size:14px }",
+  }
 
   return (
     <>
@@ -99,10 +156,6 @@ function AddArticle(props) {
       <div className="container">
         <div className="frContent">
           <h3>新增討論</h3>
-          <form method="post" enctype="multipart/form-data" action={`${process.env.REACT_APP_API_URL}/upload`}>
-            <input type="file" name="abc"></input>
-            <input type="submit" value="Submit"></input>
-          </form>
           <form name='articleForm'>
             <Form.Control
               value={title}
@@ -128,66 +181,7 @@ function AddArticle(props) {
               apiKey="e4s1xgrvd4r96o20xx1rznb6s86xopp4ex9qrle63uvyvhoq"
               onInit={(evt, editor) => (editorRef.current = editor)}
               initialValue=""
-              init={{
-                automatic_uploads: true,
-                file_picker_types: 'image',
-                images_upload_handler: function (blobInfo, succFun, failFun) {
-                  var xhr, formData;
-                  var file = blobInfo.blob();//转化为易于理解的file对象
-                  xhr = new XMLHttpRequest();
-                  xhr.withCredentials = false;
-
-                  xhr.open('POST', `${process.env.REACT_APP_API_URL}/upload`);
-                  xhr.onload = function () {
-                    var json;
-                    if (xhr.status != 200) {
-                      failFun('HTTP Error: ' + xhr.status);
-                      return;
-                    }
-                    json = JSON.parse(xhr.responseText);
-
-                    if (!json || json.status != 1) {
-                      failFun('Invalid JSON: ' + xhr.responseText);
-                      return;
-                    }
-                    var fullImgUrl = json.data.full_url;
-                    succFun(fullImgUrl);
-                  };
-                  formData = new FormData();
-                  formData.append('file', file, file.name);
-                  xhr.send(formData);
-                },
-                //处理表单ajax提交不保存信息的情况
-                setup: function (editor) {
-                  editor.on('change', function () { editor.save(); });
-                },
-                height: 600,
-                menubar: false,
-                language: 'zh_TW',
-                plugins: [
-                  'advlist',
-                  'autolink',
-                  'lists',
-                  'link',
-                  'image',
-                  'charmap',
-                  'anchor',
-                  'searchreplace',
-                  'visualblocks',
-                  'fullscreen',
-                  'insertdatetime',
-                  'table',
-                  'preview',
-                  'wordcount',
-                ],
-                toolbar:
-                  'undo redo | blocks | image | ' +
-                  'bold italic forecolor | alignleft aligncenter ' +
-                  'alignright alignjustify | bullist numlist outdent indent | ' +
-                  'removeformat | help',
-                content_style:
-                  "body { font-family: 'Noto Sans TC', sans-serif; font-size:14px }",
-              }}
+              init={{ ...editorOBJ }}
             />
             <div className="container">
               <div className="row mx-auto">

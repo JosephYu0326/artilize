@@ -1,22 +1,12 @@
-import React, { Children, useState } from "react";
+import React, { useState } from "react";
 import Swal from 'sweetalert2'
-import {
-  FaTrashAlt
-} from 'react-icons/fa'
+import { FaTrashAlt } from 'react-icons/fa'
 import '../../styles/Forum.scss'
 function Comment(props) {
   const [show, setShow] = useState(false)
   let comment = props.comment
   console.log(comment);
 
-
-
-
-  // const getNowComment = async () => {
-  //   const res = await fetch(`${process.env.REACT_APP_API_URL}/forum/comments/${forumid}`)
-  //   const data = await res.json()
-  //   setComments(data)
-  // }
 
   //刪除留言
   function hnadleDel(e) {
@@ -45,7 +35,7 @@ function Comment(props) {
                 "Accept": "application/json",
               },
               body: JSON.stringify({ "id": id })
-              //怎麼轉址的時候取回用戶id回到個人頁面?
+
             }).then(setShow(false),
               comment = props.comment
               //setComment(props.comment)
@@ -62,8 +52,6 @@ function Comment(props) {
       }
     }
   }
-
-  // console.log(comment[1].blog_comment_id)
 
   const Reply = comment.map((v, i) => {
     return (

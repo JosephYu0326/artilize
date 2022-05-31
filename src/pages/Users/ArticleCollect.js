@@ -34,17 +34,20 @@ function ArticleCollect(props) {
   //拿到收藏文章列表
   const [articleList, setArticleList] = useState([])
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/ArticleCollection/${userID}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify({ userID: `${userID}` })
-    })
+    fetch(`${process.env.REACT_APP_API_URL}/ArticleCollection/`
+      // , {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     "Accept": "application/json"
+      //   },
+      //   body: JSON.stringify({ userID: `${userID}` })
+      // }
+    )
       .then((res) => res.json())
       .then((data) => {
         setArticleList(data)
+        console.log(data);
         console.log("收藏文章");
       })
   }, [])
