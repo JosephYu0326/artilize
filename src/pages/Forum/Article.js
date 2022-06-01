@@ -3,7 +3,6 @@ import { Link, useParams, useHistory } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import FadeIn from 'react-fade-in/lib/FadeIn'
 import {
-  FaShareAltSquare,
   FaTrashAlt,
   FaEdit,
   FaStar,
@@ -72,6 +71,7 @@ function Article(props) {
   }, [])
 
   useEffect(() => {
+    setComment_msg('')
     setCommentInput('')
   }, [forumid])
 
@@ -140,7 +140,6 @@ function Article(props) {
         body: JSON.stringify({
           favorited: nowArticle.favorited,
           article: forumid,
-          // "id": userId,
         })
       })
         .then((res) => res.json())
@@ -271,9 +270,9 @@ function Article(props) {
     setComment_msg('') // 清空訊息
 
     //表單資料送出之前, 做格式檢查
-    if (commentInput.length < 10) {
+    if (commentInput.length < 15) {
       isPass = false
-      setComment_msg('留言字數需10字以上，請重新輸入')
+      setComment_msg(`留言字數需15字以上，您還需要${15-commentInput.length}字`)
     }
     if (isPass) {
       fetch(`${process.env.REACT_APP_API_URL}/ArticleComment`, {
@@ -428,7 +427,7 @@ function Article(props) {
                   </button>
                 </div>
               </section>
-              <Comment comment={comments} />
+              <Comment forum={getNowArticle} comment={comments} />
             </section>
           </div>
         </FadeIn>
