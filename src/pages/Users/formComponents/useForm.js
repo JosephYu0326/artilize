@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import UserAccountValidate from './SignUpValidate/UserAccountValidate'
+import userEmailValidate from './SignUpValidate/userEmailValidate'
+import userPasswordValidate from './SignUpValidate/userPasswordValidate'
 
 const useForm = (validate) => {
   const [addUserData, setUserData] = useState({
@@ -16,20 +19,25 @@ const useForm = (validate) => {
     const newAddUserData = { ...addUserData, [name]: value }
     setUserData(newAddUserData)
   }
+  const userAccountBlur = (e) => {
+    setErrors(UserAccountValidate(addUserData))
+  }
+  const userEmailBlur = (e) => {
+    setErrors(userEmailValidate(addUserData))
+  }
+  const userPasswordBlur = (e) => {
+    setErrors(userPasswordValidate(addUserData))
+  }
+  const userConfirmPasswordBlur = (e) => {
+    setErrors(validate(addUserData))
+  }
   const handleSubmit = (e) => {
     e.preventDefault()
 
     setErrors(validate(addUserData))
     setIsSubmitting(true)
-    console.log(validate(addUserData).userAccount)
-    if (
-      validate(addUserData).userAccount ||
-      validate(addUserData).userEmail ||
-      validate(addUserData).userPassword ||
-      validate(addUserData).userConfirmPassword !== undefined
-    ) {
-      console.log(1)
-    } else {
+    console.log(validate(addUserData))
+    if (JSON.stringify(validate(addUserData)) === '{}') {
       sendAddUserData()
     }
   }
@@ -65,7 +73,16 @@ const useForm = (validate) => {
     }
   }
 
-  return { handleChange, addUserData, handleSubmit, errors }
+  return {
+    handleChange,
+    addUserData,
+    handleSubmit,
+    errors,
+    userAccountBlur,
+    userEmailBlur,
+    userPasswordBlur,
+    userConfirmPasswordBlur,
+  }
 }
 
 export default useForm

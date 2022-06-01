@@ -5,15 +5,10 @@ import '../../styles/users.scss'
 import Header from '../../component/Header'
 import { Container, Row } from 'react-bootstrap'
 import { useState } from 'react'
-import useForm from './formComponents/useForm'
-import validate from './formComponents/validateInfo'
+
 import SignUpForm from './formComponents/SignupForm'
 
 const SignUp = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  function submitForm() {
-    setIsSubmitted(true)
-  }
   return (
     <>
       <Header />
