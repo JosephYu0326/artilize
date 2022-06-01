@@ -6,12 +6,14 @@ import userEmailValidate from './SignUpValidate/userEmailValidate'
 import userPasswordValidate from './SignUpValidate/userPasswordValidate'
 
 const useForm = (validate) => {
+  const [data, setData] = useState([])
   const [addUserData, setUserData] = useState({
     userAccount: '',
     userEmail: '',
     userPassword: '',
     userConfirmPassword: '',
   })
+
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const handleChange = (e) => {
@@ -19,9 +21,24 @@ const useForm = (validate) => {
     const newAddUserData = { ...addUserData, [name]: value }
     setUserData(newAddUserData)
   }
+  const checkAccount = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/users/signup/checkaccount?name=${addUserData.userAccount}`
+    )
+    const results = await response.json()
+    // console.log(response)
+    // console.log(results)
+    setData(results)
+  }
+  useEffect(() => {
+    checkAccount()
+  }, [addUserData])
   const userAccountBlur = (e) => {
+    checkAccount()
+
     setErrors(UserAccountValidate(addUserData))
   }
+
   const userEmailBlur = (e) => {
     setErrors(userEmailValidate(addUserData))
   }
