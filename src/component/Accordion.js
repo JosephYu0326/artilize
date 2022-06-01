@@ -55,10 +55,7 @@ function Accordion() {
             content[i].map((v, j) => {
               return (
                 <div key={j}>
-                  <Link
-                    to="product/ProductCategory"
-                    className="accordionContentLink"
-                  >
+                  <Link to="/ProductCategory" className="accordionContentLink">
                     {' '}
                     <h6
                       className={
@@ -117,11 +114,11 @@ function Accordion() {
   return (
     <>
       <div className="accordionFrame BoxShadow">
-        <div className="accordionHome">
-          <Link to="/product" className="accordionHomeLink">
+        <Link to="/product" className="accordionHomeLink">
+          <div className="accordionHome">
             <h4>首頁</h4>
-          </Link>
-        </div>
+          </div>
+        </Link>
         <div>{data}</div>
       </div>
     </>

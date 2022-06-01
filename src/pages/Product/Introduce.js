@@ -1,6 +1,6 @@
 //商品介紹
 import '../../styles/productIntro.scss'
-import React from 'react'
+import { React, useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import Header from '../../component/Header'
@@ -16,7 +16,80 @@ import Accordion from '../../component/Accordion'
 
 function Introduce(props) {
   const parmas = useParams()
+  const [pIntroData, setIntroData] = useState([])
   console.log(parmas.product_id)
+  const fetchProductId = async () => {
+    const res = await fetch(
+      `http://localhost:5000/product/introduce/${parmas.product_id}`
+    )
+    const results = await res.json()
+    console.log(results)
+    setIntroData(results)
+  }
+
+  useEffect(() => {
+    fetchProductId()
+  }, [])
+
+  const pIntroCard = pIntroData.map((productintro, index) => {
+    const {
+      product_id,
+      product_name,
+      product_introduce.innerHTML,
+      product_img,
+      product_orign_price,
+      product_price,
+    } = productintro
+    return (
+      <div className="productIntro d-flex" key={product_id}>
+        <div className="pIntroImg">
+          <img src={p_IntroImg}></img>
+        </div>
+        <div className="pIntroDetail">
+          <div className="pIntroDetailcard d-flex">
+            <div className="pIntroDetailCardcontent">
+              <div className="pIntroDetailtopic ms-2">
+                <div className="d-inline-flex">
+                  <h6 className="ExtraBold">商品介紹</h6>
+                </div>
+              </div>
+              <div className="pIntroDetailmain">{product_introduce}</div>
+              <div className="pIntroButton d-grid gap-2 m-2 p-2 ">
+                <button className="btn btn-primary rounded-pill" type="button">
+                  商品退換貨說明
+                </button>
+                <button
+                  className="btn btn-primary rounded-pill"
+                  type="button"
+                  style={{ marginBottom: '30px' }}
+                >
+                  商品問題回報
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="pIntroPurchaseBar">
+            <div className="PurchaseBarPrice">
+              <div className="PurchaseBarOrignPrice">{`原價 NT $${product_orign_price}`}</div>
+              <div className="PurchaseBarDiscountPrice">{`優惠價 NT $${product_price}`}</div>
+            </div>
+            <div className="PurchaseBarCollect">
+              <FcLike />
+            </div>
+            <div className="PurchaseBarAmount">
+              <img src={p_purchasebaramount} alt=""></img>
+            </div>
+            <div className="PurchaseBarCarticon">
+              <Link to="#">
+                <img src={p_purchasebarjoincart} alt="" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  })
+
   const ptIntroCards = ['1', '2', '3']
   const pSamesearchImg = { backgroundImage: `url(${p_SamesearchImg})` }
   const ptPopCards = ['1', '2', '3']
@@ -87,7 +160,8 @@ function Introduce(props) {
       <Header />
       <Accordion />
       <Container>
-        <div className="productIntro d-flex">
+        {pIntroCard}
+        {/* <div className="productIntro d-flex">
           <div className="pIntroImg">
             <img src={p_IntroImg}></img>
           </div>
@@ -174,14 +248,14 @@ function Introduce(props) {
                 <Link to="#">
                   <img src={p_purchasebarjoincart} alt="" />
                 </Link>
-                {/* <button className="JoinCartBtn">
+                <button className="JoinCartBtn">
                   <img src={p_purchasebarjoincart} alt="" />
-                </button> */}
-                {/* <img src={p_purchasebarjoincart} alt="" /> */}
+                </button>
+                <img src={p_purchasebarjoincart} alt="" />
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </Container>
       <Container className=" mt-5 mb-5 justify-content-center">
         <div className="mt-5">

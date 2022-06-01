@@ -1,8 +1,7 @@
 //商品
 import '../../../../styles/products.scss'
 // import '../../styles/AsideBar.scss'
-import React from 'react'
-import { useState, useEffect } from 'react'
+import { React, useState, useEffect } from 'react'
 import Header from '../../../../component/Header'
 import Accordion from '../../../../component/Accordion'
 // import AsideBar from '../../component/AsideBar'

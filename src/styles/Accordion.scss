@@ -12,6 +12,12 @@
     color: black;
 }
 
+.accordionHome:hover{
+    text-decoration: none;
+    color: $LighterGrey;
+    background: $primary;
+}
+
 .accordionFrame{
     margin-top:  500px;
     position:absolute;
