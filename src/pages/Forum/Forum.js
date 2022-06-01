@@ -46,7 +46,7 @@ function Forum(props) {
       {/* <Spinner variant='primary'/>
       <Loading className={`{(${isLoading}) ? "" : visually-hidden}`} />
 <button onClick={toggle}>toggle</button> */}
-      <Header />
+      <Header data={articleList}/>
       <ForumAside btn={btn} />
       <FadeIn className="container h-100">
         <div className="frContent">

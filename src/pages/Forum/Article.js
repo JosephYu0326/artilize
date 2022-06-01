@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams, useHistory } from 'react-router-dom'
+import { useSpring, animated } from 'react-spring'
 import Swal from 'sweetalert2'
 import FadeIn from 'react-fade-in/lib/FadeIn'
 import {
@@ -140,14 +141,14 @@ function Article(props) {
         body: JSON.stringify({
           favorited: nowArticle.favorited,
           article: forumid,
-        })
+        }),
       })
         .then((res) => res.json())
         .then((data) => {
-          alert()
+          toggle(!state)
+          // alert()
           getNowArticle()
           console.log(data)
-
         })
         .catch((err) => console.log(`沒有成功新增，因為${err}`))
       // .then((json) => console.log(json))
@@ -272,7 +273,9 @@ function Article(props) {
     //表單資料送出之前, 做格式檢查
     if (commentInput.length < 15) {
       isPass = false
-      setComment_msg(`留言字數需15字以上，您還需要${15-commentInput.length}字`)
+      setComment_msg(
+        `留言字數需15字以上，您還需要${15 - commentInput.length}字`
+      )
     }
     if (isPass) {
       fetch(`${process.env.REACT_APP_API_URL}/ArticleComment`, {
@@ -308,6 +311,12 @@ function Article(props) {
     }
   }
 
+  const [state, toggle] = useState(true)
+  const { x } = useSpring({
+    from: { x: 0 },
+    x: state ? 1 : 0,
+    config: { duration: 500 },
+  })
   return (
     <>
       <Header />
@@ -342,18 +351,37 @@ function Article(props) {
                   </div>
                 </div>
                 <div className="like d-flex justify-content-center align-items-center">
-                  <FaStar
-                    onClick={hnadleLike}
-                    className={`${nowArticle.favorited ? 'likeIt' : ''
+                  <animated.div
+                    style={{
+                      scale: x.to({
+                        range: [0.8, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 1],
+                        output: [1.2, 0.97, 0.9, 1.2, 0.9, 1.1, 1.03, 1],
+                      }),
+                    }}
+                  >
+                    <FaStar
+                      onClick={hnadleLike}
+                      className={`${
+                        nowArticle.favorited ? 'likeIt' : ''
                       } text-decoration-none fs-5 mx-2`}
-                  />
+                    />
+                  </animated.div>
                   <Link
                     to={`/forum/EditArticle/${nowArticle.article_id}`}
                     className="text-decoration-none"
                   >
-                    <FaEdit className={`${(nowArticle.users_id == userId) ? '' : 'd-none'} fs-5 mx-2`} />
+                    <FaEdit
+                      className={`${
+                        nowArticle.users_id == userId ? '' : 'd-none'
+                      } fs-5 mx-2`}
+                    />
                   </Link>
-                  <FaTrashAlt onClick={hnadleDel} className={`${(nowArticle.users_id == userId) ? '' : 'd-none'} fs-5 mx-2`} />
+                  <FaTrashAlt
+                    onClick={hnadleDel}
+                    className={`${
+                      nowArticle.users_id == userId ? '' : 'd-none'
+                    } fs-5 mx-2`}
+                  />
                 </div>
               </div>
               <div className="articleBody py-5">

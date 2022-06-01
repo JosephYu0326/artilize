@@ -1,24 +1,29 @@
-import React, { useState } from "react";
-import { Nav, Navbar, Container, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import logo from "../images/logo.png";
-import { FaUserCircle, FaSearch } from "react-icons/fa";
-import SearchBar from "./SearchBar";
-import "../styles/HeaderAndFooter.scss";
-import "../styles/SearchBar.scss";
+import React, { useState } from 'react'
+import { useSpring, animated } from 'react-spring'
+import { Nav, Navbar, Container, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import logo from '../images/logo.png'
+import { FaUserCircle, FaSearch } from 'react-icons/fa'
+import SearchBar from './SearchBar'
+import '../styles/HeaderAndFooter.scss'
+import '../styles/SearchBar.scss'
 
 function Header(props) {
+  const [serchInput, setSerchInput] = useState('')
   const [collapseSearch, setCollapseSearch] = useState(
-    "navbar-collapse collapse"
-  );
+    'navbar-collapse collapse'
+  )
+  const data = props.data
 
   function clickToSearch() {
-    if (collapseSearch === "navbar-collapse collapse") {
-      setCollapseSearch("navbar-collapse collapse show");
+    if (collapseSearch === 'navbar-collapse collapse') {
+      setCollapseSearch('navbar-collapse collapse show')
     } else {
-      setCollapseSearch("navbar-collapse collapse");
+      setCollapseSearch('navbar-collapse collapse')
     }
   }
+
+  
 
   return (
     <>
@@ -50,6 +55,7 @@ function Header(props) {
                     type="search"
                     placeholder=""
                     aria-label="Search"
+                    onChange={(e) => setSerchInput(e.target.value)}
                   />
                   <button className="btn searchbtn" type="submit">
                     <FaSearch />
@@ -71,12 +77,14 @@ function Header(props) {
               </Link>
               <li className="nav-item">
                 <div className="homeSearchBar justify-content-center align-items-stretch">
-                  <SearchBar />
+                  <SearchBar data={data} />
                   <Button variant="primary rounded-pill px-4">
                     <Link to="/b2b">辦展覽</Link>
                   </Button>
                   <button className="align-items-center d-flex pb-2">
-                    <Link to="/users"><FaUserCircle /></Link>
+                    <Link to="/users">
+                      <FaUserCircle />
+                    </Link>
                   </button>
                 </div>
               </li>
@@ -85,7 +93,7 @@ function Header(props) {
         </Container>
       </Navbar>
     </>
-  );
+  )
 }
 
-export default Header;
+export default Header

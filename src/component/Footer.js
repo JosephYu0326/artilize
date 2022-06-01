@@ -43,9 +43,12 @@ function Footer(props) {
             <a href="#" className="txtGray">
               購票須知
             </a>
-            <a href="#" className="txtGray">
+            {/* <a href="#" className="txtGray">
               關於我們
-            </a>
+            </a> */}
+            <Link to="/Newsletter" className="txtGray">
+            訂閱電子報
+            </Link>
           </div>
           <div>
             <Button variant="outline-primary rounded-pill" >聯絡我們</Button>

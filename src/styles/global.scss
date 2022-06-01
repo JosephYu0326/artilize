@@ -7,6 +7,10 @@ $secondary: rgb(244,185,66);
 // 其它要導入覆蓋掉原本的預設bootstrap樣式要放在這下面
 // 全站都會使用的共同樣式
 
+
+
+
+
 //定義顏色變數，參考figma
 $PurpleBlue:rgb(65,83,187);
 $WarnYellow:rgb(244,185,66);
@@ -16,6 +20,10 @@ $LightGrey:rgb(203,212,230);
 $LighterGrey:rgb(241,241,241);
 $background:#e5e5e5;
 
+::selection {
+	background:$DarkGrey;
+	color: $background;
+}
 
 //定義BorderRadius
 $BorderRadius:0px;
