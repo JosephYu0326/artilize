@@ -44,9 +44,8 @@ import Style from './pages/Style'
 //隱私政策
 import PrivacyPolicy from './pages/PrivacyPolicy'
 //訂閱電子報
-import Newsletter from './pages/Newsletter'
-import ScrollToTop from "../src/component/ScrollToTop"
-
+import NewsLetter from './pages/NewsLetter'
+import ScrollToTop from '../src/component/ScrollToTop'
 
 function App() {
   const userID = 4
@@ -148,8 +147,8 @@ function App() {
           <Route path="/privacypolicy">
             <PrivacyPolicy />
           </Route>
-          <Route path="/Newsletter">
-            <Newsletter />
+          <Route path="/newsletter">
+            <NewsLetter />
           </Route>
           <Route path="/" exact>
             <Home />
