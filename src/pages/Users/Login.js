@@ -10,8 +10,45 @@ import { useHistory } from 'react-router-dom'
 function Login(props) {
   const [account, setAccount] = useState('')
   const [password, setPassword] = useState('')
-  const { auth, setAuth } = props
+  const [loginData, setLoginData] = useState({
+    userAccount: '',
+    userPassword: '',
+  })
+  const { auth, setAuth, userId, setUserId } = props
   const history = useHistory()
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    const newLoginData = { ...loginData, [name]: value }
+    setLoginData(newLoginData)
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    sendLoginData()
+  }
+  const sendLoginData = async () => {
+    try {
+      const loginForm = document.getElementById('loginForm')
+      const formData = new FormData(loginForm)
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/users/login`,
+        { method: 'POST', body: formData }
+      )
+      const result = await response.json()
+      console.log(result)
+      if (result.ok === true) {
+        setAuth(!auth)
+        localStorage.setItem('userId', result.userId)
+        localStorage.setItem('auth', true)
+        setUserId(result.userId)
+        alert('歡迎登入')
+        history.push('/users')
+      } else {
+        alert('未有此帳號或帳密輸入錯誤')
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <>
@@ -19,15 +56,12 @@ function Login(props) {
       <div className="bg-background">
         <section>
           <Container>
-            <Row
-              className="d-flex justify-content-center align-items-center"
-              style={{ height: '100vh' }}
-            >
+            <Row className="d-flex justify-content-center align-items-center usersRow">
               <div
                 className=" BorderRadius usersBackground p-5"
                 style={{ maxWidth: '568px', minWidth: '390px' }}
               >
-                <form>
+                <form onSubmit={handleSubmit} noValidate id="loginForm">
                   <div style={{ paddingLeft: '12px' }}>
                     <h4 className="ph_title row ExtraBold text-primary">
                       登入
@@ -39,13 +73,11 @@ function Login(props) {
                   <div id="input-text" className="mb-3">
                     <input
                       type="text"
-                      className="form-control"
-                      id="exampleFormControlInput1"
+                      className="form-control BorderRadius"
+                      name="userAccount"
                       placeholder="帳號"
-                      value={account}
-                      onChange={(e) => {
-                        setAccount(e.target.value)
-                      }}
+                      value={loginData.userAccount}
+                      onChange={handleChange}
                     />
                     <div id="emailHelp" className="form-text text-secondary">
                       請輸入正確的帳號
@@ -57,13 +89,11 @@ function Login(props) {
                   >
                     <input
                       type="text"
-                      className="form-control "
-                      id="exampleFormControlInput1"
+                      className="form-control BorderRadius"
                       placeholder="密碼"
-                      value={password}
-                      onChange={(e) => {
-                        setPassword(e.target.value)
-                      }}
+                      name="userPassword"
+                      value={loginData.userPassword}
+                      onChange={handleChange}
                     />
                     <div id="emailHelp" className="form-text text-secondary">
                       請輸入正確的密碼
@@ -86,22 +116,14 @@ function Login(props) {
                       </button>
                     </Link> */}
                     <button
-                      className="btn btn-primary rounded-pill"
-                      onClick={() => {
-                        setAuth(!auth)
-
-                        // 呈現歡迎訊息
-                        alert('你好，歡迎')
-
-                        // 導向會員頁面
-                        history.push('/users/signup/')
-                      }}
+                      type="submit"
+                      className="btn btn-primary rounded-pill "
                     >
-                      {auth ? '登出' : '登入'}
+                      登入
                     </button>
                     <Link to="/users/signup/">
                       <button
-                        type="submit"
+                        type="click"
                         className="btn btn-primary rounded-pill"
                       >
                         註冊

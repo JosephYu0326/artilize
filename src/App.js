@@ -30,8 +30,11 @@ import NotFoundPage from './pages/Home/NotFoundPage'
 import B2B from './pages/B2B/B2B'
 import AddAbility from './pages/B2B/AddAbility'
 import Style from './pages/Style'
+import { useState } from 'react'
 
 function App() {
+  const [auth, setAuth] = useState(false)
+  const [userId, setUserId] = useState()
   return (
     <Router>
       <Switch>
@@ -105,10 +108,15 @@ function App() {
           <Edit />
         </Route>
         <Route path="/users/login">
-          <Login />
+          <Login
+            setAuth={setAuth}
+            auth={auth}
+            setUserId={setUserId}
+            userId={userId}
+          />
         </Route>
         <Route path="/users">
-          <Users />
+          <Users auth={auth} userId={userId} />
         </Route>
         <Route path="/search">
           <Serach />

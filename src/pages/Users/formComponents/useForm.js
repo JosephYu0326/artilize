@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import UserAccountValidate from './SignUpValidate/UserAccountValidate'
@@ -21,26 +22,36 @@ const useForm = (validate) => {
     const newAddUserData = { ...addUserData, [name]: value }
     setUserData(newAddUserData)
   }
-  const checkAccount = async () => {
+  // const checkAccount = async () => {
+  //   const response = await fetch(
+  //     `${process.env.REACT_APP_API_URL}/users/signup/checkaccount?name=${addUserData.userAccount}`
+  //   )
+  //   const results = await response.json()
+  //   // console.log(response)
+  //   console.log(results)
+  //   setData(results)
+  // }
+
+  const userAccountBlur = async (e) => {
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}/users/signup/checkaccount?name=${addUserData.userAccount}`
     )
     const results = await response.json()
     // console.log(response)
     // console.log(results)
-    setData(results)
-  }
-  useEffect(() => {
-    checkAccount()
-  }, [addUserData])
-  const userAccountBlur = (e) => {
-    checkAccount()
+    //setData(results)
 
-    setErrors(UserAccountValidate(addUserData))
+    setErrors(UserAccountValidate(addUserData, results))
+    console.log(UserAccountValidate(addUserData, results))
   }
 
-  const userEmailBlur = (e) => {
-    setErrors(userEmailValidate(addUserData))
+  const userEmailBlur = async (e) => {
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/users/signup/checkemail?email=${addUserData.userEmail}`
+    )
+    const results = await response.json()
+    // console.log(results)
+    setErrors(userEmailValidate(addUserData, results))
   }
   const userPasswordBlur = (e) => {
     setErrors(userPasswordValidate(addUserData))
@@ -58,7 +69,7 @@ const useForm = (validate) => {
       sendAddUserData()
     }
   }
-
+  const Navigate = useHistory()
   const MySwal = withReactContent(Swal)
   const sendAddUserData = async () => {
     try {
@@ -72,14 +83,16 @@ const useForm = (validate) => {
       console.log(results)
       if (results.ok === true) {
         MySwal.fire({
-          title: <h3>註冊成功</h3>,
+          title: <h2>註冊成功</h2>,
           icon: 'success',
+        }).then(function () {
+          Navigate.push('/users/login')
         })
       } else {
         MySwal.fire({
           title: (
             <div>
-              <h3>註冊失敗</h3>
+              <h2>註冊失敗</h2>
             </div>
           ),
           icon: 'error',
