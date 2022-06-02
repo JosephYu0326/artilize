@@ -6,7 +6,7 @@ import '../../styles/AddAbility.scss'
 import { FiSettings } from 'react-icons/fi'
 
 function AddAbility(props) {
-  const [exhibition, setExhibition] = useState({ username: '' })
+  const [exhibition, setExhibition] = useState('')
 
   // select 縣市
   const [selectedValue, setSelectedValue] = useState('')

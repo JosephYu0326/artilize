@@ -30,9 +30,9 @@ const extendAbilityEx = (array) => {
     return { ...v, expire }
   })
 }
-const ex = (a)=>{
-  
-}
+// const ex = (a)=>{
+//   for()
+// }
 //排序
 // const orderAbilityEx = (array) =>{
 //    return array.mpa((v,i)=>{
@@ -69,13 +69,34 @@ function B2B(props) {
     return Etotal
   }
   // 全部展覽總數
+  // const totalNumberEx = () => {
+  //   let total = 0
+  //   for (let i = 0; i < data.length; i++) {
+  //     total += 1
+  //   }
+  //   return total
+  // }
   const totalNumberEx = () => {
-    let total = 0
+    let total = data.length,
+      eTotal = 0,
+      pTotal = 0
+
     for (let i = 0; i < data.length; i++) {
-      total += 1
+      // total += 1
+      if (data[i].expire) {
+        eTotal += 1
+      }
     }
-    return total
+
+    pTotal = total - eTotal
+
+    return [total, eTotal, pTotal]
   }
+  console.log(totalNumberEx())
+  const [x, y, z] = totalNumberEx()
+  console.log('x', x)
+  console.log('y', y)
+  console.log('z', z)
   // 展覽刪除
   const handleDeleteEx = (id) => {
     alert('確定要刪除該筆資料嗎？')
@@ -103,7 +124,7 @@ function B2B(props) {
               activeKey={key}
               onSelect={(k) => setKey(k)}
             >
-              <Tab eventKey="start" title={`已發布(${startNumberEx()})`}>
+              <Tab eventKey="start" title={`已發布(${z})`}>
                 <B2BStartCount startNumberEx={startNumberEx()} />
                 <div className="exhibitionInorder">
                   {data
@@ -133,7 +154,7 @@ function B2B(props) {
                     })}
                 </div>
               </Tab>
-              <Tab eventKey="end" title={`已結束(${endNumberEx()})`}>
+              <Tab eventKey="end" title={`已結束(${y})`}>
                 <B2BEndCount endNumberEx={endNumberEx()} />
                 <div className="exhibitionInorder">
                   {data
@@ -162,7 +183,7 @@ function B2B(props) {
                     })}
                 </div>
               </Tab>
-              <Tab eventKey="all" title={`全部(${totalNumberEx()})`}>
+              <Tab eventKey="all" title={`全部(${x})`}>
                 <div className="exhibitionInorder">
                   {data.map((v, i) => {
                     return (
