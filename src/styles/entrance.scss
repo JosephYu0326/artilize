@@ -1,0 +1,112 @@
+@import "./global.scss";
+
+// body {
+//     font-family: 'Alatsi', sans-serif;
+//     margin: 0;
+//     overflow: hidden;
+//     background: black;
+//   }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  /* .title {
+    font-size: 10vw;
+    color: white;
+  } */
+  
+  .logo {
+    width: 50%;
+    height: 50%;
+    display: inline-block;
+    
+    -webkit-mask: url(../images/ARTILIZE_logo_b.svg) no-repeat 50% 50%;
+    mask: url(../images/ARTILIZE_logo_b.svg) no-repeat 100% 100%;
+    /* -webkit-mask-size: cover; */
+    /* mask-size: cover; */
+  }
+  
+//   .logoArtilize { 
+//     background: url(../images/testpic.png) 50% 0%;
+//     background-size: cover;
+//   }
+  
+  canvas {
+    width: 100%;
+    // height: '100vh'
+  }
+  
+  .logoAnimation { 
+    background: #FFFFFF;
+    -webkit-animation: ❤ 3s infinite linear;
+    animation: ❤ 3s infinite linear; 
+  }
+  
+  @-webkit-keyframes ❤ {
+    0% { background-color: #FFFFFF; }
+    33% { background-color: #4153BB; }
+    66% { background-color: #F4B942; }
+    
+  }
+  
+  @keyframes ❤ {
+    0% { background-color: #FFFFFF; }
+    33% { background-color: #4153BB; }
+    66% { background-color: #F4B942; }
+    
+  }
+  
+  /* @-webkit-keyframes ❤ {
+    0% { background-color: red; }
+    16% { background-color: orange; }
+    32% { background-color: yellow; }
+    48% { background-color: green; }
+    60% { background-color: blue; }
+    72% { background-color: hwb(275 0% 49%); }
+    84% { background-color: violet; }
+  }
+  
+  @keyframes ❤ {
+    0% { background-color: red; }
+    16% { background-color: orange; }
+    32% { background-color: yellow; }
+    48% { background-color: green; }
+    60% { background-color: blue; }
+    72% { background-color: indigo; }
+    84% { background-color: violet; }
+  } */
+
+
+.arrowRight{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: absolute;
+    // right: 15px;
+    // margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    color:$primary;
+    border-radius: 50%;
+    border: 0px solid;
+    
+ 
+}
+.arrowRight:hover {
+    background-color: $background;
+}
+.arrowRight:active {
+    color: $secondary;
+    background: #ffffff;
+}
