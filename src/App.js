@@ -51,6 +51,7 @@ function App() {
   const userID = 4
 
   return (
+    <Header serchdats={data}/>
     <Router>
       <ScrollToTop>
         <Switch>

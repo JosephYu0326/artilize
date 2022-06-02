@@ -35,6 +35,7 @@ function Article(props) {
   const goBack = () => {
     history.goBack()
   }
+  
   const { forumid } = useParams()
 
   //===跟據param拿到當前文章，以及前後篇文章

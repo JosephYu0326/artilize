@@ -13,7 +13,16 @@ function Header(props) {
   const [collapseSearch, setCollapseSearch] = useState(
     'navbar-collapse collapse'
   )
+  //用data去filter serchInput 有的字串，再傳回去Form
   const data = props.data
+  function filterItems(query) {
+    return data.filter(function(el) {
+        return el.toLowerCase().indexOf(query.toLowerCase()) > -1;
+    })
+  }
+  // console.log(filterItems('奇'));
+
+
 
   function clickToSearch() {
     if (collapseSearch === 'navbar-collapse collapse') {
