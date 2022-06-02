@@ -5,7 +5,9 @@ import { Link, useParams } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import Header from '../../component/Header'
 import { FcLike } from 'react-icons/fc'
-import p_purchasebaramount from '../../images/product_Images/icons/select.png'
+import { FaPlus } from 'react-icons/fa'
+import { FaMinus } from 'react-icons/fa'
+// import p_purchasebaramount from '../../images/product_Images/icons/select.png'
 import p_purchasebarjoincart from '../../images/product_Images/icons/joincart.png'
 import Footer from '../../component/Footer'
 import p_IntroImg from '../../images/product_Images/productintro/TeaTest.jpg'
@@ -31,11 +33,15 @@ function Introduce(props) {
     fetchProductId()
   }, [])
 
+  const [amountTotal, setAmountTotal] = useState(1)
+  const handleClick = (value) => () => {
+    setAmountTotal(amountTotal + value)
+  }
   const pIntroCard = pIntroData.map((productintro, index) => {
     const {
       product_id,
       product_name,
-      product_introduce.innerHTML,
+      product_introduce,
       product_img,
       product_orign_price,
       product_price,
@@ -53,7 +59,7 @@ function Introduce(props) {
                   <h6 className="ExtraBold">商品介紹</h6>
                 </div>
               </div>
-              <div className="pIntroDetailmain">{product_introduce}</div>
+              <div dangerouslySetInnerHTML={{ __html: product_introduce }} />
               <div className="pIntroButton d-grid gap-2 m-2 p-2 ">
                 <button className="btn btn-primary rounded-pill" type="button">
                   商品退換貨說明
@@ -73,13 +79,43 @@ function Introduce(props) {
               <div className="PurchaseBarOrignPrice">{`原價 NT $${product_orign_price}`}</div>
               <div className="PurchaseBarDiscountPrice">{`優惠價 NT $${product_price}`}</div>
             </div>
-            <div className="PurchaseBarCollect">
-              <FcLike />
-            </div>
+            <Link to="#">
+              <div className="PurchaseBarCollect">
+                <FcLike style={{ width: '22px', height: '22px' }} />
+              </div>
+            </Link>
             <div className="PurchaseBarAmount">
-              <img src={p_purchasebaramount} alt=""></img>
+              {/* <img src={p_purchasebaramount} alt=""></img> */}
+              <Link to="#">
+                <div
+                  style={{ visibility: amountTotal <= 1 && 'hidden' }}
+                  onClick={handleClick(-1)}
+                >
+                  <FaMinus style={{ width: '25px', height: '25px' }} />
+                </div>
+              </Link>
+
+              <div className="PurchaseBarAmountTotal">{amountTotal}</div>
+              <Link to="#">
+                <div onClick={handleClick(1)}>
+                  <FaPlus style={{ width: '25px', height: '25px' }} />
+                </div>
+              </Link>
             </div>
-            <div className="PurchaseBarCarticon">
+            <div
+              className="PurchaseBarCarticon"
+              onClick={() => {
+                localStorage.setItem('cart', '[]')
+                const joinCartArray = JSON.stringify([
+                  { product_id },
+                  { product_name },
+                  { product_img },
+                  { product_price },
+                  { amountTotal },
+                ])
+                localStorage.setItem('cart', joinCartArray)
+              }}
+            >
               <Link to="#">
                 <img src={p_purchasebarjoincart} alt="" />
               </Link>

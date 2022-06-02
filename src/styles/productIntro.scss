@@ -78,6 +78,18 @@
     color: #B4A79E;
 }
 
+.PurchaseBarAmount{
+    display: flex;
+    align-items: center;
+}
+
+.PurchaseBarAmountTotal{
+    margin: 0px 15px;
+    font-family: 'Noto SansTC', sans-serif;
+    font-size: 36px;
+    color: $primary;
+}
+
 .PurchaseBarCarticon{
     margin-right: 30px;
 }
