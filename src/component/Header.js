@@ -20,6 +20,7 @@ function Header(props) {
   //把keyword送回要搜尋(執行API)的頁面
   useEffect(() => {
     if (keyword) {
+      //引入處<Header setSerchInput={setSerchInput}>，把serchInput用SQL模糊查詢
       props.setSerchInput(keyword)
     }
   }, [keyword])
