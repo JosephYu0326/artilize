@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSpring, animated } from 'react-spring'
 import { Nav, Navbar, Container, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
@@ -9,20 +9,22 @@ import '../styles/HeaderAndFooter.scss'
 import '../styles/SearchBar.scss'
 
 function Header(props) {
-  const [serchInput, setSerchInput] = useState('')
+  //從SearchBar拿回keyword
+  const [keyword, setKeyWord] = useState('')
+  console.log(keyword);
+
   const [collapseSearch, setCollapseSearch] = useState(
     'navbar-collapse collapse'
   )
-  //用data去filter serchInput 有的字串，再傳回去Form
-  const data = props.data
-  function filterItems(query) {
-    return data.filter(function(el) {
-        return el.toLowerCase().indexOf(query.toLowerCase()) > -1;
-    })
-  }
-  // console.log(filterItems('奇'));
 
-
+  //把keyword送回要搜尋(要執行API的頁面)
+  // PROPS不是一個FUNCTION
+  useEffect(() => {
+    function pass() {
+      props.setSerchInput(keyword)
+    }
+    pass()
+  }, [keyword])
 
   function clickToSearch() {
     if (collapseSearch === 'navbar-collapse collapse') {
@@ -32,7 +34,6 @@ function Header(props) {
     }
   }
 
-  
 
   return (
     <>
@@ -53,7 +54,9 @@ function Header(props) {
             </Link>
           </Navbar.Brand>
           <div className="d-flex justify-content-center align-items-center">
-            <FaSearch className="displayY fs-2" onClick={clickToSearch} />
+            <FaSearch className="displayY fs-2"
+            //  onClick={clickToSearch}
+            />
           </div>
           <div className={collapseSearch}>
             <ul className="displayY mx-auto m-5 mb-lg-0 align-items-center list-unstyled">
@@ -64,7 +67,7 @@ function Header(props) {
                     type="search"
                     placeholder=""
                     aria-label="Search"
-                    onChange={(e) => setSerchInput(e.target.value)}
+
                   />
                   <button className="btn searchbtn" type="submit">
                     <FaSearch />
@@ -86,7 +89,7 @@ function Header(props) {
               </Link>
               <li className="nav-item">
                 <div className="homeSearchBar justify-content-center align-items-stretch">
-                  <SearchBar data={data} />
+                  <SearchBar setKeyword={setKeyWord} />
                   <Button variant="primary rounded-pill px-4">
                     <Link to="/b2b">辦展覽</Link>
                   </Button>

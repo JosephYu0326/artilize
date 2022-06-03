@@ -5,10 +5,11 @@ import FadeIn from 'react-fade-in/lib/FadeIn'
 import CommentCount from './CommentCount'
 function Article(props) {
   const articleDetails = props.articDetails
-  console.log(articleDetails)
+  // console.log(articleDetails)
 
   const article = articleDetails.map((v, i) => {
     return (
+
       <FadeIn key={i}>
         <div className="perContentHead my-4 d-flex justify-content-between">
           <div className="text-start d-flex align-items-center ">
