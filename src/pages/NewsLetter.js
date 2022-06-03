@@ -15,7 +15,8 @@ function Newsletter() {
   console.log(lastName)
   console.log(emailInput)
 
-  function subscribe() {
+  function subscribe(e) {
+    e.preventDefault()
     fetch(`${process.env.REACT_APP_API_URL}/NewsLetter`, {
       method: 'POST',
       headers: {
@@ -33,8 +34,10 @@ function Newsletter() {
           throw new Error(res.statusText)
         }
         Swal.fire('訂閱成功!', '', 'success')
-      })
-      .catch(Swal.fire('訂閱失敗!', '請輸入正確電子郵件', 'warning'))
+      }).then(setEmailInput(''),
+        setLastName(''), setFristName('')
+      )
+
   }
 
   return (
