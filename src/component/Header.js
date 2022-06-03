@@ -17,13 +17,11 @@ function Header(props) {
     'navbar-collapse collapse'
   )
 
-  //把keyword送回要搜尋(要執行API的頁面)
-  // PROPS不是一個FUNCTION
+  //把keyword送回要搜尋(執行API)的頁面
   useEffect(() => {
-    function pass() {
+    if (keyword) {
       props.setSerchInput(keyword)
     }
-    pass()
   }, [keyword])
 
   function clickToSearch() {
