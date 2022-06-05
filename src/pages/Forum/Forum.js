@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
-import { Spinner } from "react-bootstrap";
+import { Waypoint } from 'react-waypoint';
 import FadeIn from 'react-fade-in'
 import '../../styles/Forum.scss'
 import '../../styles/AsideBar.scss'
@@ -8,6 +8,9 @@ import ForumAside from '../../component/ForumAside'
 import Header from '../../component/Header'
 import Footer from '../../component/Footer'
 import Article from '../../component/Article'
+
+import Post from '../../component/Post'
+
 
 function Forum(props) {
   const [isLoading, setIsLoading] = useState(true)
@@ -18,6 +21,49 @@ function Forum(props) {
   const [btn, setBtn] = useState([])
   const [serchInput, setSerchInput] = useState('')
   const [articleList, setArticleList] = useState([{}])
+
+  // ==============
+
+  // const [hasMore, sethasMore] = useState(true);
+  const [limit, setLimit] = useState(0);
+  // useEffect(() => {
+  //   const getComments = async () => {
+  //     const res = await fetch(
+  //       `${process.env.REACT_APP_API_URL}/forum?topic=${forBkCurrentTopic}&limit=0`
+  //     );
+  //     const data = await res.json();
+  //     console.log('GETCOMMENT');
+  //     setArticleList(data);
+  //   };
+
+  //   getComments();
+  // }, []);
+
+  // const fetchComments = async () => {
+  //   const res = await fetch(
+  //     `${process.env.REACT_APP_API_URL}/forum?topic=${forBkCurrentTopic}&limit=${limit}`
+  //     // For json server use url below
+  //     // `http://localhost:3004/comments?_page=${page}&_limit=20`
+  //   );
+  //   const data = await res.json();
+  //   console.log('COMMENT');
+  //   return data;
+  //   setLimit(limit + 3)
+  // };
+
+  // const fetchData = async () => {
+  //   const commentsFormServer = await fetchComments();
+
+  //   setArticleList([...articleList, ...commentsFormServer]);
+  //   if (commentsFormServer.length === 0 || commentsFormServer.length < 5) {
+  //     sethasMore(false);
+  //   }
+  //   setLimit(limit + 3);
+  //   console.log(limit);
+  // };
+
+  // ==============
+
 
   // console.log(serchInput);
 
@@ -35,14 +81,31 @@ function Forum(props) {
   }, [])
 
   //文章類別篩選
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/forum?topic=${forBkCurrentTopic}`)
-      .then((res) => res.json())
+  // useEffect(() => {
+  //   fetch(`${process.env.REACT_APP_API_URL}/forum?topic=${forBkCurrentTopic}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setArticleList(data)
+  //     })
+  // }, [currentTopic])
+
+  // ============
+  // useEffect(() => {
+  const fetchComments = async () => {
+    const res = await fetch(
+      `${process.env.REACT_APP_API_URL}/forum?topic=${forBkCurrentTopic}&limit=${limit}`
+      // For json server use url below
+      // `http://localhost:3004/comments?_page=${page}&_limit=20`
+    ).then((res) => res.json())
       .then((data) => {
         setArticleList(data)
+        setLimit(limit + 3)
       })
-  }, [currentTopic])
+  };
+  // }, [currentTopic])
 
+
+  // ============
   //文章搜尋
   useEffect(() => {
     if (serchInput) {
@@ -65,10 +128,29 @@ function Forum(props) {
 
 
   return (
+    // <>
+
+    //   <Header data={articleList} setSerchInput={setSerchInput} />
+    //   <ForumAside btn={btn} />
+    //   <InfiniteScroll
+    //     dataLength={articleList.length} //This is important field to render the next data
+    //     next={fetchData}
+    //     hasMore={hasMore}
+    //     loader="Loading"
+    //     endMessage="Yay! You have seen it all"
+    //   >
+    //     <FadeIn className="container h-100">
+    //       <div className="frContent">
+    //         {articleList.map((articleList) => {
+    //           return <Post key={articleList.id} articleList={articleList} />;
+    //         })}
+    //       </div>
+    //     </FadeIn>
+    //   </InfiniteScroll>
+    //   <Footer />
+    // </>
+
     <>
-      {/* <Spinner variant='primary'/>
-      <Loading className={`{(${isLoading}) ? "" : visually-hidden}`} />
-<button onClick={toggle}>toggle</button> */}
       <Header data={articleList} setSerchInput={setSerchInput} />
       <ForumAside btn={btn} />
       <FadeIn className="container h-100">
@@ -76,9 +158,11 @@ function Forum(props) {
           {(articleList.length == 0) ?
             <div className='txtGray'>找不到相關文章</div>
             :
-            <Article articDetails={articleList} />
+            <Article articDetails={articleList} fetchComments={fetchComments} />
+
           }
         </div>
+        <Waypoint onEnter={fetchComments} />
       </FadeIn>
       <Footer />
     </>
