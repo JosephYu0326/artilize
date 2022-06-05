@@ -5,7 +5,9 @@ import '../../styles/users.scss'
 import Header from '../../component/Header'
 import AsideBar from '../../component/AsideBar'
 import { Container, Form, Button, Row, Image } from 'react-bootstrap'
-import logo from '../../images/logo.png'
+import logo from '../../images/user.png'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 function Users(props) {
   const usersAsideBar = {
@@ -30,6 +32,8 @@ function Users(props) {
   // console.log(auth)
   // console.log(userId)
   const userId = JSON.parse(localStorage.getItem('userId'))
+  const auth = JSON.parse(localStorage.getItem('auth'))
+  console.log(auth)
   const [data, setData] = useState([])
 
   const fetchUserData = async () => {
@@ -40,9 +44,23 @@ function Users(props) {
     // console.log(results)
     setData(results[0])
   }
+  const MySwal = withReactContent(Swal)
+  const history = useHistory()
 
   useEffect(() => {
-    fetchUserData()
+    if (auth === true) {
+      fetchUserData()
+    } else {
+      MySwal.fire({
+        icon: 'warning',
+        title: '您尚未登入，將跳轉至登入畫面',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+      }).then(() => {
+        history.push('/users/login')
+      })
+    }
   }, [])
   console.log(data)
   const {
@@ -56,28 +74,63 @@ function Users(props) {
     userName,
     userNickName,
   } = data
+  console.log(userAvatar)
 
-  const history = useHistory()
-  const clickLogOut = () => {
-    if (window.confirm('確定是否登出')) {
-      localStorage.removeItem('userId')
-      localStorage.setItem('auth', false)
-      alert('登出成功')
-      history.push('users/login')
-    }
+  const clickLogOut = (e) => {
+    e.preventDefault()
+    MySwal.fire({
+      title: '您確定要登出嗎?',
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText: '取消',
+      confirmButtonText: '確定',
+      confirmButtonColor: '#4153BB',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem('userId')
+        localStorage.removeItem('userAvatar')
+        localStorage.setItem('auth', false)
+        MySwal.fire({
+          title: '登出成功',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+        }).then(() => {
+          history.push('users/login')
+        })
+      }
+    })
+    // if (window.confirm('確定是否登出')) {
+    //   localStorage.removeItem('userId')
+    //   localStorage.setItem('auth', false)
+    //   alert('登出成功')
+    //   history.push('users/login')
+    // }
   }
+  const imageUrl = ` ${process.env.REACT_APP_API_URL}/images/${userAvatar}`
+  const imageUser = ` ${process.env.REACT_APP_API_URL}/images/user.png`
   return (
     <>
       <Header />
       <AsideBar btn={usersAsideBar} />
       <div className="bg-background">
-        <section>
+        <section className={`${!auth ? 'd-none' : ''}`}>
           <Container>
             <Row className="d-flex flex-column justify-content-center align-items-center  ">
               <form className="d-flex flex-column justify-content-center align-items-center">
                 <div>
                   <figure className="figure roundedCircle">
-                    <img alt="" src={logo} width="45" height="45" />
+                    <img
+                      alt=""
+                      src={` ${userAvatar == null ? imageUser : imageUrl}`}
+                      width="90"
+                      height="90"
+                      style={{
+                        border: '1px solid #4153BB ',
+                        borderRadius: '50%',
+                      }}
+                    />
                   </figure>
                 </div>
                 <div
@@ -156,7 +209,13 @@ function Users(props) {
                   >
                     <h6 className="Regular">性別</h6>
                     <div className="form-text text-secondary">
-                      {userGender ? userGender : `無資料`}
+                      {userGender
+                        ? userGender === 1
+                          ? `男`
+                          : userGender === 2
+                          ? `女`
+                          : `不詳`
+                        : `不詳`}
                     </div>
                   </div>
                   <div className="d-flex justify-content-around">

@@ -1,118 +1,210 @@
 //編輯會員資料
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import '../../styles/users.scss'
 import Header from '../../component/Header'
 import AsideBar from '../../component/AsideBar.js'
 import { Container, Row, Image } from 'react-bootstrap'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import logo from '../../images/logo.png'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 function Edit(props) {
-  const [account, setAccount] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [address, setAddress] = useState('')
   const [nickname, setNickname] = useState('')
   const [birthday, setBirthday] = useState('')
+  const [avatar, setAvatar] = useState('')
+  const [startDate, setStartDate] = useState(null)
   // 記錄選中了哪個值
   const [gender, setGender] = useState('')
-  const genderOptions = ['男', '女', '不提供']
+  const genderOptions = [1, 2, 3]
+  const userId = JSON.parse(localStorage.getItem('userId'))
+  const auth = JSON.parse(localStorage.getItem('auth'))
+  const [data, setData] = useState([])
 
+  const fetchUserData = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/users?userId=${userId}`
+    )
+    const results = await response.json()
+    // console.log(results)
+    setData(results[0])
+    setName(results[0].userName)
+    setPhone(results[0].userMobile)
+    setAddress(results[0].userAddress)
+    setNickname(results[0].userNickName)
+    setBirthday(results[0].userBirthday)
+    setGender(results[0].userGender)
+    setAvatar(results[0].userAvatar)
+    setImageName(results[0].userAvatar)
+  }
+  console.log(genderOptions)
+  console.log(gender)
+  const MySwal = withReactContent(Swal)
+  const history = useHistory()
+  useEffect(() => {
+    if (auth === true) {
+      fetchUserData()
+    } else {
+      MySwal.fire({
+        icon: 'warning',
+        title: '您尚未登入，將跳轉至登入畫面',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+      }).then(() => {
+        history.push('/users/login')
+      })
+    }
+  }, [])
+  const formDate = (birthday) => {
+    let fromatted_date =
+      new Date(birthday).getFullYear() +
+      '-' +
+      (new Date(birthday).getMonth() + 1) +
+      '-' +
+      new Date(birthday).getDate()
+    return fromatted_date
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    sendData()
+  }
+  const sendData = async () => {
+    try {
+      const editForm = document.getElementById('editForm')
+      console.log(editForm)
+      const formData = new FormData(editForm)
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/users/edit?id=${userId}`,
+        { method: 'PUT', body: formData }
+      )
+      const results = await response.json()
+      console.log(results)
+      if (results.ok === true) {
+        localStorage.setItem('userAvatar', results.userAvatar)
+        MySwal.fire({
+          icon: 'success',
+          title: '修改成功',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+        }).then(() => {
+          history.push('/users')
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const onClickImage = (e) => {
+    e.preventDefault()
+    const avatar = document.getElementById('avatar')
+    avatar.click()
+  }
+  const [selectedFile, setSelectedFile] = useState()
+  const [fileName, setIsFileName] = useState('')
+  const [imageName, setImageName] = useState('')
+  const handleImage = async (e) => {
+    const a = e.target.files[0]
+    const b = e.target.files[0].name
+    setSelectedFile(a)
+    setIsFileName(b)
+    console.log(a)
+    console.log(b)
+    setAvatar('')
+    // sendImage()
+  }
+  const sendImage = async () => {
+    const formData = new FormData()
+    formData.append('file', selectedFile)
+    formData.append('fileName', fileName)
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/users/uploadImage`,
+      { method: 'POST', body: formData }
+    )
+    const results = await response.json()
+    console.log(results)
+    console.log(results.filename)
+    setImageName(results.filename)
+  }
+  console.log(imageName)
+  useEffect(() => {
+    sendImage()
+  }, [fileName])
+  const imageUrl = `${process.env.REACT_APP_API_URL}/images/${avatar}`
+  const imageUrl1 = `${process.env.REACT_APP_API_URL}/images/${imageName}`
+  const imageUser = `${process.env.REACT_APP_API_URL}/images/user.png`
   return (
     <>
       <Header />
-      {/* <AsideBar btn1="123" /> */}
-
       <div className="bg-background">
-        <section>
+        <section className={`${!auth ? 'd-none' : ''}`}>
           <Container>
-            <Row
-              className="d-flex justify-content-center align-items-center"
-              style={{ height: '100vh' }}
-            >
-              <div
-                className=" BorderRadius usersBackground p-5"
-                style={{ maxWidth: '568px', minWidth: '390px' }}
+            <Row className="d-flex justify-content-center align-items-center usersRow">
+              <div className="d-flex flex-column justify-content-center align-items-center">
+                <figure className="figure roundedCircle ">
+                  <img
+                    alt=""
+                    src={`${
+                      avatar == null
+                        ? imageUser
+                        : imageName == null
+                        ? imageUrl
+                        : imageUrl1
+                    }`}
+                    width="90"
+                    height="90"
+                    style={{ border: '1px solid black', borderRadius: '50%' }}
+                  />
+                </figure>
+                <div className="d-flex justify-content-center mb-4">
+                  <button
+                    className="btn btn-primary rounded-pill"
+                    onClick={onClickImage}
+                  >
+                    更換大頭照
+                  </button>
+                  <input
+                    type="file"
+                    name="avatar"
+                    id="avatar"
+                    onChange={handleImage}
+                    accept="image/*"
+                    style={{ display: 'none' }}
+                  />
+                </div>
+              </div>
+              <form
+                className="d-flex flex-column justify-content-center align-items-center"
+                id="editForm"
+                onSubmit={handleSubmit}
+                noValidate
               >
-                <form>
-                  <div>
-                    <figure className="figure d-flex justify-content-center roundedCircle">
-                      <img alt="" src={logo} width="45" height="45" />
-                    </figure>
-                    <div className="d-flex justify-content-center mb-4">
-                      <button type="" className="btn btn-primary rounded-pill">
-                        更換大頭照
-                      </button>
-                    </div>
-                  </div>
+                <div
+                  className=" BorderRadius usersBackground pt-5 ps-5 pe-5 pb-3 d-flex flex-column"
+                  style={{ minWidth: '568px' }}
+                >
                   <div style={{ paddingLeft: '12px' }}>
                     <h4 className="ph_title row ExtraBold text-primary mb-4">
                       編輯會員資料
                     </h4>
                   </div>
-                  <div
-                    id="input-text"
-                    className="mb-3 usersContentcolor Regular"
-                  >
-                    <h6 className="Regular">帳號</h6>
-                    <input
-                      type="text"
-                      className="form-control "
-                      //id="exampleFormControlInput1"
-                      placeholder="4-20位數的英文或數字"
-                      value={account}
-                      onChange={(e) => {
-                        setAccount(e.target.value)
-                      }}
-                      required
-                    />
-                    <div id="emailHelp" className="form-text text-secondary">
-                      請輸入正確的帳號
-                    </div>
-                  </div>
-                  <div
-                    id="input-text"
-                    className="mb-3 usersContentcolor Regular"
-                  >
-                    <h6 className="Regular">信箱</h6>
-                    <input
-                      type="email"
-                      className="form-control "
-                      //id="exampleFormControlInput1"
-                      placeholder=""
-                      value={email}
-                      onChange={(e) => {
-                        setEmail(e.target.value)
-                      }}
-                      required
-                    />
-                    <div id="emailHelp" className="form-text text-secondary">
-                      請輸入正確的信箱
-                    </div>
-                  </div>
-                  <div
-                    id="input-text"
-                    className="mb-3 usersContentcolor Regular"
-                  >
-                    <h6 className="Regular">密碼</h6>
-                    <input
-                      type="password"
-                      className="form-control "
-                      //id="exampleFormControlInput1"
-                      placeholder="6位數以上(需含大寫字母、小寫字母、數字、符號至少各1)"
-                      value={password}
-                      onChange={(e) => {
-                        setPassword(e.target.value)
-                      }}
-                      required
-                    />
-                    <div id="emailHelp" className="form-text text-secondary">
-                      請輸入正確的密碼
-                    </div>
-                  </div>
+                  <input
+                    type="hidden"
+                    name="userAvatar"
+                    value={imageName}
+                    onChange={(e) => {
+                      setImageName(e.target.value)
+                    }}
+                  />
+
                   <div
                     id="input-text"
                     className="mb-3 usersContentcolor Regular"
@@ -120,12 +212,14 @@ function Edit(props) {
                     <h6 className="Regular">姓名</h6>
                     <input
                       type="text"
-                      className="form-control "
+                      className="form-control BorderRadius "
                       //id="exampleFormControlInput1"
+                      name="userName"
                       placeholder="真實姓名"
                       value={name}
                       onChange={(e) => {
-                        setName(e.target.value)
+                        const a = e.target.value
+                        setName(a)
                       }}
                       required
                     />
@@ -137,10 +231,11 @@ function Edit(props) {
                     <h6 className="Regular">手機</h6>
                     <input
                       type="tel"
-                      className="form-control "
+                      className="form-control BorderRadius "
                       //id="exampleFormControlInput1"
                       placeholder="09xxxxxxxx"
                       value={phone}
+                      name="userMobile"
                       onChange={(e) => {
                         setPhone(e.target.value)
                       }}
@@ -157,9 +252,10 @@ function Edit(props) {
                     <h6 className="Regular">地址</h6>
                     <input
                       type="text"
-                      className="form-control "
+                      className="form-control  BorderRadius"
                       //id="exampleFormControlInput1"
                       placeholder=""
+                      name="userAddress"
                       value={address}
                       onChange={(e) => {
                         setAddress(e.target.value)
@@ -174,7 +270,8 @@ function Edit(props) {
                     <h6 className="Regular">暱稱</h6>
                     <input
                       type="text"
-                      className="form-control "
+                      className="form-control BorderRadius "
+                      name="userNickName"
                       //id="exampleFormControlInput1"
                       placeholder=""
                       value={nickname}
@@ -189,12 +286,33 @@ function Edit(props) {
                     className="mb-3 usersContentcolor Regular"
                   >
                     <h6 className="Regular">生日</h6>
+                    <DatePicker
+                      dateFormat="yyyy-MM-dd"
+                      selected={startDate}
+                      onChange={(date, e) => {
+                        setStartDate(date)
+                        e.target.value = date
+                        setBirthday(e.target.value)
+                        console.log(e.target.value)
+                      }}
+                      maxDate={new Date()}
+                      showDisabledMonthNavigation
+                      className="form-control BorderRadius"
+                      value={birthday}
+                      fixedHeight
+                      // peekNextMonth
+                      showMonthDropdown
+                      showYearDropdown
+                      dropdownMode="select"
+                      useShortMonthInDropdown
+                    />
                     <input
-                      type="date"
-                      className="form-control "
+                      type="hidden"
+                      className="form-control BorderRadius "
                       //id="exampleFormControlInput1"
                       placeholder=""
-                      value={birthday}
+                      value={formDate(birthday)}
+                      name="userBirthday"
                       onChange={(e) => {
                         setBirthday(e.target.value)
                       }}
@@ -206,35 +324,43 @@ function Edit(props) {
                     className="mb-3 usersContentcolor Regular"
                   >
                     <h6 className="Regular">性別</h6>
-                    {genderOptions.map((v, i) => {
-                      return (
-                        <div key={i}>
-                          <input
-                            type="radio"
-                            checked={gender === v}
-                            value={v}
-                            onChange={(e) => {
-                              setGender(e.target.value)
-                            }}
-                            required
-                          />
-                          <label>{v}</label>
-                        </div>
-                      )
-                    })}
+                    <div className="d-flex">
+                      {genderOptions.map((v, i) => {
+                        return (
+                          <div className="form-check BorderRadius" key={i}>
+                            <input
+                              type="radio"
+                              id={'gender' + i}
+                              onChange={(e) => {
+                                setGender(parseInt(e.target.value))
+                              }}
+                              name="userGender"
+                              required
+                              className="form-check-input"
+                              value={v}
+                              checked={v === gender}
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor={'gender' + i}
+                            >
+                              {v === 1 ? '男' : v === 2 ? '女' : '不詳'}
+                            </label>
+                          </div>
+                        )
+                      })}
+                    </div>
                   </div>
                   <div className="d-flex justify-content-around">
-                    <Link to="//">
-                      <button
-                        type="submit"
-                        className="btn btn-primary rounded-pill mt-4"
-                      >
-                        送出
-                      </button>
-                    </Link>
+                    <button
+                      type="submit"
+                      className="btn btn-primary rounded-pill mt-3"
+                    >
+                      送出
+                    </button>
                   </div>
-                </form>
-              </div>
+                </div>
+              </form>
             </Row>
           </Container>
         </section>

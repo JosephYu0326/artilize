@@ -38,7 +38,9 @@ function SignUpForm({ submitForm }) {
         <div id="input-text" className=" usersContentcolor Regular">
           <input
             type="text"
-            className="form-control BorderRadius"
+            className={`form-control BorderRadius ${
+              errors.userAccount ? `is-invalid` : ``
+            }`}
             name="userAccount"
             placeholder="帳號"
             value={addUserData.userAccount}
@@ -56,7 +58,9 @@ function SignUpForm({ submitForm }) {
         <div id="input-text" className=" usersContentcolor Regular">
           <input
             type="email"
-            className="form-control BorderRadius "
+            className={`form-control BorderRadius ${
+              errors.userEmail ? `is-invalid` : ``
+            }`}
             name="userEmail"
             placeholder="信箱"
             value={addUserData.userEmail}
@@ -74,7 +78,9 @@ function SignUpForm({ submitForm }) {
         <div id="input-text" className="usersContentcolor Regular">
           <input
             type="password"
-            className="form-control  BorderRadius"
+            className={`form-control  BorderRadius ${
+              errors.userPassword ? `is-invalid` : ``
+            } `}
             name="userPassword"
             placeholder="密碼"
             value={addUserData.userPassword}
@@ -92,7 +98,9 @@ function SignUpForm({ submitForm }) {
         <div id="input-text" className=" usersContentcolor Regular">
           <input
             type="password"
-            className="form-control BorderRadius "
+            className={`form-control BorderRadius ${
+              errors.userConfirmPassword ? `is-invalid` : ``
+            } `}
             name="userConfirmPassword"
             placeholder="請再次輸入密碼"
             value={addUserData.userConfirmPassword}

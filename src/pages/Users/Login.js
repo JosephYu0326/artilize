@@ -6,16 +6,22 @@ import Header from '../../component/Header'
 import { Container, Row } from 'react-bootstrap'
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+import LoginValidate from './formComponents/LoginValidate'
 
 function Login(props) {
-  const [account, setAccount] = useState('')
-  const [password, setPassword] = useState('')
   const [loginData, setLoginData] = useState({
     userAccount: '',
     userPassword: '',
   })
-  const { auth, setAuth, userId, setUserId } = props
+  const [errors, setErrors] = useState({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const auth = JSON.parse(localStorage.getItem('auth'))
   const history = useHistory()
+  if (auth === true) {
+    history.push('/users')
+  }
   const handleChange = (e) => {
     const { name, value } = e.target
     const newLoginData = { ...loginData, [name]: value }
@@ -23,8 +29,13 @@ function Login(props) {
   }
   const handleSubmit = (e) => {
     e.preventDefault()
-    sendLoginData()
+    setErrors(LoginValidate(loginData))
+    setIsSubmitting(true)
+    if (JSON.stringify(LoginValidate(loginData)) === '{}') {
+      sendLoginData()
+    }
   }
+  const MySwal = withReactContent(Swal)
   const sendLoginData = async () => {
     try {
       const loginForm = document.getElementById('loginForm')
@@ -36,14 +47,28 @@ function Login(props) {
       const result = await response.json()
       console.log(result)
       if (result.ok === true) {
-        setAuth(!auth)
         localStorage.setItem('userId', result.userId)
         localStorage.setItem('auth', true)
-        setUserId(result.userId)
-        alert('歡迎登入')
-        history.push('/users')
-      } else {
-        alert('未有此帳號或帳密輸入錯誤')
+        localStorage.setItem('userAvatar', result.userAvatar)
+        MySwal.fire({
+          icon: 'success',
+          title: '歡迎登入Artilize',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+        }).then(() => {
+          history.push('/users')
+        })
+      } else if (result.message === '無此帳號或帳號輸入錯誤') {
+        MySwal.fire({
+          icon: 'error',
+          title: '無此帳號或帳號輸入錯誤',
+        })
+      } else if (result.message === '密碼輸入錯誤') {
+        MySwal.fire({
+          icon: 'error',
+          title: '密碼輸入錯誤',
+        })
       }
     } catch (error) {
       console.log(error)
@@ -73,14 +98,20 @@ function Login(props) {
                   <div id="input-text" className="mb-3">
                     <input
                       type="text"
-                      className="form-control BorderRadius"
+                      className={`form-control BorderRadius ${
+                        errors.userAccount ? `is-invalid` : ``
+                      }`}
                       name="userAccount"
                       placeholder="帳號"
                       value={loginData.userAccount}
                       onChange={handleChange}
                     />
-                    <div id="emailHelp" className="form-text text-secondary">
-                      請輸入正確的帳號
+                    <div
+                      id="emailHelp"
+                      className="form-text text-secondary"
+                      style={{ height: '21px' }}
+                    >
+                      {errors.userAccount && <span>{errors.userAccount}</span>}
                     </div>
                   </div>
                   <div
@@ -89,14 +120,22 @@ function Login(props) {
                   >
                     <input
                       type="text"
-                      className="form-control BorderRadius"
+                      className={`form-control  BorderRadius ${
+                        errors.userPassword ? `is-invalid` : ``
+                      } `}
                       placeholder="密碼"
                       name="userPassword"
                       value={loginData.userPassword}
                       onChange={handleChange}
                     />
-                    <div id="emailHelp" className="form-text text-secondary">
-                      請輸入正確的密碼
+                    <div
+                      id="emailHelp"
+                      className="form-text text-secondary"
+                      style={{ height: '21px' }}
+                    >
+                      {errors.userPassword && (
+                        <span>{errors.userPassword}</span>
+                      )}
                     </div>
                   </div>
                   <div>

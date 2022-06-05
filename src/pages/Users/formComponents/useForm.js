@@ -83,18 +83,19 @@ const useForm = (validate) => {
       console.log(results)
       if (results.ok === true) {
         MySwal.fire({
-          title: <h2>註冊成功</h2>,
+          title: '註冊成功',
           icon: 'success',
         }).then(function () {
           Navigate.push('/users/login')
         })
+      } else if (results.message === '已有此帳號') {
+        MySwal.fire({
+          title: '註冊失敗，已有此帳號',
+          icon: 'error',
+        })
       } else {
         MySwal.fire({
-          title: (
-            <div>
-              <h2>註冊失敗</h2>
-            </div>
-          ),
+          title: '註冊失敗，已有此Email',
           icon: 'error',
         })
       }
