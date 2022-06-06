@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react'
 import '../../styles/AddAbility.scss'
 import { FiSettings } from 'react-icons/fi'
 
-import Axios from 'axios'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 // import { zh-TW } from 'date-fns/esm/locale'
@@ -23,20 +22,69 @@ function AddAbility(props) {
   // select 地區
   //direction setDirection
   const [direction, setDirection] = useState('')
-  const [direction2, setDirection2] = useState([])
-  const fetchData = async () => {
-    const response = await fetch('http://localhost:5000/B2B/B2B/direction')
-    const results = await response.json()
-    setDirection2(results)
-    console.log('direction2', setDirection2)
-  }
-  useEffect(() => {
-    fetchData()
-  }, [])
+  const direction1 = ['北部', '中部', '南部', '東部', '離島']
+
   // select 縣市
   // city setCity
   const [city, setCity] = useState('')
-  const carOptions = ['volvo', 'saab', 'mercedes', 'audi']
+  const city1 = [
+    '基隆市',
+    '台北市',
+    '新北市	',
+    '桃園縣',
+    '新竹市',
+    '新竹縣',
+    '苗栗縣',
+    '台中市',
+    '彰化縣',
+    '南投縣',
+    '雲林縣',
+    '嘉義市',
+    '台南市',
+    '高雄市',
+    '屏東縣',
+    '台東縣',
+    '花蓮縣',
+    '宜蘭縣',
+    '澎湖縣',
+    '金門縣',
+    '連江縣',
+  ]
+  //展覽活動類型
+  const [kind, setKind] = useState('')
+  const kind1 = [
+    '古典美術',
+    '現代美術',
+    '歷史',
+    '科技',
+    '其他',
+    '課程',
+    '派對',
+    '聚會',
+    '市集',
+    '比賽',
+    '表演',
+    '研討會',
+    '分享會',
+    '見面會',
+    '宣傳活動',
+    '導覽',
+    '體驗',
+  ]
+  //館方
+  const [museum, setMuseum] = useState('')
+  const museum1 = [
+    '台北美術館',
+    '故宮博物院',
+    '高雄美術館',
+    '台南美術館 ',
+    '奇美博物館',
+    '蘭陽博物館',
+    '台北當代美術館',
+    '嘉義美術館',
+    '北師美術館',
+    '台中美術館',
+  ]
   //展覽日期 開始
   const [start, setStart] = useState(new Date())
   //展覽日期 結束
@@ -92,24 +140,6 @@ function AddAbility(props) {
   //       console.log('err.message', err.message)
   //     })
   // }
-  // const submitForm = () => {
-  //   Axios.post('http://localhost:5000/B2B/B2B/', {
-  //     aName: aName,
-  //     fileData: fileData,
-  //     direction: direction,
-  //     city: city,
-  //     startDate: start,
-  //     endDate: endDate,
-  //     address: address,
-  //     activities: activities,
-  //     ticketName: ticketName,
-  //     amount: amount,
-  //     price: price,
-  //     ticketDescription: ticketDescription,
-  //   }).then(() => {
-  //     alert('成功發送表單')
-  //   })
-  // }
 
   const submitForm = (e) => {
     fetch('http://localhost:5000/B2B/B2B/', {
@@ -122,25 +152,8 @@ function AddAbility(props) {
     e.preventDefault()
   }
 
-  //map
-  function CitySelector(){
-    direction2.map((v,i)=>{
-
-return (
-   <option key={i} value={v}>
-    {direction2[i].direction}
-   </option>
-      ) 
-
-    }
-
-  //citySelector引入到你要放的位置
-                     
-<CitySelector></CitySelector>
-
   return (
     <>
-      {/* onSubmit={handleSubmit} */}
       <div>建立新活動資料</div>
       <form
         id="myForm"
@@ -280,15 +293,14 @@ return (
                   }}
                 >
                   <option value="">請選擇地區</option>
-                  {direction2.length > 0 &&
-                    direction2.map((v, i) => {
-                      return (
-                        <option key={i} value={v}>
-                          {/* 開頭轉為大寫英文 */}
-                          {/* {v.charAt(0).toUpperCase() + v.slice(1)} */}
-                        </option>
-                      )
-                    })}
+                  {direction1.map((v, i) => {
+                    return (
+                      <option key={i} value={v}>
+                        {/* 開頭轉為大寫英文 */}
+                        {v.charAt(0).toUpperCase() + v.slice(1)}
+                      </option>
+                    )
+                  })}
                 </select>
                 <h6>請選擇地區</h6>
               </section>
@@ -305,7 +317,7 @@ return (
                   }}
                 >
                   <option value="">請選擇縣市</option>
-                  {carOptions.map((v, i) => {
+                  {city1.map((v, i) => {
                     return (
                       <option key={i} value={v}>
                         {/* 開頭轉為大寫英文 */}
@@ -323,14 +335,14 @@ return (
                 <select
                   className="form-select"
                   name="fkKindId"
-                  id="direction"
-                  value={direction}
+                  id="fkKindId"
+                  value={kind}
                   onChange={(e) => {
-                    setDirection(e.target.value)
+                    setKind(e.target.value)
                   }}
                 >
                   <option value="">請選擇活動類型</option>
-                  {carOptions.map((v, i) => {
+                  {kind1.map((v, i) => {
                     return (
                       <option key={i} value={v}>
                         {/* 開頭轉為大寫英文 */}
@@ -347,14 +359,14 @@ return (
                 <select
                   className="form-select"
                   name="fkMuseumId"
-                  id="city"
-                  value={city}
+                  id="museum"
+                  value={museum}
                   onChange={(e) => {
-                    setCity(e.target.value)
+                    setMuseum(e.target.value)
                   }}
                 >
                   <option value="">請選擇館方</option>
-                  {carOptions.map((v, i) => {
+                  {museum1.map((v, i) => {
                     return (
                       <option key={i} value={v}>
                         {/* 開頭轉為大寫英文 */}
@@ -430,6 +442,7 @@ return (
                   type="text"
                   className="form-control"
                   id="ticketName"
+                  name="ticketName"
                   placeholder="活動名稱"
                   value={ticketName}
                   onChange={(e) => {
@@ -447,6 +460,7 @@ return (
                   type="value"
                   className="form-control"
                   id="amount"
+                  name="amount"
                   placeholder="1000"
                   value={amount}
                   onChange={(e) => {
@@ -464,6 +478,7 @@ return (
                   type="value"
                   className="form-control"
                   id="price"
+                  name="price"
                   placeholder="1000"
                   value={price}
                   onChange={(e) => {
@@ -502,6 +517,7 @@ return (
                   className="form-control"
                   id="TicketDescription"
                   rows="10"
+                  name="introT"
                   value={ticketDescription}
                   onChange={(e) => {
                     setTicketDescription(e.target.value)
@@ -590,3 +606,14 @@ return (
 }
 
 export default AddAbility
+
+// const [direction2, setDirection2] = useState([])
+// const fetchData = async () => {
+//   const response = await fetch('http://localhost:5000/B2B/B2B/direction')
+//   const results = await response.json()
+//   setDirection2(results)
+//   console.log('direction2', setDirection2)
+// }
+// useEffect(() => {
+//   fetchData()
+// }, [])

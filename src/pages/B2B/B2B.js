@@ -14,6 +14,8 @@ import Col from 'react-bootstrap/Col'
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 
+import Header from '../../component/Header'
+
 import '../../styles/B2BListe.scss'
 
 import { abilityEx } from './AbilityEx'
@@ -107,6 +109,7 @@ function B2B(props) {
   }
   return (
     <>
+      <Header />
       <div>廠商後臺</div>
       <Link to="/b2b/addability">建立新活動資料</Link>
       <Container>
