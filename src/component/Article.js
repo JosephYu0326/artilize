@@ -1,7 +1,6 @@
 import React from 'react'
 import { FaStar } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
-import { Waypoint } from 'react-waypoint';
 import FadeIn from 'react-fade-in/lib/FadeIn'
 import CommentCount from './CommentCount'
 function Article(props) {

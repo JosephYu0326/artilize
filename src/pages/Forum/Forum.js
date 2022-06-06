@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
-import { Waypoint } from 'react-waypoint';
+import { Waypoint } from 'react-waypoint'
 import FadeIn from 'react-fade-in'
 import '../../styles/Forum.scss'
 import '../../styles/AsideBar.scss'
@@ -11,12 +11,11 @@ import Article from '../../component/Article'
 
 import Post from '../../component/Post'
 
-
 function Forum(props) {
   const [isLoading, setIsLoading] = useState(true)
   const location = useLocation()
   const urlSearchParams = new URLSearchParams(location.search)
-  const currentTopic = urlSearchParams.get("topic")
+  const currentTopic = urlSearchParams.get('topic')
   const forBkCurrentTopic = encodeURI(currentTopic)
   const [btn, setBtn] = useState([])
   const [serchInput, setSerchInput] = useState('')
@@ -25,7 +24,8 @@ function Forum(props) {
   // ==============
 
   // const [hasMore, sethasMore] = useState(true);
-  const [limit, setLimit] = useState(0);
+  const [limit, setLimit] = useState(0)
+  const [page, setPage] = useState(3)
   // useEffect(() => {
   //   const getComments = async () => {
   //     const res = await fetch(
@@ -64,7 +64,6 @@ function Forum(props) {
 
   // ==============
 
-
   // console.log(serchInput);
 
   // function toggle() {
@@ -81,51 +80,52 @@ function Forum(props) {
   }, [])
 
   //文章類別篩選
-  // useEffect(() => {
-  //   fetch(`${process.env.REACT_APP_API_URL}/forum?topic=${forBkCurrentTopic}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setArticleList(data)
-  //     })
-  // }, [currentTopic])
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/forum?topic=${forBkCurrentTopic}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setArticleList(data)
+      })
+  }, [currentTopic])
 
   // ============
   // useEffect(() => {
   const fetchComments = async () => {
     const res = await fetch(
-      `${process.env.REACT_APP_API_URL}/forum?topic=${forBkCurrentTopic}&limit=${limit}`
+      `${process.env.REACT_APP_API_URL}/forum?topic=${forBkCurrentTopic}&limit=${limit}&page=${page}`
       // For json server use url below
       // `http://localhost:3004/comments?_page=${page}&_limit=20`
-    ).then((res) => res.json())
+    )
+      .then((res) => res.json())
       .then((data) => {
         setArticleList(data)
-        setLimit(limit + 3)
+        // setLimit(limit + 3)
+        setPage(page + 3)
       })
-  };
+  }
   // }, [currentTopic])
-
 
   // ============
   //文章搜尋
   useEffect(() => {
     if (serchInput) {
       fetch(`${process.env.REACT_APP_API_URL}/ArticleCollection/search`, {
-        method: "post",
+        method: 'post',
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
         body: JSON.stringify({
-          keyword: serchInput
+          keyword: serchInput,
         }),
-      }).then((res) => res.json())
+      })
+        .then((res) => res.json())
         .then((data) => {
           //把傳進來的資料更改為執行SQL語句後的結果
           setArticleList(data)
         })
     }
   }, [serchInput])
-
 
   return (
     // <>
@@ -154,13 +154,12 @@ function Forum(props) {
       <Header data={articleList} setSerchInput={setSerchInput} />
       <ForumAside btn={btn} />
       <FadeIn className="container h-100">
-        <div className="frContent">
-          {(articleList.length == 0) ?
-            <div className='txtGray'>找不到相關文章</div>
-            :
+        <div className="frContent scrollbar">
+          {articleList.length == 0 ? (
+            <div className="txtGray">找不到相關文章</div>
+          ) : (
             <Article articDetails={articleList} fetchComments={fetchComments} />
-
-          }
+          )}
         </div>
         <Waypoint onEnter={fetchComments} />
       </FadeIn>

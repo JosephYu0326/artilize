@@ -31,11 +31,12 @@ function Article(props) {
   const [preArticle, setPreArticle] = useState([{}])
   const [nowArticle, setNowArticle] = useState({})
   const [nextArticle, setNextArticle] = useState([{}])
+  const [postLength, setPostLength] = useState(0)
   const history = useHistory()
   const goBack = () => {
     history.goBack()
   }
-  
+
   const { forumid } = useParams()
 
   //===跟據param拿到當前文章，以及前後篇文章
@@ -46,9 +47,6 @@ function Article(props) {
       setPreArticle(data[0])
       setNowArticle(data[1])
       setNextArticle(data[2])
-
-      console.log('此頁文章')
-      console.log(nowArticle)
     } else {
       setPreArticle(data[0])
       setNowArticle(data[1])
@@ -75,6 +73,7 @@ function Article(props) {
   useEffect(() => {
     setComment_msg('')
     setCommentInput('')
+    //setPostLength(nowArticle.content.length)
   }, [forumid])
 
   // ----------CLICK觸發的事件------------
@@ -237,7 +236,6 @@ function Article(props) {
           setNowArticle(data[1])
           setNextArticle({ title: '', created_time: '', content: '' })
         }
-        //console.log(` ${nextArticle.title}`)
       })
   }
   // ======上一篇
@@ -250,7 +248,6 @@ function Article(props) {
           setPreArticle(data[0])
           setNowArticle(data[1])
           setNextArticle(data[2])
-          //console.log(data)
         } else {
           setPreArticle(data[0])
           setNowArticle(data[1])
@@ -327,7 +324,7 @@ function Article(props) {
           <FaAngleLeft />
         </Link>
       </div>
-      <div className="container">
+      <div className="con container">
         <FadeIn className="row">
           <div className="col-lg-1 liquidLeft"></div>
           <div className="liquid col-lg-10 col-sm-12">
@@ -386,6 +383,13 @@ function Article(props) {
                 </div>
               </div>
               <div className="articleBody py-5">
+                {/* <p className="txtGray pLabel">
+                  閱讀時間{' '}
+                  {nowArticle.content.length < 400
+                    ? 1
+                    : Math.floor(nowArticle.content.length / 400)}{' '}
+                  分鐘
+                </p> */}
                 <div
                   dangerouslySetInnerHTML={{ __html: `${nowArticle.content}` }}
                 ></div>
