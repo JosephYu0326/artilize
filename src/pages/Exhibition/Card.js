@@ -5,40 +5,170 @@ import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 import { useParams } from 'react-router-dom'
 import Book from '../Exhibition/Book'
+import { Placeholder } from 'rsuite/esm/Placeholder/Placeholder'
 
-function Card() {
+function Card(props) {
+  const {
+    searchData,
+    lowPrice,
+    highPrice,
+    searchDate,
+    searchGallery,
+    searchCategory,
+    searchLocation,
+  } = props
+
   const [isOpen, setIsOpen] = useState(false)
   const [title, setTitle] = useState('')
   const [image, setImage] = useState('')
   const [start, setStart] = useState([])
   const [end, setEnd] = useState([])
+  const [ticketKind, setTicketKind] = useState('')
+  const [ticketPrice, setTicketPrice] = useState('')
+  const [ticketArray, setTicketArray] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
   const params = useParams()
   const [datas, setDatas] = useState([])
+  const [datas1, setDatas1] = useState([])
 
   const intParams = parseInt(params.kid)
 
   const fetchData = async () => {
-    var response
-    if (intParams) {
-      response = await fetch(
-        `http://localhost:5050/exhibition/categories/${params.kid}`
-      )
-    } else {
-      response = await fetch('http://localhost:5050/exhibition')
-    }
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/exhibition`)
     const results = await response.json()
+
     setDatas(results)
+    setDatas1(results)
+    if (searchData) setDatas1(searchData)
+    if (searchDate) setDatas1(searchDate)
+    if (searchGallery) {
+      let temp = datas.filter((v, i) => v.mName.includes(searchGallery))
+      setDatas1(temp)
+    }
+
+    if (searchCategory) {
+      let temp = datas.filter((v, i) => v.kind.includes(searchCategory))
+      setDatas1(temp)
+    }
+
+    if (searchLocation) {
+      let temp = datas.filter((v, i) => v.city.includes(searchLocation))
+      setDatas1(temp)
+    }
+
+    if (lowPrice || highPrice) {
+      let temp = datas.filter((v, i) => {
+        return PriceCompare(v.TicketPrice.split(','))
+      })
+      setDatas1(temp)
+    }
+
+    function PriceCompare(price) {
+      price.sort(function (a, b) {
+        return a - b
+      })
+
+      const temp = price.map((v, i) => {
+        return price[i] >= lowPrice && price[i] <= highPrice
+      })
+
+      let output
+      if (temp.includes(false)) {
+        output = false
+      } else {
+        output = true
+      }
+      return output
+    }
   }
+
   useEffect(() => {
+    setIsLoading(true)
     fetchData()
-  }, [intParams])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [highPrice])
+
+  useEffect(() => {
+    setIsLoading(true)
+    fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lowPrice])
+  useEffect(() => {
+    setIsLoading(true)
+    fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchData])
+
+  useEffect(() => {
+    setIsLoading(true)
+    fetchData()
+  }, [searchDate])
+
+  useEffect(() => {
+    setIsLoading(true)
+    fetchData()
+  }, [searchGallery])
+
+  useEffect(() => {
+    setIsLoading(true)
+    fetchData()
+  }, [searchCategory])
+
+  useEffect(() => {
+    setIsLoading(true)
+    fetchData()
+  }, [searchLocation])
+
+  useEffect(() => {
+    if (isLoading) {
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 2000)
+    }
+  }, [isLoading])
+
+  let pagination = datas1.map((v, i) => {
+    return (
+      <div key={v.id} className="col d-flex justify-content-center">
+        <div className="ph-item">
+          <div className="ph-col-12">
+            <div className="ph-picture"></div>
+            <div className="ph-row">
+              <div className="ph-col-12 big"></div>
+              <div className="ph-col-12"></div>
+              <div className="ph-col-12 empty"></div>
+              <div className="ph-col-4 "></div>
+              <div className="ph-col-8 empty"></div>
+              <div className="ph-col-6"></div>
+              <div className="ph-col-6 empty"></div>
+              <div className="ph-col-12"></div>
+              <div className="ph-col-4"></div>
+              <div className="ph-col-8 empty"></div>
+              <div className="ph-col-6"></div>
+              <div className="ph-col-6 empty"></div>
+              <div className="ph-col-12"></div>
+              <div className="ph-col-6"></div>
+              <div className="ph-col-6 empty"></div>
+
+              <div className="ph-col-12 empty"></div>
+              <div className="ph-col-4 big empty"></div>
+              <div className="ph-col-4 big"></div>
+              <div className="ph-col-4 big empty"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  })
 
   function handleClick(e) {
-    let index = parseInt(e.target.dataset.order) - 1
-    let image = document.querySelectorAll('.imgframe')[index]
+    let index = parseInt(e.target.dataset.order)
+    let totalLength = document.querySelectorAll('.imgframe').length
 
-    let date = document.querySelectorAll('.dateText')[index].innerText
+    let image = document.querySelectorAll('.imgframe')[totalLength - index]
+    let date =
+      document.querySelectorAll('.dateText')[totalLength - index].innerText
 
     let Day = date.split('\n')
     setStart(Day[0])
@@ -47,38 +177,56 @@ function Card() {
     setImage(image.dataset.image)
     setTitle(e.target.dataset.title)
     setIsOpen(!isOpen)
+
+    let temp = datas[totalLength - index].TicketName
+    let Ticket = temp.split(',')
+    setTicketKind(Ticket)
+
+    let temp2 = datas[totalLength - index].TicketPrice
+    let Price = temp2.split(',')
+    setTicketPrice(Price)
   }
 
-  const card = datas.map((v, i) => {
+  useEffect(() => {
+    let array = []
+    for (let i = 0; i < ticketKind.length; i++) {
+      array.push(0)
+    }
+    setTicketArray(array)
+  }, [ticketKind])
+
+  let card = datas1.map((v, i) => {
     return (
-      <div key={v.exhibitionId}>
+      <div key={v.id}>
         <div className="col d-flex justify-content-center">
           <div className="exhibitioncard d-flex BoxShadow">
             <Link
-              to={`/exhibition/introduce/${v.exhibitionId}`}
+              to={`/exhibition/introduce/${v.id}`}
               className="imgframe-link"
             >
-              <img
-                className="imgframe"
-                src={require(`./images/${v.image}`)}
-                data-image={v.image}
-                alt={v.image}
-              />
+              <div className="imgframe-out">
+                <img
+                  className="imgframe"
+                  src={`${process.env.REACT_APP_API_URL}/stylesheets/images/${v.pic1}`}
+                  data-image={v.pic1}
+                  alt={v.pic1}
+                />
+              </div>
             </Link>
             <div className="d-flex content">
               <div className="title mt-2">
                 <Link
-                  to={`/exhibition/introduce/${v.exhibitionId} `}
+                  to={`/exhibition/introduce/${v.id} `}
                   className="selectlink"
                 >
-                  <h5 className="titletext text-web pt-2">{v.name}</h5>
+                  <h5 className="titletext text-web pt-2">{v.aName}</h5>
                 </Link>
                 <Link
-                  to={`/exhibition/introduce/${v.exhibitionId} `}
+                  to={`/exhibition/introduce/${v.id} `}
                   className="selectlink"
                 >
                   <h6 className="pRegular titletext text-mobile my-2">
-                    {v.name}
+                    {v.aName}
                   </h6>
                 </Link>
               </div>
@@ -88,8 +236,8 @@ function Card() {
                     className="cardicon me-2"
                     icon={faMapMarkerAlt}
                   />
-                  <div className="text-web">{v.place}</div>
-                  <div className="text-mobile pSmall">{v.place}</div>
+                  <div className="text-web">{v.mName}</div>
+                  <div className="text-mobile pSmall">{v.mName}</div>
                 </div>
                 <div className="my-1 d-flex align-items-center">
                   <FontAwesomeIcon
@@ -108,8 +256,8 @@ function Card() {
                 type="button"
                 className="btn btn-secondary book h5 text-web"
                 onClick={handleClick}
-                data-title={v.name}
-                data-order={v.exhibitionId}
+                data-title={v.aName}
+                data-order={v.id}
               >
                 訂票
               </button>
@@ -126,6 +274,21 @@ function Card() {
       </div>
     )
   })
+  if (
+    searchData ||
+    lowPrice ||
+    highPrice ||
+    searchDate ||
+    searchGallery ||
+    searchCategory ||
+    searchLocation
+  ) {
+    if (datas1.length < 1) {
+      pagination = <div className="notfound">查無資料！</div>
+      card = <div className="notfound">查無資料！</div>
+    }
+  }
+
   return (
     <>
       <Book
@@ -135,9 +298,12 @@ function Card() {
         image={image}
         start={start}
         end={end}
+        ticketKind={ticketKind}
+        ticketPrice={ticketPrice}
+        ticketArray={ticketArray}
       />
 
-      {card}
+      {isLoading ? pagination : card}
     </>
   )
 }

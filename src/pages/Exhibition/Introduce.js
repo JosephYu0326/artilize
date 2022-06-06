@@ -11,6 +11,7 @@ import { FiChevronLeft } from 'react-icons/fi'
 import { FiChevronRight } from 'react-icons/fi'
 
 import Book from './Book'
+import Header from '../../component/Header'
 
 function Introduce(props) {
   const [isOpen, setIsOpen] = useState(false)
@@ -122,7 +123,7 @@ function Introduce(props) {
 
   return (
     <>
-      <header>Exhibition Header</header>
+      <Header />
       <Book
         isOpen={isOpen}
         title={title}
@@ -134,23 +135,23 @@ function Introduce(props) {
 
       {datas.map((v, i) => {
         return (
-          <div key={v.exhibitionId} className="ex-frame">
+          <div key={v.id} className="ex-frame">
             <div className="intro-imgframe">
               <img
-                src={require(`./images/${v.image}`)}
+                src={`${process.env.REACT_APP_API_URL}/stylesheets/images/${v.pic2}`}
                 className="exhibition-img"
-                alt={v.image}
-                data-image={v.image}
+                alt={v.pic2}
+                data-image={v.pic2}
               ></img>
               <div className="overview">
                 <div className="titleframe">
-                  <div className="h4">{v.name}</div>
+                  <div className="h4">{v.aName}</div>
                 </div>
 
                 <div className="dateText">
                   展期: {v.start.slice(0, 9)} ~ {v.end.slice(0, 9)}
                 </div>
-                <div>地點: {v.place}</div>
+                <div>地點: {v.mName}</div>
               </div>
             </div>
             <div className="content-background">

@@ -8,15 +8,15 @@
     flex-direction:row;
     // 左半邊
     .intro-imgframe{
-        height: calc(100vh - 88px);
+        height: calc(100vh - 107px);
         width: 40%;
         overflow: hidden;
         z-index: -1;
     }
     .exhibition-img{
-        // width: 100%;
+        width: 100%;
         height: 100%;
-        background-position: center,center;
+        object-fit:cover;
     }
     .overview{
         margin: 0 auto;
@@ -141,7 +141,7 @@
 
         }
         &.expand{
-            height: 440px;
+            height: 350px;
         }
     }
       
@@ -260,6 +260,7 @@
     width: 60%;
     height: 88px;
     border-top: 1px solid gray;
+    background: #fff;
 
     display: flex;
     justify-content: space-around;

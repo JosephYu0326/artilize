@@ -9,13 +9,19 @@ import { shoppingListEx } from './Cart-ex'
 import { shoppingListPro } from './Cart-pro'
 import CartItemEx from './CartItemEx'
 import CartItemPro from './CartItemPro'
+import Header from '../../component/Header'
+import Footer from '../../component/Footer'
+
 import Summary from './Summary'
+
+import _ from 'lodash'
 
 let storage = localStorage
 
 function Cart(props) {
   const [exhibitionInorder, setExhibitionInorder] = useState(shoppingListEx)
   const [productInorder, setProductInorder] = useState(shoppingListPro)
+
 
   // 設定展覽數
   const setExCount = (newCount, i) => {
@@ -88,7 +94,7 @@ function Cart(props) {
 
   return (
     <>
-      <header>header</header>
+      <Header />
       {/* <Link to="/booking/pay">付款</Link> */}
       <img className="step1" src={step1} alt="step1"></img>
       <div className="cart-frame">
@@ -118,6 +124,7 @@ function Cart(props) {
                 title={v.title}
                 start={v.start}
                 end={v.end}
+                buyTime={v.buyTime}
                 category={v.TicketKind}
                 price={v.TicketPrice}
                 image={v.image}
@@ -154,7 +161,7 @@ function Cart(props) {
         </div>
 
         <div className="input-frame">
-          <div>使用優惠券</div>
+          <div className="discountText">使用優惠券</div>
           <input type="text" className="form-control" placeholder="優惠券" />
         </div>
         <Summary
@@ -162,6 +169,7 @@ function Cart(props) {
           totalPricePro={totalPricePro()}
         />
       </div>
+      <Footer />
     </>
   )
 }

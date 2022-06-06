@@ -5,32 +5,33 @@ import { useState } from 'react'
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 
-function Category() {
+function Category(props) {
+  const { setSearchCategory } = props
   const frameheight = useRef()
   const [active, setActive] = useState(false)
 
-  const select = []
+  let select = []
   const [temp1, setTemp1] = useState(select)
 
-  const [datas, setDatas] = useState([])
-  const fetchData = async () => {
-    const response = await fetch('http://localhost:5050/exhibition/categories')
+  const [categoryData, setCategoryData] = useState([])
+  const fetchCategoryData = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/exhibition/categories`
+    )
     const results = await response.json()
-    setDatas(results)
+    setCategoryData(results)
   }
   useEffect(() => {
-    fetchData()
+    fetchCategoryData()
   }, [])
 
-  for (let i = 0; i < datas.length; i++) {
+  for (let i = 0; i < categoryData.length; i++) {
     select.push(0)
   }
 
-  // console.log(temp1)
-
-  let temp = datas.slice(0, 4)
-  let thelength = datas.length
-  let all = datas.slice(4, thelength)
+  let temp = categoryData.slice(0, 4)
+  let thelength = categoryData.length
+  let all = categoryData.slice(4, thelength)
 
   useEffect(() => {
     let thetarget = document.querySelector('.categoryAllText')
@@ -45,13 +46,7 @@ function Category() {
   const category = temp.map((v, i) => {
     return (
       <div key={v.kid}>
-        <Link
-          to={
-            temp1[v.kid - 1] ? '/exhibition' : `/exhibition/categories/${v.kid}`
-          }
-          className="selectlink"
-          onClick={optionChange}
-        >
+        <Link to="#" className="selectlink" onClick={optionChange}>
           <div className="d-flex align-items-center selectframe">
             <div className="selectsquare"></div>
             <div>{v.kind}</div>
@@ -114,8 +109,11 @@ function Category() {
         }
       }
       thetarget.setAttribute('class', 'selectedsquare')
+      let setCategory = thetarget.parentNode.childNodes[1].innerText
+      setSearchCategory(setCategory)
     } else {
       thetarget.setAttribute('class', 'selectsquare')
+      setSearchCategory('')
     }
   }
 

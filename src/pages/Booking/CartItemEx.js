@@ -11,6 +11,7 @@ function CartItemEx(props) {
     title,
     start,
     end,
+    buyTime,
     image,
     category,
     price,
@@ -30,19 +31,22 @@ function CartItemEx(props) {
               onClick={handleDelete}
             />
           </button>
+          <div className="exhibition-img-frame">
+            <img
+              src={`${process.env.REACT_APP_API_URL}/stylesheets/images/${image}`}
+              className="exhibition-img mx-3"
+              alt={image}
+            />
+          </div>
 
-          <img
-            src={require(`./image/${image}`)}
-            className="exhibition-img mx-3"
-            alt={image}
-          />
           <div className="cart-content">
             <div>{title}</div>
             <div className="date-frame">
               <div>{start}</div>
+              <div>~</div>
               <div>{end}</div>
-              <div className="date-process-icon">~</div>
             </div>
+            <div className="buy-time">購買日期:{buyTime}</div>
           </div>
         </div>
         <div className="cart-card-right">
@@ -63,7 +67,9 @@ function CartItemEx(props) {
             <button
               className="btn count-btn"
               onClick={() => {
-                if (count - 1 >= 1) setExCount(count - 1)
+                if (count - 1 >= 1) {
+                  setExCount(count - 1)
+                }
               }}
             >
               -

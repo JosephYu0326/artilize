@@ -1,6 +1,39 @@
 import React from 'react'
+import { useState } from 'react'
+import { shoppingListEx } from './Cart-ex'
 
 function Summary(props) {
+  const [exhibitionInorder, setExhibitionInorder] = useState(shoppingListEx)
+
+  const body = exhibitionInorder.map((v, i) => {
+    return {
+      cartExTitle: v.title,
+      cartExStart: v.start,
+      cartExEnd: v.end,
+      cartExImage: v.image,
+      cartExBuyTime: v.buyTime,
+      cartExPrice: v.TicketPrice,
+      cartExCount: v.count,
+      cartExCategory: v.TicketKind,
+    }
+  })
+
+  function finishedCart(e) {
+    e.preventDefault()
+    let isPass = true // 有沒有通過檢查
+
+    if (isPass) {
+      fetch(`${process.env.REACT_APP_API_URL}/booking`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(body),
+      }).then((json) => console.log(json))
+    }
+  }
+
   const { totalPriceEx, totalPricePro } = props
   const discount = 10
   return (
@@ -28,7 +61,10 @@ function Summary(props) {
               : totalPricePro - discount}
           </div>
         </div>
-        <button className="btn btn-primary rounded-pill next-step-btn">
+        <button
+          className="btn btn-primary rounded-pill next-step-btn"
+          onClick={finishedCart}
+        >
           下一步
         </button>
       </div>

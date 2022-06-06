@@ -1,33 +1,74 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Accordion } from 'react-bootstrap'
+import { useState, useEffect } from 'react'
 
-function Location() {
-  const areas = ['北部', '中部', '南部', '東部', '離島']
-  const areasObject = {
-    0: ['臺北市', '新北市', '基隆市', '新竹市', '桃園市', '新竹縣', '宜蘭縣'],
-    1: ['臺中市', '苗栗縣', '彰化縣', '南投縣', '雲林縣'],
-    2: ['高雄市', '臺南市', '嘉義市', '嘉義縣', '屏東縣', '澎湖縣'],
-    3: ['花蓮縣', '台東縣'],
-    4: ['金門縣', '連江縣'],
+function Location(props) {
+  const { setSearchLocation } = props
+  const [loactionData, setLocationData] = useState([])
+  const fetchLocationData = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/exhibition/location`
+    )
+    const results = await response.json()
+    setLocationData(results)
+  }
+  useEffect(() => {
+    fetchLocationData()
+  }, [])
+
+  function optionChange(e) {
+    let thetarget = e.target.parentNode.childNodes[0]
+    // 找到該層的 <div class="selectsquare"></div>
+    if (thetarget.hasChildNodes()) {
+      thetarget = thetarget.childNodes[0]
+    }
+
+    let changeicon = thetarget.getAttribute('class')
+
+    if (changeicon === 'selectsquare') {
+      // 將其他選的屏蔽掉
+      if (document.querySelector('.selectedsquare')) {
+        let other = document.querySelectorAll('.selectedsquare')
+        for (let i = 0; i < other.length; i++) {
+          other[i].setAttribute('class', 'selectsquare')
+        }
+      }
+      thetarget.setAttribute('class', 'selectedsquare')
+      let setLocation = thetarget.parentNode.childNodes[1].innerText
+      setSearchLocation(setLocation)
+    } else {
+      thetarget.setAttribute('class', 'selectsquare')
+      setSearchLocation('')
+    }
   }
 
-  const area = areas.map((v, i) => {
+  const area = loactionData.map((v, i) => {
     return (
       <div key={i}>
         <Accordion defaultActiveKey="0" flush>
           <Accordion.Item eventKey={i}>
-            <Accordion.Header>{areas[i]}</Accordion.Header>
+            <Accordion.Header>{v.direction}</Accordion.Header>
             <Accordion.Body>
-              {areasObject[i].map((v, j) => {
+              {[loactionData[i].city.split(',')].map((v2, j) => {
                 return (
                   <div key={j}>
-                    <Link to="#" className="selectlink" onClick={optionChange}>
-                      <div className="d-flex align-items-center selectframe">
-                        <div className="selectsquare"></div>
-                        {areasObject[i][j]}
-                      </div>
-                    </Link>
+                    {v2.map((v3, k) => {
+                      return (
+                        <div key={k}>
+                          <Link
+                            to="#"
+                            className="selectlink"
+                            onClick={optionChange}
+                          >
+                            <div className="d-flex align-items-center selectframe">
+                              <div className="selectsquare"></div>
+                              <div>{v3}</div>
+                            </div>
+                          </Link>
+                        </div>
+                      )
+                    })}
                   </div>
                 )
               })}
@@ -45,22 +86,6 @@ function Location() {
       <div className="mobile-window window-size pt-2">{area}</div>
     </>
   )
-}
-
-function optionChange(e) {
-  let thetarget = e.target.parentNode.childNodes[0]
-  // 找到該層的 <div class="selectsquare"></div>
-  if (thetarget.hasChildNodes()) {
-    thetarget = thetarget.childNodes[0]
-  }
-
-  let changeicon = thetarget.getAttribute('class')
-
-  if (changeicon === 'selectsquare') {
-    thetarget.setAttribute('class', 'selectedsquare')
-  } else {
-    thetarget.setAttribute('class', 'selectsquare')
-  }
 }
 
 export default Location

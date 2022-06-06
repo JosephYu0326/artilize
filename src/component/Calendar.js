@@ -5,12 +5,16 @@ import { FiChevronLeft } from 'react-icons/fi'
 import { FiChevronRight } from 'react-icons/fi'
 
 import '../styles/Calendar.scss'
+import { doc } from 'prettier'
 
 function Calendar(props) {
-  const setBuyTime = props.setBuyTime
+  const { setBuyTime, start, end } = props
+
   const now = new Date()
   const [myYear, setMyYear] = useState()
   const [myMonth, setMyMonth] = useState()
+  const [dayLength, setDayLength] = useState(0)
+  const [output, setOutput] = useState([])
 
   // 要得到今天的西元年使用Date物件的getFullYear()，要得到月份使用getMonth()(注意回傳為 0~11)
   const nowY = myYear ? myYear : now.getFullYear()
@@ -86,12 +90,23 @@ function Calendar(props) {
     let selectedDay = parseInt(e.target.innerText)
     let setStyle = e.target.parentNode
 
+    // 月份補零
+    let newMymonth = myMonth.toString()
+    if (newMymonth.length <= 1) {
+      newMymonth = '0' + newMymonth
+    }
+    // 日期補零
+    let newMyDay = selectedDay.toString()
+    if (newMyDay.length <= 1) {
+      newMyDay = '0' + newMyDay
+    }
+
     if (temp1[selectedDay] === 1) {
       selectState[selectedDay] = 0
-      setBuyTime([])
+      setBuyTime('')
     } else {
       selectState[selectedDay] = 1
-      setBuyTime([myYear, myMonth, selectedDay])
+      setBuyTime(`${myYear.toString()}-${newMymonth}-${newMyDay}`)
     }
     setTemp1(selectState)
 
@@ -174,7 +189,12 @@ function Calendar(props) {
                 <tr key={i}>
                   {v.map((item, idx) => (
                     <td key={idx}>
-                      <Link to="#" className="selectlink" onClick={handleClick}>
+                      <Link
+                        to="#"
+                        className="selectlink-canbuy"
+                        onClick={handleClick}
+                        data-day={item ? item : ''}
+                      >
                         {item}
                       </Link>
                     </td>

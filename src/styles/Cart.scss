@@ -90,8 +90,15 @@
         background: #fff;
         border: 0px;
     }
-    .exhibition-img{
+    .exhibition-img-frame{
         width: 150px;
+        height: 100px;
+        overflow: hidden;
+    }
+    .exhibition-img{
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
     }
 
     .cart-card-left{
@@ -108,17 +115,15 @@
         flex-direction: column;
         width: 60%;
         .date-frame{
+            margin-top: 10px;
             width: 250px;
             display: flex;
             justify-content: space-between;
             position: relative;
-            .date-process-icon{
-                width: 20px;
-                text-align: center;
-                position: absolute;
-                left: 50%;
-                transform: translateX(-10px);
-            }
+        }
+        .buy-time{
+            font-size: 16px;
+            color:#7C8DB0;
         }
     }
 
@@ -164,6 +169,51 @@
         }
     }
 
+}
+
+@media (max-width: 992px){
+    .cart-card-frame{
+        width: fit-content;
+        flex-direction: column;
+        border-radius: 10px;
+        box-shadow: $BoxShadow;
+        border: 0;
+        align-items: center;
+        font-size: 12px;
+    }
+    .cart-option-title{
+        display: none;
+    }
+    .cart-card-left{
+        width: auto !important;
+        .exhibition-img{
+            margin-left: 5px !important;
+            margin-right: 5px !important;
+            width: 100px;
+        }.cart-content{
+            padding: 5px;
+            
+        }
+        .date-frame{
+            margin-top: 5px;
+            width: auto !important;
+            max-width: 200px !important;
+        }
+        
+    }
+    .cart-card-right{
+        width: auto !important;
+    }
+    .bottom-frame{
+        margin-top: 20px !important;
+        width: 80% !important;
+    }
+    .discountText{
+        display: none;
+    }
+    .input-frame input{
+        width: 100% !important;
+    }
 }
 
 .selectProduct{

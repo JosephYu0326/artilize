@@ -6,6 +6,7 @@
 .calendar-frame{
     border: 1px black solid;
     width: 350px;
+    height: 350px;
 
     .title-frame{
         display: flex;
@@ -34,6 +35,21 @@
     justify-content: space-between;
     align-items: center;
     text-align: center;
+
+    .selectlink{
+        text-decoration: none;
+        color: #000;
+    }
+
+    .selectlink-nobuy{
+        text-decoration: none;
+        color: rgb(210, 197, 197);
+    }
+    .selectlink-canbuy{
+        text-decoration: none;
+        color: #000;
+    }
+
     thead{
         width: 100%;
         tr{

@@ -1,12 +1,41 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Slider from '@mui/material/Slider'
 import 'react-rangeslider/lib/index.css'
 
-function Price() {
+function Price(props) {
+  const { lowPrice, setLowPrice, highPrice, setHighPrice, setPriceSearch } =
+    props
+
   const [value, setValue] = useState([20, 800])
+  const [datas, setDatas] = useState([])
+
+  const fetchData = async () => {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/exhibition`)
+    const results = await response.json()
+    setDatas(results)
+  }
+  // console.log(test)
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
   const handleChange = (event, newValue) => {
     setValue(newValue)
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    let high = parseInt(document.querySelector('#highprice').value)
+    let low = parseInt(document.querySelector('#lowprice').value)
+    setHighPrice(high)
+    setLowPrice(low)
+    if (high && low) {
+      setPriceSearch(true)
+    } else {
+      setPriceSearch(false)
+    }
   }
 
   return (
@@ -26,7 +55,7 @@ function Price() {
         step={50}
       />
 
-      <form className="mt-2 position-relative">
+      <form className="mt-2 position-relative" onSubmit={handleSubmit}>
         <div className="justify-content-between d-flex">
           <div>
             <label htmlFor="lowprice" className="form-label">
@@ -51,6 +80,9 @@ function Price() {
             />
           </div>
         </div>
+        <button type="submit" className="assure-btn btn">
+          確定
+        </button>
       </form>
     </>
   )

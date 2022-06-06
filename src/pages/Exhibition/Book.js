@@ -7,11 +7,10 @@ import closePng from '../Exhibition/images/Category.png'
 let storage = localStorage
 
 function Book(props) {
-  const [Ticket, setTicket] = useState([0, 0])
-  const TicketPriceArray = [50, 30]
+  // const TicketPriceArray = [50, 30]
   const [TicketPrice, setTicketPrice] = useState()
-  const TicketCategory = ['全票', '優待票']
   const [TicketKind, setTicketKind] = useState('')
+  const [ticketText, setTicketText] = useState('票種')
   const [count, setCount] = useState(1)
   const [buyTime, setBuyTime] = useState([])
 
@@ -21,6 +20,20 @@ function Book(props) {
   const image = props.image
   const start = props.start
   const end = props.end
+  const TicketCategory = props.ticketKind
+  const TicketPriceArray = props.ticketPrice
+  const TicketArray = props.ticketArray
+  const [Ticket, setTicket] = useState(TicketArray)
+
+  useEffect(() => {
+    setTicket(TicketArray)
+  }, [TicketArray])
+
+  useEffect(() => {
+    if (TicketKind) {
+      setTicketText(TicketKind)
+    }
+  }, [TicketKind])
 
   function numPlus() {
     setCount(count + 1)
@@ -36,9 +49,15 @@ function Book(props) {
   function closeWindow() {
     let window = document.querySelector('.book-window-frame')
     window.style.display = 'none'
-    setTicket([0, 0])
+    let buyWhichTicket = []
+
+    for (let i = 0; i < TicketCategory.length; i++) {
+      buyWhichTicket.push(0)
+    }
+    setTicket(buyWhichTicket)
     setCount(1)
     setTicketPrice('')
+    setTicketText('票種')
     setIsOpen(false)
     setBuyTime([])
   }
@@ -79,37 +98,74 @@ function Book(props) {
       other[i].setAttribute('class', 'ticket')
     }
     setCount(1)
+
+    for (let i = 0; i < Ticket.length; i++) {
+      if (Ticket[i]) {
+        setTicketText(TicketKind)
+        break
+      } else {
+        setTicketText('票種')
+      }
+    }
   }
+  // console.log(TicketKind)
 
   function buyTicket() {
-    if (storage['addItemList'] == null) {
-      storage['addItemList'] = []
+    let startDay = new Date(start)
+    let endDay = new Date(end)
+    let buyTimeDay = new Date(buyTime)
+
+    if (TicketKind === '') {
+      alert('請選擇票種')
+    } else if (startDay > buyTimeDay || buyTimeDay > endDay) {
+      alert(`請選擇${start}~${end}`)
+    } else {
+      if (storage['addItemList'] == null) {
+        storage['addItemList'] = []
+      }
+      storage['addItemList'] += `${title},`
+
+      let titleArray = storage['addItemList'].split(',')
+
+      titleArray.pop()
+      storage['totalNum'] = titleArray.length
+      let index = parseInt(storage.getItem('totalNum')) - 1
+      let storageJson = {
+        index: index,
+        title: titleArray[index],
+        start: start,
+        end: end,
+        buyTime: buyTime,
+        image: image,
+        count: count,
+        TicketPrice: TicketPrice,
+        TicketKind: TicketKind,
+      }
+
+      storage.setItem(title, JSON.stringify(storageJson))
     }
-    storage['addItemList'] += `${title},`
 
-    let titleArray = storage['addItemList'].split(',')
+    let buyWhichTicket = []
 
-    titleArray.pop()
-    storage['totalNum'] = titleArray.length
-    let index = parseInt(storage.getItem('totalNum')) - 1
-
-    let storageJson = {
-      index: index,
-      title: titleArray[index],
-      start: start,
-      end: end,
-      buyTime: buyTime,
-      image: image,
-      count: count,
-      TicketPrice: TicketPrice,
-      TicketKind: TicketKind,
+    for (let i = 0; i < TicketCategory.length; i++) {
+      buyWhichTicket.push(0)
     }
-    storage.setItem(title, JSON.stringify(storageJson))
 
     setIsOpen(false)
     setCount(1)
-    setTicket([0, 0])
+    setTicket(buyWhichTicket)
     setTicketPrice('')
+    setTicketKind('')
+    setTicketText('票種')
+  }
+  if (TicketCategory) {
+    var ticketFrame = TicketCategory.map((v, i) => {
+      return (
+        <button key={i} className="btn ticket" onClick={selectTicket}>
+          {TicketCategory[i]}
+        </button>
+      )
+    })
   }
 
   return isOpen ? (
@@ -122,19 +178,16 @@ function Book(props) {
               <div>{title}</div>
             </div>
           </div>
-          <div className="d-flex">
-            <Calendar setBuyTime={setBuyTime} />
+          <div>
+            {start}~{end}
+          </div>
+          <div className="d-flex align-items-center">
+            <Calendar setBuyTime={setBuyTime} start={start} end={end} />
+
             <div className="information">
-              <div className="ticket-frame">
-                <button className="btn ticket" onClick={selectTicket}>
-                  {TicketCategory[0]}
-                </button>
-                <button className="btn ticket" onClick={selectTicket}>
-                  {TicketCategory[1]}
-                </button>
-              </div>
+              <div className="ticket-frame">{ticketFrame}</div>
               <div className="count mt-3 mb-4">
-                <div>{Ticket[0] || Ticket[1] ? TicketKind : '票種'}</div>
+                <div>{ticketText}</div>
                 <div>TWD {TicketPrice}/張</div>
               </div>
               <div className="btn-frame my-3">

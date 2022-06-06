@@ -1,19 +1,35 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useRef } from 'react'
+import { FaUber } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import { getMonthView } from 'rsuite/esm/utils/dateUtils'
 
-function Gallery() {
+function Gallery(props) {
+  const { setSearchGallery } = props
   const frameheight = useRef()
   const [active, setActive] = useState(false)
 
-  const galleries = [
-    '故宮博物院',
-    '台北市立美術館',
-    '台北當代藝術館',
-    '奇美博物館',
-  ]
-  const moreGallery = ['高雄市立美術館', '台中市立美術館', '台南市立美術館']
+  let select = []
+  const [galleryData, setGalleryData] = useState([])
+  const fetchGalleryData = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/exhibition/galleries`
+    )
+    const results = await response.json()
+    setGalleryData(results)
+  }
+  useEffect(() => {
+    fetchGalleryData()
+  }, [])
+
+  for (let i = 0; i < galleryData.length; i++) {
+    select.push(0)
+  }
+
+  let temp = galleryData.slice(0, 4)
+  let thelength = galleryData.length
+  let all = galleryData.slice(4, thelength)
 
   useEffect(() => {
     let thetarget = document.querySelector('.galleryAllText')
@@ -25,26 +41,26 @@ function Gallery() {
     }
   }, [active])
 
-  const gallery = galleries.map((v, i) => {
+  const gallery = temp.map((v, i) => {
     return (
       <div key={i}>
         <Link to="#" className="selectlink" onClick={optionChange}>
           <div className="d-flex align-items-center selectframe">
             <div className="selectsquare"></div>
-            <div>{galleries[i]}</div>
+            <div>{v.mName}</div>
           </div>
         </Link>
       </div>
     )
   })
 
-  const galleryAll = moreGallery.map((v, i) => {
+  const galleryAll = all.map((v, i) => {
     return (
       <div key={i}>
         <Link to="#" className="selectlink" onClick={optionChange}>
           <div className="d-flex align-items-center selectframe">
             <div className="selectsquare"></div>
-            <div>{moreGallery[i]}</div>
+            <div>{v.mName}</div>
           </div>
         </Link>
       </div>
@@ -69,8 +85,11 @@ function Gallery() {
         }
       }
       thetarget.setAttribute('class', 'selectedsquare')
+      let setGallery = thetarget.parentNode.childNodes[1].innerText
+      setSearchGallery(setGallery)
     } else {
       thetarget.setAttribute('class', 'selectsquare')
+      setSearchGallery('')
     }
   }
 

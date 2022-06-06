@@ -74,6 +74,9 @@ function App() {
         <Route path="/exhibition/mapsearch">
           <MapSearch />
         </Route>
+        <Route path="/exhibition/search?:keyword">
+          <Exhibition />
+        </Route>
         <Route path="/exhibition/categories/:kid">
           <Exhibition />
         </Route>

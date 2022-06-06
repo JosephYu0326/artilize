@@ -1,5 +1,5 @@
 //展覽
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 
 import '../../styles/exhibition-list.scss'
@@ -15,16 +15,47 @@ import Map from './Map'
 import DateTime from './DateTime'
 import Card from './Card'
 import Accordion from '../../component/Accordion'
+import Header from '../../component/Header'
+import Footer from '../../component/Footer'
 
 function Exhibition(props) {
+  const [search, setSearch] = useState('')
+  const [datas, setDatas] = useState([])
+  const [searchData, setSearchData] = useState('')
+  const [priceSearch, setPriceSearch] = useState(false)
+  const [lowPrice, setLowPrice] = useState('')
+  const [highPrice, setHighPrice] = useState('')
+  const [searchDate, setSearchDate] = useState('')
+  const [searchGallery, setSearchGallery] = useState('')
+  const [searchCategory, setSearchCategory] = useState('')
+  const [searchLocation, setSearchLocation] = useState('')
+
+  const fetchData = async () => {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/exhibition`)
+    const results = await response.json()
+    setDatas(results)
+  }
+  // console.log(test)
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    let temp = datas.filter(
+      (v, i) => v.aName.includes(search) || v.mName.includes(search)
+    )
+    setSearchData(temp)
+  }
   return (
     <>
-      <header>Exhibition Header</header>
+      <Header />
       <div className="d-flex exlist-frame">
         <aside>
           {/* 搜尋列 */}
-          <form className="searchmargin">
-            <SearchBar />
+          <form className="searchmargin" onSubmit={handleSubmit}>
+            <SearchBar setSearch={setSearch} />
           </form>
 
           {/* 地圖搜尋 */}
@@ -32,27 +63,33 @@ function Exhibition(props) {
 
           {/* 價錢 */}
           <div className="d-flex asideframe BoxShadow">
-            <Price />
+            <Price
+              setLowPrice={setLowPrice}
+              lowPrice={lowPrice}
+              setHighPrice={setHighPrice}
+              highPrice={highPrice}
+              setPriceSearch={setPriceSearch}
+            />
           </div>
 
           {/* 日期 */}
           <div className="asideframe BoxShadow">
-            <DateTime />
-          </div>
-
-          {/* 類別 */}
-          <div className="asideframe BoxShadow">
-            <Category />
+            <DateTime setSearchDate={setSearchDate} />
           </div>
 
           {/* 館所 */}
           <div className="asideframe BoxShadow">
-            <Gallery />
+            <Gallery setSearchGallery={setSearchGallery} />
+          </div>
+
+          {/* 類別 */}
+          <div className="asideframe BoxShadow">
+            <Category setSearchCategory={setSearchCategory} />
           </div>
 
           {/* 地區 */}
           <div className="asideframe BoxShadow">
-            <Location />
+            <Location setSearchLocation={setSearchLocation} />
           </div>
         </aside>
 
@@ -63,11 +100,20 @@ function Exhibition(props) {
         <main className="container-fluid">
           <div className="container">
             <div className="row row-cols-xxl-4 row-cols-xl-3 row-cols-2">
-              <Card />
+              <Card
+                searchData={searchData}
+                lowPrice={lowPrice}
+                highPrice={highPrice}
+                searchDate={searchDate}
+                searchGallery={searchGallery}
+                searchCategory={searchCategory}
+                searchLocation={searchLocation}
+              />
             </div>
           </div>
         </main>
       </div>
+      <Footer />
     </>
   )
 }
