@@ -1,34 +1,46 @@
 //建立新活動資料
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import '../../styles/AddAbility.scss'
 import { FiSettings } from 'react-icons/fi'
 
+import Axios from 'axios'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 // import { zh-TW } from 'date-fns/esm/locale'
 import { registerLocale, setDefaultLocale } from 'react-datepicker'
 import { zhTW } from 'date-fns/locale'
+import { Form } from 'react-bootstrap'
 registerLocale('zhTW', zhTW)
-
-// import Axios from 'axios'
 
 function AddAbility(props) {
   //活動名稱
-  const [exhibition, setExhibition] = useState('')
+  // aName setAname
+  const [aName, setAname] = useState('')
   //展覽圖片
   const [fileData, setFileData] = useState()
   // select 地區
-  const [selectedValue1, setSelectedValue1] = useState('')
-  const carOptions1 = ['volvo', 'saab', 'mercedes', 'audi']
+  //direction setDirection
+  const [direction, setDirection] = useState('')
+  const [direction2, setDirection2] = useState([])
+  const fetchData = async () => {
+    const response = await fetch('http://localhost:5000/B2B/B2B/direction')
+    const results = await response.json()
+    setDirection2(results)
+    console.log('direction2', setDirection2)
+  }
+  useEffect(() => {
+    fetchData()
+  }, [])
   // select 縣市
-  const [selectedValue, setSelectedValue] = useState('')
+  // city setCity
+  const [city, setCity] = useState('')
   const carOptions = ['volvo', 'saab', 'mercedes', 'audi']
   //展覽日期 開始
-  const [startDate, setStartDate] = useState(new Date())
+  const [start, setStart] = useState(new Date())
   //展覽日期 結束
-  const [endDate, setEndDate] = useState(new Date())
+  const [end, setEnd] = useState(new Date())
   //詳細地址
   const [address, setAddress] = useState('')
   //活動內容介紹
@@ -60,33 +72,79 @@ function AddAbility(props) {
     console.log('fileData', fileData)
   }
 
-  const onSubmitHandler = (e) => {
-    e.preventDefault()
+  // const onSubmitHandler = (e) => {
+  //   e.preventDefault()
 
-    const data = new FormData()
-    data.append('image', fileData)
-    // for (let i = 0; i < fileData.length; i++) {
-    //   data.append('image', fileData[i])
-    // }
+  //   const data = new FormData()
+  //   data.append('image', fileData)
+  //   // for (let i = 0; i < fileData.length; i++) {
+  //   //   data.append('image', fileData[i])
+  //   // }
 
+  //   fetch('http://localhost:5000/B2B/B2B/', {
+  //     method: 'POST',
+  //     body: data,
+  //   })
+  //     .then((result) => {
+  //       console.log('file sent successful')
+  //     })
+  //     .catch((err) => {
+  //       console.log('err.message', err.message)
+  //     })
+  // }
+  // const submitForm = () => {
+  //   Axios.post('http://localhost:5000/B2B/B2B/', {
+  //     aName: aName,
+  //     fileData: fileData,
+  //     direction: direction,
+  //     city: city,
+  //     startDate: start,
+  //     endDate: endDate,
+  //     address: address,
+  //     activities: activities,
+  //     ticketName: ticketName,
+  //     amount: amount,
+  //     price: price,
+  //     ticketDescription: ticketDescription,
+  //   }).then(() => {
+  //     alert('成功發送表單')
+  //   })
+  // }
+
+  const submitForm = (e) => {
     fetch('http://localhost:5000/B2B/B2B/', {
       method: 'POST',
-      body: data,
+      body: new FormData(document.getElementById('myForm')),
     })
-      .then((result) => {
-        console.log('file sent successful')
-      })
-      .catch((err) => {
-        console.log('err.message', err.message)
-      })
+      .then((res) => res.text())
+      .then((text) => console.log('上傳成功...' + text))
+
+    e.preventDefault()
   }
+
+  //map
+  function CitySelector(){
+    direction2.map((v,i)=>{
+
+return (
+   <option key={i} value={v}>
+    {direction2[i].direction}
+   </option>
+      ) 
+
+    }
+
+  //citySelector引入到你要放的位置
+                     
+<CitySelector></CitySelector>
+
   return (
     <>
       {/* onSubmit={handleSubmit} */}
       <div>建立新活動資料</div>
       <form
         id="myForm"
-        onSubmit={onSubmitHandler}
+        // onSubmit={onSubmitHandler}
         encType="multipart/form-data"
       >
         <div className="container d-flex justify-content-center">
@@ -98,6 +156,7 @@ function AddAbility(props) {
                 type="file"
                 onChange={fileChangeHandler}
                 multiple
+                name="img"
                 accept="image/*"
                 // style={{ display: 'none' }}
               />
@@ -127,10 +186,10 @@ function AddAbility(props) {
                   className="form-control"
                   id="exampleFormControlInput1"
                   placeholder="活動名稱"
-                  name="abilityName"
-                  value={exhibition}
+                  name="aName"
+                  value={aName}
                   onChange={(e) => {
-                    setExhibition(e.target.value)
+                    setAname(e.target.value)
                   }}
                 />
                 <h6>請輸入活動名稱</h6>
@@ -153,17 +212,19 @@ function AddAbility(props) {
                     placeholder="活動時間"
                   /> */}
                   <DatePicker
+                    dateFormat="yyyy-MM-dd"
                     locale="zhTW"
                     className="col-12"
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date)}
+                    selected={start}
+                    onChange={(date) => setStart(date)}
                     selectsStart
-                    startDate={startDate}
-                    endDate={endDate}
+                    startDate={start}
+                    endDate={end}
                     peekNextMonth
                     showMonthDropdown
                     showYearDropdown
                     dropdownMode="select"
+                    name="start"
                   />
                   <h6>請輸入活動時間</h6>
                 </div>
@@ -186,19 +247,21 @@ function AddAbility(props) {
                     placeholder="活動時間"
                   /> */}
                   <DatePicker
+                    dateFormat="yyyy-MM-dd"
                     locale="zhTW"
                     className="col-12"
-                    selected={endDate}
-                    onChange={(date) => setEndDate(date)}
+                    selected={end}
+                    onChange={(date) => setEnd(date)}
                     selectsEnd
-                    startDate={startDate}
-                    endDate={endDate}
-                    minDate={startDate}
+                    startDate={start}
+                    endDate={end}
+                    minDate={start}
                     peekNextMonth
                     showMonthDropdown
                     showYearDropdown
                     yearDropdownItemNumber={15}
                     dropdownMode="select"
+                    name="end"
                   />
                   <h6>請輸入活動時間</h6>
                 </div>
@@ -209,22 +272,23 @@ function AddAbility(props) {
               <section>
                 <select
                   className="form-select"
-                  name="Place"
-                  id="Place"
-                  value={selectedValue1}
+                  name="direction"
+                  id="direction"
+                  value={direction}
                   onChange={(e) => {
-                    setSelectedValue1(e.target.value)
+                    setDirection(e.target.value)
                   }}
                 >
                   <option value="">請選擇地區</option>
-                  {carOptions.map((v, i) => {
-                    return (
-                      <option key={i} value={v}>
-                        {/* 開頭轉為大寫英文 */}
-                        {v.charAt(0).toUpperCase() + v.slice(1)}
-                      </option>
-                    )
-                  })}
+                  {direction2.length > 0 &&
+                    direction2.map((v, i) => {
+                      return (
+                        <option key={i} value={v}>
+                          {/* 開頭轉為大寫英文 */}
+                          {/* {v.charAt(0).toUpperCase() + v.slice(1)} */}
+                        </option>
+                      )
+                    })}
                 </select>
                 <h6>請選擇地區</h6>
               </section>
@@ -233,11 +297,11 @@ function AddAbility(props) {
               <section>
                 <select
                   className="form-select"
-                  name="Place"
-                  id="Place"
-                  value={selectedValue}
+                  name="fkCityId"
+                  id="city"
+                  value={city}
                   onChange={(e) => {
-                    setSelectedValue(e.target.value)
+                    setCity(e.target.value)
                   }}
                 >
                   <option value="">請選擇縣市</option>
@@ -253,6 +317,55 @@ function AddAbility(props) {
                 <h6>請選擇鄉鎮市區</h6>
               </section>
             </div>
+            <h3>活動類型與館方</h3>
+            <div className="col-6">
+              <section>
+                <select
+                  className="form-select"
+                  name="fkKindId"
+                  id="direction"
+                  value={direction}
+                  onChange={(e) => {
+                    setDirection(e.target.value)
+                  }}
+                >
+                  <option value="">請選擇活動類型</option>
+                  {carOptions.map((v, i) => {
+                    return (
+                      <option key={i} value={v}>
+                        {/* 開頭轉為大寫英文 */}
+                        {v.charAt(0).toUpperCase() + v.slice(1)}
+                      </option>
+                    )
+                  })}
+                </select>
+                <h6>請選擇活動類型</h6>
+              </section>
+            </div>
+            <div className="col-6">
+              <section>
+                <select
+                  className="form-select"
+                  name="fkMuseumId"
+                  id="city"
+                  value={city}
+                  onChange={(e) => {
+                    setCity(e.target.value)
+                  }}
+                >
+                  <option value="">請選擇館方</option>
+                  {carOptions.map((v, i) => {
+                    return (
+                      <option key={i} value={v}>
+                        {/* 開頭轉為大寫英文 */}
+                        {v.charAt(0).toUpperCase() + v.slice(1)}
+                      </option>
+                    )
+                  })}
+                </select>
+                <h6>請選擇館方</h6>
+              </section>
+            </div>
             <div className="col-12">
               <div className="mb-3">
                 <label
@@ -263,6 +376,7 @@ function AddAbility(props) {
                 </label>
                 <input
                   type="text"
+                  name="address"
                   className="form-control"
                   id="exampleFormControlInput1"
                   value={address}
@@ -288,6 +402,7 @@ function AddAbility(props) {
                   id="exampleFormControlTextarea1"
                   rows="10"
                   value={activities}
+                  name="intro"
                   onChange={(e) => {
                     setActivities(e.target.value)
                   }}
@@ -302,6 +417,7 @@ function AddAbility(props) {
                 </div>
               </section>
             </div>
+
             <div className="col-12">
               <h3>新增活動票券</h3>
             </div>
@@ -458,7 +574,7 @@ function AddAbility(props) {
                   className="btn m btn-primary"
                   type="submit"
                   value="送出"
-                  // onClick={submitForm}
+                  onClick={submitForm}
                   // onClick={""}
                 >
                   確認
