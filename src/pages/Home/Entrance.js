@@ -14,7 +14,7 @@ function Entrance(props) {
 
   var mouse = { x: 0, y: 0 }
 
-  var numMetaballs = 35 // 控制球的數量
+  var numMetaballs = 40 // 控制球的數量
   var metaballs = []
 
   for (var i = 0; i < numMetaballs; i++) {
