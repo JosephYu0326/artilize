@@ -12,7 +12,7 @@ import Article from '../../component/Article'
 import Post from '../../component/Post'
 
 function Forum(props) {
-  const [isLoading, setIsLoading] = useState(true)
+  // const [isLoading, setIsLoading] = useState(true)
   const location = useLocation()
   const urlSearchParams = new URLSearchParams(location.search)
   const currentTopic = urlSearchParams.get('topic')
@@ -109,7 +109,7 @@ function Forum(props) {
   //文章搜尋
   useEffect(() => {
     if (serchInput) {
-      fetch(`${process.env.REACT_APP_API_URL}/ArticleCollection/search`, {
+      fetch(`${process.env.REACT_APP_API_URL}/Forum/search`, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
@@ -154,7 +154,7 @@ function Forum(props) {
       <Header data={articleList} setSerchInput={setSerchInput} />
       <ForumAside btn={btn} />
       <FadeIn className="container h-100">
-        <div className="frContent scrollbar">
+        <div className="frContent">
           {articleList.length == 0 ? (
             <div className="txtGray">找不到相關文章</div>
           ) : (

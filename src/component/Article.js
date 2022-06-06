@@ -33,7 +33,7 @@ function Article(props) {
             </div>
           </div>
           <div
-            className="preViewContent pb-3"
+            className="pRagular preViewContent pb-3"
             dangerouslySetInnerHTML={{ __html: `${articleDetails[i].content}` }}
           ></div>
           <div className="social d-flex justify-content-between align-items-center">
