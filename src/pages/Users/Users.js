@@ -8,6 +8,7 @@ import { Container, Form, Button, Row, Image } from 'react-bootstrap'
 import logo from '../../images/user.png'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import Footer from '../../component/Footer'
 
 function Users(props) {
   const usersAsideBar = {
@@ -218,13 +219,21 @@ function Users(props) {
                         : `不詳`}
                     </div>
                   </div>
-                  <div className="d-flex justify-content-around">
+                  <div className="d-flex justify-content-between">
                     <Link to="/users/edit/">
                       <button
                         type="click"
                         className="btn btn-primary rounded-pill mt-4"
                       >
-                        編輯
+                        編輯會員資料
+                      </button>
+                    </Link>
+                    <Link to="/users/changepassword/">
+                      <button
+                        type="click"
+                        className="btn btn-primary rounded-pill mt-4"
+                      >
+                        更改密碼
                       </button>
                     </Link>
 
@@ -242,6 +251,7 @@ function Users(props) {
           </Container>
         </section>
       </div>
+      <Footer />
     </>
   )
 }

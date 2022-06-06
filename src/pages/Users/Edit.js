@@ -11,6 +11,7 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import Footer from '../../component/Footer'
 
 function Edit(props) {
   const [name, setName] = useState('')
@@ -365,6 +366,7 @@ function Edit(props) {
           </Container>
         </section>
       </div>
+      <Footer />
     </>
   )
 }

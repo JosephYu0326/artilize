@@ -9,6 +9,7 @@ import { useHistory } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import LoginValidate from './formComponents/LoginValidate'
+import Footer from '../../component/Footer'
 
 function Login(props) {
   const [loginData, setLoginData] = useState({
@@ -175,6 +176,7 @@ function Login(props) {
           </Container>
         </section>
       </div>
+      <Footer />
     </>
   )
 }

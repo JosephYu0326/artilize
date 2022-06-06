@@ -60,7 +60,8 @@ function Header(props) {
           timer: 2000,
           timerProgressBar: true,
         }).then(() => {
-          history.push('users/login')
+          // history.push('/users/login')
+          history.replace('/users/login')
         })
       }
     })

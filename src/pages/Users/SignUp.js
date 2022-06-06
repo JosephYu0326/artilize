@@ -7,6 +7,7 @@ import { Container, Row } from 'react-bootstrap'
 import { useState } from 'react'
 
 import SignUpForm from './formComponents/SignupForm'
+import Footer from '../../component/Footer'
 
 const SignUp = () => {
   const history = useHistory()
@@ -31,6 +32,7 @@ const SignUp = () => {
           </Container>
         </section>
       </div>
+      <Footer />
     </>
   )
 }
