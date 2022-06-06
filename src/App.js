@@ -31,6 +31,7 @@ import B2B from './pages/B2B/B2B'
 import AddAbility from './pages/B2B/AddAbility'
 import Style from './pages/Style'
 import { useState } from 'react'
+import Resetpassword from './pages/Users/ResetPassword'
 
 function App() {
   const [auth, setAuth] = useState(false)
@@ -79,6 +80,9 @@ function App() {
         </Route>
         <Route path="/exhibition">
           <Exhibition />
+        </Route>
+        <Route path="/users/resetpassword/:userId">
+          <Resetpassword />
         </Route>
         <Route path="/users/mycoupon">
           <MyCoupon />
