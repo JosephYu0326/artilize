@@ -40,7 +40,7 @@ function Home(props) {
 
   const [pBrandData, setBrandData] = useState([])
   const fetchBrandData = async () => {
-    const res = await fetch(`${API_GET_DATA}/product`)
+    const res = await fetch(`${API_GET_DATA}/product/Brand`)
     const data = await res.json()
     // console.log(data)
     setBrandData(data)
@@ -50,8 +50,8 @@ function Home(props) {
   }, [])
 
   const pCards = pCardData.map(
-    ({ product_id, product_name, product_img, product_price }) => (
-      <div key={product_id}>
+    ({ product_id, product_name, product_img, product_price }, a) => (
+      <div key={a}>
         <Link
           to={`/product/introduce/${product_id}`}
           className="pCardLink TextLink"
@@ -109,9 +109,9 @@ function Home(props) {
   // })
 
   const pBrandCards = pBrandData.map(
-    ({ product_brand_id, product_brand_name, product_brand_img }) => {
+    ({ product_brand_id, product_brand_name, product_brand_img }, b) => {
       return (
-        <div key={product_brand_id}>
+        <div key={b}>
           <div className="pBrandCard">
             <div className="pBrandCardImgcontent">
               <Link to="/Product/Introduce">

@@ -66,7 +66,7 @@ function App() {
         <Route path="/product/introduce/:product_id">
           <PrIntroduce />
         </Route>
-        <Route path="/ProductCategory">
+        <Route path="/ProductCategory/:product_category_detail">
           <Category />
         </Route>
         <Route path="/product">

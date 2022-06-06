@@ -55,7 +55,10 @@ function Accordion() {
             content[i].map((v, j) => {
               return (
                 <div key={j}>
-                  <Link to="/ProductCategory" className="accordionContentLink">
+                  <Link
+                    to={`/ProductCategory/${content[i][j]}`}
+                    className="accordionContentLink"
+                  >
                     {' '}
                     <h6
                       className={

@@ -4,7 +4,7 @@ import { React, useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import Header from '../../component/Header'
-import { FcLike } from 'react-icons/fc'
+import { FcLikePlaceholder, FcLike } from 'react-icons/fc'
 import { FaPlus } from 'react-icons/fa'
 import { FaMinus } from 'react-icons/fa'
 // import p_purchasebaramount from '../../images/product_Images/icons/select.png'
@@ -33,6 +33,12 @@ function Introduce(props) {
     fetchProductId()
   }, [])
 
+  const [pLikeData, setpLikeData] = useState([])
+  const handlepLikeClick = (value) => () => {
+    setpLikeData(pLikeData + value)
+    console.log(setpLikeData)
+  }
+
   const [amountTotal, setAmountTotal] = useState(1)
   const handleClick = (value) => () => {
     setAmountTotal(amountTotal + value)
@@ -45,6 +51,7 @@ function Introduce(props) {
       product_img,
       product_orign_price,
       product_price,
+      product_like,
     } = productintro
     return (
       <div className="productIntro d-flex" key={product_id}>
@@ -81,7 +88,11 @@ function Introduce(props) {
             </div>
             <Link to="#">
               <div className="PurchaseBarCollect">
-                <FcLike style={{ width: '22px', height: '22px' }} />
+                <FcLikePlaceholder
+                  style={{ width: '22px', height: '22px' }}
+                  onClick={handlepLikeClick}
+                />
+                <div style={{ display: 'none' }}>{product_like}</div>
               </div>
             </Link>
             <div className="PurchaseBarAmount">
