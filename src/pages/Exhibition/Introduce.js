@@ -20,6 +20,9 @@ function Introduce(props) {
   const [image, setImage] = useState('')
   const [start, setStart] = useState([])
   const [end, setEnd] = useState([])
+  const [ticketKind, setTicketKind] = useState('')
+  const [ticketPrice, setTicketPrice] = useState('')
+  const [ticketArray, setTicketArray] = useState([])
 
   const params = useParams()
   const intParams = parseInt(params.exhibitionId)
@@ -83,6 +86,14 @@ function Introduce(props) {
     }
   }
 
+  useEffect(() => {
+    let array = []
+    for (let i = 0; i < ticketKind.length; i++) {
+      array.push(0)
+    }
+    setTicketArray(array)
+  }, [ticketKind])
+
   function handleClick() {
     let titleTarget = document.querySelector('.titleframe')
     let titleText = titleTarget.childNodes[0].innerText
@@ -97,6 +108,14 @@ function Introduce(props) {
     setImage(image.dataset.image)
     setTitle(titleText)
     setIsOpen(!isOpen)
+
+    let temp = datas[0].TicketName
+    let Ticket = temp.split(',')
+    setTicketKind(Ticket)
+
+    let temp2 = datas[0].TicketPrice
+    let Price = temp2.split(',')
+    setTicketPrice(Price)
   }
 
   const optionText = ['購票資訊', '如何訂購', '票價', '開放時間']
@@ -126,11 +145,14 @@ function Introduce(props) {
       <Header />
       <Book
         isOpen={isOpen}
-        title={title}
         setIsOpen={setIsOpen}
+        title={title}
         image={image}
         start={start}
         end={end}
+        ticketKind={ticketKind}
+        ticketPrice={ticketPrice}
+        ticketArray={ticketArray}
       />
 
       {datas.map((v, i) => {
@@ -149,7 +171,7 @@ function Introduce(props) {
                 </div>
 
                 <div className="dateText">
-                  展期: {v.start.slice(0, 9)} ~ {v.end.slice(0, 9)}
+                  展期: {v.start.slice(0, 10)} ~ {v.end.slice(0, 10)}
                 </div>
                 <div>地點: {v.mName}</div>
               </div>

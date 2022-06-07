@@ -1,4 +1,4 @@
-@import "./global.scss";
+@import './global.scss';
 
 .displayY {
     display: none;
@@ -14,17 +14,21 @@
 .nav-link {
     margin: 20px;
     vertical-align: middle;
+
     //height: 88px;
     h6 {
         margin: 0;
         color: $PurpleBlue;
     }
+
     a:-webkit-any-link {
         text-decoration: none;
     }
 }
+
 .homeSearchBar {
     gap: 16px;
+
     form {
         border: 1px solid $DarkGrey;
         border-radius: $BorderRadius;
@@ -32,7 +36,27 @@
         height: 42px;
     }
 
+    .rounded-pill a {
+        color: #fff;
+        text-decoration: none;
+    }
     button:nth-child(3) {
+        text-align: center;
+        font-size: 18px;
+        color: #fff;
+        height: 42px;
+        width: 42px;
+        border-radius: 50%;
+        
+        .cart-icon{
+            font-size: 26px;
+            position: relative;
+            left: -8px;
+        }
+    }
+
+
+    button:nth-child(4) {
         text-align: center;
         font-size: 42px;
         color: $primary;
@@ -40,6 +64,7 @@
         border: none;
         background: transparent;
     }
+
 }
 
 // ====footer====
@@ -59,6 +84,11 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+}
+
+footer>a {
+    font-size: 40px;
 }
 
 .footerSocial {
@@ -71,11 +101,12 @@ footer {
     margin: 1rem;
 }
 
+
 .copyright {
     align-self: flex-end;
 }
 
-@media (max-width: 768px) {
+@media (max-width:768px) {
     .displayN {
         display: none !important;
     }
@@ -89,7 +120,7 @@ footer {
     }
 
     // ===footer===
-    .fourword > .align-items-center {
+    .fourword>.align-items-center {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -100,17 +131,20 @@ footer {
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
+
         button {
             margin: 30px;
             width: 60vw;
             color: $background;
             border: $background 1px solid;
         }
+
         button:hover {
             color: $DarkGrey;
             background: $background;
             border: $background 1px solid;
         }
+
         button:active {
             color: $DarkGrey;
             background: $background;
@@ -133,11 +167,14 @@ footer {
     .txtGray {
         color: $background;
         text-decoration: none;
+
     }
+
 
     .copyright {
         align-self: center;
     }
 
     //=== footer===
+
 }

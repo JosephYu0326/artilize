@@ -95,7 +95,10 @@
             opacity: 0;
         }
       }
-    
+    .information-frame{
+        z-index: -1;
+    }
+
     .information-frame>div:not(:last-child){
         border-bottom: 4px #fff solid ;
     }
@@ -174,14 +177,24 @@
 }
 .ticket-frame{
     display: flex;
+    flex-wrap: wrap;
     width: 240px;
-    height: 50px;
+    height: 120px;
     justify-content: space-between;
+    align-items: center;
+    button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 50px;
+    }
 }
 
 .book-window-frame{
     position: fixed;
     display: flex;
+    z-index: 6;
     justify-content: center;
     align-items: center;
     background:rgba(0,0,0,0.2);
@@ -222,6 +235,7 @@
         justify-content: center;
         flex-direction: column;
         width: 300px;
+ 
         .count{
             display: flex;
             width: 200px;
@@ -261,6 +275,7 @@
     height: 88px;
     border-top: 1px solid gray;
     background: #fff;
+    z-index: 2;
 
     display: flex;
     justify-content: space-around;

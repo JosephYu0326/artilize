@@ -1,12 +1,21 @@
 import React from 'react'
+import { subDays } from 'rsuite/esm/utils/dateUtils'
 import '../../styles/exhibition-list.scss'
 
-function MobileOptionBtn() {
+function MobileOptionBtn(props) {
+  const { setPriceSubmit } = props
+  function submit() {
+    setPriceSubmit(true)
+
+    let close = document.querySelector('.window-on')
+    close.setAttribute('class', 'window-off')
+  }
+
   return (
     <div className="d-flex justify-content-between align-items-center mt-3">
       <button
         className="btn btn-primary rounded-pill window-btn"
-        onClick={closewindow}
+        onClick={submit}
       >
         確定
       </button>

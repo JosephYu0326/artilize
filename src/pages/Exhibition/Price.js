@@ -1,11 +1,21 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Slider from '@mui/material/Slider'
 import 'react-rangeslider/lib/index.css'
 
 function Price(props) {
-  const { lowPrice, setLowPrice, highPrice, setHighPrice, setPriceSearch } =
-    props
+  const {
+    lowPrice,
+    setLowPrice,
+    highPrice,
+    setHighPrice,
+    setPriceSearch,
+    priceSubmit,
+    setPriceSubmit,
+  } = props
+
+  const inputLowRef = useRef()
+  const inputHighRef = useRef()
 
   const [value, setValue] = useState([20, 800])
   const [datas, setDatas] = useState([])
@@ -21,7 +31,16 @@ function Price(props) {
     fetchData()
   }, [])
 
+  useEffect(() => {
+    if (priceSubmit) {
+      handleSubmit2()
+      setPriceSubmit(false)
+    }
+  }, [priceSubmit])
+
   const handleChange = (event, newValue) => {
+    setLowPrice(newValue[0])
+    setHighPrice(newValue[1])
     setValue(newValue)
   }
 
@@ -29,6 +48,19 @@ function Price(props) {
     e.preventDefault()
     let high = parseInt(document.querySelector('#highprice').value)
     let low = parseInt(document.querySelector('#lowprice').value)
+
+    setHighPrice(high)
+    setLowPrice(low)
+    if (high && low) {
+      setPriceSearch(true)
+    } else {
+      setPriceSearch(false)
+    }
+  }
+  function handleSubmit2() {
+    let low = parseInt(inputLowRef.current.value)
+    let high = parseInt(inputHighRef.current.value)
+
     setHighPrice(high)
     setLowPrice(low)
     if (high && low) {
@@ -42,7 +74,7 @@ function Price(props) {
     <>
       <div className="d-flex justify-content-between align-items-center">
         <div className="h4 my-0">價錢＄</div>
-        {value[0]}~{value[1]}
+        {lowPrice ? lowPrice : value[0]}~{highPrice ? highPrice : value[1]}
       </div>
       <Slider
         getAriaLabel={() => 'Temperature'}
@@ -66,6 +98,7 @@ function Price(props) {
               className="form-control priceinput"
               id="lowprice"
               placeholder="0"
+              ref={inputLowRef}
             />
           </div>
           <div>
@@ -77,6 +110,7 @@ function Price(props) {
               className="form-control priceinput"
               id="highprice"
               placeholder="2000"
+              ref={inputHighRef}
             />
           </div>
         </div>

@@ -94,7 +94,20 @@ function Exhibition(props) {
         </aside>
 
         <nav className="container">
-          <MobileNavbar />
+          <MobileNavbar
+            search={search}
+            setSearch={setSearch}
+            setSearchData={setSearchData}
+            setLowPrice={setLowPrice}
+            lowPrice={lowPrice}
+            setHighPrice={setHighPrice}
+            highPrice={highPrice}
+            setPriceSearch={setPriceSearch}
+            setSearchDate={setSearchDate}
+            setSearchGallery={setSearchGallery}
+            setSearchCategory={setSearchCategory}
+            setSearchLocation={setSearchLocation}
+          />
         </nav>
 
         <main className="container-fluid">

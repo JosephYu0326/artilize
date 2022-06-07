@@ -1,28 +1,27 @@
-@import "../styles/style.scss";
-@import "~bootstrap/scss/bootstrap";
+@import '../styles/style.scss';
+@import '~bootstrap/scss/bootstrap';
 
-.homeSearchBar {
+.homeSearchBar{
     display: flex;
 }
 
-.searchbar {
+.searchbar{
     display: flex;
     position: relative;
 }
 
-.searchinput {
+.searchinput{
     height: 42px;
-    border: #b4a79e 1.5px solid !important;
+    border: #B4A79E 1.5px solid !important;
     border-radius: 21px !important;
     width: 300px !important;
 }
-.searchbtn {
+.searchbtn{
     height: 42px;
-    width: 42px;
-    padding: 0 !important;
+    width: 50px;
     position: absolute;
     right: 0;
     border: none !important;
     border-radius: 21px !important;
-    color: #b4a79e !important;
+    color: #B4A79E !important;
 }
