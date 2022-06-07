@@ -1,17 +1,35 @@
 //會員忘記密碼
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import '../../styles/users.scss'
 import Header from '../../component/Header'
 import { Container, Row } from 'react-bootstrap'
 import { useState } from 'react'
 import Footer from '../../component/Footer'
-import emailjs from '@emailjs/browser'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 function ForgetPassword(props) {
+  const auth = JSON.parse(localStorage.getItem('auth'))
+  const history = useHistory()
+  const MySwal = withReactContent(Swal)
+  if (auth === true) {
+    history.replace('/users')
+  }
   const [email, setEmail] = useState('')
+  const [errors, setErrors] = useState({})
   const handleSubmit = (e) => {
     e.preventDefault()
-    sendEmail()
+    let a = {}
+    if (!email) {
+      a.email = '此欄位不能為空白'
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      a.email = '無效的Email'
+    }
+    setErrors(a)
+    if (JSON.stringify(errors) === '{}') {
+      sendEmail()
+    }
   }
   const sendEmail = async () => {
     try {
@@ -21,9 +39,29 @@ function ForgetPassword(props) {
         `${process.env.REACT_APP_API_URL}/users/resetpassword`,
         { method: 'POST', body: formData }
       )
+
       const result = await response.json()
-      console.log(result)
-    } catch (error) {}
+      if (result.ok === false) {
+        MySwal.fire({
+          icon: 'error',
+          title: '無此Email，請重新輸入',
+        })
+      } else {
+        MySwal.fire({
+          icon: 'success',
+          title: '重設密碼信，以寄至您的Email',
+          showConfirmButton: 'false',
+          timer: 2000,
+          timerProgressBar: true,
+        }).then(() => {
+          history.replace('/users/login')
+        })
+      }
+
+      // console.log(result)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -49,7 +87,9 @@ function ForgetPassword(props) {
                   >
                     <input
                       type="text"
-                      className="form-control "
+                      className={`form-control BorderRadius  ${
+                        errors.email ? `is-invalid` : ``
+                      } `}
                       name="userEmail"
                       placeholder="請輸入註冊時的Email"
                       value={email}
@@ -57,8 +97,12 @@ function ForgetPassword(props) {
                         setEmail(e.target.value)
                       }}
                     />
-                    <div id="emailHelp" className="form-text text-secondary">
-                      請輸入註冊時的Email
+                    <div
+                      id="emailHelp"
+                      className="form-text text-secondary"
+                      style={{ height: '21px' }}
+                    >
+                      {errors.email && <span>{errors.email}</span>}
                     </div>
                   </div>
                   <div className="d-flex justify-content-around">

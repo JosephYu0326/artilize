@@ -1,15 +1,5 @@
-export default function ChangePasswordValidate(changepasswordData) {
+export default function ResetPasswordValidate(changepasswordData) {
   let errors = {}
-  if (!changepasswordData.oldPassword) {
-    errors.oldPassword = '此欄位不能為空白'
-  } else if (
-    !/^(?=.*[^a-zA-Z0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{6,}$/.test(
-      changepasswordData.oldPassword
-    )
-  ) {
-    errors.oldPassword =
-      '密碼最少要6字,並且至少包含大寫字母、小寫字母、數字、符號各一'
-  }
 
   if (!changepasswordData.newPassword) {
     errors.newPassword = '此欄位不能為空白'

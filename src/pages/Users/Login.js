@@ -141,7 +141,10 @@ function Login(props) {
                   </div>
                   <div>
                     <Link to="/users/forgetpassword/">
-                      <label className="form-text mb-3 usersContentcolor Regular">
+                      <label
+                        className="form-text mb-3 usersContentcolor Regular"
+                        style={{ cursor: 'pointer' }}
+                      >
                         忘記密碼
                       </label>
                     </Link>
