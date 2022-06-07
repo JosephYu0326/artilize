@@ -66,7 +66,6 @@ function B2B(props) {
   useEffect(() => {
     fetchData()
   }, [])
-
   // console.log('data', data)
   // console.log('data1', data1) //(9) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
   const extendAbilityEx = (array) => {
@@ -80,11 +79,11 @@ function B2B(props) {
     })
   }
   // extendAbilityEx(data1)
-  // const [data2, setDate2] = useState(extendAbilityEx(data1))
-  // console.log('dextendAbilityExata1', extendAbilityEx(data1))
-  // console.log('data2', data2)
-  // console.log('setDate2', setDate2)
-  // console.log('data1', data1)
+  const [data2, setDate2] = useState(extendAbilityEx(data1))
+  console.log('dextendAbilityExata1', extendAbilityEx(data1))
+  console.log('data2', data2)
+  console.log('setDate2', setDate2)
+  console.log('data1', data1)
   // const [data2, setDate2] = useState(extendAbilityEx(data1))
   // extendAbilityEx(data1)
   // console.log('data2', data2)
@@ -93,16 +92,14 @@ function B2B(props) {
   // console.log('extendAbilityEx(abilityEx)', extendAbilityEx(abilityEx))
 
   // 設定展覽數
-
   const setExCount = (newCount, i) => {
-    const newExhibitionInorder = [...data1]
+    const newExhibitionInorder = [...abilityEx]
     newExhibitionInorder[i].count = newCount < 1 ? 1 : newCount
     setDate1(newExhibitionInorder)
   }
-
   // 已發布展覽總數
   const startNumberEx = () => {
-    let total = extendAbilityEx(data1).filter((v, i) => {
+    let total = data.filter((v, i) => {
       return v.expire === false
     }).length
     console.log('Stotal', total)
@@ -110,14 +107,22 @@ function B2B(props) {
   }
   // 過期展覽總數
   const endNumberEx = () => {
-    let Etotal = extendAbilityEx(data1).filter((v, i) => {
+    let Etotal = data.filter((v, i) => {
       return v.expire === true
     }).length
     console.log('Etotal', Etotal)
     return Etotal
   }
+  // 全部展覽總數
+  // const totalNumberEx = () => {
+  //   let total = 0
+  //   for (let i = 0; i < data.length; i++) {
+  //     total += 1
+  //   }
+  //   return total
+  // }
   const totalNumberEx = () => {
-    let total = data1.length,
+    let total = data.length,
       eTotal = 0,
       pTotal = 0
 
@@ -167,7 +172,7 @@ function B2B(props) {
               <Tab eventKey="start" title={`已發布(${z})`}>
                 <B2BStartCount startNumberEx={startNumberEx()} />
                 <div className="exhibitionInorder">
-                  {data
+                  {data1
                     .filter((v, i) => {
                       return v.expire === false
                     })
@@ -175,6 +180,7 @@ function B2B(props) {
                       {
                         /* console.log('data1', v.id, v.expire, i) */
                       }
+
                       return (
                         <B2Bliste
                           key={v.id}
@@ -184,7 +190,6 @@ function B2B(props) {
                           endtime={v.end}
                           time={v.time}
                           pic1={v.pic1}
-                          count={v.count}
                           handleDelete={() => {
                             handleDeleteEx(v.id)
                           }}
@@ -208,12 +213,11 @@ function B2B(props) {
                         <B2Bliste
                           key={v.id}
                           id={v.id}
-                          aName={v.aName}
-                          startime={v.start}
-                          endtime={v.end}
-                          time={v.time}
-                          pic1={v.pic1}
-                          count={v.count}
+                          title={v.title}
+                          startime={v.startime}
+                          endtime={v.endtime}
+                          createtime={v.createtime}
+                          image={v.image}
                           handleDelete={() => {
                             handleDeleteEx(v.id)
                           }}
@@ -232,11 +236,11 @@ function B2B(props) {
                       <B2Bliste
                         key={v.id}
                         id={v.id}
-                        aName={v.aName}
-                        startime={v.start}
-                        endtime={v.end}
-                        time={v.time}
-                        pic1={v.pic1}
+                        title={v.title}
+                        startime={v.startime}
+                        endtime={v.endtime}
+                        createtime={v.createtime}
+                        image={v.image}
                         count={v.count}
                         handleDelete={() => {
                           handleDeleteEx(v.id)

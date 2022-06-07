@@ -14,6 +14,17 @@ import { Form } from 'react-bootstrap'
 registerLocale('zhTW', zhTW)
 
 function AddAbility(props) {
+  const [data, setDate] = useState([])
+  const fetchData = async () => {
+    const response = await fetch('http://localhost:5000/B2B/B2B/')
+    const results = await response.json()
+    console.log(results)
+    setDate(results)
+  }
+  console.log(data)
+  useEffect(() => {
+    fetchData()
+  }, [])
   //活動名稱
   // aName setAname
   const [aName, setAname] = useState('')
@@ -40,6 +51,7 @@ function AddAbility(props) {
     '南投縣',
     '雲林縣',
     '嘉義市',
+    '嘉義縣',
     '台南市',
     '高雄市',
     '屏東縣',
@@ -295,9 +307,8 @@ function AddAbility(props) {
                   <option value="">請選擇地區</option>
                   {direction1.map((v, i) => {
                     return (
-                      <option key={i} value={v}>
-                        {/* 開頭轉為大寫英文 */}
-                        {v.charAt(0).toUpperCase() + v.slice(1)}
+                      <option key={i} value={i + 1}>
+                        {v}
                       </option>
                     )
                   })}
@@ -319,9 +330,8 @@ function AddAbility(props) {
                   <option value="">請選擇縣市</option>
                   {city1.map((v, i) => {
                     return (
-                      <option key={i} value={v}>
-                        {/* 開頭轉為大寫英文 */}
-                        {v.charAt(0).toUpperCase() + v.slice(1)}
+                      <option key={i} value={i + 1}>
+                        {v}
                       </option>
                     )
                   })}
@@ -344,9 +354,8 @@ function AddAbility(props) {
                   <option value="">請選擇活動類型</option>
                   {kind1.map((v, i) => {
                     return (
-                      <option key={i} value={v}>
-                        {/* 開頭轉為大寫英文 */}
-                        {v.charAt(0).toUpperCase() + v.slice(1)}
+                      <option key={i} value={i + 1}>
+                        {v}
                       </option>
                     )
                   })}
@@ -368,9 +377,8 @@ function AddAbility(props) {
                   <option value="">請選擇館方</option>
                   {museum1.map((v, i) => {
                     return (
-                      <option key={i} value={v}>
-                        {/* 開頭轉為大寫英文 */}
-                        {v.charAt(0).toUpperCase() + v.slice(1)}
+                      <option key={i} value={i + 1}>
+                        {v}
                       </option>
                     )
                   })}
@@ -378,7 +386,7 @@ function AddAbility(props) {
                 <h6>請選擇館方</h6>
               </section>
             </div>
-            <div className="col-12">
+            {/* <div className="col-12">
               <div className="mb-3">
                 <label
                   htmlFor="exampleFormControlInput1"
@@ -399,7 +407,7 @@ function AddAbility(props) {
                 />
                 <h6>請輸入詳細活動地址</h6>
               </div>
-            </div>
+            </div> */}
             <div className="col-12">
               {/* 活動內容介紹 */}
               <section className="mb-3">
@@ -442,7 +450,7 @@ function AddAbility(props) {
                   type="text"
                   className="form-control"
                   id="ticketName"
-                  name="ticketName"
+                  name="name"
                   placeholder="活動名稱"
                   value={ticketName}
                   onChange={(e) => {
@@ -517,7 +525,7 @@ function AddAbility(props) {
                   className="form-control"
                   id="TicketDescription"
                   rows="10"
-                  name="introT"
+                  name="tintro"
                   value={ticketDescription}
                   onChange={(e) => {
                     setTicketDescription(e.target.value)

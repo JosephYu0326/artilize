@@ -2,7 +2,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 import B2Bliste from './B2Bliste'
 import B2BStartCount from './B2BStartCount'
@@ -20,18 +20,18 @@ import '../../styles/B2BListe.scss'
 
 import { abilityEx } from './AbilityEx'
 
-// const extendAbilityEx = (array) => {
-//   return array.map((v, i) => {
-//     let expire = true
+const extendAbilityEx = (array) => {
+  return array.map((v, i) => {
+    let expire = true
 
-//     if (+new Date(v.endtime) > +new Date())
-//       // console.log(+new Date())
-//       expire = false
-//     }
-//     return { ...v, expire }
+    if (+new Date(v.endtime) > +new Date()) {
+      // console.log(+new Date())
+      expire = false
+    }
 
-//   })
-// }
+    return { ...v, expire }
+  })
+}
 // const ex = (a)=>{
 //   for()
 // }
@@ -41,68 +41,22 @@ import { abilityEx } from './AbilityEx'
 //      return {}
 //    })
 // }
-// const extendAbilityEx = (array) => {
-//   return array.map((v, i) => {
-//     let expire = true
-//     if (+new Date(v.end) > +new Date()) {
-//       // console.log(+new Date())
-//       expire = false
-//     }
-//     return { ...v, expire }
-//   })
-// }
+
 function B2B(props) {
+  const [data, setDate] = useState(extendAbilityEx(abilityEx))
   const [key, setKey] = useState('start')
-  //
-  const [data1, setDate1] = useState([])
-  const [data, setDate] = useState([])
-  const fetchData = async () => {
-    const response = await fetch('http://localhost:5000/B2B/B2B')
-    const results = await response.json()
-    // console.log(results)
-    setDate1(results)
-    // setDate(extendAbilityEx(data1))
-  }
-  useEffect(() => {
-    fetchData()
-  }, [])
 
-  // console.log('data', data)
-  // console.log('data1', data1) //(9) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-  const extendAbilityEx = (array) => {
-    return array.map((v, i) => {
-      let expire = true
-      if (+new Date(v.end) > +new Date()) {
-        // console.log(+new Date())
-        expire = false
-      }
-      return { ...v, expire }
-    })
-  }
-  // extendAbilityEx(data1)
-  // const [data2, setDate2] = useState(extendAbilityEx(data1))
-  // console.log('dextendAbilityExata1', extendAbilityEx(data1))
-  // console.log('data2', data2)
-  // console.log('setDate2', setDate2)
-  // console.log('data1', data1)
-  // const [data2, setDate2] = useState(extendAbilityEx(data1))
-  // extendAbilityEx(data1)
-  // console.log('data2', data2)
-  // console.log('extendAbilityEx(data1)', extendAbilityEx(data1))
-
-  // console.log('extendAbilityEx(abilityEx)', extendAbilityEx(abilityEx))
+  console.log('extendAbilityEx(abilityEx)', extendAbilityEx(abilityEx))
 
   // 設定展覽數
-
   const setExCount = (newCount, i) => {
-    const newExhibitionInorder = [...data1]
+    const newExhibitionInorder = [...abilityEx]
     newExhibitionInorder[i].count = newCount < 1 ? 1 : newCount
-    setDate1(newExhibitionInorder)
+    setDate(newExhibitionInorder)
   }
-
   // 已發布展覽總數
   const startNumberEx = () => {
-    let total = extendAbilityEx(data1).filter((v, i) => {
+    let total = data.filter((v, i) => {
       return v.expire === false
     }).length
     console.log('Stotal', total)
@@ -110,14 +64,22 @@ function B2B(props) {
   }
   // 過期展覽總數
   const endNumberEx = () => {
-    let Etotal = extendAbilityEx(data1).filter((v, i) => {
+    let Etotal = data.filter((v, i) => {
       return v.expire === true
     }).length
     console.log('Etotal', Etotal)
     return Etotal
   }
+  // 全部展覽總數
+  // const totalNumberEx = () => {
+  //   let total = 0
+  //   for (let i = 0; i < data.length; i++) {
+  //     total += 1
+  //   }
+  //   return total
+  // }
   const totalNumberEx = () => {
-    let total = data1.length,
+    let total = data.length,
       eTotal = 0,
       pTotal = 0
 
@@ -127,15 +89,16 @@ function B2B(props) {
         eTotal += 1
       }
     }
+
     pTotal = total - eTotal
 
     return [total, eTotal, pTotal]
   }
-  // console.log(totalNumberEx())
+  console.log(totalNumberEx())
   const [x, y, z] = totalNumberEx()
-  // console.log('x', x)
-  // console.log('y', y)
-  // console.log('z', z)
+  console.log('x', x)
+  console.log('y', y)
+  console.log('z', z)
   // 展覽刪除
   const handleDeleteEx = (id) => {
     alert('確定要刪除該筆資料嗎？')
@@ -172,18 +135,16 @@ function B2B(props) {
                       return v.expire === false
                     })
                     .map((v, i) => {
-                      {
-                        /* console.log('data1', v.id, v.expire, i) */
-                      }
+                      console.log('data', v.id, v.expire, i)
                       return (
                         <B2Bliste
                           key={v.id}
                           id={v.id}
-                          aName={v.aName}
-                          startime={v.start}
-                          endtime={v.end}
-                          time={v.time}
-                          pic1={v.pic1}
+                          title={v.title}
+                          startime={v.startime}
+                          endtime={v.endtime}
+                          createtime={v.createtime}
+                          image={v.image}
                           count={v.count}
                           handleDelete={() => {
                             handleDeleteEx(v.id)
@@ -199,7 +160,7 @@ function B2B(props) {
               <Tab eventKey="end" title={`已結束(${y})`}>
                 <B2BEndCount endNumberEx={endNumberEx()} />
                 <div className="exhibitionInorder">
-                  {data1
+                  {data
                     .filter((v, i) => {
                       return v.expire === true
                     })
@@ -208,11 +169,11 @@ function B2B(props) {
                         <B2Bliste
                           key={v.id}
                           id={v.id}
-                          aName={v.aName}
-                          startime={v.start}
-                          endtime={v.end}
-                          time={v.time}
-                          pic1={v.pic1}
+                          title={v.title}
+                          startime={v.startime}
+                          endtime={v.endtime}
+                          createtime={v.createtime}
+                          image={v.image}
                           count={v.count}
                           handleDelete={() => {
                             handleDeleteEx(v.id)
@@ -232,11 +193,11 @@ function B2B(props) {
                       <B2Bliste
                         key={v.id}
                         id={v.id}
-                        aName={v.aName}
-                        startime={v.start}
-                        endtime={v.end}
-                        time={v.time}
-                        pic1={v.pic1}
+                        title={v.title}
+                        startime={v.startime}
+                        endtime={v.endtime}
+                        createtime={v.createtime}
+                        image={v.image}
                         count={v.count}
                         handleDelete={() => {
                           handleDeleteEx(v.id)

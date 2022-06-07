@@ -4,26 +4,31 @@ import { Link } from 'react-router-dom'
 // import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 function B2Bliste(props) {
-  const { id, title, image, startime, endtime, createtime, handleDelete } =
-    props
+  console.log('pppppppppppppppppppppppppp', props)
+  const { id, aName, pic1, pic2, star, end, time, handleDelete } = props
   return (
     <>
       <div className="row d-flex align-items-center mb-5 border">
-        <div className="col-md-2 style={{border:'1px solid'}}">123456789</div>
+        <div className="col-md-2 style={{border:'1px solid'}}"></div>
         <div className="col-md-3 col-sm-12">
           <img
-            src={require(`${image}`)}
+            src={`http://localhost:5000/uploads/${pic1}`}
+            className="imgListe"
+            alt="exhibitionImg"
+          />
+          <img
+            src={require(`${pic2}`)}
             className="imgListe"
             alt="exhibitionImg"
           />
         </div>
         <div className="col-md-3 col-sm-12">
-          <div>{title}</div>
-          <div>開始時間:{startime}</div>
-          <div>結束時間:{endtime}</div>
-          <div>建立時間:{createtime}</div>
+          <div>{aName}</div>
+          <div>開始時間:{star}</div>
+          <div>結束時間:{end}</div>
+          <div>建立時間:{time}</div>
         </div>
-        <div className="col-md-2 col-sm-12">XXX</div>
+        <div className="col-md-2 col-sm-12">編輯</div>
         <div className="col-md-2 col-sm-12">
           <button className="trash-btn">
             {/* <FontAwesomeIcon
