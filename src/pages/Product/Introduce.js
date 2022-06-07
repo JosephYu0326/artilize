@@ -22,10 +22,10 @@ function Introduce(props) {
   console.log(parmas.product_id)
   const fetchProductId = async () => {
     const res = await fetch(
-      `http://localhost:5000/product/introduce/${parmas.product_id}`
+      `http://localhost:5000/product/introduce/${parmas.product_id}}`
     )
     const results = await res.json()
-    console.log(results)
+    // console.log(results)
     setIntroData(results)
   }
 
@@ -33,16 +33,27 @@ function Introduce(props) {
     fetchProductId()
   }, [])
 
-  const [pLikeData, setpLikeData] = useState([])
-  const handlepLikeClick = (value) => () => {
-    setpLikeData(pLikeData + value)
-    console.log(setpLikeData)
-  }
+  // const [pLikeData, setpLikeData] = useState([])
+  // const handlepLikeClick = (value) => () => {
+  //   setpLikeData(pLikeData + value)
+  //   console.log(setpLikeData)
+  // }
 
   const [amountTotal, setAmountTotal] = useState(1)
   const handleClick = (value) => () => {
     setAmountTotal(amountTotal + value)
   }
+
+  const [like, setLike] = useState(0)
+  const fetchpLikeData = async () => {
+    const res = await fetch(
+      `http://localhost/product/introduce/${parmas.product_id}`
+    )
+    const results = await res.json()
+    console.log(results)
+    setLike(results)
+  }
+
   const pIntroCard = pIntroData.map((productintro, index) => {
     const {
       product_id,
@@ -53,10 +64,12 @@ function Introduce(props) {
       product_price,
       product_like,
     } = productintro
+    console.log(product_like)
+
     return (
       <div className="productIntro d-flex" key={product_id}>
         <div className="pIntroImg">
-          <img src={p_IntroImg}></img>
+          <img src={p_IntroImg} alt="" />
         </div>
         <div className="pIntroDetail">
           <div className="pIntroDetailcard d-flex">
@@ -90,9 +103,17 @@ function Introduce(props) {
               <div className="PurchaseBarCollect">
                 <FcLikePlaceholder
                   style={{ width: '22px', height: '22px' }}
-                  onClick={handlepLikeClick}
+                  onClick={() => {
+                    if (product_like === 0) {
+                      // fetchpLikeData()
+                      parmas.setLike(1)
+                    } else if (product_like > 0) {
+                      // fetchpLikeData()
+                      parmas.setLike(0)
+                    }
+                  }}
                 />
-                <div style={{ display: 'none' }}>{product_like}</div>
+                <div>{product_like === 1 ? 1 : 0}</div>
               </div>
             </Link>
             <div className="PurchaseBarAmount">

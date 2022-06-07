@@ -50,10 +50,13 @@ function Home(props) {
   }, [])
 
   const pCards = pCardData.map(
-    ({ product_id, product_name, product_img, product_price }, a) => (
+    (
+      { product_id, product_name, product_img, product_price, product_like },
+      a
+    ) => (
       <div key={a}>
         <Link
-          to={`/product/introduce/${product_id}`}
+          to={`/product/introduce/${product_id}/${product_like}`}
           className="pCardLink TextLink"
         >
           <div className="pCard">
