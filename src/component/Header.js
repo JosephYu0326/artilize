@@ -105,10 +105,12 @@ function Header(props) {
                     type="button"
                     className="btn btn-primary position-relative"
                   >
-                    <AiOutlineShoppingCart className="cart-icon" />
-                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                      {cartCount}
-                    </span>
+                    <Link to="/booking/cart">
+                      <AiOutlineShoppingCart className="cart-icon" />
+                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {cartCount}
+                      </span>
+                    </Link>
                   </button>
 
                   <button className="align-items-center d-flex pb-2">
