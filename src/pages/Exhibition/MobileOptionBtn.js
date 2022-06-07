@@ -3,9 +3,15 @@ import { subDays } from 'rsuite/esm/utils/dateUtils'
 import '../../styles/exhibition-list.scss'
 
 function MobileOptionBtn(props) {
-  const { setPriceSubmit } = props
+  const { whichButton, setPriceSubmit, setDateSubmit } = props
+
   function submit() {
-    setPriceSubmit(true)
+    if (whichButton[0] === 1) {
+      setPriceSubmit(true)
+    }
+    if (whichButton[1] === 1) {
+      setDateSubmit(true)
+    }
 
     let close = document.querySelector('.window-on')
     close.setAttribute('class', 'window-off')

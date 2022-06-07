@@ -3,27 +3,23 @@ import '../styles/SearchBar.scss'
 import { FaSearch } from 'react-icons/fa'
 
 function SearchBar(props) {
+  const { setFormDone, setSearch } = props
 
-  //追蹤搜尋欄輸入文字
-  const [serchInput, setSerchInput] = useState('')
-  // console.log(serchInput)
-
-  //把輸入字串作Keyword傳回Header
-  function handleSearch() {
-    props.setKeyword(serchInput)
+  function searchContent(e) {
+    setSearch(e.target.value)
   }
 
   return (
     <>
-      <div className="searchbar displayN">
+      <div className="searchbar">
         <input
           className="form-control searchinput"
-          type="search"
-          placeholder={`搜尋`}
+          // type="search"
+          placeholder="搜尋展覽"
           aria-label="Search"
-          onChange={(e) => setSerchInput(e.target.value)}
+          onChange={searchContent}
         />
-        <button className="btn searchbtn" onClick={handleSearch}>
+        <button className="btn searchbtn" type="submit">
           <FaSearch />
         </button>
       </div>

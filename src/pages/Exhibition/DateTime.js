@@ -6,7 +6,7 @@ import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function DateTime(props) {
-  const { setSearchDate } = props
+  const { setSearchDate, dateSubmit, setDateSubmit } = props
   const [datas, setDatas] = useState([])
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
@@ -22,6 +22,13 @@ function DateTime(props) {
     fetchData()
   }, [])
 
+  useEffect(() => {
+    if (dateSubmit) {
+      handleSubmit2()
+      setDateSubmit(false)
+    }
+  }, [dateSubmit])
+
   function handleSubmit(e) {
     e.preventDefault()
     let temp = datas.filter((v, i) => {
@@ -29,6 +36,13 @@ function DateTime(props) {
       return DateCompare(v.start, v.end)
     })
 
+    setSearchDate(temp)
+  }
+  function handleSubmit2() {
+    let temp = datas.filter((v, i) => {
+      // 資料表中的日期轉換格式
+      return DateCompare(v.start, v.end)
+    })
     setSearchDate(temp)
   }
 

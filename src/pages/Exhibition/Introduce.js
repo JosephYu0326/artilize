@@ -1,5 +1,7 @@
 //展覽介紹
 import React, { useEffect, useRef } from 'react'
+import FadeIn from 'react-fade-in'
+
 import { Accordion, AccordionItem } from 'react-light-accordion'
 import 'react-light-accordion/demo/css/index.css'
 import '../../styles/exhibition-introduce.scss'
@@ -154,40 +156,42 @@ function Introduce(props) {
         ticketPrice={ticketPrice}
         ticketArray={ticketArray}
       />
+      <FadeIn>
+        {datas.map((v, i) => {
+          return (
+            <div key={v.id} className="ex-frame">
+              <div className="intro-imgframe">
+                <img
+                  src={`${process.env.REACT_APP_API_URL}/stylesheets/images/${v.pic2}`}
+                  className="exhibition-img"
+                  alt={v.pic2}
+                  data-image={v.pic2}
+                ></img>
+                <div className="overview">
+                  <div className="titleframe">
+                    <div className="h4">{v.aName}</div>
+                  </div>
 
-      {datas.map((v, i) => {
-        return (
-          <div key={v.id} className="ex-frame">
-            <div className="intro-imgframe">
-              <img
-                src={`${process.env.REACT_APP_API_URL}/stylesheets/images/${v.pic2}`}
-                className="exhibition-img"
-                alt={v.pic2}
-                data-image={v.pic2}
-              ></img>
-              <div className="overview">
-                <div className="titleframe">
-                  <div className="h4">{v.aName}</div>
+                  <div className="dateText">
+                    展期: {v.start.slice(0, 10)} ~ {v.end.slice(0, 10)}
+                  </div>
+                  <div>地點: {v.mName}</div>
                 </div>
+              </div>
+              <div className="content-background">
+                <div className="content-page BoxShadow">
+                  <div className="contentpadding">
+                    <div className="h5">展覽介紹</div>
+                    <pre className="content-introduce pBig">{v.intro}</pre>
+                  </div>
 
-                <div className="dateText">
-                  展期: {v.start.slice(0, 10)} ~ {v.end.slice(0, 10)}
+                  <div className="information-frame">{information}</div>
                 </div>
-                <div>地點: {v.mName}</div>
               </div>
             </div>
-            <div className="content-background">
-              <div className="content-page BoxShadow">
-                <div className="contentpadding">
-                  <div className="h5">展覽介紹</div>
-                  <pre className="content-introduce pBig">{v.intro}</pre>
-                </div>
-                <div className="information-frame">{information}</div>
-              </div>
-            </div>
-          </div>
-        )
-      })}
+          )
+        })}
+      </FadeIn>
 
       <div className="bottom-navbar">
         <div className="bottom-btn-frame">

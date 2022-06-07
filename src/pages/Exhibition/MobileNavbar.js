@@ -27,6 +27,9 @@ function MobileNavbar(props) {
 
   const [datas, setDatas] = useState([])
   const [priceSubmit, setPriceSubmit] = useState(false)
+  const [dateSubmit, setDateSubmit] = useState(false)
+
+  const [whichButton, setWhichButton] = useState([0, 0, 0, 0, 0])
 
   const fetchData = async () => {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/exhibition`)
@@ -44,6 +47,34 @@ function MobileNavbar(props) {
       (v, i) => v.aName.includes(search) || v.mName.includes(search)
     )
     setSearchData(temp)
+  }
+
+  function mobilewindow(e) {
+    let array = [0, 0, 0, 0, 0]
+    let thetarget = e.target.parentNode.childNodes[1].firstChild
+    let openWhich = e.target.parentNode.childNodes[0].innerText
+
+    switch (openWhich) {
+      case '價錢':
+        array[0] = 1
+        break
+      case '日期':
+        array[1] = 1
+        break
+      case '館所':
+        array[2] = 1
+        break
+      case '類別':
+        array[3] = 1
+        break
+      default:
+        array[4] = 1
+        break
+    }
+
+    setWhichButton(array)
+
+    thetarget.setAttribute('class', 'window-on')
   }
 
   return (
@@ -81,7 +112,11 @@ function MobileNavbar(props) {
                       setPriceSubmit={setPriceSubmit}
                     />
 
-                    <MobileOptionBtn setPriceSubmit={setPriceSubmit} />
+                    <MobileOptionBtn
+                      whichButton={whichButton}
+                      setPriceSubmit={setPriceSubmit}
+                      setDateSubmit={setDateSubmit}
+                    />
                   </div>
                 </div>
               </div>
@@ -99,9 +134,17 @@ function MobileNavbar(props) {
               <div className="window-off">
                 <div className="window-background">
                   <div className="d-flex mobileframe">
-                    <DateTime setSearchDate={setSearchDate} />
+                    <DateTime
+                      setSearchDate={setSearchDate}
+                      dateSubmit={dateSubmit}
+                      setDateSubmit={setDateSubmit}
+                    />
 
-                    <MobileOptionBtn />
+                    <MobileOptionBtn
+                      whichButton={whichButton}
+                      setPriceSubmit={setPriceSubmit}
+                      setDateSubmit={setDateSubmit}
+                    />
                   </div>
                 </div>
               </div>
@@ -121,7 +164,11 @@ function MobileNavbar(props) {
                   <div className="d-flex mobileframe">
                     <Gallery setSearchGallery={setSearchGallery} />
 
-                    <MobileOptionBtn />
+                    <MobileOptionBtn
+                      whichButton={whichButton}
+                      setPriceSubmit={setPriceSubmit}
+                      setDateSubmit={setDateSubmit}
+                    />
                   </div>
                 </div>
               </div>
@@ -140,7 +187,11 @@ function MobileNavbar(props) {
                 <div className="window-background">
                   <div className="d-flex mobileframe">
                     <Category setSearchCategory={setSearchCategory} />
-                    <MobileOptionBtn />
+                    <MobileOptionBtn
+                      whichButton={whichButton}
+                      setPriceSubmit={setPriceSubmit}
+                      setDateSubmit={setDateSubmit}
+                    />
                   </div>
                 </div>
               </div>
@@ -161,7 +212,11 @@ function MobileNavbar(props) {
                   <div className="d-flex mobileframe">
                     <Location setSearchLocation={setSearchLocation} />
 
-                    <MobileOptionBtn />
+                    <MobileOptionBtn
+                      whichButton={whichButton}
+                      setPriceSubmit={setPriceSubmit}
+                      setDateSubmit={setDateSubmit}
+                    />
                   </div>
                 </div>
               </div>
@@ -171,11 +226,6 @@ function MobileNavbar(props) {
       </div>
     </>
   )
-}
-
-function mobilewindow(e) {
-  let thetarget = e.target.parentNode.childNodes[1].firstChild
-  thetarget.setAttribute('class', 'window-on')
 }
 
 export default MobileNavbar
