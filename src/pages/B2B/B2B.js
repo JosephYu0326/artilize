@@ -146,12 +146,12 @@ function B2B(props) {
   }
   return (
     <>
-      <Header />
-      <div>廠商後臺</div>
-      <Link to="/b2b/addability">建立新活動資料</Link>
+      {/* <div>廠商後臺</div> */}
+      {/* <Link to="/b2b/addability">建立新活動資料</Link> */}
       <Container>
         <Row>
           <Col>
+            <Header />
             <h1>活動展覽列表</h1>
           </Col>
         </Row>
