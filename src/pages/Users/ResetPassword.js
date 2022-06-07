@@ -20,6 +20,9 @@ function Resetpassword(props) {
   console.log(params.userId)
 
   const auth = JSON.parse(localStorage.getItem('auth'))
+  if (auth === true) {
+    history.push('/users')
+  }
 
   const handdleChange = (e) => {
     const { name, value } = e.target

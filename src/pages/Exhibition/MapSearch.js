@@ -15,7 +15,7 @@ import {
   Marker,
   InfoWindow,
 } from '@react-google-maps/api'
-
+import Footer from '../../component/Footer'
 // const center = { lat: 22.6281, lng: 120.2927 }
 
 function MapSearch(props) {
@@ -27,7 +27,7 @@ function MapSearch(props) {
   const [markerID, setMarkerID] = useState('')
   const [center, setCenter] = useState({ lat: 22.6281, lng: 120.2927 })
   const [activeHighlight, setActiveHighlight] = useState(-1)
-  const [mapSearchButton, setMapSearchButton] = useState('exhibition')
+  const [mapSearchButton, setMapSearchButton] = useState('all')
   const [MapStyle, setMapStyle] = useState()
   const [isLoading, setIsLoading] = useState(false)
   const mapSearchInput = useRef()
@@ -39,13 +39,13 @@ function MapSearch(props) {
     setExhibitionDatas(results)
     console.log(results)
   }
-  const fetchAbilityData = async () => {
-    const response1 = await fetch(
-      `${process.env.REACT_APP_API_URL}/MapSearch/ability`
-    )
-    const results1 = await response1.json()
-    setAbilityDatas(results1)
-  }
+  // const fetchAbilityData = async () => {
+  //   const response1 = await fetch(
+  //     `${process.env.REACT_APP_API_URL}/MapSearch/ability`
+  //   )
+  //   const results1 = await response1.json()
+  //   setAbilityDatas(results1)
+  // }
   const fetchMapStyle = async () => {
     const responseMapStyle = await fetch('http://localhost:3000/MapStyle.json')
     const resultMapStyle = await responseMapStyle.json()
@@ -55,9 +55,9 @@ function MapSearch(props) {
   useEffect(() => {
     fetchExhibitionData()
   }, [])
-  useEffect(() => {
-    fetchAbilityData()
-  }, [])
+  // useEffect(() => {
+  //   fetchAbilityData()
+  // }, [])
   useEffect(() => {
     fetchMapStyle()
   }, [])
@@ -90,11 +90,22 @@ function MapSearch(props) {
       <Spinner animation="border" variant="primary" />
     </div>
   )
-
+  console.log(datas)
+  // console.log(JSON.parse(datas[0].longitude))
   const mapList = (
     <div id="scrollableDiv" style={{ height: '77.5vh', overflow: 'auto' }}>
       {datas.map((exhibition, i) => {
-        const { id, name, date, location, latitude, longitude } = exhibition
+        const {
+          id,
+          aName,
+          start,
+          end,
+          direction,
+          city,
+          mName,
+          longitude,
+          latitude,
+        } = exhibition
         return (
           <div
             key={i}
@@ -125,14 +136,16 @@ function MapSearch(props) {
                 </div>
                 <div className="col-md-9">
                   <div className="card-body d-flex flex-column justify-content-around">
-                    <h6 className="card-title SemiBold">{name}</h6>
+                    <h6 className="card-title SemiBold">{aName}</h6>
                     <div className="d-flex">
                       <FaMapMarkerAlt />
-                      <p className="card-text pRegular">{location}</p>
+                      <p className="card-text pRegular">{mName}</p>
                     </div>
                     <div className="d-flex">
                       <FaCalendarAlt />
-                      <p className="card-text pRegular">{date}</p>
+                      <p className="card-text pRegular">
+                        {start}~{end}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -144,6 +157,7 @@ function MapSearch(props) {
       <div style={{ height: '61vh' }}></div>
     </div>
   )
+  const region = ['北部', '中部', '南部', '東部', '離島']
 
   return (
     <>
@@ -151,7 +165,7 @@ function MapSearch(props) {
       <Container fluid>
         <Row>
           {/* 清單 */}
-          <section className="col-3 mapSearchList d-flex flex-column justify-content-evenly align-items-stretch mt-3">
+          <section className="col-xxl-3 col-xl-4 col-lg-5 col-md-6 mapSearchList d-flex flex-column justify-content-evenly align-items-stretch mt-3">
             <div className="mapSearchBar d-flex  align-items-stretch">
               <form
                 className="d-flex align-items-center justify-content-center "
@@ -166,8 +180,8 @@ function MapSearch(props) {
                     console.log(mapSearchInputValue)
                     const mapSearchResult = datas1.filter(
                       (v, i) =>
-                        v.location.includes(mapSearchInputValue) ||
-                        v.name.includes(mapSearchInputValue)
+                        v.mName.includes(mapSearchInputValue) ||
+                        v.aName.includes(mapSearchInputValue)
                     )
                     setIsLoading(true)
                     if (mapSearchResult.length > 0) {
@@ -183,23 +197,23 @@ function MapSearch(props) {
                       setActiveMarker(null)
                       console.log(datas)
                     }
-                    Geocode.setApiKey(
-                      `${process.env.REACT_APP_GOOGLE_MAPS_API_KEY1}`
-                    )
-                    Geocode.setLanguage('zh-TW')
-                    Geocode.setRegion('tw')
-                    Geocode.setLocationType('ROOFTOP')
-                    Geocode.enableDebug()
-                    Geocode.fromAddress(mapSearchInputValue).then(
-                      (response) => {
-                        const { lat, lng } =
-                          response.results[0].geometry.location
-                        console.log(lat, lng)
-                      },
-                      (error) => {
-                        console.error(error)
-                      }
-                    )
+                    // Geocode.setApiKey(
+                    //   `${process.env.REACT_APP_GOOGLE_MAPS_API_KEY1}`
+                    // )
+                    // Geocode.setLanguage('zh-TW')
+                    // Geocode.setRegion('tw')
+                    // Geocode.setLocationType('ROOFTOP')
+                    // Geocode.enableDebug()
+                    // Geocode.fromAddress(mapSearchInputValue).then(
+                    //   (response) => {
+                    //     const { lat, lng } =
+                    //       response.results[0].geometry.location
+                    //     console.log(lat, lng)
+                    //   },
+                    //   (error) => {
+                    //     console.error(error)
+                    //   }
+                    // )
                   }}
                   ref={mapSearchInput}
                 />
@@ -209,41 +223,16 @@ function MapSearch(props) {
             <div className="mapButton d-flex justify-content-evenly mt-2 mb-2">
               <button
                 className={`btn ${
-                  mapSearchButton === 'exhibition' ? 'btn-dark' : 'btn-light'
+                  mapSearchButton === 'all' ? 'btn-primary' : 'btn-light'
                 }`}
                 onClick={function () {
-                  setMapSearchButton('exhibition')
-                  setDatas(exhibitiondatas)
-                  setDatas1(exhibitiondatas)
+                  setMapSearchButton('all')
+                  setDatas(datas1)
+                  // setDatas1(abilitydatas)
                   setActiveMarker(null)
                   setCenter({
-                    lat: parseFloat(exhibitiondatas[0].latitude),
-                    lng: parseFloat(exhibitiondatas[0].longitude),
-                  })
-                  setActiveHighlight(-1)
-                  document
-                    .getElementById(`scrollableDiv`)
-                    .firstChild.scrollIntoView({
-                      behavior: 'smooth',
-                      block: 'start',
-                      inline: 'start',
-                    })
-                }}
-              >
-                展覽
-              </button>
-              <button
-                className={`btn ${
-                  mapSearchButton === 'ability' ? 'btn-dark' : 'btn-light'
-                }`}
-                onClick={function () {
-                  setMapSearchButton('ability')
-                  setDatas(abilitydatas)
-                  setDatas1(abilitydatas)
-                  setActiveMarker(null)
-                  setCenter({
-                    lat: parseFloat(abilitydatas[0].latitude),
-                    lng: parseFloat(abilitydatas[0].longitude),
+                    lat: parseFloat(datas1[0].latitude),
+                    lng: parseFloat(datas1[0].longitude),
                   })
                   setActiveHighlight(-1)
                   document
@@ -255,13 +244,51 @@ function MapSearch(props) {
                     })
                 }}
               >
-                活動
+                全部
               </button>
+              {region.map((a, b) => {
+                return (
+                  <button
+                    key={b}
+                    className={`btn ${
+                      mapSearchButton === `${a}` ? 'btn-primary' : 'btn-light'
+                    }`}
+                    onClick={function () {
+                      setMapSearchButton(`${a}`)
+                      const changeRegion = datas1.filter((v, i) =>
+                        v.direction.includes(`${a}`)
+                      )
+                      if (changeRegion.length > 0) {
+                        setDatas(changeRegion)
+                        // setDatas1(exhibitiondatas)
+                        setActiveMarker(null)
+                        setCenter({
+                          lat: parseFloat(changeRegion[0].latitude),
+                          lng: parseFloat(changeRegion[0].longitude),
+                        })
+                        setActiveHighlight(-1)
+                        document
+                          .getElementById(`scrollableDiv`)
+                          .firstChild.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start',
+                            inline: 'start',
+                          })
+                      } else {
+                        setDatas([])
+                        setCenter({ lat: 22.6281, lng: 120.2927 })
+                      }
+                    }}
+                  >
+                    {a}
+                  </button>
+                )
+              })}
             </div>
             {isLoading ? mapSpinner : mapList}
           </section>
           {/* 地圖 */}
-          <section className="col-9 mapSearchMap ps-0 pe-0">
+          <section className="col-xxl-9 col-xl-8 col-lg-7 col-md-6 mapSearchMap ps-0 pe-0">
             <GoogleMap
               center={center}
               zoom={14}
@@ -278,7 +305,7 @@ function MapSearch(props) {
             >
               <Marker position={{ lat: 22.6281, lng: 120.2927 }}></Marker>
               {datas.map(
-                ({ id, name, latitude, location, date, longitude }) => (
+                ({ id, aName, latitude, mName, start, end, longitude }) => (
                   <Marker
                     key={id}
                     position={{
@@ -324,14 +351,16 @@ function MapSearch(props) {
                           </div>
                           <div className="col-md-8 ">
                             <div className="card-body d-flex flex-column justify-content-beteween ">
-                              <h6 className="card-title SemiBold">{name}</h6>
+                              <h6 className="card-title SemiBold">{aName}</h6>
                               <div className="d-flex">
                                 <FaMapMarkerAlt />
-                                <p className="card-text pRegular">{location}</p>
+                                <p className="card-text pRegular">{mName}</p>
                               </div>
                               <div className="d-flex">
                                 <FaCalendarAlt />
-                                <p className="card-text pRegular">{date}</p>
+                                <p className="card-text pRegular">
+                                  {start}~{end}
+                                </p>
                               </div>
                               <button
                                 className="btn btn-secondary align-self-end"
@@ -351,6 +380,7 @@ function MapSearch(props) {
           </section>
         </Row>
       </Container>
+      <Footer />
     </>
   )
 }
