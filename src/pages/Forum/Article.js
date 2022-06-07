@@ -53,6 +53,7 @@ function Article(props) {
       setNextArticle({ title: '', created_time: '', content: '' })
     }
   }
+  console.log(nowArticle);
 
   // ======留言匯入
   useEffect(() => {

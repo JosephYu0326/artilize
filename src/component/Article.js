@@ -5,7 +5,7 @@ import FadeIn from 'react-fade-in/lib/FadeIn'
 import CommentCount from './CommentCount'
 function Article(props) {
   const articleDetails = props.articDetails
-  // console.log(articleDetails)
+  console.log(articleDetails)
 
   const article = articleDetails.map((v, i) => {
     return (
@@ -19,7 +19,9 @@ function Article(props) {
                   src="https://picsum.photos/id/222/200"
                   alt=""
                 />
-                <p className="pBig text-center">{articleDetails[i].nickname}</p>
+                <p className="pBig text-center">
+                  {articleDetails[i].userNickName}
+                </p>
               </div>
               <Link
                 to={`/forum/${articleDetails[i].article_id}`}
