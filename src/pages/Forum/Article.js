@@ -19,7 +19,7 @@ import '../../styles/global.scss'
 import '../../styles/Forum.scss'
 
 function Article(props) {
-  const userId = 2
+  const userId = 1
   const [show, setShow] = useState(false)
 
   //留言
@@ -371,14 +371,14 @@ function Article(props) {
                     <FaEdit
                       className={`${
                         nowArticle.users_id == userId ? '' : 'd-none'
-                      } fs-5 mx-2`}
+                      } fs-5 mx-2 `}
                     />
                   </Link>
                   <FaTrashAlt
                     onClick={hnadleDel}
                     className={`${
                       nowArticle.users_id == userId ? '' : 'd-none'
-                    } fs-5 mx-2`}
+                    } fs-5 mx-2 articleDel`}
                   />
                 </div>
               </div>

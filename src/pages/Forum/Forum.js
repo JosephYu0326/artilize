@@ -8,6 +8,7 @@ import ForumAside from '../../component/ForumAside'
 import Header from '../../component/Header'
 import Footer from '../../component/Footer'
 import Article from '../../component/Article'
+import Chat from '../../component/Chat'
 
 import Post from '../../component/Post'
 
@@ -89,21 +90,17 @@ function Forum(props) {
   }, [currentTopic])
 
   // ============
-  // useEffect(() => {
   const fetchComments = async () => {
     const res = await fetch(
       `${process.env.REACT_APP_API_URL}/forum?topic=${forBkCurrentTopic}&limit=${limit}&page=${page}`
-      // For json server use url below
-      // `http://localhost:3004/comments?_page=${page}&_limit=20`
     )
       .then((res) => res.json())
       .then((data) => {
         setArticleList(data)
-        // setLimit(limit + 3)
+        console.log('infinity');
         setPage(page + 3)
       })
   }
-  // }, [currentTopic])
 
   // ============
   //文章搜尋
@@ -151,19 +148,20 @@ function Forum(props) {
     // </>
 
     <>
+    <Chat />
       <Header data={articleList} setSerchInput={setSerchInput} />
       <ForumAside btn={btn} />
-      <FadeIn className="container h-100">
+      <FadeIn className="container h-100 out">
         <div className="frContent">
           {articleList.length == 0 ? (
-            <div className="txtGray">找不到相關文章</div>
+            <div className="txtGray d-flex justify-content-center">找不到相關文章</div>
           ) : (
             <Article articDetails={articleList} fetchComments={fetchComments} />
           )}
         </div>
-        <Waypoint onEnter={fetchComments} />
       </FadeIn>
       <Footer />
+        <Waypoint onEnter={fetchComments} />
     </>
   )
 }

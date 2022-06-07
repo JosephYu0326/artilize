@@ -162,7 +162,7 @@ function EditArticle(props) {
                         />
                         <div className="container">
                             <div className="row mx-auto">
-                                <Form.Select id='pp' className="mt-5" aria-label=""
+                                <Form.Select id='pp' className="mt-5" aria-label="" value={value}
                                     onChange={(e) => setChioseCategory(e.target.value)}>
                                     {categoryChoice}
                                 </Form.Select>

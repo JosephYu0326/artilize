@@ -4,14 +4,12 @@ import { FaAngleLeft } from "react-icons/fa";
 import { Link, useLocation, useParams } from 'react-router-dom'
 import "../../styles/Forum.scss";
 import "../../styles/global.scss";
-import { Button } from "react-bootstrap";
 import Header from "../../component/Header";
 import Footer from "../../component/Footer";
 import Article from '../../component/Article'
 import ForumAside from "../../component/ForumAside";
 
 function FrPersonalPage(props) {
-  const btn = ["逛展攻略", "心得分享", "小資旅遊"]
   const [articleList, setArticleList] = useState([{}])
   const { userID } = useParams()
   console.log(articleList);

@@ -1,6 +1,25 @@
 @import "../styles/style.scss";
 @import "~bootstrap/scss/bootstrap";
 
+body{
+  display: block;
+  height: 100vh;
+  overflow: auto;
+}
+
+body::-webkit-scrollbar{
+  display: block;
+    width: 1em;
+    overflow: scroll;
+    height: 0;
+    background-color: $LightGrey
+  }
+
+  body::-webkit-scrollbar-thumb {
+    background: $DarkGrey;
+    border-radius: 10px;
+  }
+  
 
 .social {
   color: $MiddleGrey;
@@ -46,6 +65,7 @@
   margin-top: 20px;
   border-radius: 10px;
   box-shadow: rgb(110, 116, 145) 2px 2px 4px;
+  overflow: scroll;
 
   .likeIt {
     color: $WarnYellow;
@@ -60,7 +80,12 @@
     overflow: hidden;
   }
 
+  .articleDel{
+    color: $WarnYellow;
+  }
+
   .articleBody {
+    border-top: 1px solid $LightGrey
     div {
       white-space: pre-wrap;
       word-wrap: break-word;

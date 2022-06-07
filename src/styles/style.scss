@@ -1,5 +1,7 @@
 @import './global.scss';
-
+body{
+    overflow: scroll;
+  }
 .BorderRadius{
     border-radius: $BorderRadius;
 }
