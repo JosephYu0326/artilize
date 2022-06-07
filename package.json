@@ -21,6 +21,7 @@
     "prettier": "^2.6.2",
     "react": "^18.1.0",
     "react-bootstrap": "^2.3.1",
+    "react-datepicker": "^4.8.0",
     "react-dom": "^18.1.0",
     "react-draft-wysiwyg": "^1.14.7",
     "react-fade-in": "^2.0.1",
@@ -32,6 +33,7 @@
     "react-waypoint": "^10.1.0",
     "sass": "^1.51.0",
     "sweetalert2": "^11.4.17",
+    "sweetalert2-react-content": "^5.0.0",
     "tinymce": "^6.0.2",
     "web-vitals": "^2.1.0",
     "yarn": "^1.22.18"

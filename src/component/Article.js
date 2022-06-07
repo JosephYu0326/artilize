@@ -5,7 +5,6 @@ import FadeIn from 'react-fade-in/lib/FadeIn'
 import CommentCount from './CommentCount'
 function Article(props) {
   const articleDetails = props.articDetails
-  console.log(articleDetails)
 
   const article = articleDetails.map((v, i) => {
     return (
@@ -16,8 +15,8 @@ function Article(props) {
               <div>
                 <img
                   className="avatar m-1"
-                  src="https://picsum.photos/id/222/200"
-                  alt=""
+                  src={` ${process.env.REACT_APP_API_URL}/images/${articleDetails[i].userAvatar}`}
+                  alt="User Avartar"
                 />
                 <p className="pBig text-center">
                   {articleDetails[i].userNickName}

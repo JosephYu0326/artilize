@@ -8,8 +8,9 @@ import Footer from "../../component/Footer";
 import Article from '../../component/Article'
 
 function PersonalPage(props) {
-  // 從appjs暫時設定使用者id
-  const userID = props.id
+  // 從localStorage設定使用者id
+  const auth = JSON.parse(localStorage.getItem('auth'))
+  const userID = localStorage.getItem('userId')
   console.log(`目前登入使用者id=${userID}`);
 
   const [articleList, setArticleList] = useState([{}])
@@ -52,6 +53,9 @@ function PersonalPage(props) {
       })
   }, [articleList.length])
 
+  const imageUrl = ` ${process.env.REACT_APP_API_URL}/images/${articleList[0].userAvatar}`
+  const imageUser = ` ${process.env.REACT_APP_API_URL}/images/user.png`
+
   return (
     <>
       <Header />
@@ -64,14 +68,14 @@ function PersonalPage(props) {
             <div className="col-lg-3 col-md-4 col-sm-12 text-center">
               <img
                 className="avatar"
-                src="https://picsum.photos/200"
+                src={` ${articleList[0].userAvatar == null ? imageUser : imageUrl}`}
                 alt="userpicture"
               />
             </div>
             <div className="col-lg-2 col-md-3 col-sm-12 text-center">
               <div>
-                <div className="h5">{articleList[0].nickname}</div>
-                <div className="h6 txtGray">( {articleList[0].username} )</div>
+                <div className="h5">{articleList[0].userNickName}</div>
+                <div className="h6 txtGray">( {articleList[0].userAccount} )</div>
                 <div className="displayN m-3">{articleList.length}  篇討論</div>
               </div>
               {/* <Button variant="btn btn-primary rounded-pill BorderRadius">

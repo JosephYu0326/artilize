@@ -8,7 +8,9 @@ function Comment(props) {
   const getNowArticle = props.forum
 
   console.log(comment)
-  const userID = 'linlin5400'
+
+  const userID = localStorage.getItem('userId')
+
   const Reply = comment.map((v, i) => {
     //刪除留言
     function hnadleDel() {
@@ -54,14 +56,13 @@ function Comment(props) {
                 src="https://picsum.photos/id/555/200/"
                 alt="userpicture"
               />
-              <div>{comment[i].nickname} </div>
-              <div className="txtGray">{comment[i].username}</div>
+              <div>{comment[i].userNickName} </div>
+              <div className="txtGray">{comment[i].userAccount}</div>
             </div>
             <FaTrashAlt
               onClick={hnadleDel}
-              className={`${
-                comment[i].username == userID ? '' : 'd-none'
-              } fs-5 mx-2`}
+              className={`${comment[i].userAccount == userID ? '' : 'd-none'
+                } fs-5 mx-2`}
             />
           </div>
           <div className="my-3">{comment[i].Blog_comment_content}</div>

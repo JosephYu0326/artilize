@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-import React from 'react'
+import React, { useState } from 'react'
 // 首頁與入口
 import Home from './pages/Home/Home'
 import Entrance from './pages/Home/Entrance'
@@ -48,7 +48,8 @@ import NewsLetter from './pages/NewsLetter'
 import ScrollToTop from '../src/component/ScrollToTop'
 
 function App() {
-  const userID = 5
+  const [auth, setAuth] = useState(false)
+  const [userId, setUserId] = useState()
 
   return (
     <Router>
@@ -64,7 +65,7 @@ function App() {
             <FrPersonalPage />
           </Route>
           <Route path="/forum/addarticle">
-            <AddArticle id={userID} />
+            <AddArticle id={userId} />
           </Route>
           <Route path="/forum/EditArticle/:EditArticleID">
             <EditArticle />
@@ -106,7 +107,7 @@ function App() {
             <MyCoupon />
           </Route>
           <Route path="/users/personalpage">
-            <PersonalPage id={userID} />
+            <PersonalPage id={userId} />
           </Route>
           <Route path="/users/productcollect">
             <ProductCollect />
@@ -130,10 +131,15 @@ function App() {
             <Edit />
           </Route>
           <Route path="/users/login">
-            <Login />
+            <Login
+              setAuth={setAuth}
+              auth={auth}
+              setUserId={setUserId}
+              userId={userId}
+            />
           </Route>
           <Route path="/users">
-            <Users />
+            <Users auth={auth} userId={userId} />
           </Route>
           <Route path="/search">
             <Serach />

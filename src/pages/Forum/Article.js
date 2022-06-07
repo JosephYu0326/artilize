@@ -51,9 +51,9 @@ function Article(props) {
       setPreArticle(data[0])
       setNowArticle(data[1])
       setNextArticle({ title: '', created_time: '', content: '' })
+      console.log(data);
     }
   }
-  console.log(nowArticle);
 
   // ======留言匯入
   useEffect(() => {
@@ -316,6 +316,9 @@ function Article(props) {
     x: state ? 1 : 0,
     config: { duration: 500 },
   })
+
+
+  console.log(`${process.env.REACT_APP_API_URL}/public/images/${nowArticle.userAvatar}`);
   return (
     <>
       <Header />
@@ -335,7 +338,7 @@ function Article(props) {
                   <Link to={`/forum/FrPersonalPage/${nowArticle.users_id}`}>
                     <img
                       className="avatar m-4"
-                      src="https://picsum.photos/200"
+                      src={`${process.env.REACT_APP_API_URL}/images/${nowArticle.userAvatar}`}
                       alt="userpicture"
                     />
                   </Link>
@@ -344,7 +347,7 @@ function Article(props) {
                       className="p txtGray"
                       to={`/forum/FrPersonalPage/${nowArticle.users_id}`}
                     >
-                      {nowArticle.nickname}
+                      {nowArticle.userNickName}
                     </Link>
                     <div className="h4 ps-3 Regular">{nowArticle.title}</div>
                   </div>
@@ -360,9 +363,8 @@ function Article(props) {
                   >
                     <FaStar
                       onClick={hnadleLike}
-                      className={`${
-                        nowArticle.favorited ? 'likeIt' : ''
-                      } text-decoration-none fs-5 mx-2`}
+                      className={`${nowArticle.favorited ? 'likeIt' : ''
+                        } text-decoration-none fs-5 mx-2`}
                     />
                   </animated.div>
                   <Link
@@ -370,16 +372,14 @@ function Article(props) {
                     className="text-decoration-none"
                   >
                     <FaEdit
-                      className={`${
-                        nowArticle.users_id == userId ? '' : 'd-none'
-                      } fs-5 mx-2 `}
+                      className={`${nowArticle.users_id == userId ? '' : 'd-none'
+                        } fs-5 mx-2 `}
                     />
                   </Link>
                   <FaTrashAlt
                     onClick={hnadleDel}
-                    className={`${
-                      nowArticle.users_id == userId ? '' : 'd-none'
-                    } fs-5 mx-2 articleDel`}
+                    className={`${nowArticle.users_id == userId ? '' : 'd-none'
+                      } fs-5 mx-2 articleDel`}
                   />
                 </div>
               </div>
