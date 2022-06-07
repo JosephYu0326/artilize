@@ -306,6 +306,76 @@
 } 
 
 
+// RWD
+
+@media (max-width: 768px){
+    .ex-frame{
+        flex-direction: column;
+        .intro-imgframe{
+            width: 100%;
+            height: 60%;
+        }
+        .overview{
+            bottom: 40%;
+            width: 60%;
+            .titleframe div{
+                font-size: 20px;
+            }
+            .dateText{
+                font-size: 14px;
+            }
+            .locationText{
+                font-size: 14px;
+            }
+        }
+        .content-background{
+            width: 100%;
+        }
+    }
+    .bottom-navbar{
+        width: 100%;
+        position: -webkit-sticky; 
+        position: sticky;
+        bottom: 0;
+        .bottom-btn-frame{
+            justify-content: space-around;
+            a{
+                font-size: 14px;
+            }
+        }
+        .bottom-btn svg {
+            font-size: 16px;
+        }
+        button{
+            font-size: 14px;
+            width: 80px;
+            margin-right: 10px;
+        }
+    }
+    .textheight{
+        font-size: 12px;
+    }
+    .optionframe div{
+        font-size: 20px;
+    }
+
+}
+
+@media (max-width:576px){
+    .ex-frame{
+        .overview{
+            bottom: 50%;
+        }
+    }   
+}
+
+@media (max-width:468px){
+    .ex-frame{
+        .overview{
+            bottom: 60%;
+        }
+    }   
+}
 
 
 

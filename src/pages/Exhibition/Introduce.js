@@ -175,7 +175,7 @@ function Introduce(props) {
                   <div className="dateText">
                     展期: {v.start.slice(0, 10)} ~ {v.end.slice(0, 10)}
                   </div>
-                  <div>地點: {v.mName}</div>
+                  <div className="locationText">地點: {v.mName}</div>
                 </div>
               </div>
               <div className="content-background">
