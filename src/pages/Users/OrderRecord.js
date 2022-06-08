@@ -9,12 +9,15 @@ import Footer from '../../component/Footer'
 import AsideBar from '../../component/AsideBar'
 import { useState, useEffect } from 'react'
 
+let storage = localStorage
+let userId = parseInt(storage.getItem('userId'))
+
 function OrderRecord(props) {
   const [datas, setDatas] = useState([])
   const [allDatas, setAllDatas] = useState([])
 
   const fetchData = async () => {
-    const response = await fetch(`http://localhost:5050/booking`)
+    const response = await fetch(`http://localhost:5050/booking/user/${userId}`)
     const results = await response.json()
     setDatas(results)
   }

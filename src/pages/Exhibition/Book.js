@@ -127,6 +127,8 @@ function Book(props) {
 
       let titleArray = storage['addItemList'].split(',')
 
+      let userId = parseInt(storage.getItem('userId'))
+
       titleArray.pop()
       storage['totalNum'] = titleArray.length
       let index = parseInt(storage.getItem('totalNum')) - 1
@@ -141,6 +143,7 @@ function Book(props) {
         TicketPrice: TicketPrice,
         TicketKind: TicketKind,
         museum: museum,
+        userID: userId,
       }
 
       storage.setItem(title, JSON.stringify(storageJson))

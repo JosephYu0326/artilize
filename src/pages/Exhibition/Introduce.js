@@ -25,6 +25,7 @@ function Introduce(props) {
   const [ticketKind, setTicketKind] = useState('')
   const [ticketPrice, setTicketPrice] = useState('')
   const [ticketArray, setTicketArray] = useState([])
+  const [museum, setMuseum] = useState('')
 
   const params = useParams()
   const intParams = parseInt(params.exhibitionId)
@@ -104,6 +105,9 @@ function Introduce(props) {
     let date = document.querySelector('.dateText').innerText
     let Day = date.substring(3).split(' ~ ')
 
+    let museum = document.querySelector('.locationText').innerText.slice(4)
+    setMuseum(museum)
+
     setStart(Day[0])
     setEnd(Day[1])
 
@@ -155,6 +159,7 @@ function Introduce(props) {
         ticketKind={ticketKind}
         ticketPrice={ticketPrice}
         ticketArray={ticketArray}
+        museum={museum}
       />
       <FadeIn>
         {datas.map((v, i) => {

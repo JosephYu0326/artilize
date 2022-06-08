@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { shoppingListEx } from './Cart-ex'
 
 let storage = localStorage
+let userId = parseInt(storage.getItem('userId'))
 
 function Summary(props) {
   const [exhibitionInorder, setExhibitionInorder] = useState(shoppingListEx)
@@ -18,6 +19,7 @@ function Summary(props) {
       cartExCount: v.count,
       cartExCategory: v.TicketKind,
       cartExMuseum: v.museum,
+      user_id: userId,
     }
   })
 
