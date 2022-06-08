@@ -8,8 +8,37 @@ import { useState } from 'react'
 
 function Pay(props) {
   // select 縣市
-  const [selectedValue, setSelectedValue] = useState('')
-  const carOptions = ['volvo', 'saab', 'mercedes', 'audi']
+  const [city, setCity] = useState('')
+  const city1 = [
+    '基隆市',
+    '台北市',
+    '新北市	',
+    '桃園縣',
+    '新竹市',
+    '新竹縣',
+    '苗栗縣',
+    '台中市',
+    '彰化縣',
+    '南投縣',
+    '雲林縣',
+    '嘉義市',
+    '嘉義縣',
+    '台南市',
+    '高雄市',
+    '屏東縣',
+    '台東縣',
+    '花蓮縣',
+    '宜蘭縣',
+    '澎湖縣',
+    '金門縣',
+    '連江縣',
+  ]
+
+  // select 地區
+  //direction setDirection
+  const [direction, setDirection] = useState('')
+  const direction1 = ['北部', '中部', '南部', '東部', '離島']
+
   return (
     <>
       <Link to="/booking/purchasesuccess">購買完成</Link>
@@ -110,11 +139,22 @@ function Pay(props) {
                 <select
                   class="form-select form-select-sm mb-0"
                   aria-label=".form-select-sm example"
+                  className="form-select"
+                  name="fkCityId"
+                  id="city"
+                  value={city}
+                  onChange={(e) => {
+                    setCity(e.target.value)
+                  }}
                 >
                   <option selected>請選擇縣市</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  {city1.map((v, i) => {
+                    return (
+                      <option key={i} value={i + 1}>
+                        {v}
+                      </option>
+                    )
+                  })}
                 </select>
                 <h6>請輸入正確的名稱</h6>
               </div>
@@ -122,11 +162,21 @@ function Pay(props) {
                 <select
                   class="form-select form-select-sm mb-3"
                   aria-label=".form-select-sm example"
+                  name="direction"
+                  id="direction"
+                  value={direction}
+                  onChange={(e) => {
+                    setDirection(e.target.value)
+                  }}
                 >
                   <option selected>請選擇區域</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  {direction1.map((v, i) => {
+                    return (
+                      <option key={i} value={i + 1}>
+                        {v}
+                      </option>
+                    )
+                  })}
                 </select>
               </div>
               <div className="col-md-6 col-sm-12 ">
@@ -148,7 +198,7 @@ function Pay(props) {
                   type="text"
                   className="form-control"
                   id="exampleFormControlInput1"
-                  placeholder="有效日期 04/29"
+                  placeholder="pkujm951@gmail.com"
                 />
                 <h6>請輸入正確的email</h6>
               </div>
@@ -157,7 +207,7 @@ function Pay(props) {
                   type="text"
                   className="form-control"
                   id="exampleFormControlInput1"
-                  placeholder="信用卡後三碼"
+                  placeholder="電話 09XXXXXXXX"
                 />
                 <h6>請輸入正確的電話格式</h6>
               </div>
