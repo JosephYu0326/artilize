@@ -14,7 +14,7 @@ function Comment(props) {
   const Reply = comment.map((v, i) => {
     //刪除留言
     function hnadleDel() {
-      if (comment[i].username == userID) {
+      if (comment[i].userId == userID) {
         setShow(true)
         if (show) {
           Swal.fire({
@@ -53,7 +53,7 @@ function Comment(props) {
             <div className="frComment d-flex align-items-center justify-content-between">
               <img
                 className="avatar m-3"
-                src="https://picsum.photos/id/555/200/"
+                src={` ${process.env.REACT_APP_API_URL}/images/${comment[i].userAvatar}`}
                 alt="userpicture"
               />
               <div>{comment[i].userNickName} </div>
@@ -61,8 +61,9 @@ function Comment(props) {
             </div>
             <FaTrashAlt
               onClick={hnadleDel}
-              className={`${comment[i].userAccount == userID ? '' : 'd-none'
-                } fs-5 mx-2`}
+              className={`${
+                comment[i].userId == userID ? '' : 'd-none'
+              } fs-5 mx-2`}
             />
           </div>
           <div className="my-3">{comment[i].Blog_comment_content}</div>

@@ -19,7 +19,9 @@ import '../../styles/global.scss'
 import '../../styles/Forum.scss'
 
 function Article(props) {
-  const userId = 1
+  const userId = localStorage.getItem('userId')
+  const userAvatar = localStorage.getItem('userAvatar')
+
   const [show, setShow] = useState(false)
 
   //留言
@@ -51,7 +53,7 @@ function Article(props) {
       setPreArticle(data[0])
       setNowArticle(data[1])
       setNextArticle({ title: '', created_time: '', content: '' })
-      console.log(data);
+      console.log(data)
     }
   }
 
@@ -240,7 +242,6 @@ function Article(props) {
       })
   }
   // ======上一篇
-
   function pre() {
     fetch(`${process.env.REACT_APP_API_URL}/forum/${preArticle.article_id}`)
       .then((res) => res.json())
@@ -317,8 +318,6 @@ function Article(props) {
     config: { duration: 500 },
   })
 
-
-  console.log(`${process.env.REACT_APP_API_URL}/public/images/${nowArticle.userAvatar}`);
   return (
     <>
       <Header />
@@ -363,8 +362,9 @@ function Article(props) {
                   >
                     <FaStar
                       onClick={hnadleLike}
-                      className={`${nowArticle.favorited ? 'likeIt' : ''
-                        } text-decoration-none fs-5 mx-2`}
+                      className={`${
+                        nowArticle.favorited ? 'likeIt' : ''
+                      } text-decoration-none fs-5 mx-2`}
                     />
                   </animated.div>
                   <Link
@@ -372,14 +372,16 @@ function Article(props) {
                     className="text-decoration-none"
                   >
                     <FaEdit
-                      className={`${nowArticle.users_id == userId ? '' : 'd-none'
-                        } fs-5 mx-2 `}
+                      className={`${
+                        nowArticle.users_id == userId ? '' : 'd-none'
+                      } fs-5 mx-2 `}
                     />
                   </Link>
                   <FaTrashAlt
                     onClick={hnadleDel}
-                    className={`${nowArticle.users_id == userId ? '' : 'd-none'
-                      } fs-5 mx-2 articleDel`}
+                    className={`${
+                      nowArticle.users_id == userId ? '' : 'd-none'
+                    } fs-5 mx-2 articleDel`}
                   />
                 </div>
               </div>
@@ -438,7 +440,7 @@ function Article(props) {
                 <div className="d-flex align-items-center">
                   <img
                     className="avatar m-3"
-                    src="https://picsum.photos/200"
+                    src={` ${process.env.REACT_APP_API_URL}/images/${userAvatar}`}
                     alt="userpicture"
                   />
                   <div>Me</div>

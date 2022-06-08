@@ -3,7 +3,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 function Exhibition(props) {
-  
   return (
     <>
       <div>展覽</div>
@@ -11,7 +10,6 @@ function Exhibition(props) {
       <br />
       <Link to="/booking/cart">購物車</Link>
       <br />
-      
     </>
   )
 }

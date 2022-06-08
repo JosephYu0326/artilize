@@ -65,7 +65,7 @@ function App() {
             <FrPersonalPage />
           </Route>
           <Route path="/forum/addarticle">
-            <AddArticle id={userId} />
+            <AddArticle auth={auth} id={userId} />
           </Route>
           <Route path="/forum/EditArticle/:EditArticleID">
             <EditArticle />
@@ -107,7 +107,7 @@ function App() {
             <MyCoupon />
           </Route>
           <Route path="/users/personalpage">
-            <PersonalPage id={userId} />
+            <PersonalPage auth={auth} id={userId} />
           </Route>
           <Route path="/users/productcollect">
             <ProductCollect />
