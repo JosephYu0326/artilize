@@ -96,7 +96,7 @@ function B2B(props) {
   // 設定展覽數
 
   const setExCount = (newCount, i) => {
-    const newExhibitionInorder = [...data1]
+    const newExhibitionInorder = [...extendAbilityEx(data1)]
     newExhibitionInorder[i].count = newCount < 1 ? 1 : newCount
     setDate1(newExhibitionInorder)
   }
@@ -144,7 +144,7 @@ function B2B(props) {
     const newExhibitionInorder = [...extendAbilityEx(data1)].filter((v, i) => {
       return v.id !== id
     })
-    setDate(newExhibitionInorder)
+    setDate1(newExhibitionInorder)
   }
   return (
     <>
@@ -259,6 +259,7 @@ function B2B(props) {
       ;
     </>
   )
+  //usehitory
 }
 
 export default B2B
