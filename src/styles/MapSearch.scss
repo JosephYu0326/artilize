@@ -57,6 +57,9 @@
         min-height: 139px;
         border-radius: $BorderRadius;
         box-shadow: $BoxShadow;
+        img {
+            border-radius: 20px 0px 0px 20px;
+        }
 
         .card-body {
             height: 139px;
