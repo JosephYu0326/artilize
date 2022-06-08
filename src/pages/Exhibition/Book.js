@@ -7,7 +7,6 @@ import closePng from '../Exhibition/images/Category.png'
 let storage = localStorage
 
 function Book(props) {
-  // const TicketPriceArray = [50, 30]
   const [TicketPrice, setTicketPrice] = useState()
   const [TicketKind, setTicketKind] = useState('')
   const [ticketText, setTicketText] = useState('票種')
@@ -23,6 +22,7 @@ function Book(props) {
   const TicketCategory = props.ticketKind
   const TicketPriceArray = props.ticketPrice
   const TicketArray = props.ticketArray
+  const museum = props.museum
   const [Ticket, setTicket] = useState(TicketArray)
 
   useEffect(() => {
@@ -140,6 +140,7 @@ function Book(props) {
         count: count,
         TicketPrice: TicketPrice,
         TicketKind: TicketKind,
+        museum: museum,
       }
 
       storage.setItem(title, JSON.stringify(storageJson))
@@ -175,6 +176,7 @@ function Book(props) {
           <div className="book-title">
             <h3>請選擇日期、票種</h3>
             <div className="title-frame">
+              <div className="museumText">{museum}</div>
               <div>{title}</div>
             </div>
           </div>

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import '../../styles/exhibition-list.scss'
 import '../../styles/style.scss'
 
-import SearchBar from '../../component/SearchBar'
+import SearchBarEx from '../../component/SearchBarEx'
 import MobileNavbar from './MobileNavbar'
 import Category from './Category'
 import Gallery from './Gallery'
@@ -55,7 +55,7 @@ function Exhibition(props) {
         <aside>
           {/* 搜尋列 */}
           <form className="searchmargin" onSubmit={handleSubmit}>
-            <SearchBar setSearch={setSearch} />
+            <SearchBarEx setSearch={setSearch} />
           </form>
 
           {/* 地圖搜尋 */}

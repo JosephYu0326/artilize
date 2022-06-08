@@ -1,11 +1,12 @@
 @import './global.scss';
-
+body{
+    overflow: scroll;
+  }
 .BorderRadius{
     border-radius: $BorderRadius;
 }
 .BoxShadow{
-    //border:3px solid $MiddleGrey;
-    //background-color: white;
+    //background-color: rgb(255, 255, 255);
 }
 .PurpleBlue{
     background-color: $PurpleBlue;

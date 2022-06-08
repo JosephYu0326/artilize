@@ -7,7 +7,7 @@ import Gallery from './Gallery'
 import Location from './Location'
 import Price from './Price'
 import DateTime from './DateTime'
-import SearchBar from '../../component/SearchBar'
+import SearchBarEx from '../../component/SearchBarEx'
 
 function MobileNavbar(props) {
   const {
@@ -80,7 +80,7 @@ function MobileNavbar(props) {
   return (
     <>
       <form className="searchmargin" onSubmit={handleSubmit}>
-        <SearchBar setSearch={setSearch} />
+        <SearchBarEx setSearch={setSearch} />
       </form>
       <div className="mobileoption-frame">
         <div className="mobileoption">

@@ -2,6 +2,8 @@ import React from 'react'
 import { useState } from 'react'
 import { shoppingListEx } from './Cart-ex'
 
+let storage = localStorage
+
 function Summary(props) {
   const [exhibitionInorder, setExhibitionInorder] = useState(shoppingListEx)
 
@@ -15,6 +17,7 @@ function Summary(props) {
       cartExPrice: v.TicketPrice,
       cartExCount: v.count,
       cartExCategory: v.TicketKind,
+      cartExMuseum: v.museum,
     }
   })
 
@@ -32,6 +35,8 @@ function Summary(props) {
         body: JSON.stringify(body),
       }).then((json) => console.log(json))
     }
+
+    storage.clear()
   }
 
   const { totalPriceEx, totalPricePro } = props

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import logo from '../images/logo.png'
 import { FaUserCircle, FaSearch } from 'react-icons/fa'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
-import SearchBar from './SearchBar'
+import SearchBar from './SearchBarEx'
 import '../styles/HeaderAndFooter.scss'
 import '../styles/SearchBar.scss'
 

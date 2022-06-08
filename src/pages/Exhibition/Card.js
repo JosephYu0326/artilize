@@ -26,6 +26,7 @@ function Card(props) {
   const [ticketKind, setTicketKind] = useState('')
   const [ticketPrice, setTicketPrice] = useState('')
   const [ticketArray, setTicketArray] = useState([])
+  const [museum, setMuseum] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
   const params = useParams()
@@ -170,6 +171,11 @@ function Card(props) {
     let date =
       document.querySelectorAll('.dateText')[totalLength - index].innerText
 
+    let museum =
+      document.querySelectorAll('.museumText')[totalLength - index].innerText
+
+    setMuseum(museum)
+
     let Day = date.split('\n')
     setStart(Day[0])
     setEnd(Day[1])
@@ -236,8 +242,10 @@ function Card(props) {
                     className="cardicon me-2"
                     icon={faMapMarkerAlt}
                   />
-                  <div className="text-web">{v.mName}</div>
-                  <div className="text-mobile pSmall">{v.mName}</div>
+                  <div className="text-web museumText">{v.mName}</div>
+                  <div className="text-mobile pSmall museumText-2">
+                    {v.mName}
+                  </div>
                 </div>
                 <div className="my-1 d-flex align-items-center">
                   <FontAwesomeIcon
@@ -301,6 +309,7 @@ function Card(props) {
         ticketKind={ticketKind}
         ticketPrice={ticketPrice}
         ticketArray={ticketArray}
+        museum={museum}
       />
 
       {isLoading ? pagination : card}

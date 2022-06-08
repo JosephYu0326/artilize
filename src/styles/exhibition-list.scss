@@ -308,7 +308,13 @@ header{
             .title-frame{
                 width: 300px;
                 text-align: center;
+                .museumText{
+                    font-size: 22px;
+                    color:$PurpleBlue;
+                    margin-bottom: 5px;
+                }
             }
+            
         }
     }
     .closeBtn{

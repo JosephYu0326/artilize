@@ -21,8 +21,6 @@ let storage = localStorage
 function Cart(props) {
   const [exhibitionInorder, setExhibitionInorder] = useState(shoppingListEx)
   const [productInorder, setProductInorder] = useState(shoppingListPro)
-
-
   // 設定展覽數
   const setExCount = (newCount, i) => {
     const newExhibitionInorder = [...shoppingListEx]
