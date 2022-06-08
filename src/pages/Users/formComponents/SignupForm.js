@@ -8,6 +8,7 @@ import validate from './validateInfo'
 import UserAccountValidate from './SignUpValidate/UserAccountValidate'
 import userEmailValidate from './SignUpValidate/userEmailValidate'
 import userPasswordValidate from './SignUpValidate/userPasswordValidate'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 function SignUpForm({ submitForm }) {
   const {
@@ -19,6 +20,7 @@ function SignUpForm({ submitForm }) {
     userEmailBlur,
     userPasswordBlur,
     userConfirmPasswordBlur,
+    authChange,
   } = useForm(
     validate,
     submitForm,
@@ -29,7 +31,12 @@ function SignUpForm({ submitForm }) {
 
   return (
     <>
-      <form id="addUserForm" onSubmit={handleSubmit} noValidate>
+      <form
+        id="addUserForm"
+        onSubmit={handleSubmit}
+        noValidate
+        className="d-flex flex-column"
+      >
         <div style={{ paddingLeft: '12px' }}>
           <h4 className="ph_title row ExtraBold text-primary mb-4">
             新會員註冊
@@ -117,6 +124,11 @@ function SignUpForm({ submitForm }) {
             )}
           </div>
         </div>
+        <ReCAPTCHA
+          className="align-self-center mb-3"
+          sitekey={`${process.env.REACT_APP_GOOGLE_RECAPTCHA_KEY}`}
+          onChange={authChange}
+        />
         <div className="d-flex justify-content-around">
           <button type="submit" className="btn btn-primary rounded-pill mt-4">
             送出

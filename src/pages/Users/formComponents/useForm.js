@@ -8,6 +8,7 @@ import userPasswordValidate from './SignUpValidate/userPasswordValidate'
 
 const useForm = (validate) => {
   const [data, setData] = useState([])
+  const [googleAuth, setGoogleAuth] = useState(false)
   const [addUserData, setUserData] = useState({
     userAccount: '',
     userEmail: '',
@@ -65,8 +66,19 @@ const useForm = (validate) => {
     setErrors(validate(addUserData))
     setIsSubmitting(true)
     console.log(validate(addUserData))
-    if (JSON.stringify(validate(addUserData)) === '{}') {
+    if (JSON.stringify(validate(addUserData)) === '{}' && googleAuth === true) {
       sendAddUserData()
+    } else if (googleAuth === false) {
+      MySwal.fire({
+        icon: 'error',
+        title: '請驗證是否不是機器人',
+      })
+    }
+  }
+  const authChange = (value) => {
+    console.log('Captcha value:', value)
+    if (value !== null) {
+      setGoogleAuth(true)
     }
   }
   const Navigate = useHistory()
@@ -93,7 +105,7 @@ const useForm = (validate) => {
           title: '註冊失敗，已有此帳號',
           icon: 'error',
         })
-      } else {
+      } else if (results.message === '已有此Email') {
         MySwal.fire({
           title: '註冊失敗，已有此Email',
           icon: 'error',
@@ -113,6 +125,7 @@ const useForm = (validate) => {
     userEmailBlur,
     userPasswordBlur,
     userConfirmPasswordBlur,
+    authChange,
   }
 }
 

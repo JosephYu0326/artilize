@@ -8,6 +8,8 @@ import { useState } from 'react'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import ChangePasswordValidate from './formComponents/ChangePasswordValidate'
+import FadeIn from 'react-fade-in'
+import ReCAPTCHA from 'react-google-recaptcha'
 function ChangePassword(props) {
   const [changepasswordData, setChangePasswordData] = useState({
     oldPassword: '',
@@ -20,6 +22,7 @@ function ChangePassword(props) {
 
   const auth = JSON.parse(localStorage.getItem('auth'))
   const userId = JSON.parse(localStorage.getItem('userId'))
+  const [googleAuth, setGoogleAuth] = useState(false)
   if (auth === false) {
     MySwal.fire({
       icon: 'warning',
@@ -39,8 +42,16 @@ function ChangePassword(props) {
   const handleSubmit = (e) => {
     e.preventDefault()
     setErrors(ChangePasswordValidate(changepasswordData))
-    if (JSON.stringify(ChangePasswordValidate(changepasswordData)) === '{}') {
+    if (
+      JSON.stringify(ChangePasswordValidate(changepasswordData)) === '{}' &&
+      googleAuth === true
+    ) {
       sendChangePasswordData()
+    } else if (googleAuth === false) {
+      MySwal.fire({
+        icon: 'error',
+        title: '請驗證是否不是機器人',
+      })
     }
   }
   const sendChangePasswordData = async () => {
@@ -73,110 +84,127 @@ function ChangePassword(props) {
       console.log(error)
     }
   }
+  const authChange = (value) => {
+    console.log('Captcha value:', value)
+    if (value !== null) {
+      setGoogleAuth(true)
+    }
+  }
 
   return (
     <>
       <Header />
       <div className="bg-background">
-        <section className={`${!auth ? 'd-none' : ''}`}>
-          <Container>
-            <Row className="d-flex justify-content-center align-items-center usersRow">
-              <div
-                className=" BorderRadius usersBackground p-5"
-                style={{ maxWidth: '568px', minWidth: '390px' }}
-              >
-                <form
-                  onSubmit={handleSubmit}
-                  noValidate
-                  id="changePasswordForm"
+        <FadeIn>
+          <section className={`${!auth ? 'd-none' : ''}`}>
+            <Container>
+              <Row className="d-flex justify-content-center align-items-center usersRow">
+                <div
+                  className=" BorderRadius usersBackground p-5"
+                  style={{ maxWidth: '568px', minWidth: '390px' }}
                 >
-                  <div style={{ paddingLeft: '12px' }}>
-                    <h4 className="ph_title row ExtraBold text-primary mb-4">
-                      更改密碼
-                    </h4>
-                  </div>
-                  <div
-                    id="input-text"
-                    className="mb-3 usersContentcolor Regular"
+                  <form
+                    onSubmit={handleSubmit}
+                    noValidate
+                    id="changePasswordForm"
+                    className="d-flex flex-column"
                   >
-                    <input
-                      type="text"
-                      className={`form-control BorderRadius ${
-                        errors.oldPassword ? `is-invalid` : ``
-                      }`}
-                      placeholder="舊密碼"
-                      name="oldPassword"
-                      value={changepasswordData.oldPassword}
-                      onChange={handdleChange}
-                    />
-                    <div
-                      id="emailHelp"
-                      className="form-text text-secondary"
-                      style={{ height: '21px' }}
-                    >
-                      {errors.oldPassword && <span>{errors.oldPassword}</span>}
+                    <div style={{ paddingLeft: '12px' }}>
+                      <h4 className="ph_title row ExtraBold text-primary mb-4">
+                        更改密碼
+                      </h4>
                     </div>
-                  </div>
-                  <div
-                    id="input-text"
-                    className="mb-3 usersContentcolor Regular"
-                  >
-                    <input
-                      type="text"
-                      className={`form-control BorderRadius ${
-                        errors.newPassword ? `is-invalid` : ``
-                      }`}
-                      placeholder="新密碼"
-                      name="newPassword"
-                      value={changepasswordData.newPassword}
-                      onChange={handdleChange}
-                    />
                     <div
-                      id="emailHelp"
-                      className="form-text text-secondary"
-                      style={{ height: '21px' }}
+                      id="input-text"
+                      className="mb-3 usersContentcolor Regular"
                     >
-                      {errors.newPassword && <span>{errors.newPassword}</span>}
+                      <input
+                        type="text"
+                        className={`form-control BorderRadius ${
+                          errors.oldPassword ? `is-invalid` : ``
+                        }`}
+                        placeholder="舊密碼"
+                        name="oldPassword"
+                        value={changepasswordData.oldPassword}
+                        onChange={handdleChange}
+                      />
+                      <div
+                        id="emailHelp"
+                        className="form-text text-secondary"
+                        style={{ height: '21px' }}
+                      >
+                        {errors.oldPassword && (
+                          <span>{errors.oldPassword}</span>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                  <div
-                    id="input-text"
-                    className="mb-3 usersContentcolor Regular"
-                  >
-                    <input
-                      type="text"
-                      className={`form-control BorderRadius ${
-                        errors.confirmNewPassword ? `is-invalid` : ``
-                      }`}
-                      placeholder="請再次輸入新密碼"
-                      name="confirmNewPassword"
-                      value={changepasswordData.confirmNewPassword}
-                      onChange={handdleChange}
-                    />
                     <div
-                      id="emailHelp"
-                      className="form-text text-secondary"
-                      style={{ height: '21px' }}
+                      id="input-text"
+                      className="mb-3 usersContentcolor Regular"
                     >
-                      {errors.confirmNewPassword && (
-                        <span>{errors.confirmNewPassword}</span>
-                      )}
+                      <input
+                        type="text"
+                        className={`form-control BorderRadius ${
+                          errors.newPassword ? `is-invalid` : ``
+                        }`}
+                        placeholder="新密碼"
+                        name="newPassword"
+                        value={changepasswordData.newPassword}
+                        onChange={handdleChange}
+                      />
+                      <div
+                        id="emailHelp"
+                        className="form-text text-secondary"
+                        style={{ height: '21px' }}
+                      >
+                        {errors.newPassword && (
+                          <span>{errors.newPassword}</span>
+                        )}
+                      </div>
                     </div>
-                  </div>
-
-                  <div className="d-flex justify-content-around">
-                    <button
-                      type="submit"
-                      className="btn btn-primary rounded-pill mt-4"
+                    <div
+                      id="input-text"
+                      className="mb-3 usersContentcolor Regular"
                     >
-                      送出
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </Row>
-          </Container>
-        </section>
+                      <input
+                        type="text"
+                        className={`form-control BorderRadius ${
+                          errors.confirmNewPassword ? `is-invalid` : ``
+                        }`}
+                        placeholder="請再次輸入新密碼"
+                        name="confirmNewPassword"
+                        value={changepasswordData.confirmNewPassword}
+                        onChange={handdleChange}
+                      />
+                      <div
+                        id="emailHelp"
+                        className="form-text text-secondary"
+                        style={{ height: '21px' }}
+                      >
+                        {errors.confirmNewPassword && (
+                          <span>{errors.confirmNewPassword}</span>
+                        )}
+                      </div>
+                    </div>
+                    <ReCAPTCHA
+                      className="align-self-center mb-3"
+                      sitekey={`${process.env.REACT_APP_GOOGLE_RECAPTCHA_KEY}`}
+                      onChange={authChange}
+                    />
+                    <div className="d-flex justify-content-around">
+                      <button
+                        type="submit"
+                        className="btn btn-primary rounded-pill mt-4"
+                      >
+                        送出
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </Row>
+            </Container>
+          </section>
+        </FadeIn>
       </div>
     </>
   )

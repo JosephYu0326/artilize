@@ -10,7 +10,8 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import LoginValidate from './formComponents/LoginValidate'
 import Footer from '../../component/Footer'
-
+import FadeIn from 'react-fade-in'
+import ReCAPTCHA from 'react-google-recaptcha'
 function Login(props) {
   const [loginData, setLoginData] = useState({
     userAccount: '',
@@ -18,6 +19,7 @@ function Login(props) {
   })
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [googleAuth, setGoogleAuth] = useState(false)
   const auth = JSON.parse(localStorage.getItem('auth'))
   const history = useHistory()
   if (auth === true) {
@@ -32,8 +34,16 @@ function Login(props) {
     e.preventDefault()
     setErrors(LoginValidate(loginData))
     setIsSubmitting(true)
-    if (JSON.stringify(LoginValidate(loginData)) === '{}') {
+    if (
+      JSON.stringify(LoginValidate(loginData)) === '{}' &&
+      googleAuth === true
+    ) {
       sendLoginData()
+    } else if (googleAuth === false) {
+      MySwal.fire({
+        icon: 'error',
+        title: '請驗證是否不是機器人',
+      })
     }
   }
   const MySwal = withReactContent(Swal)
@@ -75,82 +85,100 @@ function Login(props) {
       console.log(error)
     }
   }
-
+  const authChange = (value) => {
+    console.log('Captcha value:', value)
+    if (value !== null) {
+      setGoogleAuth(true)
+    }
+  }
   return (
     <>
       <Header />
       <div className="bg-background">
-        <section>
-          <Container>
-            <Row className="d-flex justify-content-center align-items-center usersRow">
-              <div
-                className=" BorderRadius usersBackground p-5"
-                style={{ maxWidth: '568px', minWidth: '390px' }}
-              >
-                <form onSubmit={handleSubmit} noValidate id="loginForm">
-                  <div style={{ paddingLeft: '12px' }}>
-                    <h4 className="ph_title row ExtraBold text-primary">
-                      登入
-                    </h4>
-                    <h6 className="ph_title row Regular usersContentcolor mb-3 ">
-                      使用您的Artilize帳號
-                    </h6>
-                  </div>
-                  <div id="input-text" className="mb-3">
-                    <input
-                      type="text"
-                      className={`form-control BorderRadius ${
-                        errors.userAccount ? `is-invalid` : ``
-                      }`}
-                      name="userAccount"
-                      placeholder="帳號"
-                      value={loginData.userAccount}
-                      onChange={handleChange}
-                    />
-                    <div
-                      id="emailHelp"
-                      className="form-text text-secondary"
-                      style={{ height: '21px' }}
-                    >
-                      {errors.userAccount && <span>{errors.userAccount}</span>}
-                    </div>
-                  </div>
-                  <div
-                    id="input-text"
-                    className="mb-3 usersContentcolor Regular"
+        <FadeIn>
+          <section>
+            <Container>
+              <Row className="d-flex justify-content-center align-items-center usersRow">
+                <div
+                  className=" BorderRadius usersBackground p-5"
+                  style={{ maxWidth: '568px', minWidth: '390px' }}
+                >
+                  <form
+                    onSubmit={handleSubmit}
+                    noValidate
+                    id="loginForm"
+                    className="d-flex justify-content-center flex-column"
                   >
-                    <input
-                      type="text"
-                      className={`form-control  BorderRadius ${
-                        errors.userPassword ? `is-invalid` : ``
-                      } `}
-                      placeholder="密碼"
-                      name="userPassword"
-                      value={loginData.userPassword}
-                      onChange={handleChange}
-                    />
-                    <div
-                      id="emailHelp"
-                      className="form-text text-secondary"
-                      style={{ height: '21px' }}
-                    >
-                      {errors.userPassword && (
-                        <span>{errors.userPassword}</span>
-                      )}
+                    <div style={{ paddingLeft: '12px' }}>
+                      <h4 className="ph_title row ExtraBold text-primary">
+                        登入
+                      </h4>
+                      <h6 className="ph_title row Regular usersContentcolor mb-3 ">
+                        使用您的Artilize帳號
+                      </h6>
                     </div>
-                  </div>
-                  <div>
-                    <Link to="/users/forgetpassword/">
-                      <label
-                        className="form-text mb-3 usersContentcolor Regular"
-                        style={{ cursor: 'pointer' }}
+                    <div id="input-text" className="mb-3">
+                      <input
+                        type="text"
+                        className={`form-control BorderRadius ${
+                          errors.userAccount ? `is-invalid` : ``
+                        }`}
+                        name="userAccount"
+                        placeholder="帳號"
+                        value={loginData.userAccount}
+                        onChange={handleChange}
+                      />
+                      <div
+                        id="emailHelp"
+                        className="form-text text-secondary"
+                        style={{ height: '21px' }}
                       >
-                        忘記密碼
-                      </label>
-                    </Link>
-                  </div>
-                  <div className="d-flex justify-content-around">
-                    {/* <Link to="/users/">
+                        {errors.userAccount && (
+                          <span>{errors.userAccount}</span>
+                        )}
+                      </div>
+                    </div>
+                    <div
+                      id="input-text"
+                      className="mb-3 usersContentcolor Regular"
+                    >
+                      <input
+                        type="text"
+                        className={`form-control  BorderRadius ${
+                          errors.userPassword ? `is-invalid` : ``
+                        } `}
+                        placeholder="密碼"
+                        name="userPassword"
+                        value={loginData.userPassword}
+                        onChange={handleChange}
+                      />
+                      <div
+                        id="emailHelp"
+                        className="form-text text-secondary"
+                        style={{ height: '21px' }}
+                      >
+                        {errors.userPassword && (
+                          <span>{errors.userPassword}</span>
+                        )}
+                      </div>
+                    </div>
+                    <div>
+                      <Link to="/users/forgetpassword/">
+                        <label
+                          className="form-text mb-3 usersContentcolor Regular"
+                          style={{ cursor: 'pointer' }}
+                        >
+                          忘記密碼
+                        </label>
+                      </Link>
+                    </div>
+                    <ReCAPTCHA
+                      className="align-self-center mb-3"
+                      sitekey={`${process.env.REACT_APP_GOOGLE_RECAPTCHA_KEY}`}
+                      onChange={authChange}
+                    />
+                    <div className="d-flex justify-content-around">
+                      {/* <Link to="/users/">
                       <button
                         type="submit"
                         className="btn btn-primary rounded-pill"
@@ -158,26 +186,27 @@ function Login(props) {
                         登入
                       </button>
                     </Link> */}
-                    <button
-                      type="submit"
-                      className="btn btn-primary rounded-pill "
-                    >
-                      登入
-                    </button>
-                    <Link to="/users/signup/">
                       <button
-                        type="click"
-                        className="btn btn-primary rounded-pill"
+                        type="submit"
+                        className="btn btn-primary rounded-pill "
                       >
-                        註冊
+                        登入
                       </button>
-                    </Link>
-                  </div>
-                </form>
-              </div>
-            </Row>
-          </Container>
-        </section>
+                      <Link to="/users/signup/">
+                        <button
+                          type="click"
+                          className="btn btn-primary rounded-pill"
+                        >
+                          註冊
+                        </button>
+                      </Link>
+                    </div>
+                  </form>
+                </div>
+              </Row>
+            </Container>
+          </section>
+        </FadeIn>
       </div>
       <Footer />
     </>

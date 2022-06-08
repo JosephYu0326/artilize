@@ -8,11 +8,18 @@ import { useState } from 'react'
 import Footer from '../../component/Footer'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { css } from '@emotion/react'
+import PuffLoader from 'react-spinners/PuffLoader'
+import FadeIn from 'react-fade-in'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 function ForgetPassword(props) {
   const auth = JSON.parse(localStorage.getItem('auth'))
   const history = useHistory()
   const MySwal = withReactContent(Swal)
+  const [loading, setIsLoading] = useState(false)
+  const [color, setColor] = useState('#4153BB')
+  const [googleAuth, setGoogleAuth] = useState(false)
   if (auth === true) {
     history.replace('/users')
   }
@@ -27,8 +34,14 @@ function ForgetPassword(props) {
       a.email = '無效的Email'
     }
     setErrors(a)
-    if (JSON.stringify(errors) === '{}') {
+    if (JSON.stringify(errors) === '{}' && googleAuth === true) {
+      setIsLoading(true)
       sendEmail()
+    } else if (googleAuth === false) {
+      MySwal.fire({
+        icon: 'error',
+        title: '請驗證是否不是機器人',
+      })
     }
   }
   const sendEmail = async () => {
@@ -42,11 +55,13 @@ function ForgetPassword(props) {
 
       const result = await response.json()
       if (result.ok === false) {
+        setIsLoading(false)
         MySwal.fire({
           icon: 'error',
           title: '無此Email，請重新輸入',
         })
       } else {
+        setIsLoading(false)
         MySwal.fire({
           icon: 'success',
           title: '重設密碼信，以寄至您的Email',
@@ -63,61 +78,88 @@ function ForgetPassword(props) {
       console.log(error)
     }
   }
-
+  const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: rgb(65, 83, 187);
+  `
+  const authChange = (value) => {
+    console.log('Captcha value:', value)
+    if (value !== null) {
+      setGoogleAuth(true)
+    }
+  }
   return (
     <>
       <Header />
       <div className="bg-background">
-        <section>
-          <Container>
-            <Row className="d-flex justify-content-center align-items-center usersRow">
-              <div
-                className=" BorderRadius usersBackground p-5"
-                style={{ maxWidth: '568px', minWidth: '390px' }}
-              >
-                <form onSubmit={handleSubmit} id="resetEmailForm">
-                  <div style={{ paddingLeft: '12px' }}>
-                    <h4 className="ph_title row ExtraBold text-primary mb-4">
-                      忘記密碼
-                    </h4>
-                  </div>
-                  <div
-                    id="input-text"
-                    className="mb-3 usersContentcolor Regular"
+        <FadeIn>
+          <section>
+            <Container>
+              <Row className="d-flex flex-column justify-content-center align-items-center usersRow">
+                <div
+                  className=" BorderRadius usersBackground p-5"
+                  style={{ maxWidth: '568px', minWidth: '390px' }}
+                >
+                  <form
+                    onSubmit={handleSubmit}
+                    id="resetEmailForm"
+                    className="d-flex flex-column"
                   >
-                    <input
-                      type="text"
-                      className={`form-control BorderRadius  ${
-                        errors.email ? `is-invalid` : ``
-                      } `}
-                      name="userEmail"
-                      placeholder="請輸入註冊時的Email"
-                      value={email}
-                      onChange={(e) => {
-                        setEmail(e.target.value)
-                      }}
-                    />
-                    <div
-                      id="emailHelp"
-                      className="form-text text-secondary"
-                      style={{ height: '21px' }}
-                    >
-                      {errors.email && <span>{errors.email}</span>}
+                    <div style={{ paddingLeft: '12px' }}>
+                      <h4 className="ph_title row ExtraBold text-primary mb-4">
+                        忘記密碼
+                      </h4>
                     </div>
-                  </div>
-                  <div className="d-flex justify-content-around">
-                    <button
-                      type="submit"
-                      className="btn btn-primary rounded-pill mt-4"
+                    <div
+                      id="input-text"
+                      className="mb-3 usersContentcolor Regular"
                     >
-                      送出
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </Row>
-          </Container>
-        </section>
+                      <input
+                        type="text"
+                        className={`form-control BorderRadius  ${
+                          errors.email ? `is-invalid` : ``
+                        } `}
+                        name="userEmail"
+                        placeholder="請輸入註冊時的Email"
+                        value={email}
+                        onChange={(e) => {
+                          setEmail(e.target.value)
+                        }}
+                      />
+                      <div
+                        id="emailHelp"
+                        className="form-text text-secondary"
+                        style={{ height: '21px' }}
+                      >
+                        {errors.email && <span>{errors.email}</span>}
+                      </div>
+                    </div>
+                    <ReCAPTCHA
+                      className="align-self-center mb-3"
+                      sitekey={`${process.env.REACT_APP_GOOGLE_RECAPTCHA_KEY}`}
+                      onChange={authChange}
+                    />
+                    <PuffLoader
+                      color={'#4153BB'}
+                      loading={loading}
+                      css={override}
+                      size={150}
+                    />
+                    <div className="d-flex justify-content-around">
+                      <button
+                        type="submit"
+                        className="btn btn-primary rounded-pill mt-4"
+                      >
+                        送出
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </Row>
+            </Container>
+          </section>
+        </FadeIn>
       </div>
       <Footer />
     </>

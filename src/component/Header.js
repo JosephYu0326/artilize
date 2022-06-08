@@ -66,6 +66,10 @@ function Header(props) {
       }
     })
   }
+  const clickLogIn = (e) => {
+    e.preventDefault()
+    history.replace('/users/login')
+  }
   return (
     <>
       <Navbar expand="lg" className=" justify-content-between">
@@ -159,12 +163,10 @@ function Header(props) {
                   </Link>
                   <button
                     type="click"
-                    className={`btn btn-primary rounded-pill  ${
-                      auth === false ? 'd-none' : ''
-                    }`}
-                    onClick={clickLogOut}
+                    className={`btn btn-primary rounded-pill `}
+                    onClick={auth === true ? clickLogOut : clickLogIn}
                   >
-                    登出
+                    {`${auth === true ? '登出' : '登入'}`}
                   </button>
                 </div>
               </li>

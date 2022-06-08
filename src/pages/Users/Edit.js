@@ -12,6 +12,8 @@ import withReactContent from 'sweetalert2-react-content'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import Footer from '../../component/Footer'
+import FadeIn from 'react-fade-in'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 function Edit(props) {
   const [name, setName] = useState('')
@@ -21,6 +23,7 @@ function Edit(props) {
   const [birthday, setBirthday] = useState('')
   const [avatar, setAvatar] = useState('')
   const [startDate, setStartDate] = useState(null)
+  const [googleAuth, setGoogleAuth] = useState(false)
   // 記錄選中了哪個值
   const [gender, setGender] = useState('')
   const genderOptions = [1, 2, 3]
@@ -75,7 +78,14 @@ function Edit(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    sendData()
+    if (googleAuth === true) {
+      sendData()
+    } else if (googleAuth === false) {
+      MySwal.fire({
+        icon: 'error',
+        title: '請驗證是否不是機器人',
+      })
+    }
   }
   const sendData = async () => {
     try {
@@ -142,6 +152,12 @@ function Edit(props) {
   const imageUrl = `${process.env.REACT_APP_API_URL}/images/${avatar}`
   const imageUrl1 = `${process.env.REACT_APP_API_URL}/images/${imageName}`
   const imageUser = `${process.env.REACT_APP_API_URL}/images/user.png`
+  const authChange = (value) => {
+    console.log('Captcha value:', value)
+    if (value !== null) {
+      setGoogleAuth(true)
+    }
+  }
   return (
     <>
       <Header />
@@ -149,219 +165,225 @@ function Edit(props) {
         <section className={`${!auth ? 'd-none' : ''}`}>
           <Container>
             <Row className="d-flex justify-content-center align-items-center usersRow">
-              <div className="d-flex flex-column justify-content-center align-items-center">
-                <figure className="figure roundedCircle ">
-                  <img
-                    alt=""
-                    src={`${
-                      avatar == null
-                        ? imageUser
-                        : imageName == null
-                        ? imageUrl
-                        : imageUrl1
-                    }`}
-                    width="90"
-                    height="90"
-                    style={{ border: '1px solid black', borderRadius: '50%' }}
-                  />
-                </figure>
-                <div className="d-flex justify-content-center mb-4">
-                  <button
-                    className="btn btn-primary rounded-pill"
-                    onClick={onClickImage}
-                  >
-                    更換大頭照
-                  </button>
-                  <input
-                    type="file"
-                    name="avatar"
-                    id="avatar"
-                    onChange={handleImage}
-                    accept="image/*"
-                    style={{ display: 'none' }}
-                  />
+              <FadeIn>
+                <div className="d-flex flex-column justify-content-center align-items-center">
+                  <figure className="figure roundedCircle ">
+                    <img
+                      alt=""
+                      src={`${
+                        avatar == null
+                          ? imageUser
+                          : imageName == null
+                          ? imageUrl
+                          : imageUrl1
+                      }`}
+                      width="90"
+                      height="90"
+                      style={{ border: '1px solid black', borderRadius: '50%' }}
+                    />
+                  </figure>
+                  <div className="d-flex justify-content-center mb-4">
+                    <button
+                      className="btn btn-primary rounded-pill"
+                      onClick={onClickImage}
+                    >
+                      更換大頭照
+                    </button>
+                    <input
+                      type="file"
+                      name="avatar"
+                      id="avatar"
+                      onChange={handleImage}
+                      accept="image/*"
+                      style={{ display: 'none' }}
+                    />
+                  </div>
                 </div>
-              </div>
-              <form
-                className="d-flex flex-column justify-content-center align-items-center"
-                id="editForm"
-                onSubmit={handleSubmit}
-                noValidate
-              >
-                <div
-                  className=" BorderRadius usersBackground pt-5 ps-5 pe-5 pb-3 d-flex flex-column"
-                  style={{ minWidth: '568px' }}
+              </FadeIn>
+              <FadeIn>
+                <form
+                  className="d-flex flex-column justify-content-center align-items-center"
+                  id="editForm"
+                  onSubmit={handleSubmit}
+                  noValidate
                 >
-                  <div style={{ paddingLeft: '12px' }}>
-                    <h4 className="ph_title row ExtraBold text-primary mb-4">
-                      編輯會員資料
-                    </h4>
-                  </div>
-                  <input
-                    type="hidden"
-                    name="userAvatar"
-                    value={imageName}
-                    onChange={(e) => {
-                      setImageName(e.target.value)
-                    }}
-                  />
-
                   <div
-                    id="input-text"
-                    className="mb-3 usersContentcolor Regular"
+                    className=" BorderRadius usersBackground pt-5 ps-5 pe-5 pb-3 d-flex flex-column"
+                    style={{ minWidth: '568px' }}
                   >
-                    <h6 className="Regular">姓名</h6>
-                    <input
-                      type="text"
-                      className="form-control BorderRadius "
-                      //id="exampleFormControlInput1"
-                      name="userName"
-                      placeholder="真實姓名"
-                      value={name}
-                      onChange={(e) => {
-                        const a = e.target.value
-                        setName(a)
-                      }}
-                      required
-                    />
-                  </div>
-                  <div
-                    id="input-text"
-                    className="mb-3 usersContentcolor Regular"
-                  >
-                    <h6 className="Regular">手機</h6>
-                    <input
-                      type="tel"
-                      className="form-control BorderRadius "
-                      //id="exampleFormControlInput1"
-                      placeholder="09xxxxxxxx"
-                      value={phone}
-                      name="userMobile"
-                      onChange={(e) => {
-                        setPhone(e.target.value)
-                      }}
-                      required
-                    />
-                    <div id="emailHelp" className="form-text text-secondary">
-                      請再次輸入正確的手機
+                    <div style={{ paddingLeft: '12px' }}>
+                      <h4 className="ph_title row ExtraBold text-primary mb-4">
+                        編輯會員資料
+                      </h4>
                     </div>
-                  </div>
-                  <div
-                    id="input-text"
-                    className="mb-3 usersContentcolor Regular"
-                  >
-                    <h6 className="Regular">地址</h6>
-                    <input
-                      type="text"
-                      className="form-control  BorderRadius"
-                      //id="exampleFormControlInput1"
-                      placeholder=""
-                      name="userAddress"
-                      value={address}
-                      onChange={(e) => {
-                        setAddress(e.target.value)
-                      }}
-                      required
-                    />
-                  </div>
-                  <div
-                    id="input-text"
-                    className="mb-3 usersContentcolor Regular"
-                  >
-                    <h6 className="Regular">暱稱</h6>
-                    <input
-                      type="text"
-                      className="form-control BorderRadius "
-                      name="userNickName"
-                      //id="exampleFormControlInput1"
-                      placeholder=""
-                      value={nickname}
-                      onChange={(e) => {
-                        setNickname(e.target.value)
-                      }}
-                      required
-                    />
-                  </div>
-                  <div
-                    id="input-text"
-                    className="mb-3 usersContentcolor Regular"
-                  >
-                    <h6 className="Regular">生日</h6>
-                    <DatePicker
-                      dateFormat="yyyy-MM-dd"
-                      selected={startDate}
-                      onChange={(date, e) => {
-                        setStartDate(date)
-                        e.target.value = date
-                        setBirthday(e.target.value)
-                        console.log(e.target.value)
-                      }}
-                      maxDate={new Date()}
-                      showDisabledMonthNavigation
-                      className="form-control BorderRadius"
-                      value={birthday}
-                      fixedHeight
-                      // peekNextMonth
-                      showMonthDropdown
-                      showYearDropdown
-                      dropdownMode="select"
-                      useShortMonthInDropdown
-                    />
                     <input
                       type="hidden"
-                      className="form-control BorderRadius "
-                      //id="exampleFormControlInput1"
-                      placeholder=""
-                      value={formDate(birthday)}
-                      name="userBirthday"
+                      name="userAvatar"
+                      value={imageName}
                       onChange={(e) => {
-                        setBirthday(e.target.value)
+                        setImageName(e.target.value)
                       }}
-                      required
                     />
-                  </div>
-                  <div
-                    id="input-radio"
-                    className="mb-3 usersContentcolor Regular"
-                  >
-                    <h6 className="Regular">性別</h6>
-                    <div className="d-flex">
-                      {genderOptions.map((v, i) => {
-                        return (
-                          <div className="form-check BorderRadius" key={i}>
-                            <input
-                              type="radio"
-                              id={'gender' + i}
-                              onChange={(e) => {
-                                setGender(parseInt(e.target.value))
-                              }}
-                              name="userGender"
-                              required
-                              className="form-check-input"
-                              value={v}
-                              checked={v === gender}
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor={'gender' + i}
-                            >
-                              {v === 1 ? '男' : v === 2 ? '女' : '不詳'}
-                            </label>
-                          </div>
-                        )
-                      })}
+
+                    <div
+                      id="input-text"
+                      className="mb-3 usersContentcolor Regular"
+                    >
+                      <h6 className="Regular">姓名</h6>
+                      <input
+                        type="text"
+                        className="form-control BorderRadius "
+                        //id="exampleFormControlInput1"
+                        name="userName"
+                        placeholder="真實姓名"
+                        value={name}
+                        onChange={(e) => {
+                          const a = e.target.value
+                          setName(a)
+                        }}
+                        required
+                      />
+                    </div>
+                    <div
+                      id="input-text"
+                      className="mb-3 usersContentcolor Regular"
+                    >
+                      <h6 className="Regular">手機</h6>
+                      <input
+                        type="tel"
+                        className="form-control BorderRadius "
+                        //id="exampleFormControlInput1"
+                        placeholder="09xxxxxxxx"
+                        value={phone}
+                        name="userMobile"
+                        onChange={(e) => {
+                          setPhone(e.target.value)
+                        }}
+                        required
+                      />
+                    </div>
+                    <div
+                      id="input-text"
+                      className="mb-3 usersContentcolor Regular"
+                    >
+                      <h6 className="Regular">地址</h6>
+                      <input
+                        type="text"
+                        className="form-control  BorderRadius"
+                        //id="exampleFormControlInput1"
+                        placeholder=""
+                        name="userAddress"
+                        value={address}
+                        onChange={(e) => {
+                          setAddress(e.target.value)
+                        }}
+                        required
+                      />
+                    </div>
+                    <div
+                      id="input-text"
+                      className="mb-3 usersContentcolor Regular"
+                    >
+                      <h6 className="Regular">暱稱</h6>
+                      <input
+                        type="text"
+                        className="form-control BorderRadius "
+                        name="userNickName"
+                        //id="exampleFormControlInput1"
+                        placeholder=""
+                        value={nickname}
+                        onChange={(e) => {
+                          setNickname(e.target.value)
+                        }}
+                        required
+                      />
+                    </div>
+                    <div
+                      id="input-text"
+                      className="mb-3 usersContentcolor Regular"
+                    >
+                      <h6 className="Regular">生日</h6>
+                      <DatePicker
+                        dateFormat="yyyy-MM-dd"
+                        selected={startDate}
+                        onChange={(date, e) => {
+                          setStartDate(date)
+                          e.target.value = date
+                          setBirthday(e.target.value)
+                          console.log(e.target.value)
+                        }}
+                        maxDate={new Date()}
+                        showDisabledMonthNavigation
+                        className="form-control BorderRadius"
+                        value={birthday}
+                        fixedHeight
+                        // peekNextMonth
+                        showMonthDropdown
+                        showYearDropdown
+                        dropdownMode="select"
+                        useShortMonthInDropdown
+                      />
+                      <input
+                        type="hidden"
+                        className="form-control BorderRadius "
+                        //id="exampleFormControlInput1"
+                        placeholder=""
+                        value={formDate(birthday)}
+                        name="userBirthday"
+                        onChange={(e) => {
+                          setBirthday(e.target.value)
+                        }}
+                        required
+                      />
+                    </div>
+                    <div
+                      id="input-radio"
+                      className="mb-3 usersContentcolor Regular"
+                    >
+                      <h6 className="Regular">性別</h6>
+                      <div className="d-flex">
+                        {genderOptions.map((v, i) => {
+                          return (
+                            <div className="form-check BorderRadius" key={i}>
+                              <input
+                                type="radio"
+                                id={'gender' + i}
+                                onChange={(e) => {
+                                  setGender(parseInt(e.target.value))
+                                }}
+                                name="userGender"
+                                required
+                                className="form-check-input"
+                                value={v}
+                                checked={v === gender}
+                              />
+                              <label
+                                className="form-check-label"
+                                htmlFor={'gender' + i}
+                              >
+                                {v === 1 ? '男' : v === 2 ? '女' : '不詳'}
+                              </label>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
+                    <ReCAPTCHA
+                      className="align-self-center mb-3"
+                      sitekey={`${process.env.REACT_APP_GOOGLE_RECAPTCHA_KEY}`}
+                      onChange={authChange}
+                    />
+                    <div className="d-flex justify-content-around">
+                      <button
+                        type="submit"
+                        className="btn btn-primary rounded-pill mt-3"
+                      >
+                        送出
+                      </button>
                     </div>
                   </div>
-                  <div className="d-flex justify-content-around">
-                    <button
-                      type="submit"
-                      className="btn btn-primary rounded-pill mt-3"
-                    >
-                      送出
-                    </button>
-                  </div>
-                </div>
-              </form>
+                </form>
+              </FadeIn>
             </Row>
           </Container>
         </section>

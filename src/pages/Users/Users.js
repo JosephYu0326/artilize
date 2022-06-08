@@ -9,6 +9,7 @@ import logo from '../../images/user.png'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import Footer from '../../component/Footer'
+import FadeIn from 'react-fade-in'
 
 function Users(props) {
   const usersAsideBar = {
@@ -120,132 +121,138 @@ function Users(props) {
           <Container>
             <Row className="d-flex flex-column justify-content-center align-items-center  ">
               <form className="d-flex flex-column justify-content-center align-items-center">
-                <div>
-                  <figure className="figure roundedCircle">
-                    <img
-                      alt=""
-                      src={` ${userAvatar == null ? imageUser : imageUrl}`}
-                      width="90"
-                      height="90"
-                      style={{
-                        border: '1px solid #4153BB ',
-                        borderRadius: '50%',
-                      }}
-                    />
-                  </figure>
-                </div>
-                <div
-                  className=" BorderRadius usersBackground p-5  d-flex flex-column"
-                  style={{ minWidth: '568px' }}
-                >
-                  <div style={{ paddingLeft: '12px' }}>
-                    <h4 className="ph_title row ExtraBold text-primary mb-4">
-                      會員資料
-                    </h4>
+                <FadeIn>
+                  <div>
+                    <figure className="figure roundedCircle">
+                      <img
+                        alt=""
+                        src={` ${userAvatar == null ? imageUser : imageUrl}`}
+                        width="90"
+                        height="90"
+                        style={{
+                          border: '1px solid #4153BB ',
+                          borderRadius: '50%',
+                        }}
+                      />
+                    </figure>
                   </div>
+                </FadeIn>
+                <FadeIn>
                   <div
-                    id="input-text"
-                    className="mb-3 usersContentcolor Regular"
+                    className=" BorderRadius usersBackground p-5  d-flex flex-column"
+                    style={{ minWidth: '568px' }}
                   >
-                    <h6 className="Regular">帳號</h6>
-                    <div className="form-text text-secondary ">
-                      {userAccount}
+                    <div style={{ paddingLeft: '12px' }}>
+                      <h4 className="ph_title row ExtraBold text-primary mb-4">
+                        會員資料
+                      </h4>
                     </div>
-                  </div>
-                  <div
-                    id="input-text"
-                    className="mb-3 usersContentcolor Regular"
-                  >
-                    <h6 className="Regular">信箱</h6>
-                    <div className="form-text text-secondary ">{userEmail}</div>
-                  </div>
-                  <div
-                    id="input-text"
-                    className="mb-3 usersContentcolor Regular"
-                  >
-                    <h6 className="Regular ">姓名</h6>
-                    <div className="form-text text-secondary ">
-                      {userName ? userName : `無資料`}
-                    </div>
-                  </div>
-                  <div
-                    id="input-text"
-                    className="mb-3 usersContentcolor Regular"
-                  >
-                    <h6 className="Regular">手機</h6>
-                    <div className="form-text text-secondary ">
-                      {userMobile ? userMobile : `無資料`}
-                    </div>
-                  </div>
-                  <div
-                    id="input-text"
-                    className="mb-3 usersContentcolor Regular"
-                  >
-                    <h6 className="Regular">地址</h6>
-                    <div className="form-text text-secondary">
-                      {userAddress ? userAddress : `無資料`}
-                    </div>
-                  </div>
-                  <div
-                    id="input-text"
-                    className="mb-3 usersContentcolor Regular"
-                  >
-                    <h6 className="Regular">暱稱</h6>
-                    <div className="form-text text-secondary">
-                      {userNickName ? userNickName : `無資料`}
-                    </div>
-                  </div>
-                  <div
-                    id="input-text"
-                    className="mb-3 usersContentcolor Regular"
-                  >
-                    <h6 className="Regular">生日</h6>
-                    <div className="form-text text-secondary">
-                      {userBirthday ? userBirthday : `無資料`}
-                    </div>
-                  </div>
-                  <div
-                    id="input-radio"
-                    className="mb-3 usersContentcolor Regular"
-                  >
-                    <h6 className="Regular">性別</h6>
-                    <div className="form-text text-secondary">
-                      {userGender
-                        ? userGender === 1
-                          ? `男`
-                          : userGender === 2
-                          ? `女`
-                          : `不詳`
-                        : `不詳`}
-                    </div>
-                  </div>
-                  <div className="d-flex justify-content-between">
-                    <Link to="/users/edit/">
-                      <button
-                        type="click"
-                        className="btn btn-primary rounded-pill mt-4"
-                      >
-                        編輯會員資料
-                      </button>
-                    </Link>
-                    <Link to="/users/changepassword/">
-                      <button
-                        type="click"
-                        className="btn btn-primary rounded-pill mt-4"
-                      >
-                        更改密碼
-                      </button>
-                    </Link>
-
-                    <button
-                      type="click"
-                      className="btn btn-primary rounded-pill mt-4"
-                      onClick={clickLogOut}
+                    <div
+                      id="input-text"
+                      className="mb-3 usersContentcolor Regular"
                     >
-                      登出
-                    </button>
+                      <h6 className="Regular">帳號</h6>
+                      <div className="form-text text-secondary ">
+                        {userAccount}
+                      </div>
+                    </div>
+                    <div
+                      id="input-text"
+                      className="mb-3 usersContentcolor Regular"
+                    >
+                      <h6 className="Regular">信箱</h6>
+                      <div className="form-text text-secondary ">
+                        {userEmail}
+                      </div>
+                    </div>
+                    <div
+                      id="input-text"
+                      className="mb-3 usersContentcolor Regular"
+                    >
+                      <h6 className="Regular ">姓名</h6>
+                      <div className="form-text text-secondary ">
+                        {userName ? userName : `無資料`}
+                      </div>
+                    </div>
+                    <div
+                      id="input-text"
+                      className="mb-3 usersContentcolor Regular"
+                    >
+                      <h6 className="Regular">手機</h6>
+                      <div className="form-text text-secondary ">
+                        {userMobile ? userMobile : `無資料`}
+                      </div>
+                    </div>
+                    <div
+                      id="input-text"
+                      className="mb-3 usersContentcolor Regular"
+                    >
+                      <h6 className="Regular">地址</h6>
+                      <div className="form-text text-secondary">
+                        {userAddress ? userAddress : `無資料`}
+                      </div>
+                    </div>
+                    <div
+                      id="input-text"
+                      className="mb-3 usersContentcolor Regular"
+                    >
+                      <h6 className="Regular">暱稱</h6>
+                      <div className="form-text text-secondary">
+                        {userNickName ? userNickName : `無資料`}
+                      </div>
+                    </div>
+                    <div
+                      id="input-text"
+                      className="mb-3 usersContentcolor Regular"
+                    >
+                      <h6 className="Regular">生日</h6>
+                      <div className="form-text text-secondary">
+                        {userBirthday ? userBirthday : `無資料`}
+                      </div>
+                    </div>
+                    <div
+                      id="input-radio"
+                      className="mb-3 usersContentcolor Regular"
+                    >
+                      <h6 className="Regular">性別</h6>
+                      <div className="form-text text-secondary">
+                        {userGender
+                          ? userGender === 1
+                            ? `男`
+                            : userGender === 2
+                            ? `女`
+                            : `不詳`
+                          : `不詳`}
+                      </div>
+                    </div>
+                    <div className="d-flex justify-content-between">
+                      <Link to="/users/edit/">
+                        <button
+                          type="click"
+                          className="btn btn-primary rounded-pill mt-4"
+                        >
+                          編輯會員資料
+                        </button>
+                      </Link>
+                      <Link to="/users/changepassword/">
+                        <button
+                          type="click"
+                          className="btn btn-primary rounded-pill mt-4"
+                        >
+                          更改密碼
+                        </button>
+                      </Link>
+
+                      <button
+                        type="click"
+                        className="btn btn-primary rounded-pill mt-4"
+                        onClick={clickLogOut}
+                      >
+                        登出
+                      </button>
+                    </div>
                   </div>
-                </div>
+                </FadeIn>
               </form>
             </Row>
           </Container>
