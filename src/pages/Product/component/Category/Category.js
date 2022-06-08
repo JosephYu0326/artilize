@@ -24,13 +24,13 @@ function Category(props) {
       `${API_GET_DATA}/product/category/${params.product_category_detail}`
     )
     const results = await res.json()
-    console.log(results)
+    console.log('results', results)
     setCategoryData(results)
   }
 
   useEffect(() => {
     fetchCategoryDetail()
-  }, [])
+  }, [params.product_category_detail])
 
   // const ptCategoryCards = ['1', '2', '3']
   // const pCategoryImg = { backgroundImage: `url(${p_categoryImg})` }

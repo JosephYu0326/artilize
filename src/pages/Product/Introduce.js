@@ -43,15 +43,20 @@ function Introduce(props) {
   const handleClick = (value) => () => {
     setAmountTotal(amountTotal + value)
   }
-
+  const userId = localStorage.getItem('userId')
   const [like, setLike] = useState(0)
-  const fetchpLikeData = async () => {
-    const res = await fetch(
-      `http://localhost/product/introduce/${parmas.product_id}`
-    )
-    const results = await res.json()
-    console.log(results)
-    setLike(results)
+  const handleLikeClick = () => {
+    const fetchpLikeData = async () => {
+      const res = await fetch(
+        `http://localhost:5000/product/introduce/like?productId=${
+          parmas.product_id
+        }&userId=${1}`
+      )
+      const results = await res.json()
+      console.log(results)
+      setLike(results)
+    }
+    fetchpLikeData()
   }
 
   const pIntroCard = pIntroData.map((productintro, index) => {
@@ -62,10 +67,7 @@ function Introduce(props) {
       product_img,
       product_orign_price,
       product_price,
-      product_like,
     } = productintro
-    console.log(product_like)
-
     return (
       <div className="productIntro d-flex" key={product_id}>
         <div className="pIntroImg">
@@ -103,17 +105,8 @@ function Introduce(props) {
               <div className="PurchaseBarCollect">
                 <FcLikePlaceholder
                   style={{ width: '22px', height: '22px' }}
-                  onClick={() => {
-                    if (product_like === 0) {
-                      // fetchpLikeData()
-                      parmas.setLike(1)
-                    } else if (product_like > 0) {
-                      // fetchpLikeData()
-                      parmas.setLike(0)
-                    }
-                  }}
+                  onClick={handleLikeClick}
                 />
-                <div>{product_like === 1 ? 1 : 0}</div>
               </div>
             </Link>
             <div className="PurchaseBarAmount">
