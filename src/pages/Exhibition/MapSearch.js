@@ -163,9 +163,9 @@ function MapSearch(props) {
     <>
       <Header />
       <Container fluid>
-        <Row>
+        <div className="row">
           {/* 清單 */}
-          <section className="col-xxl-3 col-xl-4 col-lg-5 col-md-6 mapSearchList d-flex flex-column justify-content-evenly align-items-stretch mt-3">
+          <section className="col-xxl-3 col-xl-4 col-lg-5 col-md-6  mapSearchList d-flex flex-column justify-content-evenly align-items-stretch mt-3">
             <div className="mapSearchBar d-flex  align-items-stretch">
               <form
                 className="d-flex align-items-center justify-content-center "
@@ -196,6 +196,17 @@ function MapSearch(props) {
                       setCenter(resultCenter)
                       setActiveMarker(null)
                       console.log(datas)
+                    } else {
+                      setTimeout(() => {
+                        setIsLoading(false)
+                      }, 3000)
+                      setDatas([
+                        {
+                          aName: '查無資料',
+                          mName: '查無資料',
+                          start: '查無資料',
+                        },
+                      ])
                     }
                     // Geocode.setApiKey(
                     //   `${process.env.REACT_APP_GOOGLE_MAPS_API_KEY1}`
@@ -292,7 +303,7 @@ function MapSearch(props) {
             <GoogleMap
               center={center}
               zoom={14}
-              mapContainerStyle={{ width: '100%', height: '100%' }}
+              mapContainerStyle={{ width: '75vw', height: '90vh' }}
               options={{
                 streetViewControl: false,
                 mapTypeControl: false,
@@ -378,9 +389,9 @@ function MapSearch(props) {
               )}
             </GoogleMap>
           </section>
-        </Row>
+        </div>
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 }
