@@ -305,7 +305,7 @@ function MapSearch(props) {
             <GoogleMap
               center={center}
               zoom={14}
-              mapContainerStyle={{ width: '100vw', height: '90vh' }}
+              mapContainerStyle={{ width: '100vw', height: `calc(100vh - 95px)` }}
               options={{
                 streetViewControl: false,
                 mapTypeControl: false,
