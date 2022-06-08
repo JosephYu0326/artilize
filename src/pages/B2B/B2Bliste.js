@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 function B2Bliste(props) {
   console.log('pppppppppppppppppppppppppp', props)
-  const { id, aName, pic1, pic2, star, end, time, handleDelete } = props
+  const { id, aName, pic1, pic2, start, end, time, handleDelete } = props
   return (
     <>
       <div className="row d-flex align-items-center mb-5 border">
@@ -16,15 +16,10 @@ function B2Bliste(props) {
             className="imgListe"
             alt="exhibitionImg"
           />
-          <img
-            src={require(`${pic2}`)}
-            className="imgListe"
-            alt="exhibitionImg"
-          />
         </div>
         <div className="col-md-3 col-sm-12">
           <div>{aName}</div>
-          <div>開始時間:{star}</div>
+          <div>開始時間:{start}</div>
           <div>結束時間:{end}</div>
           <div>建立時間:{time}</div>
         </div>

@@ -1,3 +1,6 @@
+//Accordion
+import Accordion from '../../component/Accordion'
+import '../../styles/Accordion.scss'
 //廠商後臺
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -17,8 +20,6 @@ import Tab from 'react-bootstrap/Tab'
 import Header from '../../component/Header'
 
 import '../../styles/B2BListe.scss'
-
-import { abilityEx } from './AbilityEx'
 
 // const extendAbilityEx = (array) => {
 //   return array.map((v, i) => {
@@ -117,13 +118,13 @@ function B2B(props) {
     return Etotal
   }
   const totalNumberEx = () => {
-    let total = data1.length,
+    let total = extendAbilityEx(data1).length,
       eTotal = 0,
       pTotal = 0
 
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < extendAbilityEx(data1).length; i++) {
       // total += 1
-      if (data[i].expire) {
+      if (extendAbilityEx(data1)[i].expire) {
         eTotal += 1
       }
     }
@@ -133,30 +134,32 @@ function B2B(props) {
   }
   // console.log(totalNumberEx())
   const [x, y, z] = totalNumberEx()
-  // console.log('x', x)
-  // console.log('y', y)
-  // console.log('z', z)
+  console.log('x', x)
+  console.log('y', y)
+  console.log('z', z)
   // 展覽刪除
   const handleDeleteEx = (id) => {
     alert('確定要刪除該筆資料嗎？')
-    const newExhibitionInorder = [...abilityEx].filter((v, i) => {
+    //fetch
+    const newExhibitionInorder = [...extendAbilityEx(data1)].filter((v, i) => {
       return v.id !== id
     })
     setDate(newExhibitionInorder)
   }
   return (
     <>
-      {/* <div>廠商後臺</div> */}
-      {/* <Link to="/b2b/addability">建立新活動資料</Link> */}
       <Container>
+        <Header />
+        <div>廠商後臺</div>
+        <Link to="/b2b/addability">建立新活動資料</Link>
+
         <Row>
           <Col>
-            <Header />
             <h1>活動展覽列表</h1>
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col xs={11}>
             <Tabs
               //defaultActiveKey="profile"
               id="uncontrolled-tab-example"
@@ -167,7 +170,7 @@ function B2B(props) {
               <Tab eventKey="start" title={`已發布(${z})`}>
                 <B2BStartCount startNumberEx={startNumberEx()} />
                 <div className="exhibitionInorder">
-                  {data
+                  {extendAbilityEx(data1)
                     .filter((v, i) => {
                       return v.expire === false
                     })
@@ -180,8 +183,8 @@ function B2B(props) {
                           key={v.id}
                           id={v.id}
                           aName={v.aName}
-                          startime={v.start}
-                          endtime={v.end}
+                          start={v.start}
+                          end={v.end}
                           time={v.time}
                           pic1={v.pic1}
                           count={v.count}
@@ -199,7 +202,7 @@ function B2B(props) {
               <Tab eventKey="end" title={`已結束(${y})`}>
                 <B2BEndCount endNumberEx={endNumberEx()} />
                 <div className="exhibitionInorder">
-                  {data1
+                  {extendAbilityEx(data1)
                     .filter((v, i) => {
                       return v.expire === true
                     })
@@ -209,8 +212,8 @@ function B2B(props) {
                           key={v.id}
                           id={v.id}
                           aName={v.aName}
-                          startime={v.start}
-                          endtime={v.end}
+                          start={v.start}
+                          end={v.end}
                           time={v.time}
                           pic1={v.pic1}
                           count={v.count}
@@ -227,14 +230,14 @@ function B2B(props) {
               </Tab>
               <Tab eventKey="all" title={`全部(${x})`}>
                 <div className="exhibitionInorder">
-                  {data.map((v, i) => {
+                  {extendAbilityEx(data1).map((v, i) => {
                     return (
                       <B2Bliste
                         key={v.id}
                         id={v.id}
                         aName={v.aName}
-                        startime={v.start}
-                        endtime={v.end}
+                        start={v.start}
+                        end={v.end}
                         time={v.time}
                         pic1={v.pic1}
                         count={v.count}

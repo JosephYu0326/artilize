@@ -10,11 +10,12 @@ import 'react-datepicker/dist/react-datepicker.css'
 // import { zh-TW } from 'date-fns/esm/locale'
 import { registerLocale, setDefaultLocale } from 'react-datepicker'
 import { zhTW } from 'date-fns/locale'
-import { Form } from 'react-bootstrap'
+
 registerLocale('zhTW', zhTW)
 
 function AddAbility(props) {
-  const [data, setDate] = useState([])
+  const [data, setDate] = useState(null)
+
   const fetchData = async () => {
     const response = await fetch('http://localhost:5000/B2B/B2B/')
     const results = await response.json()
@@ -29,7 +30,7 @@ function AddAbility(props) {
   // aName setAname
   const [aName, setAname] = useState('')
   //展覽圖片
-  const [fileData, setFileData] = useState()
+  const [fileData, setFileData] = useState([])
   // select 地區
   //direction setDirection
   const [direction, setDirection] = useState('')
@@ -115,21 +116,30 @@ function AddAbility(props) {
   const [ticketDescription, setTicketDescription] = useState('')
 
   const fileChangeHandler = (e) => {
+    // console.log(e.target.files[0])
+    // console.log(e.target.files.length)
+    if (e.target.files.length > 0) {
+      let fileNames = []
+      for (let a = 0, max = e.target.files.length; a < max; a++) {
+        fileNames.push(URL.createObjectURL(e.target.files[a]))
+      }
+      setFileData(fileNames)
+    }
     // setFileData(e.target.files)
     // setFileData(e.target.files[1])
-    setFileData(e.target.files[0])
+    //setFileData(e.target.files[0])
     // console.log('e.target.files', e.target.files)
-    if (e.target.files.length !== 0) {
-      setFileData(URL.createObjectURL(e.target.files[0]))
-    }
+    // if (e.target.files.length !== 0) {
+    //   setFileData(URL.createObjectURL(e.target.files[0]))
+    // }
     // setFileData(URL.createObjectURL(e.target.files[0]))
     // setFileData(URL.createObjectURL(e.target.files))
-    console.log(
-      'URL.createObjectURL(e.target.files)',
-      URL.createObjectURL(e.target.files)
-    )
+    // console.log(
+    //   'URL.createObjectURL(e.target.files)',
+    //   URL.createObjectURL(e.target.files)
+    // )
 
-    console.log('fileData', fileData)
+    // console.log('fileData', fileData)
   }
 
   // const onSubmitHandler = (e) => {
@@ -154,14 +164,18 @@ function AddAbility(props) {
   // }
 
   const submitForm = (e) => {
-    fetch('http://localhost:5000/B2B/B2B/', {
-      method: 'POST',
-      body: new FormData(document.getElementById('myForm')),
-    })
-      .then((res) => res.text())
-      .then((text) => console.log('上傳成功...' + text))
-
     e.preventDefault()
+
+    if (fileData.length > 0) {
+      fetch('http://localhost:5000/B2B/B2B/', {
+        method: 'POST',
+        body: new FormData(document.getElementById('myForm')),
+      })
+        .then((res) => res.text())
+        .then((text) => console.log('上傳成功...' + text))
+    } else {
+      alert('請選擇圖檔')
+    }
   }
 
   return (
@@ -177,19 +191,50 @@ function AddAbility(props) {
             <div className="col-12 ">
               <h3>開始建立活動資訊</h3>
               <h5>請創建一個活動展覽資訊</h5>
-              <input
-                type="file"
-                onChange={fileChangeHandler}
-                multiple
-                name="img"
-                accept="image/*"
-                // style={{ display: 'none' }}
-              />
+              <label htmlFor="upload_img">
+                <input
+                  type="file"
+                  multiple
+                  onChange={fileChangeHandler}
+                  name="img"
+                  id="upload_img"
+                  accept="image/*"
+                  style={{ display: 'none' }}
+                />
+
+                <i className="fa fa-photo btn btn-primary ">上傳圖片</i>
+              </label>
+              {/* <Stack direction="row" alignItems="center" spacing={10}>
+                <label htmlFor="contained-button-file">
+                  <Input
+                    accept="image/*"
+                    multiple
+                    type="file"
+                    onChange={fileChangeHandler}
+                    name="img"
+                    id="select-image"
+                  />
+                  <Button variant="contained" component="span">
+                    Upload
+                  </Button>
+                </label>
+              </Stack> */}
+              {/* {fileData && data && (
+                <div>
+                  <div>Image Preview:</div>
+                  <img src={fileData} alt={data.name} height="100px" />
+                </div>
+              )} */}
             </div>
 
             <div className="col-12">
               <figure className="figure">
-                <img className="imgwidth img-fluid" src={fileData} />
+                {}
+                {/* <img className="imgwidth img-fluid" src={fileData} /> */}
+                {fileData.map((v, i) => {
+                  //console.log(v)
+                  return <img className="imgwidth img-fluid" src={v} />
+                })}
               </figure>
             </div>
             {/* <div className="col-12">
