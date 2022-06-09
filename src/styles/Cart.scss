@@ -172,6 +172,129 @@
 
 }
 
+.coupon-window-frame{
+    position: fixed;
+    display: flex;
+    z-index: 6;
+    justify-content: center;
+    align-items: center;
+    background:rgba(0,0,0,0.2);
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+}
+
+.coupon-window{
+    h3{
+        margin: 0;
+    }
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    z-index: 4;
+    padding: 25px 25px 0px 25px;
+    border-radius: 20px;
+    border:#B4A79E solid 1px;
+    background: #fff;
+    width: 700px;
+    height: 340px;
+    border-radius: 20px;
+    top: 50%;
+    .coupon-card-frame{
+        width: 100%;
+        height: 170px;
+        padding-left: 30px;
+        padding-right: 30px;
+        border: 1px solid $DarkGrey;
+        border-radius: 10px;
+        overflow: scroll;
+    }
+    .coupon-link{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 3;
+        border-radius: 10px;
+        top: 0;
+        left: 0;
+    }
+    .coupon {
+        text-decoration: none;
+        color: black;
+        border: $WarnYellow 0px;
+        border-radius: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        box-shadow: $BoxShadow;
+        position: relative;
+        
+
+        .checkIcon{
+            display: none;
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            z-index: 4;
+            border-radius: 50%;
+            background: url('../images/check.svg');
+            background-size: cover;
+            right: 0;
+            top: 0;
+        }
+      
+        .couponImage {
+          text-align: center;
+          min-width: 100px;
+          background-image: url("../images/coupon.svg");
+          background-size: contain;
+          background-repeat: no-repeat;
+          color: #fff;
+          svg{
+            position: relative;
+            transform: translateY(-5px);
+      
+          }
+      
+          .couponIcon {
+            font-size: 2rem;
+          }
+          .couponName{
+            position: relative;
+            transform: translateY(-5px);
+            line-height: 24px;
+            font-weight: bold;
+          }
+        }
+        .usetext{
+          font-size: 16px;
+        }
+        
+        .couponMsg{
+          display: flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+          align-items: center;
+          .codeName{
+            color: $DarkGrey;
+            
+            font-size: 15px;
+          }
+        }
+    }
+      
+    .coupon:hover {
+        background: rgb(242, 242, 242);
+        transition: 0.3s;
+    }
+    .assure-btn{
+        width: 150px;
+    }
+}
+
+
+
 @media (max-width: 992px){
     .cart-card-frame{
         width: fit-content;

@@ -6,6 +6,7 @@ let storage = localStorage
 let userId = parseInt(storage.getItem('userId'))
 
 function Summary(props) {
+  const { totalPriceEx, totalPricePro, couponPrice, couponCode } = props
   const [exhibitionInorder, setExhibitionInorder] = useState(shoppingListEx)
 
   const body = exhibitionInorder.map((v, i) => {
@@ -38,11 +39,24 @@ function Summary(props) {
       }).then((json) => console.log(json))
     }
 
+    const coupon = {
+      couponName: `${couponCode}`,
+      isUsed: 1,
+    }
+    if (couponCode) {
+      fetch(`${process.env.REACT_APP_API_URL}/booking/coupon`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(coupon),
+      }).then((json) => console.log(json))
+    }
+
     storage.clear()
   }
 
-  const { totalPriceEx, totalPricePro } = props
-  const discount = 10
   return (
     <>
       <div className="bottom-frame">
@@ -56,7 +70,7 @@ function Summary(props) {
         </div>
         <div className="total-frame">
           <div>優惠券折扣</div>
-          <div>-${discount}</div>
+          <div>-${couponPrice}</div>
         </div>
         <div className="total-line"></div>
         <div className="total-frame">
@@ -64,8 +78,8 @@ function Summary(props) {
           <div className="final-total-text">
             $
             {totalPriceEx
-              ? totalPriceEx + totalPricePro - discount
-              : totalPricePro - discount}
+              ? totalPriceEx + totalPricePro - couponPrice
+              : totalPricePro - couponPrice}
           </div>
         </div>
         <button

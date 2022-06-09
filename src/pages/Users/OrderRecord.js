@@ -14,16 +14,17 @@ let userId = parseInt(storage.getItem('userId'))
 
 function OrderRecord(props) {
   const [datas, setDatas] = useState([])
-  const [allDatas, setAllDatas] = useState([])
 
   const fetchData = async () => {
-    const response = await fetch(`http://localhost:5050/booking/user/${userId}`)
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/booking/user/${userId}`
+    )
     const results = await response.json()
     setDatas(results)
   }
   useEffect(() => {
     fetchData()
-  }, [])
+  }, [userId])
 
   const btnList = {
     btnTitle: [

@@ -5,22 +5,34 @@ import '../../styles/Cart.scss'
 import step1 from './image/step.png'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FaTicketAlt } from 'react-icons/fa'
 import { shoppingListEx } from './Cart-ex'
 import { shoppingListPro } from './Cart-pro'
 import CartItemEx from './CartItemEx'
 import CartItemPro from './CartItemPro'
 import Header from '../../component/Header'
 import Footer from '../../component/Footer'
+import closePng from '../Exhibition/images/Category.png'
 
 import Summary from './Summary'
 
 import _ from 'lodash'
 
 let storage = localStorage
+let userId = parseInt(storage.getItem('userId'))
 
 function Cart(props) {
   const [exhibitionInorder, setExhibitionInorder] = useState(shoppingListEx)
   const [productInorder, setProductInorder] = useState(shoppingListPro)
+  const [whichCoupon, setWhichCoupon] = useState([])
+
+  const [couponCode, setCouponCode] = useState('')
+  const [couponPrice, setCouponPrice] = useState(0)
+
+  useEffect(() => {
+    setExhibitionInorder(shoppingListEx)
+  }, [shoppingListEx])
+
   // 設定展覽數
   const setExCount = (newCount, i) => {
     const newExhibitionInorder = [...shoppingListEx]
@@ -88,6 +100,120 @@ function Cart(props) {
       return v.id !== id
     })
     setProductInorder(newProductInorder)
+  }
+
+  // 優惠券
+  const [datas, setDatas] = useState([])
+
+  const fetchData = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/booking/coupon/user/${userId}`
+    )
+    const results = await response.json()
+    let temp = results.filter((v, i) => !v.isUsed)
+    setDatas(temp)
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [userId])
+
+  function selectCoupon(e) {
+    let index = parseInt(e.target.dataset.index)
+
+    let check = document.querySelectorAll('.checkIcon')
+
+    let array = []
+
+    for (let i = 0; i < check.length; i++) {
+      check[i].style.display = 'none'
+      array.push(0)
+    }
+
+    let thetarget = check[index]
+    if (whichCoupon[index]) {
+      array[index] = 0
+    } else {
+      array[index] = 1
+    }
+
+    setWhichCoupon(array)
+
+    if (array[index]) {
+      thetarget.style.display = 'block'
+    } else {
+      thetarget.style.display = 'none'
+    }
+  }
+
+  function assureCoupon() {
+    if (whichCoupon.includes(1)) {
+      let index
+      for (let i = 0; i < whichCoupon.length; i++) {
+        if (whichCoupon[i]) {
+          index = i
+          break
+        }
+      }
+      let check = document.querySelectorAll('.codeName')
+      let couponName = check[index].innerHTML
+      setCouponCode(couponName)
+
+      let price = document.querySelectorAll('.couponPrice')
+      let couponPriceText = price[index].innerHTML
+      let couponMoney = parseInt(couponPriceText.slice(6, 8))
+
+      setCouponPrice(couponMoney)
+
+      let input = document.querySelector('.coupon-input')
+      input.value = couponName
+    } else {
+      let input = document.querySelector('.coupon-input')
+      input.value = ''
+      setCouponPrice(0)
+    }
+    closeWindow()
+  }
+
+  const couponCard = datas.map((v, i) => {
+    return (
+      <div key={i} className="coupon row col-md-12 col-lg-6 my-2">
+        <Link
+          to="#"
+          onClick={selectCoupon}
+          className="coupon-link"
+          data-index={i}
+        ></Link>
+        <div className="checkIcon"></div>
+        <div className="couponImage col-4">
+          <FaTicketAlt className="couponIcon mt-2" />
+          <div className="couponName">{v.couponKind}</div>
+        </div>
+        <div className="couponMsg text-center col-7">
+          <h5 className="couponPrice">憑此券可折抵{v.couponPrice}$</h5>
+          <div className="codeName">{v.couponName}</div>
+        </div>
+        <div className="couponInfo d-flex justify-content-around mt-1">
+          <div className="usetext">期限{v.useDeadline}</div>
+          <div className="usetext">{v.isUsed ? '已使用' : '未使用'}</div>
+        </div>
+      </div>
+    )
+  })
+
+  function openCouponWindow() {
+    let window = document.querySelector('.coupon-window')
+    window.style.display = 'flex'
+
+    let check = document.querySelectorAll('.checkIcon')
+
+    let array = []
+
+    for (let i = 0; i < check.length; i++) {
+      array.push(0)
+    }
+
+    setWhichCoupon(array)
   }
 
   return (
@@ -160,16 +286,52 @@ function Cart(props) {
 
         <div className="input-frame">
           <div className="discountText">使用優惠券</div>
-          <input type="text" className="form-control" placeholder="優惠券" />
+          <input
+            type="text"
+            className="form-control coupon-input"
+            placeholder="優惠券"
+            onClick={openCouponWindow}
+          />
+          <div className="coupon-window">
+            <h3>我的優惠券</h3>
+            <div className="coupon-card-frame">
+              <div className="mx-auto row justify-content-between coupon-window-inner">
+                {couponCard}
+              </div>
+            </div>
+            <div className="d-flex justify-content-center">
+              <button
+                className="btn btn-primary rounded-pill assure-btn"
+                onClick={assureCoupon}
+              >
+                確定
+              </button>
+            </div>
+            <Link to="#">
+              <img
+                className="closeBtn"
+                src={closePng}
+                alt="closeBtn"
+                onClick={closeWindow}
+              />
+            </Link>
+          </div>
         </div>
         <Summary
           totalPriceEx={totalPriceEx()}
           totalPricePro={totalPricePro()}
+          couponPrice={couponPrice}
+          couponCode={couponCode}
         />
       </div>
       <Footer />
     </>
   )
+}
+
+function closeWindow() {
+  let window = document.querySelector('.coupon-window')
+  window.style.display = 'none'
 }
 
 function showExhibition() {
