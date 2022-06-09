@@ -25,7 +25,7 @@ function B2Bliste(props) {
         </div>
         <div className="col-md-2 col-sm-12">編輯</div>
         <div className="col-md-2 col-sm-12">
-          <button className="trash-btn">
+          <button className="trash-btn" onClick={handleDelete}>
             刪除
             {/* <FontAwesomeIcon
               className="trash"

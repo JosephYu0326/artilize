@@ -1,19 +1,22 @@
 //建立新活動資料
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import '../../styles/AddAbility.scss'
 import { FiSettings } from 'react-icons/fi'
-
+//DatePicker
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 // import { zh-TW } from 'date-fns/esm/locale'
 import { registerLocale, setDefaultLocale } from 'react-datepicker'
 import { zhTW } from 'date-fns/locale'
+//sweetalert2
+import Swal from 'sweetalert2'
 
 registerLocale('zhTW', zhTW)
 
 function AddAbility(props) {
+  const history = useHistory()
   const [data, setDate] = useState(null)
 
   const fetchData = async () => {
@@ -174,7 +177,12 @@ function AddAbility(props) {
         .then((res) => res.text())
         .then((text) => console.log('上傳成功...' + text))
     } else {
-      alert('請選擇圖檔')
+      Swal.fire({
+        icon: 'error',
+        title: '請選擇圖檔',
+        text: '至少兩張圖片',
+        // footer: '<a href="">Why do I have this issue?</a>',
+      })
     }
   }
 
@@ -548,6 +556,11 @@ function AddAbility(props) {
                   type="submit"
                   value="送出"
                   onClick={submitForm}
+                  // onClick={() => {
+                  //   submitForm()
+
+                  //   history.push('/b2b')
+                  // }}
                 >
                   確認
                 </button>
