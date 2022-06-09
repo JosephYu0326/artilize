@@ -8,6 +8,7 @@ import ForumAside from '../../component/ForumAside'
 import Header from '../../component/Header'
 import Footer from '../../component/Footer'
 import Article from '../../component/Article'
+import Chat from '../../component/Chat'
 
 
 function Forum(props) {
@@ -146,7 +147,7 @@ function Forum(props) {
     // </>
 
     <>
-    {/* <Chat /> */}
+     <Chat /> 
       <Header data={articleList} setSerchInput={setSerchInput} />
       <ForumAside btn={btn} />
       <FadeIn className="container h-100 out">
