@@ -1,5 +1,5 @@
 //會員登入
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import '../../styles/users.scss'
 import Header from '../../component/Header'
@@ -12,8 +12,11 @@ import LoginValidate from './formComponents/LoginValidate'
 import Footer from '../../component/Footer'
 import FadeIn from 'react-fade-in'
 import ReCAPTCHA from 'react-google-recaptcha'
+import jwtDecode from 'jwt-decode'
 import { GoogleLogin } from '@react-oauth/google'
 import { GoogleOAuthProvider } from '@react-oauth/google'
+import { clearConfigCache } from 'prettier'
+import { post } from 'jquery'
 
 function Login(props) {
   const [loginData, setLoginData] = useState({
@@ -24,6 +27,12 @@ function Login(props) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [googleAuth, setGoogleAuth] = useState(false)
   const auth = JSON.parse(localStorage.getItem('auth'))
+  const [googleLogin, setGoogleLogin] = useState({
+    email: '',
+    name: '',
+    picture: '',
+    sub: '',
+  })
   const history = useHistory()
 
   if (auth === true) {
@@ -95,6 +104,33 @@ function Login(props) {
       setGoogleAuth(true)
     }
   }
+  const { email, name, picture, sub } = googleLogin
+  console.log(googleLogin)
+  const sendGoogleLogIn = async () => {
+    try {
+      const responseGoogle = await fetch(
+        `${process.env.REACT_APP_API_URL}/users/googlelogin`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify(googleLogin),
+        }
+      )
+      const resultGoogle = await responseGoogle.json()
+      console.log(resultGoogle)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  if (sub !== '') {
+    sendGoogleLogIn()
+  }
+  // useEffect(() => {
+  // }, [googleLogin])
+
   return (
     <>
       <Header />
@@ -176,20 +212,34 @@ function Login(props) {
                         </label>
                       </Link>
                     </div>
+
                     <GoogleOAuthProvider
                       clientId={`${process.env.REACT_APP_GOOGLE_LOGIN_KEY}`}
                     >
                       <GoogleLogin
                         onSuccess={(credentialResponse) => {
                           console.log(credentialResponse)
+                          const ab = jwtDecode(credentialResponse.credential)
+                          console.log(ab)
+                          setGoogleLogin({
+                            email: ab.email,
+                            name: ab.name,
+                            picture: ab.picture,
+                            sub: ab.sub,
+                          })
                         }}
                         onError={() => {
                           console.log('Login Failed')
                         }}
+                        // type="icon"
+                        theme="filled_black"
+                        text="signin"
+                        shape="pill"
+                        width="300"
                       />
                     </GoogleOAuthProvider>
                     <ReCAPTCHA
-                      className="align-self-center mb-3"
+                      className="align-self-center mb-3 mt-3"
                       sitekey={`${process.env.REACT_APP_GOOGLE_RECAPTCHA_KEY}`}
                       onChange={authChange}
                     />
