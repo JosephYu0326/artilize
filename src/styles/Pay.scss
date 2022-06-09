@@ -77,4 +77,12 @@
       }
      
    
-   
+   //驗證
+   .invalid {
+    border: 1px solid red;
+    // border-color:  $danger;
+  }
+  
+  .error-text {
+    color: red;
+  }
