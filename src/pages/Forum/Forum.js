@@ -8,6 +8,7 @@ import ForumAside from '../../component/ForumAside'
 import Header from '../../component/Header'
 import Footer from '../../component/Footer'
 import Article from '../../component/Article'
+import Chat from '../../component/Chat'
 
 
 function Forum(props) {
@@ -122,6 +123,8 @@ function Forum(props) {
     }
   }, [serchInput])
 
+
+
   return (
     // <>
 
@@ -146,10 +149,12 @@ function Forum(props) {
     // </>
 
     <>
-    {/* <Chat /> */}
+      <Chat />
+
       <Header data={articleList} setSerchInput={setSerchInput} />
+
       <ForumAside btn={btn} />
-      <FadeIn className="container h-100 out">
+      <FadeIn className="container h-100">
         <div className="frContent">
           {articleList.length == 0 ? (
             <div className="txtGray d-flex justify-content-center">找不到相關文章</div>
@@ -158,8 +163,9 @@ function Forum(props) {
           )}
         </div>
       </FadeIn>
+
       <Footer />
-        <Waypoint onEnter={fetchComments} />
+      <Waypoint onEnter={fetchComments} />
     </>
   )
 }

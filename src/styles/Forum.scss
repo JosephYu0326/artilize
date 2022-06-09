@@ -20,6 +20,22 @@ body::-webkit-scrollbar-thumb {
   border-radius: 10px;
 }
 
+#chatRoomtoggle {
+  cursor: pointer;
+  color: $PurpleBlue;
+  right: 3rem;
+  bottom: 5rem;
+}
+
+#chatRoom {
+  position: fixed;
+  bottom: 15%;
+  right: 5%;
+  margin: auto;
+  background-color: #FFF;
+  z-index: 5;
+}
+
 
 .social {
   color: $MiddleGrey;

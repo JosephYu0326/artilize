@@ -20,7 +20,9 @@ import '../../styles/Forum.scss'
 
 function Article(props) {
   const userId = localStorage.getItem('userId')
-  const userAvatar = localStorage.getItem('userAvatar')
+  const auth = localStorage.getItem('auth')
+  const userAvatar = userId ? localStorage.getItem('userAvatar') : `user.png`
+  console.log(userAvatar);
 
   const [show, setShow] = useState(false)
 
@@ -362,9 +364,8 @@ function Article(props) {
                   >
                     <FaStar
                       onClick={hnadleLike}
-                      className={`${
-                        nowArticle.favorited ? 'likeIt' : ''
-                      } text-decoration-none fs-5 mx-2`}
+                      className={`${nowArticle.favorited ? 'likeIt' : ''
+                        } text-decoration-none fs-5 mx-2`}
                     />
                   </animated.div>
                   <Link
@@ -372,16 +373,14 @@ function Article(props) {
                     className="text-decoration-none"
                   >
                     <FaEdit
-                      className={`${
-                        nowArticle.users_id == userId ? '' : 'd-none'
-                      } fs-5 mx-2 `}
+                      className={`${nowArticle.users_id == userId ? '' : 'd-none'
+                        } fs-5 mx-2 `}
                     />
                   </Link>
                   <FaTrashAlt
                     onClick={hnadleDel}
-                    className={`${
-                      nowArticle.users_id == userId ? '' : 'd-none'
-                    } fs-5 mx-2 articleDel`}
+                    className={`${nowArticle.users_id == userId ? '' : 'd-none'
+                      } fs-5 mx-2 articleDel`}
                   />
                 </div>
               </div>
@@ -436,33 +435,40 @@ function Article(props) {
                 </div>
               </div>
               {/* 新增回復 */}
-              <section className="d-flex flex-column border my-5 p-4 newComment">
-                <div className="d-flex align-items-center">
-                  <img
-                    className="avatar m-3"
-                    src={` ${process.env.REACT_APP_API_URL}/images/${userAvatar}`}
-                    alt="userpicture"
-                  />
-                  <div>Me</div>
-                </div>
-
-                <textarea
-                  id="inputBox"
-                  type="text"
-                  value={commentInput}
-                  className="my-3 form-control"
-                  onChange={(e) => setCommentInput(e.target.value)}
-                ></textarea>
-                <div style={{ color: 'red' }}>{comment_msg}</div>
-                <div className="align-self-end">
-                  <button
-                    onClick={postComment}
-                    className="btn btn-primary rounded-pill"
-                  >
-                    新增回覆
-                  </button>
-                </div>
-              </section>
+              {userId ?
+                <section className="d-flex flex-column border my-5 p-4 newComment">
+                  <div className="d-flex align-items-center">
+                    <img
+                      className="avatar m-3"
+                      src={` ${process.env.REACT_APP_API_URL}/images/${userAvatar}`}
+                      alt="userpicture"
+                    />
+                    <div>Me</div>
+                  </div>
+                  <textarea
+                    id="inputBox"
+                    type="text"
+                    value={commentInput}
+                    className="my-3 form-control"
+                    onChange={(e) => setCommentInput(e.target.value)}
+                  ></textarea>
+                  <div style={{ color: 'red' }}>{comment_msg}</div>
+                  <div className="align-self-end">
+                    <button
+                      onClick={postComment}
+                      className="btn btn-primary rounded-pill"
+                    >
+                      新增回覆
+                    </button>
+                  </div>
+                </section>
+                :
+                <section className="d-flex txtGray flex-column text-center border my-5 p-4 newComment">
+                  <Link to="/users" className='text-decoration-none'>
+                    登入以參與討論
+                  </Link>
+                </section>
+              }
               <Comment forum={getNowArticle} comment={comments} />
             </section>
           </div>
