@@ -259,9 +259,15 @@ function Home(props) {
           alt=""
         ></img>
       </div>
-      <Container className="main mt-5 justify-content-center">
+      <Container
+        className="main mt-5 justify-content-center"
+        style={{ marginLeft: '400px' }}
+      >
         <div>
-          <div className="d-flex justify-content-center">
+          <div
+            className="d-flex justify-content-center"
+            style={{ marginRight: '100px' }}
+          >
             <h5 className="ExtraBold pCardTopictext d-flex justify-content-center">
               熱銷 TOP10
             </h5>
@@ -269,7 +275,10 @@ function Home(props) {
           <div className="row row-cols-xxl-3 row-cols-2">{pCards}</div>
         </div>
         <div className="mt-5">
-          <div className="d-flex justify-content-center">
+          <div
+            className="d-flex justify-content-center"
+            style={{ marginRight: '100px' }}
+          >
             <h5 className="ExtraBold pCardTopictext d-flex justify-content-center">
               精選館別
             </h5>
@@ -277,7 +286,10 @@ function Home(props) {
           <div className="row row-cols-xxl-3 row-cols-2">{pBrandCards}</div>
         </div>
         <div className="mt-5">
-          <div className="d-flex justify-content-center">
+          <div
+            className="d-flex justify-content-center"
+            style={{ marginRight: '100px' }}
+          >
             <h5 className="ExtraBold pCardTopictext d-flex justify-content-center">
               更多優惠
             </h5>

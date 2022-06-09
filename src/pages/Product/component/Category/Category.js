@@ -164,7 +164,7 @@ function Category(props) {
           alt=""
         />
       </div>
-      <Container>
+      <Container style={{ margiLleft: '400px' }}>
         <div className="row row-cols-xxl-3 row-cols-2">{pCategoryCards}</div>
       </Container>
       <Footer />

@@ -4,13 +4,15 @@ import { React, useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import Header from '../../component/Header'
+import Carousel from 'react-bootstrap/Carousel'
 import { FcLikePlaceholder, FcLike } from 'react-icons/fc'
 import { FaPlus } from 'react-icons/fa'
 import { FaMinus } from 'react-icons/fa'
 // import p_purchasebaramount from '../../images/product_Images/icons/select.png'
 import p_purchasebarjoincart from '../../images/product_Images/icons/joincart.png'
 import Footer from '../../component/Footer'
-import p_IntroImg from '../../images/product_Images/productintro/TeaTest.jpg'
+import p_IntroImg from '../../images/product_Images/productintro/teaIntroL1.jpg'
+import p_RightVector from '../../images/product_Images/productintro/RightVector.png'
 import p_SamesearchImg from '../../images/product_Images/product/ArcherTest.jpeg'
 import p_PopImg from '../../images/product_Images/product/ViewDraw.jpeg'
 import p_BrandImg from '../../images/product_Images/brand/Chimei.png'
@@ -72,6 +74,45 @@ function Introduce(props) {
       <div className="productIntro d-flex" key={product_id}>
         <div className="pIntroImg">
           <img src={p_IntroImg} alt="" />
+          {/* <div
+            id="carouselExampleIndicators"
+            className="carousel slide"
+            data-bs-ride="true"
+          >
+            <div className="carousel-indicators">
+              <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="0"
+                className="active"
+                aria-current="true"
+                aria-label="Slide 1"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="1"
+                aria-label="Slide 2"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="2"
+                aria-label="Slide 3"
+              ></button>
+            </div>
+            <div className="carousel-inner">
+              <div className="carousel-item active">
+                <img src={p_IntroImg} className="d-block w-100" alt="..." />
+              </div>
+              <div className="carousel-item">
+                <img src={p_IntroImg} className="d-block w-100" alt="..." />
+              </div>
+              <div className="carousel-item">
+                <img src="..." className="d-block w-100" alt="..." />
+              </div>
+            </div>
+          </div> */}
         </div>
         <div className="pIntroDetail">
           <div className="pIntroDetailcard d-flex">
@@ -220,8 +261,17 @@ function Introduce(props) {
     <>
       <Header />
       <Accordion />
-      <Container>
+      <Container className="productIntroArea" style={{ marginLeft: '400px' }}>
         {pIntroCard}
+        <Link to="#">
+          <div className="pIntroRightVector">
+            <img
+              src={p_RightVector}
+              style={{ width: '23px', height: '35px' }}
+              alt="RightVector"
+            />
+          </div>
+        </Link>
         {/* <div className="productIntro d-flex">
           <div className="pIntroImg">
             <img src={p_IntroImg}></img>
@@ -318,7 +368,10 @@ function Introduce(props) {
           </div>
         </div> */}
       </Container>
-      <Container className=" mt-5 mb-5 justify-content-center">
+      <Container
+        className=" mt-5 mb-5 justify-content-center"
+        style={{ marginLeft: '400px' }}
+      >
         <div className="mt-5">
           <h5 className="ExtraBold d-flex">看過此商品的人也搜尋了...</h5>
           <div className="row row-cols-xxl-3 row-cols-2">{pIntroCards}</div>

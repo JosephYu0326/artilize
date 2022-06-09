@@ -1,17 +1,36 @@
 @import './global.scss';
 @import './style.scss';
 
+
+.productIntroArea{
+    margin-top: 50px;
+    background-color: $LighterGrey;
+}
+
 .productIntro{
-    height: 868px;
+    height: 820px;
     overflow: scroll;
     position: relative;
+}
+
+.pIntroImg{
+    position: relative;
+    margin-top: 50px;
+    margin-left: 25px;
+}
+
+.pIntroRightVector{
+    position: absolute;
+    margin-top: -70px;
+    margin-left: 28%;
 }
 
 .pIntroDetail{
     background: $LighterGrey;
     position: relative;
-    height: 822px;
+    height: 825px;
     overflow: hidden;
+    margin-left: 10px;
 }
 
 .pIntroDetailcard{
@@ -58,8 +77,8 @@
     position: absolute;
     bottom: 0px;
     background:white;
-    right: 0px;
-    width: 660px;
+    right: 10px;
+    width: 635px;
     height: 80px;
     display:flex;
     align-items: center;
