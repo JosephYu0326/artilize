@@ -97,6 +97,9 @@ const useForm = (validate) => {
         MySwal.fire({
           title: '註冊成功',
           icon: 'success',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
         }).then(function () {
           Navigate.push('/users/login')
         })

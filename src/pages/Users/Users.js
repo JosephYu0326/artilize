@@ -258,6 +258,7 @@ function Users(props) {
           </Container>
         </section>
       </div>
+      <div className={`usersRow1 ${auth === true ? 'd-none' : ''}`}></div>
       <Footer />
     </>
   )

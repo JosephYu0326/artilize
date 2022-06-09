@@ -1,0 +1,96 @@
+@import "./global.scss";
+
+// body {
+//     font-family: 'Alatsi', sans-serif;
+//     margin: 0;
+//     overflow: hidden;
+//     background: black;
+//   }
+
+.encontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    .logo {
+        width: 50%;
+        height: 50%;
+        display: inline-block;
+
+        -webkit-mask: url(../images/ARTILIZE_logo_b.svg) no-repeat 50% 50%;
+        mask: url(../images/ARTILIZE_logo_b.svg) no-repeat 100% 100%;
+        /* -webkit-mask-size: cover; */
+        /* mask-size: cover; */
+    }
+    .logoAnimation {
+        background: #ffffff;
+        -webkit-animation: ❤ 3s infinite linear;
+        animation: ❤ 3s infinite linear;
+    }
+
+    @-webkit-keyframes ❤ {
+        0% {
+            background-color: #ffffff;
+        }
+        33% {
+            background-color: #4153bb;
+        }
+        66% {
+            background-color: #f4b942;
+        }
+    }
+
+    @keyframes ❤ {
+        0% {
+            background-color: #ffffff;
+        }
+        33% {
+            background-color: #4153bb;
+        }
+        66% {
+            background-color: #f4b942;
+        }
+    }
+
+    .arrowRight {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+        position: absolute;
+        // right: 15px;
+        // margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #ffffff;
+        color: $primary;
+        border-radius: 50%;
+        border: 0px solid;
+    }
+    .arrowRight:hover {
+        background-color: $background;
+    }
+    .arrowRight:active {
+        color: $secondary;
+        background: #ffffff;
+    }
+}
+canvas {
+    width: 100vw;
+    height: 100vh;
+}
+
+/* .title {
+    font-size: 10vw;
+    color: white;
+  } */
+
+//   .logoArtilize {
+//     background: url(../images/testpic.png) 50% 0%;
+//     background-size: cover;
+//   }

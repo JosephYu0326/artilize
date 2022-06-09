@@ -1,6 +1,6 @@
 //首頁
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { Navbar, Container, Row, Col, Card } from 'react-bootstrap'
 import logo from '../../images/logo.svg'
 import userIcon from '../../images/userIcon.svg'
@@ -58,7 +58,7 @@ import HomeMuseum10 from '../../images/homeMuseum10.svg'
 
 function Home(props) {
   const [homeMapSearch, sethomeMapSearch] = useState('')
-
+  const history = useHistory()
   return (
     <>
       {/* <div>首頁</div>
@@ -178,7 +178,12 @@ function Home(props) {
                   <button className=" btn btn-primary">
                     <h2>關鍵字搜尋</h2>
                   </button>
-                  <button className=" btn ">
+                  <button
+                    className=" btn "
+                    onClick={() => {
+                      history.push('/exhibition/mapsearch')
+                    }}
+                  >
                     <h2>地圖搜尋</h2>
                   </button>
                 </div>

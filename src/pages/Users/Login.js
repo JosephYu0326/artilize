@@ -12,6 +12,9 @@ import LoginValidate from './formComponents/LoginValidate'
 import Footer from '../../component/Footer'
 import FadeIn from 'react-fade-in'
 import ReCAPTCHA from 'react-google-recaptcha'
+import { GoogleLogin } from '@react-oauth/google'
+import { GoogleOAuthProvider } from '@react-oauth/google'
+
 function Login(props) {
   const [loginData, setLoginData] = useState({
     userAccount: '',
@@ -22,6 +25,7 @@ function Login(props) {
   const [googleAuth, setGoogleAuth] = useState(false)
   const auth = JSON.parse(localStorage.getItem('auth'))
   const history = useHistory()
+
   if (auth === true) {
     history.push('/users')
   }
@@ -172,6 +176,18 @@ function Login(props) {
                         </label>
                       </Link>
                     </div>
+                    <GoogleOAuthProvider
+                      clientId={`${process.env.REACT_APP_GOOGLE_LOGIN_KEY}`}
+                    >
+                      <GoogleLogin
+                        onSuccess={(credentialResponse) => {
+                          console.log(credentialResponse)
+                        }}
+                        onError={() => {
+                          console.log('Login Failed')
+                        }}
+                      />
+                    </GoogleOAuthProvider>
                     <ReCAPTCHA
                       className="align-self-center mb-3"
                       sitekey={`${process.env.REACT_APP_GOOGLE_RECAPTCHA_KEY}`}
