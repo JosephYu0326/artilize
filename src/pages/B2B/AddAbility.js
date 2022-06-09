@@ -237,11 +237,7 @@ function AddAbility(props) {
                 })}
               </figure>
             </div>
-            {/* <div className="col-12">
-              <figure className="figure">
-                <img className="imgwidth img-fluid" src={fileData} />
-              </figure>
-            </div> */}
+
             <div className="col-12">
               {' '}
               <div>
@@ -431,28 +427,7 @@ function AddAbility(props) {
                 <h6>請選擇館方</h6>
               </section>
             </div>
-            {/* <div className="col-12">
-              <div className="mb-3">
-                <label
-                  htmlFor="exampleFormControlInput1"
-                  className="form-label"
-                >
-                  詳細地址（道路、街名、巷弄號、樓層）
-                </label>
-                <input
-                  type="text"
-                  name="address"
-                  className="form-control"
-                  id="exampleFormControlInput1"
-                  value={address}
-                  onChange={(e) => {
-                    setAddress(e.target.value)
-                  }}
-                  placeholder="例如:中山北路二段106-2號6樓"
-                />
-                <h6>請輸入詳細活動地址</h6>
-              </div>
-            </div> */}
+
             <div className="col-12">
               {/* 活動內容介紹 */}
               <section className="mb-3">
@@ -504,7 +479,7 @@ function AddAbility(props) {
                 />
               </div>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-4">
               <div className="mb-3">
                 <label htmlFor="amount" className="form-label">
                   票券數量
@@ -522,7 +497,7 @@ function AddAbility(props) {
                 />
               </div>
             </div>
-            <div className="col-md-2">
+            <div className="col-md-3">
               <div className="mb-3">
                 <label htmlFor="price" className="form-label">
                   票券價格
@@ -540,27 +515,7 @@ function AddAbility(props) {
                 />
               </div>
             </div>
-            <div className="col-md-2">
-              <div>
-                <div className="col-12 pb-1">
-                  <h6>操作</h6>
-                </div>
-                <div className="col-12 d-flex justify-content-around  py-2">
-                  {/* <button>
-                    <FiSettings />
-                  </button>
-                  <button>
-                    <FiSettings />
-                  </button>
-                  <button>
-                    <FiSettings />
-                  </button> */}
-                  <FiSettings />
-                  <FiSettings />
-                  <FiSettings />
-                </div>
-              </div>
-            </div>
+
             <div className="col-12">
               <div className="mb-3">
                 <label htmlFor="TicketDescription" className="form-label">
@@ -586,57 +541,6 @@ function AddAbility(props) {
                 </div>
               </div>
             </div>
-            {/* <div className="col-12">
-              <div className="mb-3">
-                <label
-                  htmlFor="exampleFormControlInput1"
-                  className="form-label"
-                >
-                  開始時間
-                </label>
-                <input
-                  type="datetime-local"
-                  className="form-control"
-                  id="exampleFormControlInput1"
-                  placeholder="活動時間"
-                />
-                <h6>請輸入活動時間</h6>
-              </div>
-            </div>
-            <div className="col-12">
-              <div className="mb-3">
-                <label
-                  htmlFor="exampleFormControlInput1"
-                  className="form-label"
-                >
-                  開始時間
-                </label>
-                <input
-                  type="datetime-local"
-                  className="form-control"
-                  id="exampleFormControlInput1"
-                  placeholder="活動時間"
-                />
-                <h6>請輸入活動時間</h6>
-              </div>
-            </div> */}
-            {/* <div className="col-12">
-              <div className="d-grid gap-3">
-                <button type="button" className="btn btn-primary my-2">
-                  收合資訊
-                </button>
-              </div>
-            </div> */}
-            {/* <div className="col-md-12 ">
-              <div class="d-grid gap-2 d-md-flex justify-content-md-evenly">
-                <button class="btn btn-primary me-md-2" type="button">
-                  Button
-                </button>
-                <button class="btn btn-primary" type="button">
-                  Button
-                </button>
-              </div>
-            </div> */}
             <div className="col-md-12 d-flex justify-content-center">
               <div className="d-grid gap-2 my-2 col-md-3">
                 <button
@@ -644,7 +548,6 @@ function AddAbility(props) {
                   type="submit"
                   value="送出"
                   onClick={submitForm}
-                  // onClick={""}
                 >
                   確認
                 </button>
@@ -659,14 +562,3 @@ function AddAbility(props) {
 }
 
 export default AddAbility
-
-// const [direction2, setDirection2] = useState([])
-// const fetchData = async () => {
-//   const response = await fetch('http://localhost:5000/B2B/B2B/direction')
-//   const results = await response.json()
-//   setDirection2(results)
-//   console.log('direction2', setDirection2)
-// }
-// useEffect(() => {
-//   fetchData()
-// }, [])
