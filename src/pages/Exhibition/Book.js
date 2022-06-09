@@ -108,7 +108,6 @@ function Book(props) {
       }
     }
   }
-  // console.log(TicketKind)
 
   function buyTicket() {
     let startDay = new Date(start)
@@ -180,13 +179,13 @@ function Book(props) {
             <h3>請選擇日期、票種</h3>
             <div className="title-frame">
               <div className="museumText">{museum}</div>
-              <div>{title}</div>
+              <div className="title-text">{title}</div>
             </div>
           </div>
           <div>
             {start}~{end}
           </div>
-          <div className="d-flex align-items-center">
+          <div className="date-content-frame d-flex align-items-center">
             <Calendar setBuyTime={setBuyTime} start={start} end={end} />
 
             <div className="information">

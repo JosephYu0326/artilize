@@ -157,7 +157,7 @@ function Calendar(props) {
     <>
       <div className="calendar-frame">
         <div className="title-frame">
-          <h4 className="title-text">
+          <h4 className="title-date-text">
             {monthList[myMonth - 1] + ' ' + myYear}
           </h4>
 

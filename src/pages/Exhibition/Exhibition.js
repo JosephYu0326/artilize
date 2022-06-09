@@ -112,7 +112,7 @@ function Exhibition(props) {
 
         <main className="container-fluid">
           <div className="container">
-            <div className="row row-cols-xxl-4 row-cols-xl-3 row-cols-2">
+            <div className="row row-cols-xxl-4 row-cols-xl-3 row-cols-2 mb-3">
               <Card
                 searchData={searchData}
                 lowPrice={lowPrice}

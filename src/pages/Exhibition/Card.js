@@ -19,6 +19,7 @@ function Card(props) {
   } = props
 
   const [isOpen, setIsOpen] = useState(false)
+
   const [title, setTitle] = useState('')
   const [image, setImage] = useState('')
   const [start, setStart] = useState([])
@@ -182,6 +183,7 @@ function Card(props) {
 
     setImage(image.dataset.image)
     setTitle(e.target.dataset.title)
+
     setIsOpen(!isOpen)
 
     let temp = datas[totalLength - index].TicketName
@@ -273,6 +275,8 @@ function Card(props) {
                 type="button"
                 className="btn btn-secondary book pRegular text-mobile"
                 onClick={handleClick}
+                data-title={v.aName}
+                data-order={v.id}
               >
                 訂票
               </button>

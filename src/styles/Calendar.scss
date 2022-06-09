@@ -15,7 +15,7 @@
         margin-bottom: 10px;
     }
 
-    .title-text{
+    .title-date-text{
         margin-left: 12px;
         margin-top: 8px;
     }
@@ -97,5 +97,29 @@
                 }
             }
         }
+    }
+}
+
+
+@media (max-width:768px){
+    .calendar-frame{
+        width: 280px;
+        .btn-size {
+            font-size: 30px !important;
+        }
+    }
+    thead{
+        tr{
+            font-size: 14px;
+        }
+    }
+    tbody{
+        a{
+            font-size: 14px;
+        }
+    }
+    .selectlink{
+        text-decoration: none;
+        color: #000;
     }
 }
