@@ -5,8 +5,46 @@ import '../../styles/Pay.scss'
 import progressBar from './image/progressBar.png'
 
 import { useState } from 'react'
+const creditRule = /^\d{4}-\d{4}-\d{4}-\d{4}$/
+const emailRule =
+  /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/
 
 function Pay(props) {
+  //信用卡
+  const [credit, setCredit] = useState('')
+  const [creditTouched, setCreditTouched] = useState(false)
+  const [email, setEmail] = useState('')
+  const [emailTouched, setEmailTouched] = useState(false)
+
+  const creditIsValid = creditRule.test(credit)
+
+  const emailIsValid = emailRule.test(email)
+
+  const onChangeName = (e) => setCredit(e.target.value)
+  const onBlurName = () => setCreditTouched(true)
+  const onChangeEmail = (e) => setEmail(e.target.value)
+  const onBlurEmail = () => setEmailTouched(true)
+
+  const onFormSubmit = (e) => {
+    e.preventDefault()
+
+    if (!creditIsValid) setCreditTouched(true)
+    if (!emailIsValid) setEmailTouched(true)
+    if (!creditIsValid || !emailIsValid) return
+
+    console.log('submit success!')
+    console.log(credit, email)
+
+    // reset
+    setCredit('')
+    setCreditTouched(false)
+    setEmail('')
+    setEmailTouched(false)
+  }
+
+  const nameInputClasses = !creditIsValid && setCreditTouched ? 'invalid' : ''
+  const emailInputClasses = !emailIsValid && emailTouched ? 'invalid' : ''
+
   // select 縣市
   const [city, setCity] = useState('')
   const city1 = [
@@ -55,25 +93,29 @@ function Pay(props) {
           </div>
         </div>
         {/* form  */}
-        <form>
+        <form onSubmit={onFormSubmit}>
           <div className="container ">
             <div className="row maxwidth style={ }">
               {/* <div className=" style={ border :1px solid ;}"> */}
-              <div className="col-12 ">
+              <div className="col-12 pb-1">
                 <h1>付款方式</h1>
-                <label
-                  htmlFor="exampleFormControlInput1"
-                  className="form-label"
-                >
+                <label htmlFor="credit" className="form-label">
                   信用卡
                 </label>
                 <input
                   type="text"
-                  className="form-control"
-                  id="exampleFormControlInput1"
-                  placeholder="卡號 0000 0000 0000"
+                  className="form-control "
+                  id={nameInputClasses}
+                  placeholder="卡號 xxxx-xxxx-xxxx-xxxx"
+                  // id="credit"
+                  onChange={onChangeName}
+                  onBlur={onBlurName}
+                  value={credit}
                 />
-                <h6>請輸入正確的卡號</h6>
+                {!creditIsValid && creditTouched && (
+                  <h6 className="error-text">請輸入正確的卡號</h6>
+                )}
+                {/* <h6>請輸入正確的卡號</h6> */}
               </div>
               <div className="col-12 ">
                 {/* <label
@@ -86,7 +128,7 @@ function Pay(props) {
                   id="exampleFormControlInput1"
                   placeholder="持卡人姓名 CHUNG HSIEN YU"
                 />
-                <h6>請輸入正確的姓名</h6>
+                {/* <h6>請輸入正確的姓名</h6> */}
               </div>
               <div className="col-12 ">
                 {/* <label
@@ -99,7 +141,7 @@ function Pay(props) {
                   id="exampleFormControlInput1"
                   placeholder="有效日期 04/29"
                 />
-                <h6>請輸入有效的日期</h6>
+                {/* <h6>請輸入有效的日期</h6> */}
               </div>
               <div className="col-12  ">
                 {/* <label
@@ -112,7 +154,7 @@ function Pay(props) {
                   id="exampleFormControlInput1"
                   placeholder="信用卡後三碼"
                 />
-                <h6>請輸入正確卡號</h6>
+                {/* <h6>請輸入正確卡號</h6> */}
               </div>
               {/* </div> */}
             </div>
