@@ -1,59 +1,44 @@
 import React, { useEffect, useState } from 'react'
 import $ from 'jquery'
-// import { Server } from 'socket.io'
+import { io } from 'socket.io-client'
 import { FaRocketchat } from 'react-icons/fa'
 import { Alert, Button, Form, FormControl, InputGroup } from 'react-bootstrap'
 
 function Chat() {
-  let ws = null
-  const userId = localStorage.getItem('userId')
+  let socket = null
+  useEffect(() => {
+    const userId = localStorage.getItem('userId')
+    const msgInput = document.getElementById('msg-input')
+    if (socket) return
+    socket = io('http://localhost:1337')
+    socket.on('connect', () => {
+      displayMessage(`您已連線`)
+      $('#connect-status').text('已連線')
+    })
+    socket.on('receive-message', (userId, message) => {
+      displayMessage(`${userId}:${message}`)
+    })
+
+    $('#form1').submit((e) => {
+      e.preventDefault()
+      const message = msgInput.value
+
+      if (message === '') return
+      displayMessage(`${userId}: ${message}`)
+      console.log(`${userId}, ${message}`)
+      socket.emit('send-message', message, userId)
+      msgInput.value = ''
+    })
+  }, [])
+
+  function displayMessage(message) {
+    const div = document.createElement('div')
+    div.textContent = message
+    document.getElementById('msg-io').append(div)
+  }
   const auth = localStorage.getItem('auth')
   const [show, setShow] = useState('none')
   // const [text, setText] = useState('none')
-
-  useEffect(() => {
-    if (ws) return
-
-    ws = new WebSocket('ws://localhost:1337')
-    ws.onopen = function () {
-      console.log('Connection 開啟了...')
-      $('#connect-status').text('已連線')
-    }
-    ws.onclose = function () {
-      console.log('Connection 關閉了...')
-      $('#connect-status').text('離線中')
-    }
-
-    ws.onmessage = function (event) {
-      //ws.emit('login', { id: userId })
-      //let msg = { text: event.data, id: userId }
-      let msg = event.data
-      // console.log(event)
-      $('#msg-io').append(`<h6>${msg}</h6>`)
-      var msgIoDiv = $('#msg-io')[0]
-      msgIoDiv.scrollTo(0, msgIoDiv.scrollHeight)
-      //element.scrollTo(x-coord, y-coord)
-      //The scrollTo() method of the Element interface scrolls to a particular set of coordinates inside a given element.
-      //Element.scrollHeight是衡量元素包含因為overflow而沒顯示在螢幕上的內容高度的唯讀屬性.
-    }
-
-    $('#form1').submit(function () {
-      ws.send($('#msg-input').val())
-      $('#msg-input').val('')
-      return false
-    })
-    // const sendMessage = () => {
-    //   const message = document.querySelector('#msg-input').value
-    //   const sendMessageRequest = {
-    //     message,
-    //     userId,
-    //   }
-    //   console.log(userId);
-    //   ws.emit('ClientToServerMsg', sendMessageRequest)
-    //   document.querySelector('#msg-input').value = ''
-    //   console.log('已發送傳送訊息事件按鈕----', sendMessageRequest)
-    // }
-  }, [])
 
   function showChatRoom() {
     if (show === 'none') {
@@ -65,7 +50,6 @@ function Chat() {
   }
   function closeChatRoom() {
     setShow('none')
-    ws.close(1000, '正常斷線')
   }
 
   return (
