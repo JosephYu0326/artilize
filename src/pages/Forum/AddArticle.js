@@ -11,6 +11,7 @@ import Footer from '../../component/Footer'
 import BackBtn from '../../component/BackBtn'
 
 function AddArticle(props) {
+  const userId = localStorage.getItem('userId')
   const history = useHistory()
   const goBack = () => {
     history.goBack()
@@ -39,7 +40,7 @@ function AddArticle(props) {
     title: title,
     content: content,
     category: ChioseCategory,
-    userid: props.id,
+    userid: userId,
   }
   // 新增文章
   function postArticle(e) {
