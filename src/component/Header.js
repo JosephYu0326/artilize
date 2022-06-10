@@ -21,12 +21,12 @@ function Header(props) {
   )
 
   let cartNum = parseInt(storage['totalNum'] ? storage['totalNum'] : 0)
-  window.addEventListener('storage', doFirst)
 
-  function doFirst() {
-    console.log(storage.getItem('totalNum'))
-  }
   const [cartCount, setCartCount] = useState(cartNum)
+
+  setInterval(() => {
+    setCartCount(storage.getItem('totalNum'))
+  }, 1000)
 
   //把keyword送回要搜尋(執行API)的頁面
   useEffect(() => {

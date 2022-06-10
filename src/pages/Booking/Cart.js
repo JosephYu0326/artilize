@@ -1,5 +1,5 @@
 //購物車
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useLayoutEffect } from 'react'
 import { Link } from 'react-router-dom'
 import '../../styles/Cart.scss'
 import step1 from './image/step.png'
@@ -20,22 +20,40 @@ import _ from 'lodash'
 
 let storage = localStorage
 let userId = parseInt(storage.getItem('userId'))
+var jsonData = []
+
+function doFirst() {
+  if (storage['addItemList'] == null) {
+    storage['addItemList'] = ''
+  }
+
+  let temp = storage.getItem('addItemList').split(',')
+
+  for (let i = 0; i < temp.length; i++) {
+    if (temp[i] === '') continue
+    jsonData.push(JSON.parse(storage.getItem(temp[i])))
+  }
+}
+
+window.addEventListener('load', doFirst())
 
 function Cart(props) {
-  const [exhibitionInorder, setExhibitionInorder] = useState(shoppingListEx)
+  useEffect(() => {
+    jsonData = []
+    doFirst()
+    setExhibitionInorder(jsonData)
+  }, [])
+
+  const [exhibitionInorder, setExhibitionInorder] = useState(jsonData)
   const [productInorder, setProductInorder] = useState(shoppingListPro)
   const [whichCoupon, setWhichCoupon] = useState([])
 
   const [couponCode, setCouponCode] = useState('')
   const [couponPrice, setCouponPrice] = useState(0)
 
-  useEffect(() => {
-    setExhibitionInorder(shoppingListEx)
-  }, [shoppingListEx])
-
   // 設定展覽數
   const setExCount = (newCount, i) => {
-    const newExhibitionInorder = [...shoppingListEx]
+    const newExhibitionInorder = [...exhibitionInorder]
     newExhibitionInorder[i].count = newCount < 1 ? 1 : newCount
     setExhibitionInorder(newExhibitionInorder)
   }

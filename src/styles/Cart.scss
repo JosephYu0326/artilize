@@ -98,7 +98,7 @@
     .exhibition-img{
         width: 100%;
         height: 100%;
-        object-fit: fill;
+        object-fit: contain;
     }
 
     .cart-card-left{
@@ -301,6 +301,7 @@
         transform: translateX(-150px);
     }
     .cart-content-frame{
+        width: 350px;
         .selectExhibition{
             margin-left: 10px;
             margin-right: 10px;
@@ -315,6 +316,8 @@
         align-items: center;
         font-size: 12px;
         .exhibition-img{
+            margin-top: 10px;
+            margin-bottom: 5px;
             object-fit: cover;
         }
     }
@@ -322,7 +325,9 @@
         display: none;
     }
     .cart-card-left{
+        justify-content: center !important;
         width: auto !important;
+        margin-left: 5px !important;
         .cart-content{
             padding: 5px;
             font-size: 12px;
@@ -341,7 +346,15 @@
     .cart-card-right{
         width: auto !important;
         font-size: 14px;
-        
+        .ticket-kind{
+            width: 100px !important;
+        }
+        .count{
+            width: 100px !important;
+        }
+        .total{
+            width: 100px !important;
+        }
     }
     .bottom-frame{
         margin-top: 20px !important;
@@ -352,6 +365,27 @@
     }
     .input-frame input{
         width: 100% !important;
+    }
+
+    .coupon-window{
+        width: 300px;
+        left: 50%;
+        transform: translateX(-150px);
+        .coupon{
+            justify-content: center;
+        }
+        .coupon-card-frame{
+            padding-left: auto;
+            padding-right: 1px;
+        }
+        .couponMsg{
+            flex-grow: 1;
+        }
+        .couponInfo{
+            flex-direction: column;
+            align-items: center;
+
+        }
     }
 }
 

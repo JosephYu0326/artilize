@@ -34,7 +34,7 @@ function CartItemEx(props) {
           <div className="exhibition-img-frame">
             <img
               src={`${process.env.REACT_APP_API_URL}/stylesheets/images/${image}`}
-              className="exhibition-img mx-3"
+              className="exhibition-img mx-2"
               alt={image}
             />
           </div>
