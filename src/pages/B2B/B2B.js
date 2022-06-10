@@ -279,9 +279,7 @@ function B2B(props) {
                         handleDelete={() => {
                           handleDeleteEx(v.id)
                         }}
-                        // handleRRR={() => {
-                        //   handleRRREX(v.id)
-                        // }}
+                        handleRRR={v.id}
                         setExCount={(newCount) => {
                           setExCount(newCount, i)
                         }}

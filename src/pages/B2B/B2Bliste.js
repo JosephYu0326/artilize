@@ -18,14 +18,14 @@ function B2Bliste(props) {
           />
         </div>
         <div className="col-md-3 col-sm-12">
-          <div className="text-truncate">{aName}</div>
+          <div className="text-truncate">活動名稱:{aName}</div>
           <div>開始時間:{start}</div>
           <div>結束時間:{end}</div>
           <div>建立時間:{time}</div>
         </div>
         <div className="col-md-2 col-sm-12">
-          <button className="trash-btn" onClick={handleRRR}>
-            編輯
+          <button className="trash-btn">
+            <Link to={`/b2b/edit/${handleRRR}`}>編輯</Link>
           </button>
         </div>
         <div className="col-md-2 col-sm-12">

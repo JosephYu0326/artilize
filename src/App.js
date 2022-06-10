@@ -30,11 +30,15 @@ import NotFoundPage from './pages/Home/NotFoundPage'
 import B2B from './pages/B2B/B2B'
 import AddAbility from './pages/B2B/AddAbility'
 import Style from './pages/Style'
+import EditAbility from './pages/B2B/EditAbility'
 
 function App() {
   return (
     <Router>
       <Switch>
+        <Route path="/b2b/edit/:id">
+          <EditAbility />
+        </Route>
         <Route path="/b2b/addability">
           <AddAbility />
         </Route>
