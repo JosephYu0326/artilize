@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 import { useParams } from 'react-router-dom'
 import Book from '../Exhibition/Book'
 import { Placeholder } from 'rsuite/esm/Placeholder/Placeholder'
+import withReactContent from 'sweetalert2-react-content'
+import Swal from 'sweetalert2'
 
 function Card(props) {
   const {
@@ -33,6 +35,9 @@ function Card(props) {
   const params = useParams()
   const [datas, setDatas] = useState([])
   const [datas1, setDatas1] = useState([])
+
+  const MySwal = withReactContent(Swal)
+  const history = useHistory()
 
   const intParams = parseInt(params.kid)
 
@@ -165,34 +170,47 @@ function Card(props) {
   })
 
   function handleClick(e) {
-    let index = parseInt(e.target.dataset.order)
-    let totalLength = document.querySelectorAll('.imgframe').length
+    const auth = JSON.parse(localStorage.getItem('auth'))
+    if (auth !== true) {
+      MySwal.fire({
+        icon: 'warning',
+        title: '您尚未登入，將跳轉至登入畫面',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+      }).then(() => {
+        history.push('/users/login')
+      })
+    } else {
+      let index = parseInt(e.target.dataset.order)
+      let totalLength = document.querySelectorAll('.imgframe').length
 
-    let image = document.querySelectorAll('.imgframe')[totalLength - index]
-    let date =
-      document.querySelectorAll('.dateText')[totalLength - index].innerText
+      let image = document.querySelectorAll('.imgframe')[totalLength - index]
+      let date =
+        document.querySelectorAll('.dateText')[totalLength - index].innerText
 
-    let museum =
-      document.querySelectorAll('.museumText')[totalLength - index].innerText
+      let museum =
+        document.querySelectorAll('.museumText')[totalLength - index].innerText
 
-    setMuseum(museum)
+      setMuseum(museum)
 
-    let Day = date.split('\n')
-    setStart(Day[0])
-    setEnd(Day[1])
+      let Day = date.split('\n')
+      setStart(Day[0])
+      setEnd(Day[1])
 
-    setImage(image.dataset.image)
-    setTitle(e.target.dataset.title)
+      setImage(image.dataset.image)
+      setTitle(e.target.dataset.title)
 
-    setIsOpen(!isOpen)
+      setIsOpen(!isOpen)
 
-    let temp = datas[totalLength - index].TicketName
-    let Ticket = temp.split(',')
-    setTicketKind(Ticket)
+      let temp = datas[totalLength - index].TicketName
+      let Ticket = temp.split(',')
+      setTicketKind(Ticket)
 
-    let temp2 = datas[totalLength - index].TicketPrice
-    let Price = temp2.split(',')
-    setTicketPrice(Price)
+      let temp2 = datas[totalLength - index].TicketPrice
+      let Price = temp2.split(',')
+      setTicketPrice(Price)
+    }
   }
 
   useEffect(() => {

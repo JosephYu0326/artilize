@@ -1,13 +1,20 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect, useHistory } from 'react'
+import { Link } from 'react-router-dom'
 import { shoppingListEx } from './Cart-ex'
+// import { useNavigate } from 'react-router-dom'
 
 let storage = localStorage
 let userId = parseInt(storage.getItem('userId'))
 
 function Summary(props) {
-  const { totalPriceEx, totalPricePro, couponPrice, couponCode } = props
-  const [exhibitionInorder, setExhibitionInorder] = useState(shoppingListEx)
+  const {
+    totalPriceEx,
+    totalPricePro,
+    couponPrice,
+    couponCode,
+    exhibitionInorder,
+  } = props
 
   const body = exhibitionInorder.map((v, i) => {
     return {
@@ -20,7 +27,7 @@ function Summary(props) {
       cartExCount: v.count,
       cartExCategory: v.TicketKind,
       cartExMuseum: v.museum,
-      user_id: userId,
+      user_id: v.userID,
     }
   })
 
@@ -55,6 +62,7 @@ function Summary(props) {
     }
 
     storage.clear()
+    window.location.href = '/booking/pay'
   }
 
   return (
@@ -82,12 +90,13 @@ function Summary(props) {
               : totalPricePro - couponPrice}
           </div>
         </div>
-        <button
+        <Link
+          to="/booking/pay"
           className="btn btn-primary rounded-pill next-step-btn"
           onClick={finishedCart}
         >
           下一步
-        </button>
+        </Link>
       </div>
     </>
   )

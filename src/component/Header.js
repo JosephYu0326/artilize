@@ -11,6 +11,8 @@ import '../styles/SearchBar.scss'
 
 let storage = localStorage
 
+let cartNum = parseInt(storage['totalNum'] ? storage['totalNum'] : 0)
+
 function Header(props) {
   //從SearchBar拿回keyword
   const [keyword, setKeyWord] = useState('')
@@ -19,9 +21,6 @@ function Header(props) {
   const [collapseSearch, setCollapseSearch] = useState(
     'navbar-collapse collapse'
   )
-
-  let cartNum = parseInt(storage['totalNum'] ? storage['totalNum'] : 0)
-
   const [cartCount, setCartCount] = useState(cartNum)
 
   setInterval(() => {
@@ -106,13 +105,12 @@ function Header(props) {
                   <button
                     type="button"
                     className="btn btn-primary position-relative"
+                    onClick={() => (window.location.href = '/booking/cart')}
                   >
-                    <Link to="/booking/cart">
-                      <AiOutlineShoppingCart className="cart-icon" />
-                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        {cartCount}
-                      </span>
-                    </Link>
+                    <AiOutlineShoppingCart className="cart-icon" />
+                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                      {cartCount}
+                    </span>
                   </button>
 
                   <button className="align-items-center d-flex pb-2">

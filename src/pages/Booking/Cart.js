@@ -340,6 +340,7 @@ function Cart(props) {
           totalPricePro={totalPricePro()}
           couponPrice={couponPrice}
           couponCode={couponCode}
+          exhibitionInorder={exhibitionInorder}
         />
       </div>
       <Footer />
