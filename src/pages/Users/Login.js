@@ -1,5 +1,5 @@
 //會員登入
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import '../../styles/users.scss'
 import Header from '../../component/Header'
@@ -32,8 +32,10 @@ function Login(props) {
     name: '',
     picture: '',
     sub: '',
+    account: '',
   })
   const history = useHistory()
+  const isMounted = useRef(false)
 
   if (auth === true) {
     history.push('/users')
@@ -52,7 +54,10 @@ function Login(props) {
       googleAuth === true
     ) {
       sendLoginData()
-    } else if (googleAuth === false) {
+    } else if (
+      JSON.stringify(LoginValidate(loginData)) === '{}' &&
+      googleAuth === false
+    ) {
       MySwal.fire({
         icon: 'error',
         title: '請驗證是否不是機器人',
@@ -74,6 +79,7 @@ function Login(props) {
         localStorage.setItem('userId', result.userId)
         localStorage.setItem('auth', true)
         localStorage.setItem('userAvatar', result.userAvatar)
+        localStorage.setItem('userAccount', result.userAccount)
         MySwal.fire({
           icon: 'success',
           title: '歡迎登入Artilize',
@@ -121,15 +127,34 @@ function Login(props) {
       )
       const resultGoogle = await responseGoogle.json()
       console.log(resultGoogle)
+      console.log(resultGoogle.userId)
+      if (resultGoogle.ok === true) {
+        localStorage.setItem('userId', resultGoogle.userId)
+        localStorage.setItem('auth', true)
+        localStorage.setItem('userAvatar', resultGoogle.userAvatar)
+        MySwal.fire({
+          icon: 'success',
+          title: '歡迎登入Artilize',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+        }).then(() => {
+          history.push('/users')
+        })
+      }
     } catch (error) {
       console.log(error)
     }
   }
-  if (sub !== '') {
-    sendGoogleLogIn()
-  }
-  // useEffect(() => {
-  // }, [googleLogin])
+  useEffect(() => {
+    if (isMounted.current) {
+      if (sub !== '') {
+        sendGoogleLogIn()
+      }
+    } else {
+      isMounted.current = true
+    }
+  }, [googleLogin])
 
   return (
     <>
@@ -225,7 +250,8 @@ function Login(props) {
                             email: ab.email,
                             name: ab.name,
                             picture: ab.picture,
-                            sub: ab.sub,
+                            sub: Math.floor(ab.sub * 0.0000000000001),
+                            account: `Google_${ab.email.split('@')[0]}`,
                           })
                         }}
                         onError={() => {

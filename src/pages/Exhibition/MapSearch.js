@@ -127,7 +127,7 @@ function MapSearch(props) {
               }`}
             >
               <div className="row g-0">
-                <div className="col-md-3">
+                <div className="col-md-3 col-sm-12 mapImg">
                   <img
                     src="https://picsum.photos/106/139"
                     className="img-fluid rounded-start"
@@ -154,7 +154,7 @@ function MapSearch(props) {
           </div>
         )
       })}
-      <div style={{ height: '61vh' }}></div>
+      <div className="displayN" style={{ height: '61vh' }}></div>
     </div>
   )
   const region = ['北部', '中部', '南部', '東部', '離島']

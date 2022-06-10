@@ -138,10 +138,7 @@ function Users(props) {
                   </div>
                 </FadeIn>
                 <FadeIn>
-                  <div
-                    className=" BorderRadius usersBackground p-5  d-flex flex-column"
-                    style={{ minWidth: '568px' }}
-                  >
+                  <div className=" BorderRadius usersBackground p-5  d-flex flex-column usersData">
                     <div style={{ paddingLeft: '12px' }}>
                       <h4 className="ph_title row ExtraBold text-primary mb-4">
                         會員資料

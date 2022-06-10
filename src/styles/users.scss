@@ -19,3 +19,15 @@
     display: flex;
     justify-content: center;
 }
+.usersData {
+    min-width: 568px !important;
+}
+
+@media (max-width: 570px) {
+    .usersData {
+        min-width: 368px !important;
+    }
+    .usersRow {
+        height: 100vh;
+    }
+}

@@ -150,7 +150,7 @@ function Header(props) {
                       <figure className="figure roundedCircle">
                         <img
                           alt=""
-                          src={` ${process.env.REACT_APP_API_URL}/images/${userAvatar}`}
+                          src={`${process.env.REACT_APP_API_URL}/images/${userAvatar}`}
                           width="42"
                           height="42"
                           style={{

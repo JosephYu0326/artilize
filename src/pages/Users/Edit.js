@@ -5,7 +5,7 @@ import '../../styles/users.scss'
 import Header from '../../component/Header'
 import AsideBar from '../../component/AsideBar.js'
 import { Container, Row, Image } from 'react-bootstrap'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import logo from '../../images/logo.png'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -30,7 +30,7 @@ function Edit(props) {
   const userId = JSON.parse(localStorage.getItem('userId'))
   const auth = JSON.parse(localStorage.getItem('auth'))
   const [data, setData] = useState([])
-
+  const isMounted = useRef(false)
   const fetchUserData = async () => {
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}/users?userId=${userId}`
@@ -147,7 +147,11 @@ function Edit(props) {
   }
   console.log(imageName)
   useEffect(() => {
-    sendImage()
+    if (isMounted.current) {
+      sendImage()
+    } else {
+      isMounted.current = true
+    }
   }, [fileName])
   const imageUrl = `${process.env.REACT_APP_API_URL}/images/${avatar}`
   const imageUrl1 = `${process.env.REACT_APP_API_URL}/images/${imageName}`
@@ -158,6 +162,7 @@ function Edit(props) {
       setGoogleAuth(true)
     }
   }
+  console.log(birthday)
   return (
     <>
       <Header />
@@ -207,10 +212,7 @@ function Edit(props) {
                   onSubmit={handleSubmit}
                   noValidate
                 >
-                  <div
-                    className=" BorderRadius usersBackground pt-5 ps-5 pe-5 pb-3 d-flex flex-column"
-                    style={{ minWidth: '568px' }}
-                  >
+                  <div className=" BorderRadius usersBackground pt-5 ps-5 pe-5 pb-3 d-flex flex-column usersData usersData1">
                     <div style={{ paddingLeft: '12px' }}>
                       <h4 className="ph_title row ExtraBold text-primary mb-4">
                         編輯會員資料
@@ -328,7 +330,7 @@ function Edit(props) {
                         className="form-control BorderRadius "
                         //id="exampleFormControlInput1"
                         placeholder=""
-                        value={formDate(birthday)}
+                        value={birthday === null ? '' : formDate(birthday)}
                         name="userBirthday"
                         onChange={(e) => {
                           setBirthday(e.target.value)
