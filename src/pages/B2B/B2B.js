@@ -143,24 +143,38 @@ function B2B(props) {
   const handleDeleteEx = (id) => {
     alert('確定要刪除該筆資料嗎？')
     //fetch
-    // extendAbilityEx(data1)
-    const newExhibitionInorder = [...data1].filter((v, i) => {
-      console.log('v.id', v.id)
-      // console.log('i', i)
-      // fetch('http://localhost:5000/B2B/B2B/' + v.id, {
-      //   method: 'delete',
-      // })
-      //   .then((res) => res.text())
-      //   .then((text) => console.log('刪除成功...' + text))
-      // Swal.fire('刪除成功', '成功刪除活動', 'success')
-      return v.id !== id
+    extendAbilityEx(data1)
+
+    fetch('http://localhost:5000/B2B/B2B/' + id, {
+      method: 'delete',
     })
-    // .catch((err) => {
-    //   console.error(err)
-    //   alert('删除用户失败')
-    // })
-    setDate1(newExhibitionInorder)
+      .then((res) => res.text())
+      .then((text) => console.log('刪除成功...' + text))
+      .then(() => {
+        Swal.fire('刪除成功', '成功刪除活動', 'success')
+        const newExhibitionInorder = [...data1].filter((v, i) => {
+          console.log('v.id', v.id)
+        })
+        setDate1(newExhibitionInorder)
+      })
   }
+  //修改編輯
+  // const handleRRREX = (id) => {
+  //   alert('id')
+  //   handleRRREX(data1)
+  //   fetch('http://localhost:5000/B2B/B2B/' + id, {
+  //     method: 'put',
+  //   })
+  //     .then((res) => res.text())
+  //     .then((text) => console.log('刪除成功...' + text))
+  //     .then(() => {
+  //       Swal.fire('刪除成功', '成功刪除活動', 'success')
+  //       const newExhibitionInorder = [...data1].filter((v, i) => {
+  //         console.log('v.id', v.id)
+  //       })
+  //       setDate1(newExhibitionInorder)
+  //     })
+  // }
   return (
     <>
       <Container>
@@ -206,6 +220,9 @@ function B2B(props) {
                           handleDelete={() => {
                             handleDeleteEx(v.id)
                           }}
+                          // handleRRR={() => {
+                          //   handleRRREX(v.id)
+                          // }}
                           setExCount={(newCount) => {
                             setExCount(newCount, i)
                           }}
@@ -235,6 +252,9 @@ function B2B(props) {
                           handleDelete={() => {
                             handleDeleteEx(v.id)
                           }}
+                          // handleRRR={() => {
+                          //   handleRRREX(v.id)
+                          // }}
                           setExCount={(newCount) => {
                             setExCount(newCount, i)
                           }}
@@ -259,6 +279,9 @@ function B2B(props) {
                         handleDelete={() => {
                           handleDeleteEx(v.id)
                         }}
+                        // handleRRR={() => {
+                        //   handleRRREX(v.id)
+                        // }}
                         setExCount={(newCount) => {
                           setExCount(newCount, i)
                         }}

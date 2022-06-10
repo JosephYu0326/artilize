@@ -176,7 +176,21 @@ function AddAbility(props) {
       })
         .then((res) => res.text())
         .then((text) => console.log('上傳成功...' + text))
-      Swal.fire('成功', '成功建立上傳活動', 'success')
+      // Swal.fire('成功', '成功建立上傳活動', 'success')
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Swal.fire('Deleted!', 'Your file has been deleted.', 'success')
+          history.push('/b2b')
+        }
+      })
     } else {
       Swal.fire({
         icon: 'error',
@@ -553,7 +567,6 @@ function AddAbility(props) {
                   type="submit"
                   value="送出"
                   onClick={submitForm}
-
                   // onClick={() => {
                   //   submitForm()
 
