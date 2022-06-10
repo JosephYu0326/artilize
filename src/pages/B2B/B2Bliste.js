@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 // import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 function B2Bliste(props) {
-  console.log('pppppppppppppppppppppppppp', props)
   const { id, aName, pic1, pic2, start, end, time, handleDelete } = props
   return (
     <>
@@ -18,12 +17,12 @@ function B2Bliste(props) {
           />
         </div>
         <div className="col-md-3 col-sm-12">
-          <div>{aName}</div>
+          <div className="text-truncate">{aName}</div>
           <div>開始時間:{start}</div>
           <div>結束時間:{end}</div>
           <div>建立時間:{time}</div>
         </div>
-        <div className="col-md-2 col-sm-12">編輯</div>
+        <div className="col-md-2 col-sm-12"></div>
         <div className="col-md-2 col-sm-12">
           <button className="trash-btn" onClick={handleDelete}>
             刪除

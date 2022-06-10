@@ -93,7 +93,7 @@ function Pay(props) {
           </div>
         </div>
         {/* form  */}
-        <form onSubmit={onFormSubmit}>
+        <form onSubmit={onFormSubmit} novalidate>
           <div className="container ">
             <div className="row maxwidth style={ }">
               {/* <div className=" style={ border :1px solid ;}"> */}
@@ -115,7 +115,7 @@ function Pay(props) {
                 {!creditIsValid && creditTouched && (
                   <h6 className="error-text">請輸入正確的卡號</h6>
                 )}
-                {/* <h6>請輸入正確的卡號</h6> */}
+                <h6>請輸入正確的卡號</h6>
               </div>
               <div className="col-12 ">
                 {/* <label
@@ -127,8 +127,10 @@ function Pay(props) {
                   className="form-control"
                   id="exampleFormControlInput1"
                   placeholder="持卡人姓名 CHUNG HSIEN YU"
+                  required
                 />
-                {/* <h6>請輸入正確的姓名</h6> */}
+                <div class="invalid-feedback">Please provide a valid city.</div>
+                <h6>請輸入正確的姓名</h6>
               </div>
               <div className="col-12 ">
                 {/* <label
@@ -141,7 +143,7 @@ function Pay(props) {
                   id="exampleFormControlInput1"
                   placeholder="有效日期 04/29"
                 />
-                {/* <h6>請輸入有效的日期</h6> */}
+                <h6>請輸入有效的日期</h6>
               </div>
               <div className="col-12  ">
                 {/* <label
@@ -154,7 +156,7 @@ function Pay(props) {
                   id="exampleFormControlInput1"
                   placeholder="信用卡後三碼"
                 />
-                {/* <h6>請輸入正確卡號</h6> */}
+                <h6>請輸入正確卡號</h6>
               </div>
               {/* </div> */}
             </div>

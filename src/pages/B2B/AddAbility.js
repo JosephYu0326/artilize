@@ -176,6 +176,7 @@ function AddAbility(props) {
       })
         .then((res) => res.text())
         .then((text) => console.log('上傳成功...' + text))
+      Swal.fire('成功', '成功建立上傳活動', 'success')
     } else {
       Swal.fire({
         icon: 'error',
@@ -456,11 +457,9 @@ function AddAbility(props) {
                   }}
                 />
                 <div className="row ">
-                  <div className="col-6">
-                    <h6>請輸入50個字以上</h6>
-                  </div>
+                  <div className="col-6">{/* <h6>請輸入50個字以上</h6> */}</div>
                   <div className="col-6 text-end">
-                    <h6>顯示字數</h6>
+                    {/* <h6>顯示字數</h6> */}
                   </div>
                 </div>
               </section>
@@ -540,11 +539,9 @@ function AddAbility(props) {
                   }}
                 />
                 <div className="row ">
-                  <div className="col-6">
-                    <h6>請輸入50個字以上</h6>
-                  </div>
+                  <div className="col-6">{/* <h6>請輸入50個字以上</h6> */}</div>
                   <div className="col-6 text-end">
-                    <h6>顯示字數</h6>
+                    {/* <h6>顯示字數</h6> */}
                   </div>
                 </div>
               </div>
@@ -556,6 +553,7 @@ function AddAbility(props) {
                   type="submit"
                   value="送出"
                   onClick={submitForm}
+
                   // onClick={() => {
                   //   submitForm()
 

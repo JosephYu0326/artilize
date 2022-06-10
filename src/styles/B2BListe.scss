@@ -5,3 +5,9 @@
 .imgListe {
     width: 150px;
 }
+
+.ellipsis1 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }

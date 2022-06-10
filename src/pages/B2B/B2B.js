@@ -11,6 +11,9 @@ import B2Bliste from './B2Bliste'
 import B2BStartCount from './B2BStartCount'
 import B2BEndCount from './B2BEndCount'
 
+//sweetalert2
+import Swal from 'sweetalert2'
+
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -53,10 +56,11 @@ import '../../styles/B2BListe.scss'
 //   })
 // }
 function B2B(props) {
+  //react boostrap
   const [key, setKey] = useState('start')
   //
   const [data1, setDate1] = useState([])
-  const [data, setDate] = useState([])
+  // const [data, setDate] = useState([])
   const fetchData = async () => {
     const response = await fetch('http://localhost:5000/B2B/B2B')
     const results = await response.json()
@@ -68,8 +72,6 @@ function B2B(props) {
     fetchData()
   }, [])
 
-  // console.log('data', data)
-  // console.log('data1', data1) //(9) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
   const extendAbilityEx = (array) => {
     return array.map((v, i) => {
       let expire = true
@@ -134,16 +136,29 @@ function B2B(props) {
   }
   // console.log(totalNumberEx())
   const [x, y, z] = totalNumberEx()
-  console.log('x', x)
-  console.log('y', y)
-  console.log('z', z)
+  // console.log('x', x)
+  // console.log('y', y)
+  // console.log('z', z)
   // 展覽刪除
   const handleDeleteEx = (id) => {
     alert('確定要刪除該筆資料嗎？')
     //fetch
-    const newExhibitionInorder = [...extendAbilityEx(data1)].filter((v, i) => {
+    // extendAbilityEx(data1)
+    const newExhibitionInorder = [...data1].filter((v, i) => {
+      console.log('v.id', v.id)
+      // console.log('i', i)
+      // fetch('http://localhost:5000/B2B/B2B/' + v.id, {
+      //   method: 'delete',
+      // })
+      //   .then((res) => res.text())
+      //   .then((text) => console.log('刪除成功...' + text))
+      // Swal.fire('刪除成功', '成功刪除活動', 'success')
       return v.id !== id
     })
+    // .catch((err) => {
+    //   console.error(err)
+    //   alert('删除用户失败')
+    // })
     setDate1(newExhibitionInorder)
   }
   return (
