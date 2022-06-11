@@ -3,7 +3,9 @@
 
 
 .imgListe {
-    width: 150px;
+    width: 250px;
+    // height: 200px;
+    border-radius: 20px;
 }
 
 .ellipsis1 {
@@ -11,3 +13,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
   }
+  
+.bobo{
+    border-radius: 20px;
+}
