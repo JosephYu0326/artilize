@@ -91,6 +91,7 @@ function Users(props) {
       if (result.isConfirmed) {
         localStorage.removeItem('userId')
         localStorage.removeItem('userAvatar')
+        localStorage.removeItem('userAccount')
         localStorage.setItem('auth', false)
         MySwal.fire({
           title: '登出成功',
@@ -119,7 +120,7 @@ function Users(props) {
       <div className="bg-background">
         <section className={`${!auth ? 'd-none' : ''}`}>
           <Container>
-            <Row className="d-flex flex-column justify-content-center align-items-center  ">
+            <Row className="d-flex flex-column justify-content-center align-items-center usersliquid ">
               <form className="d-flex flex-column justify-content-center align-items-center">
                 <FadeIn>
                   <div>

@@ -9,6 +9,7 @@ import UserAccountValidate from './SignUpValidate/UserAccountValidate'
 import userEmailValidate from './SignUpValidate/userEmailValidate'
 import userPasswordValidate from './SignUpValidate/userPasswordValidate'
 import ReCAPTCHA from 'react-google-recaptcha'
+import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 function SignUpForm({ submitForm }) {
   const {
@@ -28,6 +29,16 @@ function SignUpForm({ submitForm }) {
     userEmailValidate,
     userPasswordValidate
   )
+  const [hidepassword, setHidePassword] = useState(false)
+  const [hidepassword1, setHidePassword1] = useState(false)
+  const eye = <FaEye />
+  const closeEye = <FaEyeSlash />
+  const showPassword = (e) => {
+    setHidePassword(!hidepassword)
+  }
+  const showPassword1 = (e) => {
+    setHidePassword1(!hidepassword1)
+  }
 
   return (
     <>
@@ -83,17 +94,30 @@ function SignUpForm({ submitForm }) {
           </div>
         </div>
         <div id="input-text" className="usersContentcolor Regular">
-          <input
-            type="password"
-            className={`form-control  BorderRadius ${
-              errors.userPassword ? `is-invalid` : ``
-            } `}
-            name="userPassword"
-            placeholder="密碼"
-            value={addUserData.userPassword}
-            onChange={handleChange}
-            onBlur={userPasswordBlur}
-          />
+          <div className="d-flex">
+            <input
+              type={`${hidepassword === false ? 'password' : 'text'}`}
+              className={`form-control  BorderRadius ${
+                errors.userPassword ? `is-invalid` : ``
+              } `}
+              name="userPassword"
+              placeholder="密碼"
+              value={addUserData.userPassword}
+              onChange={handleChange}
+              onBlur={userPasswordBlur}
+            />
+            <i
+              onClick={showPassword}
+              style={{
+                marginLeft: -50,
+                marginTop: 6,
+                color: 'rgb(65,83,187)',
+                cursor: 'pointer',
+              }}
+            >
+              {hidepassword === false ? closeEye : eye}
+            </i>
+          </div>
           <div
             id="emailHelp"
             className="form-text text-secondary mt-1 mb-1"
@@ -103,17 +127,30 @@ function SignUpForm({ submitForm }) {
           </div>
         </div>
         <div id="input-text" className=" usersContentcolor Regular">
-          <input
-            type="password"
-            className={`form-control BorderRadius ${
-              errors.userConfirmPassword ? `is-invalid` : ``
-            } `}
-            name="userConfirmPassword"
-            placeholder="請再次輸入密碼"
-            value={addUserData.userConfirmPassword}
-            onChange={handleChange}
-            onBlur={userConfirmPasswordBlur}
-          />
+          <div className="d-flex">
+            <input
+              type={`${hidepassword1 === false ? 'password' : 'text'}`}
+              className={`form-control BorderRadius ${
+                errors.userConfirmPassword ? `is-invalid` : ``
+              } `}
+              name="userConfirmPassword"
+              placeholder="請再次輸入密碼"
+              value={addUserData.userConfirmPassword}
+              onChange={handleChange}
+              onBlur={userConfirmPasswordBlur}
+            />
+            <i
+              onClick={showPassword1}
+              style={{
+                marginLeft: -50,
+                marginTop: 6,
+                color: 'rgb(65,83,187)',
+                cursor: 'pointer',
+              }}
+            >
+              {hidepassword1 === false ? closeEye : eye}
+            </i>
+          </div>
           <div
             id="emailHelp"
             className="form-text text-secondary mt-1 mb-1"

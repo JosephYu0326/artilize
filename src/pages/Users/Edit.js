@@ -169,7 +169,7 @@ function Edit(props) {
       <div className="bg-background">
         <section className={`${!auth ? 'd-none' : ''}`}>
           <Container>
-            <Row className="d-flex justify-content-center align-items-center usersRow">
+            <Row className="d-flex justify-content-center align-items-center   usersliquid">
               <FadeIn>
                 <div className="d-flex flex-column justify-content-center align-items-center">
                   <figure className="figure roundedCircle ">

@@ -96,7 +96,7 @@ function ForgetPassword(props) {
         <FadeIn>
           <section>
             <Container>
-              <Row className="d-flex flex-column justify-content-center align-items-center usersRow">
+              <Row className="d-flex flex-column justify-content-center align-items-center usersRow usersliquid">
                 <div
                   className=" BorderRadius usersBackground p-5"
                   style={{ maxWidth: '568px', minWidth: '390px' }}

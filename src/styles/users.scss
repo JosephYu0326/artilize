@@ -3,6 +3,9 @@
 .usersRow {
     height: calc(100vh - 93.9px);
 }
+.usersliquid {
+    background: url("http://localhost:5000/images/liquid.svg") no-repeat;
+}
 
 .usersBackground {
     background-color: #ffffff;
@@ -22,12 +25,20 @@
 .usersData {
     min-width: 568px !important;
 }
+.facebook {
+    span {
+        align-self: center;
+    }
+}
+.btnFacebook {
+    width: 300px;
+}
 
 @media (max-width: 570px) {
     .usersData {
         min-width: 368px !important;
     }
-    .usersRow {
-        height: 100vh;
+    .usersRow1 {
+        height: 120vh;
     }
 }

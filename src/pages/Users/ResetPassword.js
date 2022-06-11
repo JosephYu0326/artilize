@@ -9,6 +9,7 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import ResetPasswordValidate from './formComponents/ResetPasswordValidate'
 import FadeIn from 'react-fade-in'
+import { FaEye, FaEyeSlash } from 'react-icons/fa'
 function Resetpassword(props) {
   const [changepasswordData, setChangePasswordData] = useState({
     newPassword: '',
@@ -62,6 +63,16 @@ function Resetpassword(props) {
       console.log(error)
     }
   }
+  const [hidepassword, setHidePassword] = useState(false)
+  const [hidepassword1, setHidePassword1] = useState(false)
+  const eye = <FaEye />
+  const closeEye = <FaEyeSlash />
+  const showPassword = (e) => {
+    setHidePassword(!hidepassword)
+  }
+  const showPassword1 = (e) => {
+    setHidePassword1(!hidepassword1)
+  }
 
   return (
     <>
@@ -70,7 +81,7 @@ function Resetpassword(props) {
         <FadeIn>
           <section>
             <Container>
-              <Row className="d-flex justify-content-center align-items-center usersRow">
+              <Row className="d-flex justify-content-center align-items-center usersRow usersliquid">
                 <div
                   className=" BorderRadius usersBackground p-5"
                   style={{ maxWidth: '568px', minWidth: '390px' }}
@@ -85,21 +96,35 @@ function Resetpassword(props) {
                         重設密碼
                       </h4>
                     </div>
-
                     <div
                       id="input-text"
                       className="mb-3 usersContentcolor Regular"
                     >
-                      <input
-                        type="text"
-                        className={`form-control BorderRadius ${
-                          errors.newPassword ? `is-invalid` : ``
-                        }`}
-                        placeholder="新密碼"
-                        name="newPassword"
-                        value={changepasswordData.newPassword}
-                        onChange={handdleChange}
-                      />
+                      <div className="d-flex">
+                        <input
+                          type={`${
+                            hidepassword === false ? 'password' : 'text'
+                          }`}
+                          className={`form-control BorderRadius ${
+                            errors.newPassword ? `is-invalid` : ``
+                          }`}
+                          placeholder="新密碼"
+                          name="newPassword"
+                          value={changepasswordData.newPassword}
+                          onChange={handdleChange}
+                        />
+                        <i
+                          onClick={showPassword}
+                          style={{
+                            marginLeft: -50,
+                            marginTop: 6,
+                            color: 'rgb(65,83,187)',
+                            cursor: 'pointer',
+                          }}
+                        >
+                          {hidepassword === false ? closeEye : eye}
+                        </i>
+                      </div>
                       <div
                         id="emailHelp"
                         className="form-text text-secondary"
@@ -114,16 +139,31 @@ function Resetpassword(props) {
                       id="input-text"
                       className="mb-3 usersContentcolor Regular"
                     >
-                      <input
-                        type="text"
-                        className={`form-control BorderRadius ${
-                          errors.confirmNewPassword ? `is-invalid` : ``
-                        }`}
-                        placeholder="請再次輸入新密碼"
-                        name="confirmNewPassword"
-                        value={changepasswordData.confirmNewPassword}
-                        onChange={handdleChange}
-                      />
+                      <div className="d-flex">
+                        <input
+                          type={`${
+                            hidepassword1 === false ? 'password' : 'text'
+                          }`}
+                          className={`form-control BorderRadius ${
+                            errors.confirmNewPassword ? `is-invalid` : ``
+                          }`}
+                          placeholder="請再次輸入新密碼"
+                          name="confirmNewPassword"
+                          value={changepasswordData.confirmNewPassword}
+                          onChange={handdleChange}
+                        />
+                        <i
+                          onClick={showPassword1}
+                          style={{
+                            marginLeft: -50,
+                            marginTop: 6,
+                            color: 'rgb(65,83,187)',
+                            cursor: 'pointer',
+                          }}
+                        >
+                          {hidepassword1 === false ? closeEye : eye}
+                        </i>
+                      </div>
                       <div
                         id="emailHelp"
                         className="form-text text-secondary"

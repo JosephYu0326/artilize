@@ -24,6 +24,7 @@
     "react-countup": "^6.2.0",
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.1.0",
+    "react-facebook-login": "^4.1.1",
     "react-fade-in": "^2.0.1",
     "react-geocode": "^0.2.3",
     "react-google-recaptcha": "^2.1.0",

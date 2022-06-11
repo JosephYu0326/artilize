@@ -52,6 +52,7 @@ function Header(props) {
       if (result.isConfirmed) {
         localStorage.removeItem('userId')
         localStorage.removeItem('userAvatar')
+        localStorage.removeItem('userAccount')
         localStorage.setItem('auth', false)
         MySwal.fire({
           title: '登出成功',
