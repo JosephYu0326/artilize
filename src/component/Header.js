@@ -9,6 +9,7 @@ import '../styles/HeaderAndFooter.scss'
 import '../styles/SearchBar.scss'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import Weather from '../pages/Users/Weather'
 
 function Header(props) {
   //從SearchBar拿回keyword
@@ -21,6 +22,10 @@ function Header(props) {
   const auth = JSON.parse(localStorage.getItem('auth'))
   const userAvatar = localStorage.getItem('userAvatar')
   console.log(auth)
+  const [weatherlist, setWeatherlist] = useState({
+    temp: '',
+    icon: '',
+  })
 
   //把keyword送回要搜尋(執行API)的頁面
   useEffect(() => {
@@ -71,6 +76,12 @@ function Header(props) {
     e.preventDefault()
     history.replace('/users/login')
   }
+  useEffect(() => {
+    const weatherlist = JSON.parse(localStorage.getItem('weather'))
+    const { temp, icon } = weatherlist
+    setWeatherlist({ temp: temp, icon: icon })
+  }, [])
+  const { temp, icon } = weatherlist
   return (
     <>
       <Navbar expand="lg" className=" justify-content-between">
@@ -162,6 +173,18 @@ function Header(props) {
                       </figure>
                     </div>
                   </Link>
+                  <div class="weatherDropdown">
+                    <button class="weatherDropbtn btn d-flex align-items-center p-0">
+                      <img
+                        src={` http://openweathermap.org/img/wn/${icon}.png`}
+                        alt=""
+                      />
+                      <h6 className="mb-0">高雄市 {temp}°C</h6>
+                    </button>
+                    <div class="weatherDropdown-content">
+                      <Weather />
+                    </div>
+                  </div>
                   <button
                     type="click"
                     className={`btn btn-primary rounded-pill `}

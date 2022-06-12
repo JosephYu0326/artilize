@@ -241,7 +241,7 @@ function Login(props) {
                     onSubmit={handleSubmit}
                     noValidate
                     id="loginForm"
-                    className="d-flex justify-content-center flex-column facebook"
+                    className="d-flex justify-content-center flex-column "
                   >
                     <div style={{ paddingLeft: '12px' }}>
                       <h4 className="ph_title row ExtraBold text-primary">
@@ -322,16 +322,13 @@ function Login(props) {
                         </label>
                       </Link>
                     </div>
-                    <GoogleOAuthProvider
-                      clientId={`${process.env.REACT_APP_GOOGLE_LOGIN_KEY}`}
-                    >
-                      <ReCAPTCHA
-                        className="align-self-center mb-3 "
-                        sitekey={`${process.env.REACT_APP_GOOGLE_RECAPTCHA_KEY}`}
-                        onChange={authChange}
-                      />
-                      <div className="d-flex justify-content-around">
-                        {/* <Link to="/users/">
+                    <ReCAPTCHA
+                      className="align-self-center mb-3 "
+                      sitekey={`${process.env.REACT_APP_GOOGLE_RECAPTCHA_KEY}`}
+                      onChange={authChange}
+                    />
+                    <div className="d-flex justify-content-around">
+                      {/* <Link to="/users/">
                       <button
                         type="submit"
                         className="btn btn-primary rounded-pill"
@@ -339,18 +336,23 @@ function Login(props) {
                         登入
                       </button>
                     </Link> */}
-                        <button
-                          type="submit"
-                          className="btn btn-primary rounded-pill "
-                          style={{ width: 300 }}
-                        >
-                          登入
-                        </button>
-                      </div>
-                      <div
-                        style={{ border: '1px solid lightgrey' }}
-                        className="mb-3 mt-3"
-                      ></div>
+                      <button
+                        type="submit"
+                        className="btn btn-primary rounded-pill "
+                        style={{ width: 300 }}
+                      >
+                        登入
+                      </button>
+                    </div>
+                    <div
+                      style={{ border: '1px solid lightgrey' }}
+                      className="mb-3 mt-3"
+                    ></div>
+                  </form>
+                  <div className="d-fle flex-column  align-items-center">
+                    <GoogleOAuthProvider
+                      clientId={`${process.env.REACT_APP_GOOGLE_LOGIN_KEY}`}
+                    >
                       <GoogleLogin
                         onSuccess={(credentialResponse) => {
                           console.log(credentialResponse)
@@ -374,26 +376,28 @@ function Login(props) {
                         width="300"
                       />
                     </GoogleOAuthProvider>
-                    <FacebookLogin
-                      appId={`${process.env.REACT_APP_FACEBOOK_LOGIN_KEY}`}
-                      autoLoad={false}
-                      fields="name,email,picture"
-                      callback={responseFacebook}
-                      icon="fa-facebook"
-                      textButton="&nbsp;&nbsp;Sign In with Facebook"
-                      cssClass="BorderRadius btn btn-primary btnFacebook mt-3"
-                      // authType="reauthenticate"
-                    />
-                    <div className="align-self-center mt-3">
-                      <h6 className="ph_title  Regular usersContentcolor  ">
-                        還沒有帳號嗎?按
-                        <Link className="ph_title Regular" to="/users/signup/">
-                          這裡
-                        </Link>
-                        加入Artilize
-                      </h6>
+                    <div className="facebook d-flex flex-column align-items-center">
+                      <FacebookLogin
+                        appId={`${process.env.REACT_APP_FACEBOOK_LOGIN_KEY}`}
+                        autoLoad={false}
+                        fields="name,email,picture"
+                        callback={responseFacebook}
+                        icon="fa-facebook"
+                        textButton="&nbsp;&nbsp;Sign In with Facebook"
+                        cssClass="BorderRadius btn btn-primary btnFacebook mt-3"
+                        // authType="reauthenticate"
+                      />
                     </div>
-                  </form>
+                  </div>
+                  <div className="d-flex flex-column align-items-center mt-3">
+                    <h6 className="ph_title  Regular usersContentcolor  ">
+                      還沒有帳號嗎?按
+                      <Link className="ph_title Regular" to="/users/signup/">
+                        這裡
+                      </Link>
+                      加入Artilize
+                    </h6>
+                  </div>
                 </div>
               </Row>
             </Container>

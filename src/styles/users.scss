@@ -25,11 +25,7 @@
 .usersData {
     min-width: 568px !important;
 }
-.facebook {
-    span {
-        align-self: center;
-    }
-}
+
 .btnFacebook {
     width: 300px;
 }
@@ -41,4 +37,7 @@
     .usersRow1 {
         height: 120vh;
     }
+}
+.weather {
+    color: $primary;
 }

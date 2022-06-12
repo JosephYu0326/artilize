@@ -41,6 +41,27 @@
         background: transparent;
     }
 }
+.weatherDropdown {
+    position: relative;
+    display: inline-block;
+    button {
+        color: $PurpleBlue;
+        h6 {
+            font-size: 12px;
+        }
+        &:hover {
+            color: $PurpleBlue;
+        }
+    }
+    z-index: 9999;
+}
+.weatherDropdown-content {
+    display: none;
+    position: absolute;
+}
+.weatherDropdown:hover .weatherDropdown-content {
+    display: block;
+}
 
 // ====footer====
 
