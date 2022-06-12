@@ -71,11 +71,13 @@ function Entrance(props) {
   sum += (radius * radius) / (dx * dx + dy * dy);
   }
   
+  // 調整球的顏色與亮度
   if (sum >= 0.99) {
-  gl_FragColor = vec4(mix(vec3(x / WIDTH, y / HEIGHT, 1.0), vec3(0, 0, 0), max(0.0, 1.0 - (sum - 0.99) * 100.0)), 1.0);
+  gl_FragColor = vec4(mix(vec3(x / WIDTH, y / HEIGHT, 0.6), vec3(0, 0, 0), max(0.0, 1.0 - (sum - 0.99) * 100.0)) * 0.7, 1.0);
   return;
   }
   
+  // 調整球的背景顏色
   gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
   }
   
@@ -189,7 +191,6 @@ function Entrance(props) {
             {/* <div className="logo logoArtilize"></div> */}
             <div className="logo logoAnimation "></div>
             <div>
-              {/* <Link to="/">入口</Link> */}
               <Link to="/">
                 <button className="arrowRight d-flex mt-5">
                   {' '}
