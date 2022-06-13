@@ -142,26 +142,36 @@ function B2B(props) {
   // console.log('z', z)
   // 展覽刪除
   const handleDeleteEx = (id) => {
-    // alert('確定要刪除該筆資料嗎？')
-    // Swal.fire('刪除成功', '成功刪除活動', 'success')
-    // Swal.fire('The Internet?', 'That thing is still around?', 'question')
-    //fetch
-    extendAbilityEx(data1)
-    fetch('http://localhost:5000/B2B/B2B/' + id, {
-      method: 'delete',
-    })
-      .then((res) => res.text())
-      .then((text) => console.log('刪除成功...' + text))
-      .then(() => {
-        const newExhibitionInorder = [...data1].filter((v, i) => {
-          console.log('v.id', v.id)
-          return v.id !== id
+    Swal.fire({
+      title: '確定?',
+      text: '刪除就不能回復!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '是確定刪除',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        //fetch
+        extendAbilityEx(data1)
+        fetch('http://localhost:5000/B2B/B2B/' + id, {
+          method: 'delete',
         })
+          .then((res) => res.text())
+          .then((text) => console.log('刪除成功...' + text))
+          .then(() => {
+            const newExhibitionInorder = [...data1].filter((v, i) => {
+              console.log('v.id', v.id)
+              return v.id !== id
+            })
 
-        console.log(newExhibitionInorder)
+            console.log(newExhibitionInorder)
 
-        setDate1(newExhibitionInorder)
-      })
+            setDate1(newExhibitionInorder)
+          })
+        Swal.fire('刪除!', '展覽活動已被刪除', '成功')
+      }
+    })
     // setDate1(newExhibitionInorder)
     // Swal.fire('刪除成功', '成功刪除活動', 'success')
   }

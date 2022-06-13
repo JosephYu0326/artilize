@@ -13,8 +13,9 @@ function B2Bliste(props) {
         <div className="col-md-2 style={{border:'1px solid'}}"></div>
         <div className="col-md-3 col-sm-12 my-3">
           <img
-            // src={`${process.env.REACT_APP_API_URL}/uploads/${pic1}`}
-            src={`${process.env.REACT_APP_API_URL}/stylesheets/images/${pic1}`}
+            // src={`http://localhost:5000/uploads/${pic1}`}
+            // src={`${process.env.REACT_APP_API_URL}/stylesheets/images/${pic1}`}
+            src={`http://localhost:5000/stylesheets/images/${pic1}`}
             className="imgListe rounded-3 "
             alt="exhibitionImg"
           />
