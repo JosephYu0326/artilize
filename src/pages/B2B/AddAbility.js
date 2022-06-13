@@ -167,9 +167,27 @@ function AddAbility(props) {
   //       console.log('err.message', err.message)
   //     })
   // }
+  const [validated, setValidated] = useState(false)
 
   const submitForm = (e) => {
+    console.log('submitForm')
     e.preventDefault()
+
+    const form = e.currentTarget
+
+    if (form.checkValidity() === false) {
+      console.log('form.checkValidity false')
+      e.preventDefault()
+      e.stopPropagation()
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'error',
+      })
+      return
+    }
+
+    document.getElementById('myForm').validated = true
 
     if (fileData.length > 0) {
       fetch('http://localhost:5000/B2B/B2B/', {
@@ -202,15 +220,18 @@ function AddAbility(props) {
     }
   }
   //boostrap 表單驗證
-  const [validated, setValidated] = useState(false)
+  //const [validated, setValidated] = useState(false)
+
   const handleSubmit = (event) => {
+    console.log('handleSubmit')
     const form = event.currentTarget
     if (form.checkValidity() === false) {
       event.preventDefault()
       event.stopPropagation()
     }
 
-    setValidated(true)
+    document.getElementById('myForm').validated = true
+    // setValidated(true)
   }
 
   return (
@@ -222,8 +243,8 @@ function AddAbility(props) {
         encType="multipart/form-data"
         //boostrap 表單驗證
         noValidate
-        validated={validated}
-        onSubmit={handleSubmit}
+        validated="false"
+        onSubmit={submitForm}
       >
         <div className="container d-flex justify-content-center">
           <div className="row formwidth">
@@ -299,6 +320,7 @@ function AddAbility(props) {
                   //required
                   minLength="2"
                   required
+                  autoFocus
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 <Form.Control.Feedback type="invalid">
@@ -520,6 +542,7 @@ function AddAbility(props) {
                   onChange={(e) => {
                     setTicketName(e.target.value)
                   }}
+                  required
                 />
               </div>
             </div>
@@ -589,7 +612,7 @@ function AddAbility(props) {
                   className="btn m btn-primary"
                   type="submit"
                   value="送出"
-                  onClick={submitForm}
+                  // onClick={submitForm}
                 >
                   確認
                 </button>
