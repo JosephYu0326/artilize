@@ -360,7 +360,7 @@ function AddAbility(props) {
                     dropdownMode="select"
                     name="start"
                   />
-                  <h6>請輸入活動時間</h6>
+                  {/* <h6>請輸入活動時間</h6> */}
                 </div>
               </section>
             </div>
@@ -397,7 +397,6 @@ function AddAbility(props) {
                     dropdownMode="select"
                     name="end"
                   />
-                  <h6>請輸入活動時間</h6>
                 </div>
               </section>
             </div>
@@ -425,7 +424,10 @@ function AddAbility(props) {
                     )
                   })}
                 </Form.Control>
-                <h6>請選擇地區</h6>
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  <h6>請選擇地區</h6>
+                </Form.Control.Feedback>
               </section>
             </div>
             <div className="col-6">
@@ -451,7 +453,10 @@ function AddAbility(props) {
                     )
                   })}
                 </Form.Control>
-                <h6>請選擇鄉鎮市區</h6>
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  <h6>請選擇鄉鎮市區</h6>
+                </Form.Control.Feedback>
               </section>
             </div>
             <h3>活動類型與館方</h3>
