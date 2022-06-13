@@ -18,7 +18,7 @@ function Chat() {
     socket.on('receive-message', (userAccount, message) => {
       const myId = localStorage.getItem('userAccount')
       if (userAccount !== myId) {
-        displayMessage(`ssss${userAccount}: ${message}`)
+        displayMessage(`${userAccount}: ${message}`)
       }
     })
 
@@ -31,17 +31,23 @@ function Chat() {
       console.log(`${userAccount}, ${message}`)
       socket.emit('send-message', message, userAccount)
       msgInput.value = ''
+      document.getElementById(`myBubble`).scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+        //inline: 'start',
+      })
     })
   }, [])
 
   function displayMessage(message) {
     const userAccount = localStorage.getItem('userAccount')
     const id = message.split(':')
-    console.log(id)
+    console.log(id[0])
+    console.log(userAccount)
     if (id[0] === userAccount) {
       const div = document.createElement('div')
       div.setAttribute('id', 'myBubble')
-      div.textContent = message
+      div.textContent = id[1]
       document.getElementById('msg-io').append(div)
     } else {
       const div = document.createElement('div')
