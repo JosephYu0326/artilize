@@ -12,10 +12,12 @@ import { registerLocale, setDefaultLocale } from 'react-datepicker'
 import { zhTW } from 'date-fns/locale'
 //sweetalert2
 import Swal from 'sweetalert2'
+//react Boostrap
+import { Form, Col, Button, Feedback } from 'react-bootstrap'
 
 registerLocale('zhTW', zhTW)
 
-function EditAbility(props) {
+function AddAbility(props) {
   const history = useHistory()
   const [data, setDate] = useState(null)
 
@@ -119,8 +121,8 @@ function EditAbility(props) {
   const [ticketDescription, setTicketDescription] = useState('')
 
   const fileChangeHandler = (e) => {
-    // console.log(e.target.files[0])
-    // console.log(e.target.files.length)
+    console.log(e.target.files[0])
+    console.log(e.target.files.length)
     if (e.target.files.length > 0) {
       let fileNames = []
       for (let a = 0, max = e.target.files.length; a < max; a++) {
@@ -165,9 +167,27 @@ function EditAbility(props) {
   //       console.log('err.message', err.message)
   //     })
   // }
+  const [validated, setValidated] = useState(false)
 
   const submitForm = (e) => {
+    console.log('submitForm')
     e.preventDefault()
+
+    const form = e.currentTarget
+
+    if (form.checkValidity() === false) {
+      console.log('form.checkValidity false')
+      e.preventDefault()
+      e.stopPropagation()
+      Swal.fire({
+        icon: 'error',
+        title: '請輸入表格',
+        text: '錯誤',
+      })
+      return
+    }
+
+    document.getElementById('myForm').validated = true
 
     if (fileData.length > 0) {
       fetch('http://localhost:5000/B2B/B2B/', {
@@ -195,25 +215,42 @@ function EditAbility(props) {
       Swal.fire({
         icon: 'error',
         title: '請選擇圖檔',
-        text: '至少兩張圖片',
-        // footer: '<a href="">Why do I have this issue?</a>',
+        text: '請選兩張圖片上傳',
       })
     }
   }
+  //boostrap 表單驗證
+  //const [validated, setValidated] = useState(false)
+
+  // const handleSubmit = (event) => {
+  //   console.log('handleSubmit')
+  //   const form = event.currentTarget
+  //   if (form.checkValidity() === false) {
+  //     event.preventDefault()
+  //     event.stopPropagation()
+  //   }
+
+  //   document.getElementById('myForm').validated = true
+  //   // setValidated(true)
+  // }
 
   return (
     <>
-      <div>建立新活動資料</div>
-      <form
+      <div>編輯活動資料</div>
+      <Form
         id="myForm"
         // onSubmit={onSubmitHandler}
         encType="multipart/form-data"
+        //boostrap 表單驗證
+        noValidate
+        validated="false"
+        onSubmit={submitForm}
       >
         <div className="container d-flex justify-content-center">
           <div className="row formwidth">
             <div className="col-12 ">
-              <h3>開始建立活動資訊</h3>
-              <h5>請創建一個活動展覽資訊</h5>
+              <h3>編輯活動資料</h3>
+              <h5>請編輯該活動展覽資訊</h5>
               <label htmlFor="upload_img">
                 <input
                   type="file"
@@ -270,7 +307,7 @@ function EditAbility(props) {
                 >
                   活動名稱
                 </label>
-                <input
+                <Form.Control
                   type="text"
                   className="form-control"
                   id="exampleFormControlInput1"
@@ -280,8 +317,16 @@ function EditAbility(props) {
                   onChange={(e) => {
                     setAname(e.target.value)
                   }}
+                  //required
+                  minLength="2"
+                  required
+                  autoFocus
                 />
-                <h6>請輸入活動名稱</h6>
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  <h6>請輸入正確的姓名</h6>
+                </Form.Control.Feedback>
+                {/* <h6>請輸入活動名稱</h6> */}
               </div>
             </div>
             <div className="col-12">
@@ -315,7 +360,7 @@ function EditAbility(props) {
                     dropdownMode="select"
                     name="start"
                   />
-                  <h6>請輸入活動時間</h6>
+                  {/* <h6>請輸入活動時間</h6> */}
                 </div>
               </section>
             </div>
@@ -352,14 +397,17 @@ function EditAbility(props) {
                     dropdownMode="select"
                     name="end"
                   />
-                  <h6>請輸入活動時間</h6>
+                  {/* <h6>請輸入活動時間</h6> */}
                 </div>
               </section>
             </div>
             <h3>活動地點</h3>
             <div className="col-6">
               <section>
-                <select
+                <Form.Control
+                  required
+                  as="select"
+                  custom
                   className="form-select"
                   name="direction"
                   id="direction"
@@ -376,13 +424,19 @@ function EditAbility(props) {
                       </option>
                     )
                   })}
-                </select>
-                <h6>請選擇地區</h6>
+                </Form.Control>
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  <h6>請選擇地區</h6>
+                </Form.Control.Feedback>
               </section>
             </div>
             <div className="col-6">
               <section>
-                <select
+                <Form.Control
+                  required
+                  as="select"
+                  custom
                   className="form-select"
                   name="fkCityId"
                   id="city"
@@ -399,14 +453,20 @@ function EditAbility(props) {
                       </option>
                     )
                   })}
-                </select>
-                <h6>請選擇鄉鎮市區</h6>
+                </Form.Control>
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  <h6>請選擇鄉鎮市區</h6>
+                </Form.Control.Feedback>
               </section>
             </div>
             <h3>活動類型與館方</h3>
             <div className="col-6">
               <section>
-                <select
+                <Form.Control
+                  required
+                  as="select"
+                  custom
                   className="form-select"
                   name="fkKindId"
                   id="fkKindId"
@@ -423,13 +483,19 @@ function EditAbility(props) {
                       </option>
                     )
                   })}
-                </select>
-                <h6>請選擇活動類型</h6>
+                </Form.Control>
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  <h6>請選擇活動類型</h6>
+                </Form.Control.Feedback>
               </section>
             </div>
             <div className="col-6">
               <section>
-                <select
+                <Form.Control
+                  required
+                  as="select"
+                  custom
                   className="form-select"
                   name="fkMuseumId"
                   id="museum"
@@ -446,8 +512,11 @@ function EditAbility(props) {
                       </option>
                     )
                   })}
-                </select>
-                <h6>請選擇館方</h6>
+                </Form.Control>
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  <h6>請選擇館方</h6>
+                </Form.Control.Feedback>
               </section>
             </div>
 
@@ -460,7 +529,9 @@ function EditAbility(props) {
                 >
                   活動內容介紹
                 </label>
-                <textarea
+                <Form.Group
+                  required
+                  as="textarea"
                   className="form-control"
                   id="exampleFormControlTextarea1"
                   rows="10"
@@ -469,9 +540,16 @@ function EditAbility(props) {
                   onChange={(e) => {
                     setActivities(e.target.value)
                   }}
+                  minLength="10"
                 />
                 <div className="row ">
-                  <div className="col-6">{/* <h6>請輸入50個字以上</h6> */}</div>
+                  <div className="col-6">
+                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">
+                      <h6>請輸入正確的姓名</h6>
+                    </Form.Control.Feedback>
+                    {/* <h6>請輸入50個字以上</h6> */}
+                  </div>
                   <div className="col-6 text-end">
                     {/* <h6>顯示字數</h6> */}
                   </div>
@@ -492,12 +570,19 @@ function EditAbility(props) {
                   className="form-control"
                   id="ticketName"
                   name="name"
-                  placeholder="活動名稱"
+                  placeholder="票券名稱"
                   value={ticketName}
                   onChange={(e) => {
                     setTicketName(e.target.value)
                   }}
+                  required
+                  maxLength="4"
+                  pattern="^[\u4e00-\u9fa5_a-zA-Z0-9]+$"
                 />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  <h6>請輸入文字</h6>
+                </Form.Control.Feedback>
               </div>
             </div>
             <div className="col-md-4">
@@ -505,7 +590,7 @@ function EditAbility(props) {
                 <label htmlFor="amount" className="form-label">
                   票券數量
                 </label>
-                <input
+                <Form.Control
                   type="value"
                   className="form-control"
                   id="amount"
@@ -515,7 +600,14 @@ function EditAbility(props) {
                   onChange={(e) => {
                     setAmount(e.target.value)
                   }}
+                  required
+                  pattern="/[0-9]/"
+                  maxLength="4"
                 />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  <h6>請輸入數字</h6>
+                </Form.Control.Feedback>
               </div>
             </div>
             <div className="col-md-3">
@@ -523,7 +615,7 @@ function EditAbility(props) {
                 <label htmlFor="price" className="form-label">
                   票券價格
                 </label>
-                <input
+                <Form.Control
                   type="value"
                   className="form-control"
                   id="price"
@@ -533,7 +625,14 @@ function EditAbility(props) {
                   onChange={(e) => {
                     setPrice(e.target.value)
                   }}
+                  required
+                  pattern="/[0-9]/"
+                  maxLength="4"
                 />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  <h6>請輸入數字</h6>
+                </Form.Control.Feedback>
               </div>
             </div>
 
@@ -542,7 +641,9 @@ function EditAbility(props) {
                 <label htmlFor="TicketDescription" className="form-label">
                   票券說明
                 </label>
-                <textarea
+                <Form.Group
+                  required
+                  as="textarea"
                   className="form-control"
                   id="TicketDescription"
                   rows="10"
@@ -566,12 +667,7 @@ function EditAbility(props) {
                   className="btn m btn-primary"
                   type="submit"
                   value="送出"
-                  onClick={submitForm}
-                  // onClick={() => {
-                  //   submitForm()
-
-                  //   history.push('/b2b')
-                  // }}
+                  // onClick={submitForm}
                 >
                   確認
                 </button>
@@ -579,10 +675,10 @@ function EditAbility(props) {
             </div>
           </div>
         </div>
-      </form>
+      </Form>
       <br />
     </>
   )
 }
 
-export default EditAbility
+export default AddAbility
