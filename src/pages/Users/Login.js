@@ -345,9 +345,11 @@ function Login(props) {
                       </button>
                     </div>
                     <div
-                      style={{ border: '1px solid lightgrey' }}
-                      className="mb-3 mt-3"
-                    ></div>
+                      // style={{ border: '1px solid lightgrey' }}
+                      className="loginBorder text-center mb-3 mt-3"
+                    >
+                      <span className="loginInnertText">or</span>
+                    </div>
                   </form>
                   <div className="d-fle flex-column  align-items-center">
                     <GoogleOAuthProvider

@@ -1,14 +1,41 @@
-@import "./global.scss";
+@import './global.scss';
 
 .usersRow {
-    height: calc(100vh - 93.9px);
+  height: calc(100vh - 93.9px);
 }
 
 .usersBackground {
-    background-color: #ffffff;
-    box-shadow: $BoxShadow;
+  background-color: #ffffff;
+  box-shadow: $BoxShadow;
 }
 
 .usersContentcolor {
-    color: $DarkGrey;
+  color: $DarkGrey;
+}
+
+.loginBorder {
+  color: $LightGrey;
+  text-align: center;
+  bottom: 40px;
+  left: 40px;
+  right: 40px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.loginInnertText::before,
+.loginInnertText::after {
+  content: '';
+  display: inline-block;
+  width: 200px;
+  height: 1px;
+  background: $LightGrey;
+  vertical-align: middle;
+}
+.loginInnertText::before {
+  margin-right: 16px;
+}
+
+.loginInnertText::after {
+  margin-left: 16px;
 }
