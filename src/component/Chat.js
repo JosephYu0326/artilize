@@ -7,7 +7,7 @@ import { Alert, Button, Form, FormControl, InputGroup } from 'react-bootstrap'
 function Chat() {
   let socket = null
   useEffect(() => {
-    const userId = localStorage.getItem('userId')
+    const userId = localStorage.getItem('userAccount')
     const msgInput = document.getElementById('msg-input')
     if (socket) return
     socket = io('http://localhost:1337')
