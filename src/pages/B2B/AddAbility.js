@@ -197,19 +197,34 @@ function AddAbility(props) {
       Swal.fire({
         icon: 'error',
         title: '請選擇圖檔',
-        text: '至少兩張圖片',
+        text: '請選兩張圖片上傳',
         // footer: '<a href="">Why do I have this issue?</a>',
       })
     }
+  }
+  //boostrap 表單驗證
+  const [validated, setValidated] = useState(false)
+  const handleSubmit = (event) => {
+    const form = event.currentTarget
+    if (form.checkValidity() === false) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+
+    setValidated(true)
   }
 
   return (
     <>
       <div>建立新活動資料</div>
-      <form
+      <Form
         id="myForm"
         // onSubmit={onSubmitHandler}
         encType="multipart/form-data"
+        //boostrap 表單驗證
+        noValidate
+        validated={validated}
+        onSubmit={handleSubmit}
       >
         <div className="container d-flex justify-content-center">
           <div className="row formwidth">
@@ -272,7 +287,7 @@ function AddAbility(props) {
                 >
                   活動名稱
                 </label>
-                <input
+                <Form.Control
                   type="text"
                   className="form-control"
                   id="exampleFormControlInput1"
@@ -282,7 +297,14 @@ function AddAbility(props) {
                   onChange={(e) => {
                     setAname(e.target.value)
                   }}
+                  //required
+                  minLength="2"
+                  required
                 />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  <h6>請輸入正確的姓名</h6>
+                </Form.Control.Feedback>
                 <h6>請輸入活動名稱</h6>
               </div>
             </div>
@@ -569,11 +591,6 @@ function AddAbility(props) {
                   type="submit"
                   value="送出"
                   onClick={submitForm}
-                  // onClick={() => {
-                  //   submitForm()
-
-                  //   history.push('/b2b')
-                  // }}
                 >
                   確認
                 </button>
@@ -581,7 +598,7 @@ function AddAbility(props) {
             </div>
           </div>
         </div>
-      </form>
+      </Form>
       <br />
     </>
   )
