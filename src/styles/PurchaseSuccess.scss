@@ -18,7 +18,32 @@
 
     .paywidth{
         min-width: 330px;
+      
     }
+
+    .greeting{
+        text-align: center;
+        margin: 0 auto 0;
+        min-width: 330px;
+    }
+
+    .purchaseSuccess{
+        // max-width: 810px ;
+        min-width: 330px;
+        margin:0 auto 40px !important; 
+        padding:  40px ;
+        border-bottom: 1px solid $DarkGrey;
+        border-radius: $BorderRadius;
+        box-shadow: $BoxShadow;
+      
+        button{
+            border-radius: $BorderRadius;
+        }
+    }
+
+
+
+
     // 影藏css
     .stepPurchaseSuccess {
         display: none;
@@ -29,6 +54,7 @@
     .allTextStep{
         display: none;
     }
+   
 }
 
 
@@ -45,9 +71,27 @@
     //問候感謝div
     .greeting{
         margin: 0 auto 0;
-        max-width: 809px;
+        max-width: 810px;
         max-height: 70px;
         text-align: center;
         margin-bottom: 38px;
+    }
+    // .cardwidth{
+    //     max-width: 810px;
+    // }
+   
+
+    .purchaseSuccess{
+        max-width: 810px ;
+        min-width: 330px;
+        margin:0 auto 40px !important; 
+        padding:  40px ;
+        border-bottom: 1px solid $DarkGrey;
+        border-radius: $BorderRadius;
+        box-shadow: $BoxShadow;
+      
+        button{
+            border-radius: $BorderRadius;
+        }
     }
 }
