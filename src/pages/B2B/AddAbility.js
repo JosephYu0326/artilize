@@ -12,6 +12,8 @@ import { registerLocale, setDefaultLocale } from 'react-datepicker'
 import { zhTW } from 'date-fns/locale'
 //sweetalert2
 import Swal from 'sweetalert2'
+//react Boostrap
+import { Form, Col, Button, Feedback } from 'react-bootstrap'
 
 registerLocale('zhTW', zhTW)
 
