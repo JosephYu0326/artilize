@@ -1,0 +1,121 @@
+@import "../styles/style.scss";
+@import "~bootstrap/scss/bootstrap";
+
+.calendar-frame {
+    border: 1px black solid;
+    width: 350px;
+    height: 350px;
+
+    .title-frame {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .title-date-text {
+        margin-left: 12px;
+        margin-top: 8px;
+    }
+    .monthBtn {
+        display: flex;
+        // width: 40px;
+        justify-content: space-between;
+        .btn-size {
+            font-size: 36px;
+        }
+    }
+}
+
+.calendar-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+
+    .selectlink {
+        text-decoration: none;
+        color: #000;
+    }
+
+    .selectlink-nobuy {
+        text-decoration: none;
+        color: rgb(210, 197, 197);
+    }
+    .selectlink-canbuy {
+        text-decoration: none;
+        color: #000;
+    }
+
+    thead {
+        width: 100%;
+        tr {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            th {
+                width: 100%;
+                flex-grow: 1;
+            }
+        }
+    }
+    tbody {
+        width: 100%;
+        // height: 288px;
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        tr {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            td {
+                border: 1px solid #eee;
+                width: 48px;
+                min-height: 38px;
+                flex-grow: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                a {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                &.select {
+                    background: $PurpleBlue;
+                    a {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .calendar-frame {
+        width: 280px;
+        .btn-size {
+            font-size: 30px !important;
+        }
+    }
+    thead {
+        tr {
+            font-size: 14px;
+        }
+    }
+    tbody {
+        a {
+            font-size: 14px;
+        }
+    }
+    .selectlink {
+        text-decoration: none;
+        color: #000;
+    }
+}

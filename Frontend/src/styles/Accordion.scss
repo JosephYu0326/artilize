@@ -1,0 +1,70 @@
+@import "../styles/style.scss";
+@import "~bootstrap/scss/bootstrap";
+
+.accordionFrame {
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+}
+.optionheight {
+    height: 0px;
+    transition: 0.4s;
+}
+
+.option-frame {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+.icon-frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 25px;
+}
+
+.accordionText {
+    margin: 10px;
+    opacity: 0;
+    transition: 0.4s;
+
+    &.expand {
+        opacity: 1;
+    }
+}
+
+.option-expand {
+    width: 25px;
+    height: 25px;
+}
+.plusIcon1 {
+    height: 20px;
+    width: 5px;
+    background: black;
+    transition: transform 0.3s;
+    &.expand {
+        transform: rotate(-90deg);
+    }
+}
+.plusIcon2 {
+    height: 20px;
+    width: 5px;
+    background: black;
+    transform: rotate(90deg);
+    position: absolute;
+    transition: opacity 0.3s;
+    &.expand {
+        opacity: 0;
+    }
+}
+
+.testlink {
+    height: 100%;
+    top: 0;
+    position: absolute;
+    width: 100%;
+    text-decoration: none;
+    color: black;
+}

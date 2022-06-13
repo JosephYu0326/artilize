@@ -1,0 +1,18 @@
+@import "../styles/style.scss";
+@import "~bootstrap/scss/bootstrap";
+
+.imgListe {
+    width: 250px;
+    // height: 200px;
+    border-radius: 20px;
+}
+
+.ellipsis1 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.bobo {
+    border-radius: 20px;
+}

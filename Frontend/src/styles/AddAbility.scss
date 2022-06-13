@@ -1,0 +1,34 @@
+@import "./global.scss";
+//新 Form 表單樣式
+.formwidth {
+    max-width: 690px;
+    min-width: 390px;
+    padding: 40px;
+
+    border-bottom: 1px solid $DarkGrey;
+    border-radius: $BorderRadius;
+    box-shadow: $BoxShadow;
+
+    input {
+        border: 1px solid $DarkGrey;
+        border-radius: $BorderRadius;
+    }
+    select {
+        border-radius: $BorderRadius;
+    }
+    textarea {
+        border-radius: $BorderRadius;
+    }
+    button {
+        border-radius: $BorderRadius;
+    }
+}
+.imgwidth {
+    max-width: 586px;
+    min-width: 350px;
+}
+
+body.swal2-shown > [aria-hidden="true"] {
+    transition: 0.1s filter;
+    filter: blur(10px);
+}

@@ -1,0 +1,142 @@
+// 這裡導入所有要預設變數覆蓋
+$primary: rgb(65,83,187);
+$secondary: rgb(244,185,66);
+$headings-line-height:1.35 ;
+// 導入bootstrap所有的樣式與預設變數
+@import '~bootstrap/scss/bootstrap';
+
+// 其它要導入覆蓋掉原本的預設bootstrap樣式要放在這下面
+// 全站都會使用的共同樣式
+
+//定義顏色變數，參考figma
+$PurpleBlue:rgb(65,83,187);
+$WarnYellow:rgb(244,185,66);
+$DarkGrey:rgb(110,116,145);
+$MiddleGrey:rgb(124,141,176);
+$LightGrey:rgb(203,212,230);
+$LighterGrey:rgb(241,241,241);
+$background:#e5e5e5;
+
+//RWD寫法
+@mixin mobile {
+    @media (max-width:391px) {
+        @content;
+    }
+}
+// @include mobile
+
+
+//定義BorderRadius
+$BorderRadius:20px;
+.BorderRadius{
+    border-radius: $BorderRadius;
+}
+
+//定義box-shadow
+$BoxShadow:0px 2px 4px rgba(28, 5, 77, 0.1), 0px 12px 32px rgba(0, 0, 0, 0.05);
+.BoxShadow{
+    box-shadow: rgb(110,116,145) 2px 2px 4px, rgb(110,116,145) 2px 2px 4px;
+}
+
+.ExtraBold{
+    font-weight: 800;
+}
+.Regular{
+    font-weight: 400;
+}
+.SemiBold{
+    font-weight: 600; 
+}
+//定義h1
+h1{
+    font-family: 'Noto Sans TC', sans-serif;
+    font-style: normal;
+    // font-size: 40px;
+    // line-height: 54px;
+    // @include mobile{
+        
+    // }
+}
+
+//定義h2
+h2{
+    font-family: 'Noto SansTC', sans-serif;
+    font-style: normal;
+    // font-size: 32px;
+    // line-height: 44px;
+}
+
+//定義h3
+h3{
+    font-family: 'Noto Sans TC', sans-serif;
+    font-style: normal;
+    // font-size: 28px;
+    // line-height: 38px;
+}
+
+//定義h4
+h4{
+    font-family: 'Noto Sans TC', sans-serif;
+    font-style: normal;
+    // font-size: 24px;
+    // line-height: 33px;
+}
+
+//定義h5
+h5{
+    font-family: 'Noto Sans TC', sans-serif;
+    font-style: normal;
+    // font-size: 20px;
+    // line-height: 27px;
+}
+
+//定義h6
+h6{
+    font-family: 'Noto Sans TC', sans-serif;
+    font-style: normal;
+    // font-size: 16px;
+    // line-height: 22px;
+}
+
+//定義p Big
+.pBig{
+    font-family: 'Noto Sans TC', sans-serif;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 19px;
+}
+
+//定義p Regular
+.pRegular{
+    font-family: 'Noto Sans TC', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+//定義p Small
+.pSmall{
+    font-family: 'Noto Sans TC', sans-serif;
+    font-style: normal;
+    font-size: 10px;
+    line-height: 14px;
+}
+
+//定義p Label
+.pLabel{
+    font-family: 'Noto Sans TC', sans-serif;
+    font-style: normal;
+    font-size: 10px;
+    line-height: 14px;
+    letter-spacing: 0.25em;
+    
+}
+
+//定義p Minimum
+.pMinimum{
+    font-family: 'Noto Sans TC', sans-serif;
+    font-style: normal;
+    font-size: 8px;
+    line-height: 11px;
+}
+

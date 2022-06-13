@@ -1,0 +1,103 @@
+@import "../styles/style.scss";
+@import "~bootstrap/scss/bootstrap";
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.asideBar {
+    vertical-align: middle;
+    background-color: #fff;
+    min-height: 350px;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0;
+    width: 260px;
+    line-height: 100px;
+    border-radius: 0 10px 10px 0;
+    box-shadow: $DarkGrey 2px 2px 4px;
+    //收合
+    transform: translateX(-80%);
+    transition: 0.3s;
+
+    a {
+        color: $LighterGrey;
+    }
+
+    a:link {
+        color: $LighterGrey;
+        text-decoration: none;
+    }
+    a:hover {
+        color: $LighterGrey;
+        text-decoration: none;
+    }
+}
+
+#sideMenu-switch {
+    opacity: 0;
+    z-index: -100;
+}
+#sideMenu-switch:checked + .asideBar {
+    transform: translateX(0);
+}
+
+#sideMenu-switch:checked + .asideBar label .faAngleRight {
+    transform: scaleX(-1);
+}
+
+.asideBar .asideBtn {
+    color: rgb(110, 116, 145);
+    width: inherit;
+    line-height: 30px;
+    border-radius: 0%;
+}
+
+.asideBar .asideBtn:hover {
+    color: #fff;
+    background: rgb(65, 83, 187);
+}
+
+.asideBar label {
+    color: rgb(110, 116, 145);
+    position: absolute;
+    top: 0%;
+    font-size: 24px;
+}
+
+@media (max-width: 768px) {
+    .asideBar {
+        position: relative;
+        padding-bottom: 0;
+        margin: auto;
+        overflow-x: scroll;
+        min-height: 100px;
+        min-width: 80vw;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        box-shadow: none;
+        transform: none;
+        border-bottom: 1px solid $DarkGrey;
+
+        .btn {
+            margin: 10px;
+            min-width: 110px;
+            border: 1px solid $DarkGrey;
+            scroll-snap-align: center;
+            border-radius: 50rem !important;
+            color: rgb(110, 116, 145);
+        }
+        .asideBtn:hover {
+            color: rgb(65, 83, 187);
+            border: 1px solid rgb(65, 83, 187);
+            background: rgb(255, 255, 255);
+        }
+        label {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,188 @@
+@import "./global.scss";
+
+.displayY {
+    display: none;
+    color: $DarkGrey;
+}
+
+.mobileSearch {
+    height: 50vh;
+    width: 100vw;
+    background-image: linear-gradient(to top, transparent, $PurpleBlue);
+}
+
+.nav-link {
+    margin: 20px;
+    vertical-align: middle;
+    //height: 88px;
+    h6 {
+        margin: 0;
+        color: $PurpleBlue;
+    }
+    a:-webkit-any-link {
+        text-decoration: none;
+    }
+}
+.homeSearchBar {
+    gap: 16px;
+    form {
+        border: 1px solid $DarkGrey;
+        border-radius: $BorderRadius;
+        width: 230px;
+        height: 42px;
+    }
+    .rounded-pill a {
+        color: #fff;
+        text-decoration: none;
+    }
+    .cartbutton {
+        margin-bottom: 40px;
+    }
+    button:nth-child(3) {
+        a {
+            text-decoration: none;
+            color: #fff;
+        }
+        text-align: center;
+        font-size: 42px;
+        color: $primary;
+        height: 42px;
+        border: none;
+        background: transparent;
+
+        .cart-icon {
+            font-size: 26px;
+            position: relative;
+            left: -8px;
+        }
+    }
+    button:nth-child(4) {
+        text-align: center;
+        font-size: 42px;
+        color: $primary;
+        height: 42px;
+        border: none;
+        background: transparent;
+    }
+}
+.weatherDropdown {
+    position: relative;
+    display: inline-block;
+    button {
+        color: $PurpleBlue;
+        h6 {
+            font-size: 12px;
+        }
+        &:hover {
+            color: $PurpleBlue;
+        }
+    }
+    z-index: 9999;
+}
+.weatherDropdown-content {
+    display: none;
+    position: absolute;
+}
+.weatherDropdown:hover .weatherDropdown-content {
+    display: block;
+}
+
+// ====footer====
+
+.fourword {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer {
+    margin-bottom: 0;
+    margin: auto;
+    height: 40vh;
+    max-width: 80vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footerSocial {
+    font-size: 2.5rem;
+}
+
+.txtGray {
+    color: $DarkGrey;
+    text-decoration: none;
+    margin: 1rem;
+}
+
+.copyright {
+    align-self: flex-end;
+}
+
+@media (max-width: 768px) {
+    .displayN {
+        display: none !important;
+    }
+
+    .displayY {
+        display: flex;
+    }
+
+    .homeNavBar {
+        height: auto;
+    }
+
+    // ===footer===
+    .fourword > .align-items-center {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .fourword {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        button {
+            margin: 30px;
+            width: 60vw;
+            color: $background;
+            border: $background 1px solid;
+        }
+        button:hover {
+            color: $DarkGrey;
+            background: $background;
+            border: $background 1px solid;
+        }
+        button:active {
+            color: $DarkGrey;
+            background: $background;
+            border: $background 1px solid;
+            box-shadow: none !important;
+        }
+    }
+
+    footer {
+        min-width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        background-color: $DarkGrey;
+    }
+
+    .txtGray {
+        color: $background;
+        text-decoration: none;
+    }
+
+    .copyright {
+        align-self: center;
+    }
+
+    //=== footer===
+}

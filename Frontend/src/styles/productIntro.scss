@@ -1,0 +1,221 @@
+@import "./global.scss";
+@import "./style.scss";
+
+.productIntroArea {
+    margin-top: 50px;
+    background-color: $LighterGrey;
+}
+
+.productIntro {
+    height: 820px;
+    overflow: scroll;
+    position: relative;
+}
+
+.pIntroImg {
+    position: relative;
+    margin-top: 50px;
+    margin-left: 25px;
+}
+
+.pIntroRightVector {
+    position: absolute;
+    margin-top: -70px;
+    margin-left: 28%;
+}
+
+.pIntroDetail {
+    background: $LighterGrey;
+    position: relative;
+    height: 825px;
+    overflow: hidden;
+    margin-left: 10px;
+}
+
+.pIntroDetailcard {
+    height: 1000px;
+    width: 635px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 3px rgb(199, 199, 199);
+    flex-direction: column;
+    padding: 0;
+    overflow: scroll;
+    background: white;
+    margin: 50px 10px;
+}
+.pIntroDetailCardcontent {
+    padding: 0 45px;
+    margin-top: 50px;
+    height: 650px;
+    overflow: scroll;
+}
+.pIntroMaincontenttopictext {
+    color: $PurpleBlue;
+}
+.pExintroTopictext {
+    color: $PurpleBlue;
+}
+
+.pIntroMaincontentdetailtext {
+    margin: 0px 15px 10px 10px;
+    font-family: "Noto Sans TC", sans-serif;
+    font-size: 12px;
+    line-height: 22px;
+    letter-spacing: 2px;
+}
+
+.pExintrocontent {
+    margin: 0px 15px 10px 10px;
+    font-family: "Noto Sans TC", sans-serif;
+    font: size 12px;
+    line-height: 22px;
+    letter-spacing: 2px;
+}
+
+.pIntroPurchaseBar {
+    position: absolute;
+    bottom: 0px;
+    background: white;
+    right: 10px;
+    width: 635px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.PurchaseBarPrice {
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    font-family: "Noto SansTC", sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: #b4a79e;
+}
+
+.PurchaseBarAmount {
+    display: flex;
+    align-items: center;
+}
+
+.PurchaseBarAmountTotal {
+    margin: 0px 15px;
+    font-family: "Noto SansTC", sans-serif;
+    font-size: 36px;
+    color: $primary;
+}
+
+.PurchaseBarCarticon {
+    margin-right: 30px;
+}
+
+.PurchaseBarDiscountPrice {
+    font-size: 20px;
+    color: $primary;
+}
+
+.pSamesearchCard {
+    margin-top: 30px;
+    height: 550px;
+    width: 330px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 3px rgb(199, 199, 199);
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0;
+}
+.pSameSearchimg {
+    background-repeat: no-repeat;
+    width: 330px;
+    height: 395px;
+    background-position: top, center;
+    background-size: cover;
+    overflow: hidden;
+}
+.pSamesearchContent {
+    width: 330px;
+    height: 155px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.pSamesearchLinktopic {
+    text-decoration: none;
+    font-family: "Noto Sans TC", sans-serif;
+    color: #000;
+}
+.pPopCard {
+    margin-top: 30px;
+    height: 550px;
+    width: 330px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 3px rgb(199, 199, 199);
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0;
+}
+
+.pIntroImgContainer {
+    width: 620px;
+}
+
+.pPopImg {
+    background-repeat: no-repeat;
+    width: 330px;
+    height: 395px;
+    background-position: top, center;
+    background-size: cover;
+    overflow: hidden;
+}
+.pPopCardcontent {
+    width: 330px;
+    height: 155px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.pPopLinktopic,
+.pPopLinkprice {
+    text-decoration: none;
+    font-family: "Noto Sans TC", sans-serif;
+    color: #000;
+}
+.pPopPrice {
+    font-weight: 800;
+}
+.pBrandCard {
+    margin-top: 30px;
+    height: 550px;
+    width: 330px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 3px rgb(199, 199, 199);
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0;
+}
+.pIntroBrandImg {
+    background-repeat: no-repeat;
+    width: 330px;
+    height: 395px;
+    background-position: center;
+    background-size: auto;
+    overflow: hidden;
+}
+.pBrandCardcontent {
+    width: 330px;
+    height: 155px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.pBrandLink {
+    text-decoration: none;
+    font-family: "Noto Sans TC", sans-serif;
+    color: #000;
+}

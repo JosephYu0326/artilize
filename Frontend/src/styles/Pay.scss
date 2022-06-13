@@ -1,0 +1,77 @@
+@import "./global.scss";
+
+.pay {
+    div > h6 {
+        color: $WarnYellow !important;
+    }
+}
+//舊的Form 表單樣式
+// .payForm{
+// padding:40px !important;
+// border-bottom: 1px solid $DarkGrey;
+// border-radius: $BorderRadius;
+// box-shadow: $BoxShadow;
+// input {
+//     border: 1px solid $DarkGrey;
+//     border-radius: $BorderRadius;
+// }
+// select{
+//     border-radius: $BorderRadius;
+// }
+// textarea{
+//     border-radius: $BorderRadius;
+// }
+// button{
+//     border-radius: $BorderRadius;
+// }
+// }
+
+//新 Form 表單樣式
+.maxwidth {
+    max-width: 810px;
+    min-width: 330px;
+    margin: 0 auto 40px !important;
+    padding: 40px;
+    border-bottom: 1px solid $DarkGrey;
+    border-radius: $BorderRadius;
+    box-shadow: $BoxShadow;
+
+    input {
+        border: 1px solid $DarkGrey;
+        border-radius: $BorderRadius;
+    }
+    select {
+        border-radius: $BorderRadius;
+    }
+    textarea {
+        border-radius: $BorderRadius;
+    }
+    button {
+        border-radius: $BorderRadius;
+    }
+}
+
+// <576px //手機板才樣式
+@include media-breakpoint-down(sm) {
+    .phoneTitle {
+        max-width: 810px;
+        min-width: 330px;
+        margin: 0 auto 0 !important;
+        padding: 0;
+        text-align: center;
+        border-radius: $BorderRadius;
+        box-shadow: $BoxShadow;
+    }
+
+    // 影藏 Step 進度條
+    // .schedule{
+    //     display: none;
+    // }
+}
+
+// ≥576px //桌機板樣式
+@include media-breakpoint-up(sm) {
+    .phoneTitle {
+        display: none;
+    }
+}

@@ -1,0 +1,406 @@
+@import "../styles/style.scss";
+@import "~bootstrap/scss/bootstrap";
+
+body {
+    display: block;
+    height: 100vh;
+    overflow: auto;
+}
+
+body::-webkit-scrollbar {
+    display: block;
+    width: 0.5em;
+    overflow: scroll;
+    height: 0;
+    background-color: $LightGrey;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: $DarkGrey;
+    border-radius: 10px;
+}
+
+#chatRoomtoggle {
+    cursor: pointer;
+    color: $PurpleBlue;
+    right: 3rem;
+    bottom: 40%;
+}
+
+#chatRoom {
+    position: fixed;
+    bottom: 15%;
+    right: 5%;
+
+    max-width: 500px;
+    margin: auto;
+    background-color: #fff;
+    z-index: 5;
+    overflow: auto;
+}
+#msg-io {
+    height: 300px;
+    width: 332px;
+    overflow: scroll;
+}
+
+#myBubble {
+    background-color: $PurpleBlue;
+    box-shadow: $DarkGrey 1px 1px;
+    color: #fff;
+    border-radius: 15px 15px 0 15px;
+    padding: 10px;
+    margin: 10px;
+    width: 70%;
+    float: right;
+}
+#Bubble {
+    background-color: DarkGrey;
+    color: #fff;
+    border-radius: 0 15px 15px 15px;
+    padding: 10px;
+    margin: 10px;
+    width: 70%;
+    float: left;
+}
+
+.social {
+    padding: 0.5rem 0;
+    color: $MiddleGrey;
+}
+
+.liquid {
+    background-image: url("../images/bg-big.svg"), url("../images/bg-dot.svg");
+    background-repeat: no-repeat;
+    background-position: 100% 45%, 0% 10%;
+}
+
+.liquidLeft {
+    background-image: url("../images/bg-sm.svg");
+    background-repeat: no-repeat;
+    background-position: 45px 80px;
+    background-attachment: fixed;
+}
+
+.backBtn {
+    color: rgb(110, 116, 145);
+    position: fixed;
+    text-align: center;
+    width: 120px;
+    border-radius: 0 10px 10px 0;
+    box-shadow: rgb(110, 116, 145) 2px 2px 4px;
+    margin-top: 50px;
+    margin-left: 0;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.backBtn > a {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.frContent {
+    background-color: #fff;
+    min-height: calc(100vh - 420px);
+    width: 70%;
+    margin: auto;
+    padding: 30px 50px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: rgb(110, 116, 145) 2px 2px 4px;
+    overflow: scroll;
+
+    .likeIt {
+        color: $WarnYellow;
+    }
+
+    .comment {
+        overflow: hidden;
+    }
+
+    .preViewContent {
+        max-height: 20vh;
+        overflow: hidden;
+    }
+
+    .articleDel {
+        color: $WarnYellow;
+    }
+
+    .articleBody {
+        border-top: 1px solid $LightGrey div {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: inherit;
+        }
+    }
+}
+
+.newComment {
+    border: 3px solid rgb(110, 116, 145);
+    border-radius: 20px;
+    padding: 10px;
+}
+
+#inputBox {
+    border: 1px solid rgb(203, 212, 230);
+    border-radius: 20px;
+    height: 3rem;
+}
+
+.avatar {
+    border-radius: 50%;
+    width: 52px;
+}
+
+.replyHr {
+    width: 30%;
+}
+
+// =====FrPersonalPage=====
+.personalPage {
+    .content {
+        width: 80vw;
+        margin: auto;
+    }
+}
+
+.personalPageHead .avatar {
+    border-radius: 50%;
+    width: 100px;
+}
+
+.perContentHead p:only-child {
+    color: rgb(65, 83, 187);
+    align-self: flex-start;
+}
+
+.perContentHead {
+    align-items: center;
+
+    h5 {
+        cursor: pointer;
+    }
+
+    p {
+        margin: 0;
+        color: $MiddleGrey;
+        align-self: flex-start;
+    }
+
+    a:link {
+        color: $DarkGrey;
+        text-decoration: none;
+    }
+
+    a:visited {
+        color: $DarkGrey;
+    }
+}
+
+// ====orderRecord====
+.orderRecord {
+    flex-direction: column;
+
+    .container {
+        flex-direction: column;
+    }
+
+    .orderRecordCard {
+        flex-direction: row;
+        justify-content: between;
+        align-items: center;
+        border-radius: 10px;
+        box-shadow: $BoxShadow;
+
+        .col-md-3 {
+            height: 30vh;
+        }
+
+        button {
+            color: #fff;
+        }
+
+        img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            border-radius: 10px 0 0 10px;
+            margin-right: 10px;
+        }
+    }
+}
+
+// ----coupon----
+.coupon {
+    border: $WarnYellow 0px;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: $BoxShadow;
+
+    .couponImage {
+        text-align: center;
+        min-width: 100px;
+        background-image: url("../images/coupon.svg");
+        background-size: contain;
+        background-repeat: no-repeat;
+        color: #fff;
+        svg {
+            position: relative;
+            transform: translateY(-5px);
+        }
+
+        .couponIcon {
+            font-size: 2rem;
+        }
+        .couponName {
+            position: relative;
+            transform: translateY(-5px);
+            line-height: 24px;
+        }
+    }
+    .usetext {
+        font-size: 16px;
+    }
+
+    .couponMsg {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        .codeName {
+            color: $DarkGrey;
+
+            font-size: 15px;
+        }
+    }
+}
+
+.coupon:hover {
+    background: rgb(242, 242, 242);
+    transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+    .displayN {
+        display: none !important;
+    }
+
+    .frContent {
+        min-height: 75vh;
+        width: 100%;
+        margin: auto;
+        padding: 10px 30px;
+        margin-top: 10px;
+        border-radius: none;
+        box-shadow: none;
+    }
+
+    .articleBody {
+        img {
+            max-width: 100%;
+            // max-height: 100%;
+        }
+    }
+
+    .avatar {
+        border-radius: 50%;
+        width: 32px;
+    }
+
+    .perContentHead {
+        flex-direction: row;
+        align-items: center;
+
+        p {
+            font-size: small;
+        }
+
+        .title {
+            font-size: large;
+        }
+    }
+
+    .personalPage .social {
+        display: none !important;
+    }
+    // ====user====
+    .userPage {
+        h3 {
+            font-family: "Noto Sans TC", sans-serif;
+            color: $DarkGrey;
+            line-height: 22px;
+            text-align: start;
+            font-size: 16px;
+        }
+
+        h5 {
+            font-size: 0.6rem;
+            margin: 0;
+        }
+    }
+
+    .coupon {
+        border: $WarnYellow 0px;
+
+        .couponImage {
+            text-align: center;
+            min-width: 80px;
+            background-image: url("../images/couponBG.svg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            color: #fff;
+
+            .couponIcon {
+                font-size: 2rem;
+            }
+        }
+
+        p {
+            margin: 0;
+        }
+
+        .couponMsg h5:first-child {
+            font-size: 1rem;
+            margin: 0;
+        }
+    }
+
+    // ====orderRecord====
+    .orderRecord {
+        .container {
+            flex-direction: row;
+        }
+
+        .orderRecordCard {
+            width: 33vw;
+            flex-direction: column;
+            justify-content: between;
+            align-items: center;
+            border-radius: 10px;
+
+            .col-md-3 {
+                height: 13vh;
+            }
+
+            h4 {
+                font-size: 1rem;
+            }
+
+            .orderTxt {
+                font-size: 0.8rem;
+            }
+
+            img {
+                width: 33vw;
+                height: 7rem;
+                padding: 0;
+                border-radius: 10px 10px 0 0;
+            }
+        }
+    }
+}

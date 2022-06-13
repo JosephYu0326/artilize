@@ -1,0 +1,387 @@
+@import "./style.scss";
+@import "../styles/global.scss";
+@import "./Calendar.scss";
+
+.ex-frame {
+    display: flex;
+    flex-direction: row;
+    // 左半邊
+    .intro-imgframe {
+        height: calc(100vh - 107px);
+        width: 40%;
+        overflow: hidden;
+        z-index: -1;
+    }
+    .exhibition-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .overview {
+        margin: 0 auto;
+        padding: 20px;
+        position: absolute;
+        width: 30%;
+        bottom: 10%;
+        left: 5%;
+        color: #fff;
+        background: rgba(#6e7491, 0.5);
+        display: flex;
+        flex-direction: column;
+    }
+    .titleframe {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    // 右半邊
+    .content-background {
+        width: 60%;
+        height: calc(100vh - 176px);
+        background: #eee;
+        padding: 30px;
+        overflow: scroll;
+    }
+    .content-page {
+        border-radius: 20px;
+        width: 100%;
+        background: #fff;
+        overflow: hidden;
+    }
+    .contentpadding {
+        padding: 40px;
+    }
+    .content-introduce {
+        white-space: pre-wrap;
+    }
+
+    .expand-link {
+        text-decoration: none;
+        color: #fff;
+    }
+    .testlink {
+        // background-color: aqua;
+        height: 100px;
+        top: 0;
+        position: absolute;
+        width: 100%;
+        text-decoration: none;
+        color: black;
+    }
+
+    .plusIcon1 {
+        height: 20px;
+        width: 5px;
+        background: #fff;
+        transition: transform 0.3s;
+        &.expand {
+            transform: rotate(-90deg);
+        }
+    }
+    .plusIcon2 {
+        height: 20px;
+        width: 5px;
+        background: #fff;
+        transform: rotate(90deg);
+        position: absolute;
+        transition: opacity 0.3s;
+        &.expand {
+            opacity: 0;
+        }
+    }
+    .information-frame {
+        z-index: -1;
+    }
+
+    .information-frame > div:not(:last-child) {
+        border-bottom: 4px #fff solid;
+    }
+
+    .optionframe {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 30px;
+        background: $PurpleBlue;
+    }
+    .optionframe:hover {
+        background: rgb(2, 21, 116);
+        opacity: 0.8;
+    }
+    .option-expand {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+    .optionText {
+        width: 100%;
+        height: 0;
+        transition: height 0.5s;
+
+        .textheight {
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 15px;
+            margin: 0;
+            width: 100%;
+            white-space: pre-wrap;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: 0.5s;
+            &.expand {
+                opacity: 1;
+            }
+        }
+        &.expand {
+            height: auto;
+        }
+    }
+}
+
+.book-set {
+    display: flex;
+    flex-direction: column;
+    .book-title {
+        margin-bottom: 10px;
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        h3 {
+            margin: 0;
+        }
+        .title-frame {
+            width: 300px;
+            text-align: center;
+        }
+    }
+}
+.closeBtn {
+    width: 40px;
+    border-radius: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.ticket-frame {
+    display: flex;
+    flex-wrap: wrap;
+    width: 240px;
+    // height: 120px;
+    justify-content: space-between;
+    align-items: center;
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 50px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}
+
+.book-window-frame {
+    position: fixed;
+    display: flex;
+    z-index: 6;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    .museumText {
+        font-size: 22px;
+        color: $PurpleBlue;
+        margin-bottom: 5px;
+    }
+}
+
+.book-window {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    position: fixed;
+    z-index: 4;
+    padding: 30px;
+    border-radius: 20px;
+    border: #b4a79e solid 1px;
+    background: #fff;
+    width: 700px;
+    border-radius: 20px;
+
+    .ticket {
+        width: 100px;
+        background: #6e7491;
+        border-radius: 30px;
+        border: 0;
+        color: #fff;
+        &.selected {
+            background: #cbd4e6;
+            color: #6e7491;
+            border: 0;
+        }
+    }
+    .information {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 300px;
+
+        .count {
+            display: flex;
+            width: 200px;
+            justify-content: space-between;
+        }
+        .btn-frame {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 140px;
+
+            button {
+                width: 40px;
+                height: 40px;
+                border: 1.5px solid black;
+                border-radius: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+        .line {
+            width: 260px;
+            height: 1px;
+            background: black;
+        }
+    }
+}
+
+.bottom-navbar {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 60%;
+    height: 88px;
+    border-top: 1px solid gray;
+    background: #fff;
+    z-index: 2;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .bottom-btn-frame {
+        width: 400px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .bottom-btn {
+        border: 2px solid $PurpleBlue;
+        display: flex;
+        align-items: center;
+        font-size: 22px;
+        font-weight: bold;
+        svg {
+            font-size: 34px;
+        }
+    }
+    .book-btn {
+        width: 100px;
+        color: #fff;
+    }
+}
+
+// RWD
+
+@media (max-width: 768px) {
+    .ex-frame {
+        flex-direction: column;
+        .intro-imgframe {
+            width: 100%;
+            height: 40vh;
+        }
+        .overview {
+            bottom: 60%;
+            width: 60%;
+            .titleframe div {
+                font-size: 16px;
+            }
+            .dateText {
+                font-size: 14px;
+            }
+            .locationText {
+                font-size: 14px;
+            }
+        }
+        .content-background {
+            width: 100%;
+        }
+    }
+    .bottom-navbar {
+        width: 100%;
+        position: -webkit-sticky;
+        position: sticky;
+        bottom: 0;
+        .bottom-btn-frame {
+            justify-content: space-around;
+            a {
+                font-size: 14px;
+            }
+        }
+        .bottom-btn svg {
+            font-size: 16px;
+        }
+        button {
+            font-size: 14px;
+            width: 80px;
+            margin-right: 20px;
+        }
+    }
+    .textheight {
+        font-size: 12px;
+    }
+    .optionframe div {
+        font-size: 20px;
+    }
+
+    .searchinput {
+        width: 400px !important;
+    }
+    .book-set {
+        height: 100%;
+        width: 100%;
+    }
+    .book-title {
+        flex-direction: column;
+    }
+    .book-window {
+        width: 320px;
+        height: 500px;
+        overflow: scroll;
+    }
+    .date-content-frame {
+        flex-direction: column;
+    }
+    .information {
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+    .museumText {
+        font-size: 22px;
+        margin-bottom: 5px;
+        color: rgb(127, 127, 127) !important;
+    }
+    .title-text {
+        color: $PurpleBlue;
+    }
+}

@@ -1,0 +1,68 @@
+@import "./global.scss";
+
+.usersRow {
+    height: calc(100vh - 93.9px);
+}
+.usersliquid {
+    background: url("http://localhost:5000/images/liquid.svg") no-repeat;
+}
+
+.usersBackground {
+    background-color: #ffffff;
+    box-shadow: $BoxShadow;
+}
+
+.usersContentcolor {
+    color: $DarkGrey;
+}
+.usersRow1 {
+    height: calc(100vh - 390px - 93.9px);
+}
+.S9gUrf-YoZ4jf {
+    display: flex;
+    justify-content: center;
+}
+.usersData {
+    min-width: 568px !important;
+}
+
+.btnFacebook {
+    width: 300px;
+}
+
+@media (max-width: 570px) {
+    .usersData {
+        min-width: 368px !important;
+    }
+    .usersRow1 {
+        height: 120vh;
+    }
+}
+.weather {
+    color: $primary;
+}
+.loginBorder {
+    color: $LightGrey;
+    text-align: center;
+    bottom: 40px;
+    left: 40px;
+    right: 40px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.loginInnertText::before,
+.loginInnertText::after {
+    content: "";
+    display: inline-block;
+    width: 200px;
+    height: 1px;
+    background: $LightGrey;
+    vertical-align: middle;
+}
+.loginInnertText::before {
+    margin-right: 16px;
+}
+
+.loginInnertText::after {
+    margin-left: 16px;
+}

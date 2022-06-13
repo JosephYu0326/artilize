@@ -1,0 +1,155 @@
+@import "./global.scss";
+
+.mapSearchList {
+    flex-direction: column;
+    justify-content: evenly;
+    align-items: stretch;
+    // border: 1px solid black;
+    .mapSearchBar {
+        // margin-top: 12px;
+        max-width: 454px;
+
+        gap: 16px;
+        form {
+            border: 1px solid $DarkGrey;
+            border-radius: 37px;
+            box-shadow: $BoxShadow;
+            background-color: #fff;
+            width: 100%;
+            height: 51px;
+
+            input {
+                background: transparent;
+                border: 1px solid transparent;
+                width: 85%;
+                height: 44px;
+                // border: 1px solid black;
+            }
+
+            input:focus {
+                outline: none;
+            }
+
+            button {
+                text-indent: -999px;
+                overflow: hidden;
+                width: 42px;
+                padding: 0;
+                margin: 0;
+                border: none;
+                background: transparent url(../../src/images/searchIcon.svg) no-repeat center;
+                cursor: pointer;
+                opacity: 0.7;
+            }
+        }
+    }
+    .mapButton {
+        button {
+            border-radius: $BorderRadius;
+        }
+    }
+    a:-webkit-any-link {
+        text-decoration: none;
+        color: black;
+    }
+    #scrollableDiv::-webkit-scrollbar {
+        display: none;
+    }
+    #scrollableDiv {
+        height: 77.5vh;
+        overflow: auto;
+    }
+    .card {
+        max-width: 454px;
+        min-height: 139px;
+        border-radius: $BorderRadius;
+        box-shadow: $BoxShadow;
+
+        .card-body {
+            height: 139px;
+        }
+        img {
+            border-radius: 20px 0 0 20px;
+            width: 100%;
+            height: 139px;
+            object-fit: cover;
+        }
+
+        .row {
+            max-width: 454px;
+        }
+    }
+    .mapCardActive {
+        border: 2px solid red;
+    }
+}
+.gm-style-iw,
+.gm-style-iw-c,
+.gm-style-iw-d {
+    padding: 0px !important;
+}
+.gm-style-iw-d {
+    overflow: hidden !important;
+    max-width: 454px !important;
+}
+.mapSearchMap {
+    // border: 1px solid black;
+
+    .card {
+        max-width: 454px;
+        min-height: 139px;
+        border-radius: $BorderRadius;
+        box-shadow: $BoxShadow;
+    }
+    .card-body {
+        max-height: 200px;
+        max-width: 204px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #scrollableDiv {
+        width: 100vw;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 50vh;
+        overflow-y: scroll;
+        .scrollCard {
+            height: 50vh;
+        }
+    }
+    .mapSearchList {
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+
+        .mapSearchBar {
+            max-width: 80vw;
+        }
+        .card {
+            width: 70vw;
+            margin: 0 20px;
+            height: 40vh;
+            border-radius: $BorderRadius;
+            box-shadow: $BoxShadow;
+            img {
+                width: inherit;
+                height: 20vh;
+                border-radius: 20px 20px 0 0;
+            }
+            .row {
+                height: 40vh;
+            }
+        }
+        .card-body {
+            max-height: 200px;
+            max-width: 204px !important;
+        }
+    }
+    .mapSearchMap {
+        div {
+            width: 100vw;
+        }
+    }
+}
