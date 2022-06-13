@@ -13,8 +13,8 @@ function B2BStartCount(props) {
           <div className="p-2 flex-grow-1 bd-highlight ">
             共 {startNumberEx} 檔展覽活動
           </div>
-          <div className="p-2 bd-highlight">開始時間</div>
-          <div className="p-2 bd-highlight">建立時間</div>
+          <div className="p-2 bd-highlight"></div>
+          <div className="p-2 bd-highlight"></div>
         </div>
       </div>
     </>
