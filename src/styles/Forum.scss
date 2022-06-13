@@ -1,5 +1,5 @@
-@import "../styles/style.scss";
-@import "~bootstrap/scss/bootstrap";
+@import '../styles/style.scss';
+@import '~bootstrap/scss/bootstrap';
 
 body {
   display: block;
@@ -9,10 +9,10 @@ body {
 
 body::-webkit-scrollbar {
   display: block;
-  width: 1em;
+  width: 0.5em;
   overflow: scroll;
   height: 0;
-  background-color: $LightGrey
+  background-color: $LightGrey;
 }
 
 body::-webkit-scrollbar-thumb {
@@ -31,24 +31,47 @@ body::-webkit-scrollbar-thumb {
   position: fixed;
   bottom: 15%;
   right: 5%;
+  max-width: 500px;
   margin: auto;
-  background-color: #FFF;
+  background-color: #fff;
   z-index: 5;
 }
+#msg-io {
+  width: 332px;
+}
 
+#myBubble {
+  background-color: $PurpleBlue;
+  box-shadow: $DarkGrey 1px 1px;
+  color: #fff;
+  border-radius: 15px 15px 0 15px;
+  padding: 10px;
+  margin: 10px;
+  width: 70%;
+  float: right;
+}
+#Bubble {
+  background-color: DarkGrey;
+  color: #fff;
+  border-radius: 0 15px 15px 15px;
+  padding: 10px;
+  margin: 10px;
+  width: 70%;
+  float: left;
+}
 
 .social {
   color: $MiddleGrey;
 }
 
 .liquid {
-  background-image: url("../images/bg-big.svg"), url("../images/bg-dot.svg");
+  background-image: url('../images/bg-big.svg'), url('../images/bg-dot.svg');
   background-repeat: no-repeat;
   background-position: 100% 45%, 0% 10%;
 }
 
 .liquidLeft {
-  background-image: url("../images/bg-sm.svg");
+  background-image: url('../images/bg-sm.svg');
   background-repeat: no-repeat;
   background-position: 45px 80px;
   background-attachment: fixed;
@@ -67,7 +90,7 @@ body::-webkit-scrollbar-thumb {
   cursor: pointer;
 }
 
-.backBtn>a {
+.backBtn > a {
   cursor: pointer;
   text-decoration: none;
 }
@@ -187,7 +210,6 @@ body::-webkit-scrollbar-thumb {
     border-radius: 10px;
     box-shadow: $BoxShadow;
 
-
     .col-md-3 {
       height: 30vh;
     }
@@ -214,7 +236,7 @@ body::-webkit-scrollbar-thumb {
   .couponImage {
     text-align: center;
     min-width: 100px;
-    background-image: url("../images/couponBG.svg");
+    background-image: url('../images/couponBG.svg');
     background-size: contain;
     background-repeat: no-repeat;
     color: #fff;
@@ -228,7 +250,7 @@ body::-webkit-scrollbar-thumb {
     color: $PurpleBlue;
   }
 
-  .couponMsg>p {
+  .couponMsg > p {
     color: $DarkGrey;
   }
 }
@@ -267,7 +289,6 @@ body::-webkit-scrollbar-thumb {
   }
 
   .perContentHead {
-
     flex-direction: row;
     align-items: center;
 
@@ -287,7 +308,7 @@ body::-webkit-scrollbar-thumb {
   // ====user====
   .userPage {
     h3 {
-      font-family: "Noto Sans TC", sans-serif;
+      font-family: 'Noto Sans TC', sans-serif;
       color: $DarkGrey;
       line-height: 22px;
       text-align: start;
@@ -306,7 +327,7 @@ body::-webkit-scrollbar-thumb {
     .couponImage {
       text-align: center;
       min-width: 80px;
-      background-image: url("../images/couponBG.svg");
+      background-image: url('../images/couponBG.svg');
       background-size: contain;
       background-repeat: no-repeat;
       color: #fff;
@@ -348,7 +369,7 @@ body::-webkit-scrollbar-thumb {
       }
 
       .orderTxt {
-        font-size: .8rem;
+        font-size: 0.8rem;
       }
 
       img {

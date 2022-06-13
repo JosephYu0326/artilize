@@ -92,7 +92,7 @@ function AddArticle(props) {
       'Content-Type': false,
     },
   }
-  // function Upload({`${process.env.REACT_APP_API_URL}/upload`)
+  
   const editorOBJ = {
     automatic_uploads: true,
     file_picker_types: 'image',

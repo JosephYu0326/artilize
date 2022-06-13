@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import $ from 'jquery'
 import { io } from 'socket.io-client'
 import { FaRocketchat } from 'react-icons/fa'
-import { Alert, Button, Form, FormControl, InputGroup } from 'react-bootstrap'
+import { Button, Form, FormControl, InputGroup } from 'react-bootstrap'
 
 function Chat() {
   let socket = null
   useEffect(() => {
-    const userId = localStorage.getItem('userAccount')
+    const userAccount = localStorage.getItem('userAccount')
     const msgInput = document.getElementById('msg-input')
     if (socket) return
     socket = io('http://localhost:1337')
@@ -15,8 +15,11 @@ function Chat() {
       displayMessage(`您已連線`)
       $('#connect-status').text('已連線')
     })
-    socket.on('receive-message', (userId, message) => {
-      displayMessage(`${userId}:${message}`)
+    socket.on('receive-message', (userAccount, message) => {
+      const myId = localStorage.getItem('userAccount')
+      if (userAccount !== myId) {
+        displayMessage(`ssss${userAccount}: ${message}`)
+      }
     })
 
     $('#form1').submit((e) => {
@@ -24,17 +27,28 @@ function Chat() {
       const message = msgInput.value
 
       if (message === '') return
-      displayMessage(`${userId}: ${message}`)
-      console.log(`${userId}, ${message}`)
-      socket.emit('send-message', message, userId)
+      displayMessage(`${userAccount}:  ${message}`)
+      console.log(`${userAccount}, ${message}`)
+      socket.emit('send-message', message, userAccount)
       msgInput.value = ''
     })
   }, [])
 
   function displayMessage(message) {
-    const div = document.createElement('div')
-    div.textContent = message
-    document.getElementById('msg-io').append(div)
+    const userAccount = localStorage.getItem('userAccount')
+    const id = message.split(':')
+    console.log(id)
+    if (id[0] === userAccount) {
+      const div = document.createElement('div')
+      div.setAttribute('id', 'myBubble')
+      div.textContent = message
+      document.getElementById('msg-io').append(div)
+    } else {
+      const div = document.createElement('div')
+      div.setAttribute('id', 'Bubble')
+      div.textContent = message
+      document.getElementById('msg-io').append(div)
+    }
   }
   const auth = localStorage.getItem('auth')
   const [show, setShow] = useState('none')
