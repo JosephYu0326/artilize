@@ -132,7 +132,7 @@ function Forum(props) {
           //把傳進來的資料更改為執行SQL語句後的結果
           setTimeout(() => {
             setIsLoading(false)
-          }, 1200)
+          }, 1000)
           setArticleList(data)
         })
     }

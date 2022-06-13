@@ -129,7 +129,7 @@ function MapSearch(props) {
             >
               <div className="row g-0">
                 <div className="col-md-3 col-sm-12 mapImg">
-                {/* 李義弘回顧展圖片 */}
+                  {/* 李義弘回顧展圖片 */}
                   <img
                     src={`${process.env.REACT_APP_API_URL}/images/exhibition01.jpg`}
                     className=""
@@ -156,7 +156,7 @@ function MapSearch(props) {
           </div>
         )
       })}
-      <div className='displayN' style={{ height: '61vh' }}></div>
+      <div className="displayN" style={{ height: '61vh' }}></div>
     </div>
   )
   const region = ['北部', '中部', '南部', '東部', '離島']
@@ -285,7 +285,7 @@ function MapSearch(props) {
                           .firstChild.scrollIntoView({
                             behavior: 'smooth',
                             block: 'start',
-                            inline: 'start',
+                            //inline: 'start',
                           })
                       } else {
                         setDatas([])
@@ -305,7 +305,10 @@ function MapSearch(props) {
             <GoogleMap
               center={center}
               zoom={14}
-              mapContainerStyle={{ width: '100vw', height: `calc(100vh - 95px)` }}
+              mapContainerStyle={{
+                width: '100vw',
+                height: `calc(100vh - 95px)`,
+              }}
               options={{
                 streetViewControl: false,
                 mapTypeControl: false,
