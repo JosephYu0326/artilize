@@ -335,9 +335,7 @@ function Pay(props) {
                 />
                 {/* <h6>請輸入正確的email</h6> */}
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                <Form.Control.Feedback>
-                  {' '}
-                  type="invalid">
+                <Form.Control.Feedback type="invalid">
                   <h6>請輸入正確的email</h6>
                 </Form.Control.Feedback>
               </div>
