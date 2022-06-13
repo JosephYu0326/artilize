@@ -164,10 +164,16 @@ function Category(props) {
           alt=""
         />
       </div>
-      <Container style={{ margiLleft: '400px' }}>
+      <Container
+        style={{
+          marginTop: '80px',
+          marginLeft: '400px',
+          marginBottom: '900px',
+        }}
+      >
         <div className="row row-cols-xxl-3 row-cols-2">{pCategoryCards}</div>
       </Container>
-      <Footer />
+      <Footer style={{ marginTop: '80px' }} />
     </>
   )
 }

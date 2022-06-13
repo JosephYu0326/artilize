@@ -8,13 +8,13 @@ import Accordion from '../../../../component/Accordion'
 import Footer from '../../../../component/Footer'
 import { Link } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
-import { API_GET_DATA, API_GET_IMG } from '../../constants'
+import { API_GET_DATA, API_GET_IMG, API_GET_BIMG } from '../../constants'
 import p_adImages from '../../../../images/product_Images/ad/test_2.jpeg'
-import p_Images from '../../../../images/product_Images/product/tea_L2.jpg'
+// import p_Images from '../../../../images/product_Images/product/tea_L2.jpg'
 // import p_brandImages from '../../images/product_Images/brand/nationalpalace.png'
 // import p_saleImages from '../../../../images/product_Images/product/whiteveg.jpeg'
 import p_saleIconsfreight from '../../../../images/product_Images/icons/freeFreight.png'
-import p_saleIconsdiscount from '../../../../images/product_Images/icons/sale.png'
+// import p_saleIconsdiscount from '../../../../images/product_Images/icons/sale.png'
 
 function Home(props) {
   // const ptCards = ['1', '2', '3']
@@ -23,7 +23,7 @@ function Home(props) {
   // const pBrandImg = { backgroundImage: `url(${p_brandImages})` }
   // const ptSaleCards = ['1', '2', '3']
   // const pSaleImg = { backgroundImage: `url(${p_saleImages})` }
-  const pInCartImg = { backgroundImage: `url(${p_Images})` }
+  // const pInCartImg = { backgroundImage: `url(${p_Images})` }
 
   const [pCardData, setData] = useState([])
   const fetchData = async () => {
@@ -109,14 +109,14 @@ function Home(props) {
   // })
 
   const pBrandCards = pBrandData.map(
-    ({ product_brand_id, product_brand_name, product_brand_img }, b) => {
+    ({ product_brand_name, product_brand_img }, b) => {
       return (
         <div key={b}>
           <div className="pBrandCard">
             <div className="pBrandCardImgcontent">
               <Link to="/Product/Introduce">
                 <img
-                  src={`${API_GET_IMG}/${product_brand_img}`}
+                  src={`${API_GET_BIMG}/${product_brand_img}`}
                   className="pBrandCardImg"
                   alt=""
                 ></img>
@@ -191,13 +191,13 @@ function Home(props) {
                   alt=""
                 ></img>
               </div>
-              <div>
+              {/* <div>
                 <img
                   className="pMoresaleCardContentSaleIconImg"
                   src={p_saleIconsdiscount}
                   alt=""
                 ></img>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -266,7 +266,7 @@ function Home(props) {
             style={{ marginRight: '100px' }}
           >
             <h5 className="ExtraBold pCardTopictext d-flex justify-content-center">
-              熱銷 TOP10
+              熱銷推推
             </h5>
           </div>
           <div className="row row-cols-xxl-3 row-cols-2">{pCards}</div>
