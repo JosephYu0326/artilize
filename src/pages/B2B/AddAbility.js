@@ -198,7 +198,6 @@ function AddAbility(props) {
         icon: 'error',
         title: '請選擇圖檔',
         text: '請選兩張圖片上傳',
-        // footer: '<a href="">Why do I have this issue?</a>',
       })
     }
   }
