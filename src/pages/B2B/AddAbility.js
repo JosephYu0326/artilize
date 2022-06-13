@@ -600,12 +600,12 @@ function AddAbility(props) {
                     setAmount(e.target.value)
                   }}
                   required
-                  pattern="/[0-9]/"
+                  pattern="^[0-9]*$"
                   maxLength="4"
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 <Form.Control.Feedback type="invalid">
-                  <h6>請輸入數字</h6>
+                  <h6>數字最多四位數</h6>
                 </Form.Control.Feedback>
               </div>
             </div>
@@ -625,12 +625,12 @@ function AddAbility(props) {
                     setPrice(e.target.value)
                   }}
                   required
-                  pattern="/[0-9]/"
+                  pattern="^[0-9]*$"
                   maxLength="4"
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 <Form.Control.Feedback type="invalid">
-                  <h6>請輸入數字</h6>
+                  <h6>數字最多四位數</h6>
                 </Form.Control.Feedback>
               </div>
             </div>
