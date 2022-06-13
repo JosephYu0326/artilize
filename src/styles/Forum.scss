@@ -31,13 +31,17 @@ body::-webkit-scrollbar-thumb {
   position: fixed;
   bottom: 15%;
   right: 5%;
+  
   max-width: 500px;
   margin: auto;
   background-color: #fff;
   z-index: 5;
+  overflow: auto;
 }
 #msg-io {
+  height: 300px;
   width: 332px;
+  overflow: scroll;
 }
 
 #myBubble {
@@ -61,6 +65,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .social {
+  padding:.5rem 0;
   color: $MiddleGrey;
 }
 

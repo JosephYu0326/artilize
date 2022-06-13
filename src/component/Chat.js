@@ -50,6 +50,8 @@ function Chat() {
       div.textContent = message
       document.getElementById('msg-io').append(div)
     }
+    // let toBT = document.getElementById('#msg-io')
+    // toBT.scrollTop = toBT.scrollHeight
   }
   const auth = localStorage.getItem('auth')
   const [show, setShow] = useState('none')
@@ -84,14 +86,13 @@ function Chat() {
       >
         <div className="row">
           <div className="p-5">
-            <Button
-              variant="outline-primary"
+            <div
               id="disconnect-btn"
-              className="float-end"
+              className="float-end user-select-none"
               onClick={closeChatRoom}
             >
-              X
-            </Button>
+              ✖
+            </div>
             <h4 className="text-center pb-3">即時討論區</h4>
             <h5>
               <span

@@ -14,7 +14,7 @@ function Article(props) {
             <div className="text-start d-flex align-items-center ">
               <div>
                 <img
-                  className="avatar m-1"
+                  className="avatar m-1 user-select-none"
                   src={` ${process.env.REACT_APP_API_URL}/images/${articleDetails[i].userAvatar}`}
                   alt="User Avartar"
                 />
