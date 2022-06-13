@@ -3,7 +3,7 @@ import Accordion from '../../component/Accordion'
 import '../../styles/Accordion.scss'
 //廠商後臺
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import { useState, useEffect } from 'react'
 
@@ -56,6 +56,7 @@ import '../../styles/B2BListe.scss'
 //   })
 // }
 function B2B(props) {
+  const history = useHistory()
   //react boostrap
   const [key, setKey] = useState('start')
   //
@@ -154,7 +155,10 @@ function B2B(props) {
       .then(() => {
         const newExhibitionInorder = [...data1].filter((v, i) => {
           console.log('v.id', v.id)
+          return v.id !== id
         })
+
+        console.log(newExhibitionInorder)
 
         setDate1(newExhibitionInorder)
       })
@@ -194,7 +198,9 @@ function B2B(props) {
       <Container>
         <Header />
         <div>廠商後臺</div>
-        <Link to="/b2b/addability">建立新活動資料</Link>
+        <Link to="/b2b/addability" className="btn btn-primary">
+          建立新活動資料
+        </Link>
 
         <Row>
           <Col>
