@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Spinner } from 'react-bootstrap'
 import { Link, useLocation, useParams } from 'react-router-dom'
 import { Waypoint } from 'react-waypoint'
 import FadeIn from 'react-fade-in'
@@ -10,9 +11,16 @@ import Footer from '../../component/Footer'
 import Article from '../../component/Article'
 import Chat from '../../component/Chat'
 
-
 function Forum(props) {
-  // const [isLoading, setIsLoading] = useState(true)
+  const forumSpinner = (
+    <div
+      style={{ height: '77.5vh', overflow: 'auto' }}
+      className="d-flex justify-content-center align-items-center"
+    >
+      <Spinner animation="border" variant="primary" />
+    </div>
+  )
+  const [isLoading, setIsLoading] = useState(true)
   const location = useLocation()
   const urlSearchParams = new URLSearchParams(location.search)
   const currentTopic = urlSearchParams.get('topic')
@@ -86,6 +94,9 @@ function Forum(props) {
       .then((data) => {
         setArticleList(data)
       })
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 1200)
   }, [currentTopic])
 
   // ============
@@ -96,7 +107,7 @@ function Forum(props) {
       .then((res) => res.json())
       .then((data) => {
         setArticleList(data)
-        console.log('infinity');
+        console.log('infinity')
         setPage(page + 3)
       })
   }
@@ -105,6 +116,7 @@ function Forum(props) {
   //文章搜尋
   useEffect(() => {
     if (serchInput) {
+      setIsLoading(true)
       fetch(`${process.env.REACT_APP_API_URL}/Forum/search`, {
         method: 'post',
         headers: {
@@ -118,12 +130,13 @@ function Forum(props) {
         .then((res) => res.json())
         .then((data) => {
           //把傳進來的資料更改為執行SQL語句後的結果
+          setTimeout(() => {
+            setIsLoading(false)
+          }, 1200)
           setArticleList(data)
         })
     }
   }, [serchInput])
-
-
 
   return (
     // <>
@@ -151,20 +164,29 @@ function Forum(props) {
     <>
       <Chat />
       <Header data={articleList} setSerchInput={setSerchInput} />
-
       <ForumAside btn={btn} />
-      <FadeIn className="container h-100">
-        <div className="frContent">
-          {articleList.length == 0 ? (
-            <div className="txtGray d-flex justify-content-center">找不到相關文章</div>
-          ) : (
-            <Article articDetails={articleList} fetchComments={fetchComments} />
-          )}
-        </div>
-      </FadeIn>
-
-      <Footer />
-      <Waypoint onEnter={fetchComments} />
+      {isLoading ? (
+        forumSpinner
+      ) : (
+        <>
+          <FadeIn className="container h-100">
+            <div className="frContent">
+              {articleList.length == 0 ? (
+                <div className="txtGray d-flex justify-content-center">
+                  找不到相關文章
+                </div>
+              ) : (
+                <Article
+                  articDetails={articleList}
+                  fetchComments={fetchComments}
+                />
+              )}
+            </div>
+          </FadeIn>
+          <Footer />
+          <Waypoint onEnter={fetchComments} />
+        </>
+      )}
     </>
   )
 }

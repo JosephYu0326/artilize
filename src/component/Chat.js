@@ -31,11 +31,6 @@ function Chat() {
       console.log(`${userAccount}, ${message}`)
       socket.emit('send-message', message, userAccount)
       msgInput.value = ''
-      document.getElementById(`myBubble`).scrollIntoView({
-        behavior: 'smooth',
-        block: 'end',
-        //inline: 'start',
-      })
     })
   }, [])
 
