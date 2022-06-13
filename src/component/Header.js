@@ -173,15 +173,15 @@ function Header(props) {
                       </figure>
                     </div>
                   </Link>
-                  <div class="weatherDropdown">
-                    <button class="weatherDropbtn btn d-flex align-items-center p-0">
+                  <div className="weatherDropdown">
+                    <button className="weatherDropbtn btn d-flex align-items-center p-0">
                       <img
                         src={` http://openweathermap.org/img/wn/${icon}.png`}
                         alt=""
                       />
                       <h6 className="mb-0">高雄市 {temp}°C</h6>
                     </button>
-                    <div class="weatherDropdown-content">
+                    <div className="weatherDropdown-content">
                       <Weather />
                     </div>
                   </div>
