@@ -121,8 +121,8 @@ function AddAbility(props) {
   const [ticketDescription, setTicketDescription] = useState('')
 
   const fileChangeHandler = (e) => {
-    // console.log(e.target.files[0])
-    // console.log(e.target.files.length)
+    console.log(e.target.files[0])
+    console.log(e.target.files.length)
     if (e.target.files.length > 0) {
       let fileNames = []
       for (let a = 0, max = e.target.files.length; a < max; a++) {
@@ -181,8 +181,8 @@ function AddAbility(props) {
       e.stopPropagation()
       Swal.fire({
         icon: 'error',
-        title: 'Error',
-        text: 'error',
+        title: '請輸入表格',
+        text: '錯誤',
       })
       return
     }
@@ -222,17 +222,17 @@ function AddAbility(props) {
   //boostrap 表單驗證
   //const [validated, setValidated] = useState(false)
 
-  const handleSubmit = (event) => {
-    console.log('handleSubmit')
-    const form = event.currentTarget
-    if (form.checkValidity() === false) {
-      event.preventDefault()
-      event.stopPropagation()
-    }
+  // const handleSubmit = (event) => {
+  //   console.log('handleSubmit')
+  //   const form = event.currentTarget
+  //   if (form.checkValidity() === false) {
+  //     event.preventDefault()
+  //     event.stopPropagation()
+  //   }
 
-    document.getElementById('myForm').validated = true
-    // setValidated(true)
-  }
+  //   document.getElementById('myForm').validated = true
+  //   // setValidated(true)
+  // }
 
   return (
     <>
@@ -326,7 +326,7 @@ function AddAbility(props) {
                 <Form.Control.Feedback type="invalid">
                   <h6>請輸入正確的姓名</h6>
                 </Form.Control.Feedback>
-                <h6>請輸入活動名稱</h6>
+                {/* <h6>請輸入活動名稱</h6> */}
               </div>
             </div>
             <div className="col-12">
@@ -404,7 +404,10 @@ function AddAbility(props) {
             <h3>活動地點</h3>
             <div className="col-6">
               <section>
-                <select
+                <Form.Control
+                  required
+                  as="select"
+                  custom
                   className="form-select"
                   name="direction"
                   id="direction"
@@ -421,13 +424,16 @@ function AddAbility(props) {
                       </option>
                     )
                   })}
-                </select>
+                </Form.Control>
                 <h6>請選擇地區</h6>
               </section>
             </div>
             <div className="col-6">
               <section>
-                <select
+                <Form.Control
+                  required
+                  as="select"
+                  custom
                   className="form-select"
                   name="fkCityId"
                   id="city"
@@ -444,14 +450,17 @@ function AddAbility(props) {
                       </option>
                     )
                   })}
-                </select>
+                </Form.Control>
                 <h6>請選擇鄉鎮市區</h6>
               </section>
             </div>
             <h3>活動類型與館方</h3>
             <div className="col-6">
               <section>
-                <select
+                <Form.Control
+                  required
+                  as="select"
+                  custom
                   className="form-select"
                   name="fkKindId"
                   id="fkKindId"
@@ -468,13 +477,19 @@ function AddAbility(props) {
                       </option>
                     )
                   })}
-                </select>
-                <h6>請選擇活動類型</h6>
+                </Form.Control>
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  <h6>請選擇活動類型</h6>
+                </Form.Control.Feedback>
               </section>
             </div>
             <div className="col-6">
               <section>
-                <select
+                <Form.Control
+                  required
+                  as="select"
+                  custom
                   className="form-select"
                   name="fkMuseumId"
                   id="museum"
@@ -491,8 +506,11 @@ function AddAbility(props) {
                       </option>
                     )
                   })}
-                </select>
-                <h6>請選擇館方</h6>
+                </Form.Control>
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  <h6>請選擇館方</h6>
+                </Form.Control.Feedback>
               </section>
             </div>
 
@@ -505,7 +523,9 @@ function AddAbility(props) {
                 >
                   活動內容介紹
                 </label>
-                <textarea
+                <Form.Group
+                  required
+                  as="textarea"
                   className="form-control"
                   id="exampleFormControlTextarea1"
                   rows="10"
@@ -514,9 +534,16 @@ function AddAbility(props) {
                   onChange={(e) => {
                     setActivities(e.target.value)
                   }}
+                  minLength="10"
                 />
                 <div className="row ">
-                  <div className="col-6">{/* <h6>請輸入50個字以上</h6> */}</div>
+                  <div className="col-6">
+                    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">
+                      <h6>請輸入正確的姓名</h6>
+                    </Form.Control.Feedback>
+                    {/* <h6>請輸入50個字以上</h6> */}
+                  </div>
                   <div className="col-6 text-end">
                     {/* <h6>顯示字數</h6> */}
                   </div>
@@ -537,13 +564,19 @@ function AddAbility(props) {
                   className="form-control"
                   id="ticketName"
                   name="name"
-                  placeholder="活動名稱"
+                  placeholder="票券名稱"
                   value={ticketName}
                   onChange={(e) => {
                     setTicketName(e.target.value)
                   }}
                   required
+                  maxLength="4"
+                  pattern="^[\u4e00-\u9fa5_a-zA-Z0-9]+$"
                 />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  <h6>請輸入文字</h6>
+                </Form.Control.Feedback>
               </div>
             </div>
             <div className="col-md-4">
@@ -551,7 +584,7 @@ function AddAbility(props) {
                 <label htmlFor="amount" className="form-label">
                   票券數量
                 </label>
-                <input
+                <Form.Control
                   type="value"
                   className="form-control"
                   id="amount"
@@ -561,7 +594,14 @@ function AddAbility(props) {
                   onChange={(e) => {
                     setAmount(e.target.value)
                   }}
+                  required
+                  pattern="/[0-9]/"
+                  maxLength="4"
                 />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  <h6>請輸入數字</h6>
+                </Form.Control.Feedback>
               </div>
             </div>
             <div className="col-md-3">
@@ -569,7 +609,7 @@ function AddAbility(props) {
                 <label htmlFor="price" className="form-label">
                   票券價格
                 </label>
-                <input
+                <Form.Control
                   type="value"
                   className="form-control"
                   id="price"
@@ -579,7 +619,14 @@ function AddAbility(props) {
                   onChange={(e) => {
                     setPrice(e.target.value)
                   }}
+                  required
+                  pattern="/[0-9]/"
+                  maxLength="4"
                 />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  <h6>請輸入數字</h6>
+                </Form.Control.Feedback>
               </div>
             </div>
 
@@ -588,7 +635,9 @@ function AddAbility(props) {
                 <label htmlFor="TicketDescription" className="form-label">
                   票券說明
                 </label>
-                <textarea
+                <Form.Group
+                  required
+                  as="textarea"
                   className="form-control"
                   id="TicketDescription"
                   rows="10"
