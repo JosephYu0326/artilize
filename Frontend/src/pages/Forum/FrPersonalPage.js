@@ -53,7 +53,7 @@ function FrPersonalPage(props) {
             <div className="col-lg-3 col-md-4 col-sm-12 text-center">
               <img
                 className="avatar"
-                src="https://picsum.photos/200"
+                src={` ${process.env.REACT_APP_API_URL}/images/${articleList[0].userAvatar}`}
                 alt="userpicture"
               />
             </div>
