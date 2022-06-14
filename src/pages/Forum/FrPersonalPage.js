@@ -1,18 +1,18 @@
 //個人頁面
 import React, { useEffect, useState } from 'react'
-import { FaAngleLeft } from "react-icons/fa";
+import { FaAngleLeft } from 'react-icons/fa'
 import { Link, useLocation, useParams } from 'react-router-dom'
-import "../../styles/Forum.scss";
-import "../../styles/global.scss";
-import Header from "../../component/Header";
-import Footer from "../../component/Footer";
+import '../../styles/Forum.scss'
+import '../../styles/global.scss'
+import Header from '../../component/Header'
+import Footer from '../../component/Footer'
 import Article from '../../component/Article'
-import ForumAside from "../../component/ForumAside";
+import ForumAside from '../../component/ForumAside'
 
 function FrPersonalPage(props) {
   const [articleList, setArticleList] = useState([{}])
   const { userID } = useParams()
-  console.log(articleList);
+  console.log(articleList)
   console.log(userID)
   //顯示該用戶發表文章
   // useEffect(() => {
@@ -25,12 +25,12 @@ function FrPersonalPage(props) {
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/users/personalpage`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
-      body: JSON.stringify({ userID: `${userID}` })
+      body: JSON.stringify({ userID: `${userID}` }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -42,7 +42,8 @@ function FrPersonalPage(props) {
     <>
       <Header />
       <div className="backBtn displayN">
-        <Link to="/forum">回討論區
+        <Link to="/forum">
+          回討論區
           <FaAngleLeft />
         </Link>
       </div>
@@ -52,7 +53,7 @@ function FrPersonalPage(props) {
             <div className="col-lg-3 col-md-4 col-sm-12 text-center">
               <img
                 className="avatar"
-                src="https://picsum.photos/200"
+                src={` ${process.env.REACT_APP_API_URL}/images/${articleList[0].userAvatar}`}
                 alt="userpicture"
               />
             </div>
@@ -60,7 +61,7 @@ function FrPersonalPage(props) {
               <div>
                 <div className="h6">{articleList[0].userNickName}</div>
                 <div className="h6 txtGray">{articleList[0].userAccount}</div>
-                <div className="displayN m-3">{articleList.length}  篇討論</div>
+                <div className="displayN m-3">{articleList.length} 篇討論</div>
               </div>
               {/* <Button variant="btn btn-primary rounded-pill BorderRadius">
                 FOLLOW
@@ -77,7 +78,7 @@ function FrPersonalPage(props) {
       </div>
       <Footer />
     </>
-  );
+  )
 }
 
-export default FrPersonalPage;
+export default FrPersonalPage
