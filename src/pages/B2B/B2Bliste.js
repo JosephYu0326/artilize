@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Zmage from 'react-zmage'
+import Zoom from 'react-img-zoom'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 // `${process.env.REACT_APP_API_URL}/exhibition/${params.exhibitionId}`
@@ -15,9 +17,9 @@ function B2Bliste(props) {
           <img
             // src={`http://localhost:5000/uploads/${pic1}`}
             // src={`${process.env.REACT_APP_API_URL}/stylesheets/images/${pic1}`}
-            src={`http://localhost:5000/stylesheets/images/${pic1}`}
             className="imgListe rounded-3 "
             alt="exhibitionImg"
+            src={`http://localhost:5000/stylesheets/images/${pic1}`}
           />
         </div>
         <div className="col-md-3 col-sm-12 my-3">

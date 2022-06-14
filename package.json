@@ -23,8 +23,10 @@
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.1.0",
     "react-icons": "^4.3.1",
+    "react-img-zoom": "^0.1.0",
     "react-router-dom": "5.3.1",
     "react-scripts": "5.0.1",
+    "react-zmage": "^0.8.5-beta.37",
     "sass": "^1.51.0",
     "sweetalert2": "^11.4.17",
     "web-vitals": "^2.1.0"

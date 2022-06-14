@@ -172,37 +172,8 @@ function B2B(props) {
         Swal.fire('刪除!', '展覽活動已被刪除', '成功')
       }
     })
-    // setDate1(newExhibitionInorder)
-    // Swal.fire('刪除成功', '成功刪除活動', 'success')
   }
 
-  // const fetchData1 = async () => {
-  //   const response = await fetch('http://localhost:5000/B2B/B2B')
-  //   const results = await response.json()
-  //   // console.log(results)
-  //   setDate1(results)
-  //   // setDate(extendAbilityEx(data1))
-  // }
-  // useEffect(() => {
-  //   fetchData1()
-  // }, [])
-  //修改編輯
-  // const handleRRREX = (id) => {
-  //   alert('id')
-  //   handleRRREX(data1)
-  //   fetch('http://localhost:5000/B2B/B2B/' + id, {
-  //     method: 'put',
-  //   })
-  //     .then((res) => res.text())
-  //     .then((text) => console.log('刪除成功...' + text))
-  //     .then(() => {
-  //       Swal.fire('刪除成功', '成功刪除活動', 'success')
-  //       const newExhibitionInorder = [...data1].filter((v, i) => {
-  //         console.log('v.id', v.id)
-  //       })
-  //       setDate1(newExhibitionInorder)
-  //     })
-  // }
   return (
     <>
       <Container>
