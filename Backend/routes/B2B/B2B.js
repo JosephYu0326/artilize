@@ -258,7 +258,7 @@ router.route('/B2B/kind')
             const id = req.params.id;
             const sql = "UPDATE exhibition_actadm SET id=?,aName=?,pic1=?,pic2=?,start=?,end=?,intro=?,fkCityId=?,fkMuseumId=?,fkKindId=? WHERE id=?";
     
-            const sql1 ="UPDATE exhibition_ticket SET id=?,name=?,price=?,introT=?,amount=? WHERE id=?";
+            const sql1 ="UPDATE exhibition_ticket SET id=?,name=?,price=?,introT=?,amount=? WHERE tid=?";
     
             // const sql2 ="UPDATE exhibition_"
     
@@ -266,7 +266,7 @@ router.route('/B2B/kind')
             const [datas2] = await db.query(sql1,[id,req.body.name,req.body.price,req.body.introT,req.body.amount,id],); 
             console.log(datas);
             console.log(datas2);
-            if(datas.affectedRows === 1){
+            if(datas2.affectedRows === 1){
                 output.ok = true;
              }
            res.json(output) ;

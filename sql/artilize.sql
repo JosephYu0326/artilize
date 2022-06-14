@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2022-06-13 20:28:41
+-- 產生時間： 2022-06-14 09:10:23
 -- 伺服器版本： 8.0.28
 -- PHP 版本： 7.4.27
 
@@ -200,7 +200,16 @@ CREATE TABLE `cart_coupon` (
 --
 
 INSERT INTO `cart_coupon` (`coupon_id`, `couponPrice`, `couponName`, `fkUserId`, `couponKind`, `useDeadline`, `isUsed`) VALUES
-(1, 20, 'dDII125D', 1, '商品折價券', '2022-06-18', 0);
+(1, 20, 'dDII125D', 1, '商品折價券', '2022-06-18', 0),
+(2, 50, '9HbEjd', 2, '商品折價券', '2022-10-28', 0),
+(3, 100, 'cTHxEa', 3, '商品折價券', '2022-11-11', 0),
+(4, 150, 'p43y9c', 4, '商品折價券', '2022-07-03', 0),
+(5, 200, 'EHtUBY', 5, '商品折價券', '2022-06-15', 0),
+(6, 50, 'RcsEdq', 1, '展覽優惠券', '2022-06-25', 1),
+(7, 100, '5RcxuA', 1, '展覽優惠券', '2022-09-01', 0),
+(8, 150, 'WnYW5Z', 2, '展覽優惠券', '2022-07-23', 0),
+(9, 200, 'weqRZh', 3, '展覽優惠券', '2022-12-19', 0),
+(10, 250, '7F4vkJ', 4, '展覽優惠券', '2022-09-20', 0);
 
 -- --------------------------------------------------------
 
@@ -899,7 +908,7 @@ ALTER TABLE `blog_images`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `cart_coupon`
 --
 ALTER TABLE `cart_coupon`
-  MODIFY `coupon_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `coupon_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `cart_exhibition`

@@ -53,7 +53,7 @@ function MyCoupon(props) {
   }
   useEffect(() => {
     fetchData()
-  }, [userId])
+  }, [])
 
   const couponCard = datas.map((v, i) => {
     return (
