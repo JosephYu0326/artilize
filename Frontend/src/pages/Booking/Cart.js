@@ -19,11 +19,14 @@ import Summary from './Summary'
 import _ from 'lodash'
 
 let storage = localStorage
-let userId = parseInt(storage.getItem('userId'))
+
 var jsonData = []
 var jsonData2 = []
+var userId
 
 function doFirst() {
+  userId = parseInt(storage.getItem('userId'))
+  console.log(userId)
   if (storage['addItemList'] == null) {
     storage['addItemList'] = ''
   }
@@ -50,6 +53,7 @@ window.addEventListener('load', doFirst())
 
 function Cart(props) {
   useEffect(() => {
+    userId = parseInt(storage.getItem('userId'))
     jsonData = []
     jsonData2 = []
     doFirst()

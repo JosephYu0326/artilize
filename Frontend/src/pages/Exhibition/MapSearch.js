@@ -132,7 +132,7 @@ function MapSearch(props) {
                 <div className="col-md-3 col-sm-12 mapImg">
                   <img
                     src={`${process.env.REACT_APP_API_URL}/stylesheets/images/${pic1}`}
-                    className="img-fluid rounded-start"
+                    className="img-fluid rounded-start  "
                     alt="..."
                   />
                 </div>
@@ -207,6 +207,7 @@ function MapSearch(props) {
                           aName: '查無資料',
                           mName: '查無資料',
                           start: '查無資料',
+                          pic1: 'notFound.png',
                         },
                       ])
                     }
@@ -369,7 +370,7 @@ function MapSearch(props) {
                               src={`${process.env.REACT_APP_API_URL}/stylesheets/images/${pic1}`}
                               className="img-fluid rounded-start"
                               alt="..."
-                              style={{ width: 106, height: 139 }}
+                              style={{ width: 120, height: 175 }}
                             />
                           </div>
                           <div className="col-md-8 ">

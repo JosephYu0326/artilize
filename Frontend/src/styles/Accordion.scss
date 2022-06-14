@@ -1,40 +1,81 @@
 @import "../styles/style.scss";
 @import "~bootstrap/scss/bootstrap";
 
+.accordionHome {
+    display: flex;
+    justify-content: center;
+    margin-right: 30px;
+}
+
+.accordionHomeLink {
+    text-decoration: none;
+    color: black;
+}
+
+.accordionHome:hover {
+    text-decoration: none;
+    color: $LighterGrey;
+    background: $primary;
+}
+
 .accordionFrame {
+    margin-top: 500px;
+    position: absolute;
     padding: 20px;
     border-radius: 10px;
     width: 300px;
 }
 .optionheight {
+    margin: 0px 30px 15px 0px;
     height: 0px;
-    transition: 0.4s;
+    transition: 0.8s;
 }
 
 .option-frame {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    // justify-content: space-between;
     align-items: center;
     margin-top: 10px;
 }
 .icon-frame {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     position: relative;
     width: 25px;
 }
 
+.accordionTitle {
+    color: black;
+}
+
+.accordionContentLink {
+    text-decoration: none;
+    color: $MiddleGrey;
+}
+
+.accordionContentLink:hover {
+    text-decoration: none;
+    color: $LighterGrey;
+    background: $primary;
+}
+
 .accordionText {
+    display: flex;
+    justify-content: center;
     margin: 10px;
+    padding: 10px;
     opacity: 0;
-    transition: 0.4s;
+    transition: 0.3s;
 
     &.expand {
         opacity: 1;
     }
+    &.expand:hover {
+        background: $primary;
+    }
 }
-
 .option-expand {
     width: 25px;
     height: 25px;
@@ -42,8 +83,9 @@
 .plusIcon1 {
     height: 20px;
     width: 5px;
+    margin-right: -30px;
     background: black;
-    transition: transform 0.3s;
+    transition: transform 0.6s;
     &.expand {
         transform: rotate(-90deg);
     }
@@ -51,10 +93,11 @@
 .plusIcon2 {
     height: 20px;
     width: 5px;
+    margin-right: -30px;
     background: black;
     transform: rotate(90deg);
     position: absolute;
-    transition: opacity 0.3s;
+    transition: opacity 0.6s;
     &.expand {
         opacity: 0;
     }

@@ -7,9 +7,9 @@ import AsideBar from '../../component/AsideBar'
 import Article from '../../component/Article'
 
 function ArticleCollect(props) {
-  localStorage.setItem('userid', '2')
-  const userID = localStorage.getItem('userid')
-  console.log(userID)
+  // localStorage.setItem('userid', '2')
+  // const userID = localStorage.getItem('userid')
+  // console.log(userID)
 
   const btnList = {
     btnTitle: [

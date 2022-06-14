@@ -2,7 +2,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Card, Button, Container, Row, Col } from 'react-bootstrap'
-import { FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa'
+import { FaMapMarkerAlt, FaCalendarAlt, FaDollarSign } from 'react-icons/fa'
 import FadeIn from 'react-fade-in'
 import Header from '../../component/Header'
 import Footer from '../../component/Footer'
@@ -78,6 +78,7 @@ function OrderRecord(props) {
                 {v.cartExStart} - {v.cartExEnd}
               </div>
             </div>
+            <h6>展覽訂單編號:{v.cartExID}</h6>
           </Col>
           <Col md="2" sm="12" className="text-center">
             <Button variant="secondary rounded-pill my-2">
@@ -105,17 +106,31 @@ function OrderRecord(props) {
               <h4 className="h4 mb-2">{v.p_incart_topic}</h4>
             </div>
             <div className="orderTxt d-flex justify-content-start align-items-center">
-              <div>單價:{v.p_incart_price}</div>
+              <div className="d-flex align-items-center">
+                <h6 className="mb-0">單價:</h6>
+                <FaDollarSign />
+                <p className="mb-0">
+                  {v.p_incart_price.toLocaleString('en-US')}
+                </p>
+              </div>
             </div>
             <div className="orderTxt d-flex justify-content-start align-items-center">
-              <div>數量:{v.p_incart_amount}</div>
+              <h6 className="mb-0">數量:{v.p_incart_amount}</h6>
+            </div>
+            <div className="orderTxt d-flex justify-content-start align-items-center">
+              <h6 className="mb-0">商品訂單編號:{v.id}</h6>
             </div>
           </Col>
           <Col md="2" sm="12" className="text-center">
             <Button variant="secondary rounded-pill my-2">
-              <h5 className="h5">
-                {parseInt(v.p_incart_price) * parseInt(v.p_incart_amount)}元
-              </h5>
+              <div className="d-flex align-items-center">
+                <FaDollarSign />
+                <h5 className="h5 mb-0">
+                  {(
+                    parseInt(v.p_incart_price) * parseInt(v.p_incart_amount)
+                  ).toLocaleString('en-US')}
+                </h5>
+              </div>
             </Button>
           </Col>
         </Row>
@@ -132,7 +147,7 @@ function OrderRecord(props) {
           <h3>展覽/活動</h3>
           <hr />
           <FadeIn className="orderRecord w-100">{bookRecord}</FadeIn>
-          <h3>商品</h3>
+          <h3 className="mt-3">商品</h3>
           <hr />
           <FadeIn className="orderRecord w-100">{bookRecord2}</FadeIn>
         </div>

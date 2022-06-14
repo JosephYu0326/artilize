@@ -13,8 +13,8 @@ import p_adImages from '../../../../images/product_Images/ad/test_2.jpeg'
 // import p_Images from '../../../../images/product_Images/product/tea_L2.jpg'
 // import p_brandImages from '../../images/product_Images/brand/nationalpalace.png'
 // import p_saleImages from '../../../../images/product_Images/product/whiteveg.jpeg'
-import p_saleIconsfreight from '../../../../images/product_Images/icons/freeFreight.png'
-// import p_saleIconsdiscount from '../../../../images/product_Images/icons/sale.png'
+// import p_saleIconsfreight from '../../../../images/product_Images/icons/freeFreight.png'
+import p_saleIconsdiscount from '../../../../images/product_Images/icons/sale.png'
 
 function Home(props) {
   // const ptCards = ['1', '2', '3']
@@ -156,54 +156,54 @@ function Home(props) {
   //   )
   // })
 
-  const pMoresaleCards = pCardData.map((product, index) => {
-    const { product_name, product_img, product_orign_price, product_price } =
-      product
-    return (
-      <div key={index}>
-        <div className="pMoresaleCard">
-          <Link to="/Product/Introduce">
-            <img
-              src={`${API_GET_IMG}/${product_img}`}
-              className="pMoresaleCardImg"
-              alt=""
-            ></img>
-          </Link>
-          <div className="pMoresaleCardContent">
-            <div className="pMoresaleCardContentPrice">
-              <Link to="/Product/Introduce" className="TextLink">
-                <h6 className="ExtraBold pCardTestContentTopic">
-                  {product_name}
-                </h6>
-              </Link>
-              <p className="pRegular pMoresaleCardContentOrignPrice">{`NT $${product_orign_price}`}</p>
-              <Link to="/Product/Introduce" className="TextLink">
-                <p className="pBig ExtraBold pMoresaleCardContentSalePrice">
-                  {`NT $${product_price}`}
-                </p>
-              </Link>
-            </div>
-            <div className="pMoresaleCardContentSaleIcon">
-              <div>
-                <img
-                  className="pMoresaleCardContentSaleIconImg"
-                  src={p_saleIconsfreight}
-                  alt=""
-                ></img>
-              </div>
-              {/* <div>
-                <img
-                  className="pMoresaleCardContentSaleIconImg"
-                  src={p_saleIconsdiscount}
-                  alt=""
-                ></img>
-              </div> */}
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  })
+  // const pMoresaleCards = pCardData.map((product, index) => {
+  //   const { product_name, product_img, product_orign_price, product_price } =
+  //     product
+  //   return (
+  //     <div key={index}>
+  //       <div className="pMoresaleCard">
+  //         <Link to="/Product/Introduce">
+  //           <img
+  //             src={`${API_GET_IMG}/${product_img}`}
+  //             className="pMoresaleCardImg"
+  //             alt=""
+  //           ></img>
+  //         </Link>
+  //         <div className="pMoresaleCardContent">
+  //           <div className="pMoresaleCardContentPrice">
+  //             <Link to="/Product/Introduce" className="TextLink">
+  //               <h6 className="ExtraBold pCardTestContentTopic">
+  //                 {product_name}
+  //               </h6>
+  //             </Link>
+  //             {/* <p className="pRegular pMoresaleCardContentOrignPrice">{`NT $${product_orign_price}`}</p> */}
+  //             <Link to="/Product/Introduce" className="TextLink">
+  //               <p className="pBig ExtraBold pMoresaleCardContentSalePrice">
+  //                 {`NT $${product_price}`}
+  //               </p>
+  //             </Link>
+  //           </div>
+  //           {/* <div className="pMoresaleCardContentSaleIcon">
+  //             <div>
+  //               <img
+  //                 className="pMoresaleCardContentSaleIconImg"
+  //                 src={p_saleIconsfreight}
+  //                 alt=""
+  //               ></img>
+  //             </div>
+  //             <div>
+  //               <img
+  //                 className="pMoresaleCardContentSaleIconImg"
+  //                 src={p_saleIconsdiscount}
+  //                 alt=""
+  //               ></img>
+  //             </div>
+  //           </div> */}
+  //         </div>
+  //       </div>
+  //     </div>
+  //   )
+  // })
 
   // const pSaleCards = ptSaleCards.map((v, i) => {
   //   return (
@@ -269,7 +269,9 @@ function Home(props) {
               熱銷推推
             </h5>
           </div>
-          <div className="row row-cols-xxl-3 row-cols-2">{pCards}</div>
+          <div className="phCardContainer row-cols-xxl-3 row-cols-2">
+            {pCards}
+          </div>
         </div>
         <div className="mt-5">
           <div
@@ -280,7 +282,9 @@ function Home(props) {
               精選館別
             </h5>
           </div>
-          <div className="row row-cols-xxl-3 row-cols-2">{pBrandCards}</div>
+          <div className="phCardContainer row-cols-xxl-3 row-cols-2">
+            {pBrandCards}
+          </div>
         </div>
         <div className="mt-5">
           <div
@@ -291,8 +295,150 @@ function Home(props) {
               更多優惠
             </h5>
           </div>
-          <div className="row row-cols-xxl-3 row-cols-2 mb-3">
-            {pMoresaleCards}
+          <div className="phCardContainer row-cols-xxl-3 row-cols-2 mb-3">
+            {/* {pMoresaleCards} */}
+            <div>
+              <div className="pMoresaleCard">
+                <Link to="/Product/Introduce">
+                  <img
+                    src={`${API_GET_IMG}/鵲鳥琉璃項鍊_L1.jpg`}
+                    className="pMoresaleCardImg"
+                    alt=""
+                  ></img>
+                </Link>
+                <div className="pMoresaleCardContent">
+                  <div className="pMoresaleCardContentPrice">
+                    <Link to="/Product/Introduce" className="TextLink">
+                      <h6 className="ExtraBold pCardTestContentTopic">
+                        鵲鳥 琉璃項鍊
+                      </h6>
+                    </Link>
+                    <strike>
+                      <p className="pRegular pMoresaleCardContentOrignPrice">
+                        NT $380
+                      </p>
+                    </strike>
+                    <Link to="/Product/Introduce" className="TextLink">
+                      <p className="pBig ExtraBold pMoresaleCardContentSalePrice">
+                        NT $265
+                      </p>
+                    </Link>
+                  </div>
+                  <div className="pMoresaleCardContentSaleIcon">
+                    {/* <div>
+                      <img
+                        className="pMoresaleCardContentSaleIconImg"
+                        src={p_saleIconsfreight}
+                        alt=""
+                      ></img>
+                    </div> */}
+                    <div>
+                      <img
+                        className="pMoresaleCardContentSaleIconImg"
+                        src={p_saleIconsdiscount}
+                        alt=""
+                      ></img>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div className="pMoresaleCard">
+                <Link to="/Product/Introduce">
+                  <img
+                    src={`${API_GET_IMG}/溥心畬蘭花絲巾(白)_L1.jpg`}
+                    className="pMoresaleCardImg"
+                    alt=""
+                  ></img>
+                </Link>
+                <div className="pMoresaleCardContent">
+                  <div className="pMoresaleCardContentPrice">
+                    <Link to="/Product/Introduce" className="TextLink">
+                      <h6 className="ExtraBold pCardTestContentTopic">
+                        溥心畬蘭花絲巾(白)
+                      </h6>
+                    </Link>
+                    <strike>
+                      {' '}
+                      <p className="pRegular pMoresaleCardContentOrignPrice">
+                        NT $780
+                      </p>
+                    </strike>
+
+                    <Link to="/Product/Introduce" className="TextLink">
+                      <p className="pBig ExtraBold pMoresaleCardContentSalePrice">
+                        NT $545
+                      </p>
+                    </Link>
+                  </div>
+                  <div className="pMoresaleCardContentSaleIcon">
+                    {/* <div>
+                      <img
+                        className="pMoresaleCardContentSaleIconImg"
+                        src={p_saleIconsfreight}
+                        alt=""
+                      ></img>
+                    </div> */}
+                    <div>
+                      <img
+                        className="pMoresaleCardContentSaleIconImg"
+                        src={p_saleIconsdiscount}
+                        alt=""
+                      ></img>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div className="pMoresaleCard">
+                <Link to="/Product/Introduce">
+                  <img
+                    src={`${API_GET_IMG}/故宮萬壽無疆手環_L1.jpg`}
+                    className="pMoresaleCardImg"
+                    alt=""
+                  ></img>
+                </Link>
+                <div className="pMoresaleCardContent">
+                  <div className="pMoresaleCardContentPrice">
+                    <Link to="/Product/Introduce" className="TextLink">
+                      <h6 className="ExtraBold pCardTestContentTopic">
+                        萬壽無疆手環
+                      </h6>
+                    </Link>
+                    <strike>
+                      {' '}
+                      <p className="pRegular pMoresaleCardContentOrignPrice">
+                        NT $1380
+                      </p>
+                    </strike>
+
+                    <Link to="/Product/Introduce" className="TextLink">
+                      <p className="pBig ExtraBold pMoresaleCardContentSalePrice">
+                        NT $965
+                      </p>
+                    </Link>
+                  </div>
+                  <div className="pMoresaleCardContentSaleIcon">
+                    {/* <div>
+                      <img
+                        className="pMoresaleCardContentSaleIconImg"
+                        src={p_saleIconsfreight}
+                        alt=""
+                      ></img>
+                    </div> */}
+                    <div>
+                      <img
+                        className="pMoresaleCardContentSaleIconImg"
+                        src={p_saleIconsdiscount}
+                        alt=""
+                      ></img>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </Container>

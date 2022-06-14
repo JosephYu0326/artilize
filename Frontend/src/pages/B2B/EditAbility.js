@@ -14,6 +14,8 @@ import { zhTW } from 'date-fns/locale'
 import Swal from 'sweetalert2'
 //react Boostrap
 import { Form, Col, Button, Feedback } from 'react-bootstrap'
+import Header from '../../component/Header'
+import Footer from '../../component/Footer'
 
 registerLocale('zhTW', zhTW)
 
@@ -241,7 +243,7 @@ function AddAbility(props) {
 
   return (
     <>
-      <div>編輯活動資料</div>
+      <Header />
       <Form
         id="myForm"
         // onSubmit={onSubmitHandler}
@@ -318,7 +320,7 @@ function AddAbility(props) {
                   id="exampleFormControlInput1"
                   placeholder="活動名稱"
                   name="aName"
-                  value={aName}
+                  value="李義弘：回顧展"
                   onChange={(e) => {
                     setAname(e.target.value)
                   }}
@@ -354,7 +356,7 @@ function AddAbility(props) {
                     dateFormat="yyyy-MM-dd"
                     locale="zhTW"
                     className="col-12"
-                    selected={start}
+                    selected={new Date()}
                     onChange={(date) => setStart(date)}
                     selectsStart
                     startDate={start}
@@ -389,7 +391,7 @@ function AddAbility(props) {
                     dateFormat="yyyy-MM-dd"
                     locale="zhTW"
                     className="col-12"
-                    selected={end}
+                    selected={new Date(2022, 8, 8)}
                     onChange={(date) => setEnd(date)}
                     selectsEnd
                     startDate={start}
@@ -416,7 +418,7 @@ function AddAbility(props) {
                   className="form-select"
                   name="direction"
                   id="direction"
-                  value={direction}
+                  value={1}
                   onChange={(e) => {
                     setDirection(e.target.value)
                   }}
@@ -445,7 +447,7 @@ function AddAbility(props) {
                   className="form-select"
                   name="fkCityId"
                   id="city"
-                  value={city}
+                  value={2}
                   onChange={(e) => {
                     setCity(e.target.value)
                   }}
@@ -475,7 +477,7 @@ function AddAbility(props) {
                   className="form-select"
                   name="fkKindId"
                   id="fkKindId"
-                  value={kind}
+                  value={2}
                   onChange={(e) => {
                     setKind(e.target.value)
                   }}
@@ -504,7 +506,7 @@ function AddAbility(props) {
                   className="form-select"
                   name="fkMuseumId"
                   id="museum"
-                  value={museum}
+                  value={1}
                   onChange={(e) => {
                     setMuseum(e.target.value)
                   }}
@@ -540,7 +542,7 @@ function AddAbility(props) {
                   className="form-control"
                   id="exampleFormControlTextarea1"
                   rows="10"
-                  value={activities}
+                  value="「李義弘：回顧展」邀請藝評學者王嘉驥擔任客座策展人，是藝術家長達55年的藝術生涯以來規模最大也最重要的一次展出。李義弘（1941-）早年曾在基隆的國民中學任教，並追隨書畫名家江兆申（1925-1996）；1978年後轉向專職創作。從傳統山水繪畫入手，繼而導入自然與風土實景，搜盡臺灣奇特地形，也赴海外遊歷；運用筆墨作畫的同時，他也藉助於攝影，捕捉實景以發想創作。李義弘於晚年發展出立體感與空間構造性兼具的山海繪畫，確立其獨創一格的現代水墨藝術風貌。展覽將以「造景」與「寫景」兩大脈絡為方向，聚焦李義弘的山水／風景類型的繪畫，觀察並梳理「想像」與「再現」兩種創作思維，如何在他長年的藝術實踐中既平行發展又相互滲透，最終融匯出卓然成家的獨特景觀。"
                   name="intro"
                   onChange={(e) => {
                     setActivities(e.target.value)
@@ -576,7 +578,7 @@ function AddAbility(props) {
                   id="ticketName"
                   name="name"
                   placeholder="票券名稱"
-                  value={ticketName}
+                  value="軍人票"
                   onChange={(e) => {
                     setTicketName(e.target.value)
                   }}
@@ -601,7 +603,7 @@ function AddAbility(props) {
                   id="amount"
                   name="amount"
                   placeholder="1000"
-                  value={amount}
+                  value={500}
                   onChange={(e) => {
                     setAmount(e.target.value)
                   }}
@@ -626,7 +628,7 @@ function AddAbility(props) {
                   id="price"
                   name="price"
                   placeholder="1000"
-                  value={price}
+                  value={250}
                   onChange={(e) => {
                     setPrice(e.target.value)
                   }}
@@ -653,7 +655,7 @@ function AddAbility(props) {
                   id="TicketDescription"
                   rows="10"
                   name="tintro"
-                  value={ticketDescription}
+                  value="軍人票特價中"
                   onChange={(e) => {
                     setTicketDescription(e.target.value)
                   }}
@@ -682,6 +684,7 @@ function AddAbility(props) {
         </div>
       </Form>
       <br />
+      <Footer />
     </>
   )
 }

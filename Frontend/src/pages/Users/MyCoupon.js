@@ -10,9 +10,18 @@ import Footer from '../../component/Footer'
 import { useEffect, useState } from 'react'
 
 let storage = localStorage
-let userId = parseInt(storage.getItem('userId'))
+var userId
+function doFirst() {
+  userId = parseInt(storage.getItem('userId'))
+}
+
+window.addEventListener('load', doFirst())
 
 function MyCoupon(props) {
+  useEffect(() => {
+    doFirst()
+    userId = parseInt(storage.getItem('userId'))
+  }, [])
   const btnList = {
     btnTitle: [
       '會員資料',
@@ -53,7 +62,7 @@ function MyCoupon(props) {
   }
   useEffect(() => {
     fetchData()
-  }, [])
+  }, [userId])
 
   const couponCard = datas.map((v, i) => {
     return (

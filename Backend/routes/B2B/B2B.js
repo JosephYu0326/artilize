@@ -95,9 +95,14 @@ router.route('/B2B/kind')
   // Get http://localhost:5000/B2B/B2B
   router.route('/B2B')
   .get(async (req,res,next)=>{
-        const sql = 'SELECT id,aName,pic1,pic2,date_format(start,"%Y-%m-%d") as start,date_format(end,"%Y-%m-%d") as end,date_format(time,"%Y-%m-%d") as time,intro,fkCityID,fkMuseumId,fkKindID FROM exhibition_actadm';
-        const [datas] = await db.query(sql);
-       res.json(datas);
+    try {
+      const sql = 'SELECT id,aName,pic1,pic2,date_format(start,"%Y-%m-%d") as start,date_format(end,"%Y-%m-%d") as end,date_format(time,"%Y-%m-%d") as time,intro,fkCityID,fkMuseumId,fkKindID FROM exhibition_actadm ORDER BY TIME DESC';
+      const [datas] = await db.query(sql);
+     res.json(datas);
+      
+    } catch (error) {
+      console.log(error)
+    }
     })
 
     //POST http://localhost:5000/B2B/B2B

@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { Navbar, Container, Row, Col, Card } from 'react-bootstrap'
+import { Waypoint } from 'react-waypoint'
 import logo from '../../images/logo.svg'
 import userIcon from '../../images/userIcon.svg'
 import '../../styles/Home.scss'

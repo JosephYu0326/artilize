@@ -21,6 +21,7 @@ function CartItemPro(props) {
             src={`${process.env.REACT_APP_API_URL}/stylesheets/images/${image}`}
             className="exhibition-img"
             alt="exhibitionImg"
+            style={{ width: 200, height: 200 }}
           />
           <div className="cart-content">
             <div>{title}</div>

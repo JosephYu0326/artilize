@@ -11,8 +11,8 @@ import { Link, useParams } from 'react-router-dom'
 import { API_GET_DATA, API_GET_IMG } from '../../constants'
 import { Container } from 'react-bootstrap'
 import p_adImages from '../../../../images/product_Images/ad/test_2.jpeg'
-import p_saleIconsfreight from '../../../../images/product_Images/icons/freeFreight.png'
-import p_saleIconsdiscount from '../../../../images/product_Images/icons/sale.png'
+// import p_saleIconsfreight from '../../../../images/product_Images/icons/freeFreight.png'
+// import p_saleIconsdiscount from '../../../../images/product_Images/icons/sale.png'
 // import p_categoryImg from '../../../../images/product_Images/product/necklace.jpeg'
 
 function Category(props) {
@@ -43,11 +43,20 @@ function Category(props) {
   //   }
 
   const pCategoryCards = pCategoryData.map(
-    ({ product_name, product_img, product_orign_price, product_price }, i) => {
+    (
+      {
+        product_id,
+        product_name,
+        product_img,
+        product_orign_price,
+        product_price,
+      },
+      i
+    ) => {
       return (
         <div key={i}>
           <div className="pMoresaleCard">
-            <Link to="/Product/Introduce">
+            <Link to={`/Product/Introduce/${product_id}`}>
               <img
                 src={`${API_GET_IMG}/${product_img}`}
                 className="pMoresaleCardImg"
@@ -61,14 +70,14 @@ function Category(props) {
                     {product_name}
                   </h6>
                 </Link>
-                <p className="pRegular pMoresaleCardContentOrignPrice">{`NT $${product_orign_price}`}</p>
+                {/* <p className="pRegular pMoresaleCardContentOrignPrice">{`NT $${product_orign_price}`}</p> */}
                 <Link to="/Product/Introduce" className="TextLink">
                   <p className="pBig ExtraBold pMoresaleCardContentSalePrice">
                     {`NT $${product_price}`}
                   </p>
                 </Link>
               </div>
-              <div className="pMoresaleCardContentSaleIcon">
+              {/* <div className="pMoresaleCardContentSaleIcon">
                 <div>
                   <img
                     className="pMoresaleCardContentSaleIconImg"
@@ -83,7 +92,7 @@ function Category(props) {
                     alt=""
                   ></img>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

@@ -93,18 +93,18 @@ function Users(props) {
         localStorage.removeItem('userAvatar')
         localStorage.removeItem('userAccount')
         localStorage.setItem('auth', false)
-        const temp = localStorage.getItem('addItemList').split(',')
-        const temp2 = localStorage.getItem('addItemList2').split(',')
-        for (let i = 0; i < temp.length - 1; i++) {
-          localStorage.removeItem(temp[i])
-        }
-        for (let i = 0; i < temp2.length - 1; i++) {
-          localStorage.removeItem(temp2[i])
-        }
-        localStorage.removeItem('totalPrice')
-        localStorage.removeItem('addItemList')
-        localStorage.removeItem('addItemList2')
-        localStorage.setItem('totalNum', 0)
+        // const temp = localStorage.getItem('addItemList').split(',')
+        // const temp2 = localStorage.getItem('addItemList2').split(',')
+        // for (let i = 0; i < temp.length - 1; i++) {
+        //   localStorage.removeItem(temp[i])
+        // }
+        // for (let i = 0; i < temp2.length - 1; i++) {
+        //   localStorage.removeItem(temp2[i])
+        // }
+        // localStorage.removeItem('totalPrice')
+        // localStorage.removeItem('addItemList')
+        // localStorage.removeItem('addItemList2')
+        // localStorage.setItem('totalNum', 0)
 
         MySwal.fire({
           title: '登出成功',

@@ -25,6 +25,8 @@ import Header from '../../component/Header'
 import '../../styles/B2BListe.scss'
 import Footer from '../../component/Footer'
 
+import withReactContent from 'sweetalert2-react-content'
+
 // const extendAbilityEx = (array) => {
 //   return array.map((v, i) => {
 //     let expire = true
@@ -72,6 +74,21 @@ function B2B(props) {
   }
   useEffect(() => {
     fetchData()
+  }, [])
+  const auth = JSON.parse(localStorage.getItem('auth'))
+  const MySwal = withReactContent(Swal)
+  useEffect(() => {
+    if (auth === false) {
+      MySwal.fire({
+        icon: 'warning',
+        title: '您尚未登入，將跳轉至登入畫面',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+      }).then(() => {
+        history.push('/users/login')
+      })
+    }
   }, [])
 
   const extendAbilityEx = (array) => {

@@ -185,6 +185,15 @@
     font-family: "Noto Sans TC", sans-serif;
     color: #000;
 }
+
+.pPopTopic {
+    width: 240px;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 .pPopPrice {
     font-weight: 800;
 }

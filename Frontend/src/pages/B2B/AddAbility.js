@@ -14,6 +14,8 @@ import { zhTW } from 'date-fns/locale'
 import Swal from 'sweetalert2'
 //react Boostrap
 import { Form, Col, Button, Feedback } from 'react-bootstrap'
+import Header from '../../component/Header'
+import Footer from '../../component/Footer'
 
 registerLocale('zhTW', zhTW)
 
@@ -236,6 +238,7 @@ function AddAbility(props) {
 
   return (
     <>
+      <Header />
       <Form
         id="myForm"
         // onSubmit={onSubmitHandler}
@@ -323,7 +326,7 @@ function AddAbility(props) {
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 <Form.Control.Feedback type="invalid">
-                  <h6>請輸入正確的姓名</h6>
+                  <h6>請輸入正確的活動名稱</h6>
                 </Form.Control.Feedback>
                 {/* <h6>請輸入活動名稱</h6> */}
               </div>
@@ -675,6 +678,7 @@ function AddAbility(props) {
         </div>
       </Form>
       <br />
+      <Footer />
     </>
   )
 }

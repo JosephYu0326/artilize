@@ -64,7 +64,7 @@ function ForgetPassword(props) {
         setIsLoading(false)
         MySwal.fire({
           icon: 'success',
-          title: '重設密碼信，以寄至您的Email',
+          title: '重設密碼信，已寄至您的Email',
           showConfirmButton: 'false',
           timer: 2000,
           timerProgressBar: true,
