@@ -67,15 +67,18 @@ function MyCoupon(props) {
   const couponCard = datas.map((v, i) => {
     return (
       <div key={i} className="coupon row col-md-12 col-lg-6 my-2">
-        <div className="couponImage col-4">
+        <div
+          className="couponImage col-4 "
+          style={{ paddingRight: '28px', paddingTop: '15px' }}
+        >
           <FaTicketAlt className="couponIcon mt-2" />
-          <h5 className="couponName">{v.couponKind}</h5>
+          <h6 className="couponName">{v.couponKind}</h6>
         </div>
         <div className="couponMsg text-center col-7">
           <h5>憑此券可折抵{v.couponPrice}$</h5>
           <div className="codeName">{v.couponName}</div>
         </div>
-        <div className="couponInfo d-flex justify-content-around mt-1">
+        <div className="couponInfo d-flex justify-content-around mt-2">
           <div className="usetext">期限{v.useDeadline}</div>
           <div className="usetext isUsed">{v.isUsed ? '已使用' : '未使用'}</div>
         </div>

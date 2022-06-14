@@ -189,7 +189,7 @@ function Introduce(props) {
           </div>
           <div className="pIntroPurchaseBar">
             <div className="PurchaseBarPrice">
-              <div className="PurchaseBarOrignPrice">{`原價 NT $${product_orign_price}`}</div>
+              {/* <div className="PurchaseBarOrignPrice">{`原價 NT $${product_orign_price}`}</div> */}
               <div className="PurchaseBarDiscountPrice">{`優惠價 NT $${product_price}`}</div>
             </div>
             <Link to="#">

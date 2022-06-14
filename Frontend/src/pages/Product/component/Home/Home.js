@@ -442,6 +442,7 @@ function Home(props) {
           </div>
         </div>
       </Container>
+      <div style={{ height: '30vh' }}></div>
       <Footer />
     </>
   )

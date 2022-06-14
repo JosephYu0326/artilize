@@ -270,6 +270,31 @@ function Pay(props) {
                 </section>
                 {/* <h6>請輸入正確的名稱</h6> */}
               </div>
+
+              <div className="col-md-3 col-sm-12 mb-3 ">
+                <Form.Control
+                  required
+                  as="select"
+                  custom
+                  className="form-select form-select-sm mb-3"
+                  aria-label=".form-select-sm example"
+                  name="direction"
+                  id="direction"
+                  value={direction}
+                  onChange={(e) => {
+                    setDirection(e.target.value)
+                  }}
+                >
+                  <option value="">請選擇區域</option>
+                  {direction1.map((v, i) => {
+                    return (
+                      <option key={i} value={i + 1}>
+                        {v}
+                      </option>
+                    )
+                  })}
+                </Form.Control>
+              </div>
               <div className="col-md-3 col-sm-12 mb-3 ">
                 <Form.Control
                   required
@@ -295,30 +320,6 @@ function Pay(props) {
                   })}
                 </Form.Control>
                 {/* <h6>請輸入縣市區域地址</h6> */}
-              </div>
-              <div className="col-md-3 col-sm-12 mb-3 ">
-                <Form.Control
-                  required
-                  as="select"
-                  custom
-                  className="form-select form-select-sm mb-3"
-                  aria-label=".form-select-sm example"
-                  name="direction"
-                  id="direction"
-                  value={direction}
-                  onChange={(e) => {
-                    setDirection(e.target.value)
-                  }}
-                >
-                  <option value="">請選擇區域</option>
-                  {direction1.map((v, i) => {
-                    return (
-                      <option key={i} value={i + 1}>
-                        {v}
-                      </option>
-                    )
-                  })}
-                </Form.Control>
               </div>
               <div className="col-md-6 col-sm-12 mb-3 ">
                 <section className="">

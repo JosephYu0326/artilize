@@ -53,6 +53,9 @@ function App() {
   return (
     <Router>
       <Switch>
+        <Route path="/NewsLetter">
+          <Newsletter />
+        </Route>
         <Route path="/b2b/edit/:id">
           <EditAbility />
         </Route>
