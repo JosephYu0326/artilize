@@ -77,7 +77,7 @@ router.route("/search")
 // 文章依userID顯示
 router.route("/FrPersonalPage/:userID")
   .get(async (req, res, next) => {
-    const id = req.params.userID;
+    const userId = req.params.userID;
     // console.log(id);
     const sql = "SELECT article_id, title, blog_article.created_time, content, users_id, thema, userNickName, userAccount, userAvatar FROM blog_article JOIN `blog_category` ON blog_article.category = blog_category.sn JOIN`users` ON blog_article.users_id = users.userId WHERE users_id = ? ORDER BY `blog_article`.`created_time` DESC";
     const [datas] = await db.query(sql, [userId]);
