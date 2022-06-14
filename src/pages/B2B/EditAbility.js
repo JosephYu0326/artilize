@@ -1,6 +1,6 @@
 //建立新活動資料
 import React from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import '../../styles/AddAbility.scss'
 import { FiSettings } from 'react-icons/fi'
@@ -31,6 +31,7 @@ function AddAbility(props) {
   useEffect(() => {
     fetchData()
   }, [])
+
   //活動名稱
   // aName setAname
   const [aName, setAname] = useState('')
@@ -169,6 +170,10 @@ function AddAbility(props) {
   // }
   const [validated, setValidated] = useState(false)
 
+  //網址id
+  const params = useParams()
+  const id = params.id
+
   const submitForm = (e) => {
     console.log('submitForm')
     e.preventDefault()
@@ -190,8 +195,8 @@ function AddAbility(props) {
     document.getElementById('myForm').validated = true
 
     if (fileData.length > 0) {
-      fetch('http://localhost:5000/B2B/B2B/', {
-        method: 'POST',
+      fetch('http://localhost:5000/B2B/B2B/' + id, {
+        method: 'put',
         body: new FormData(document.getElementById('myForm')),
       })
         .then((res) => res.text())
@@ -591,7 +596,7 @@ function AddAbility(props) {
                   票券數量
                 </label>
                 <Form.Control
-                  type="value"
+                  type="number"
                   className="form-control"
                   id="amount"
                   name="amount"
@@ -601,7 +606,7 @@ function AddAbility(props) {
                     setAmount(e.target.value)
                   }}
                   required
-                  pattern="/[0-9]/"
+                  pattern="^[0-9]*$"
                   maxLength="4"
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -616,7 +621,7 @@ function AddAbility(props) {
                   票券價格
                 </label>
                 <Form.Control
-                  type="value"
+                  type="number"
                   className="form-control"
                   id="price"
                   name="price"
@@ -626,7 +631,7 @@ function AddAbility(props) {
                     setPrice(e.target.value)
                   }}
                   required
-                  pattern="/[0-9]/"
+                  pattern="^[0-9]*$"
                   maxLength="4"
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
