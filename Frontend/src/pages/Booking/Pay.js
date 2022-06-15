@@ -1,6 +1,7 @@
 //
 
 import { Form, Col, Button, Feedback } from 'react-bootstrap'
+import { FaDollarSign } from 'react-icons/fa'
 //付款
 import React, { useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
@@ -391,7 +392,12 @@ function Pay(props) {
                     <h5>總金額</h5>
                   </div>
                   <div className="p-2 bd-highlight " style={{ color: 'red' }}>
-                    <h4>{totalPrice}</h4>
+                    <div className="d-flex align-items-center">
+                      <FaDollarSign />
+                      <h4 className="mb-0">
+                        {parseInt(totalPrice).toLocaleString('en-US')}
+                      </h4>
+                    </div>
                   </div>
                 </div>
               </div>

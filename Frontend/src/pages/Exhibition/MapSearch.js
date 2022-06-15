@@ -129,11 +129,12 @@ function MapSearch(props) {
               }`}
             >
               <div className="row g-0">
-                <div className="col-md-3 col-sm-12 mapImg">
+                <div className="col-md-3 col-sm-12 mapImg d-flex align-items-center justify-content-center">
                   <img
                     src={`${process.env.REACT_APP_API_URL}/stylesheets/images/${pic1}`}
                     className="img-fluid rounded-start  "
                     alt="..."
+                    style={{ height: 130, width: 100 }}
                   />
                 </div>
                 <div className="col-md-9">
@@ -370,7 +371,7 @@ function MapSearch(props) {
                               src={`${process.env.REACT_APP_API_URL}/stylesheets/images/${pic1}`}
                               className="img-fluid rounded-start"
                               alt="..."
-                              style={{ width: 120, height: 175 }}
+                              style={{ width: 130, height: 175 }}
                             />
                           </div>
                           <div className="col-md-8 ">
