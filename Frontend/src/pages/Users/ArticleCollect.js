@@ -25,7 +25,7 @@ function ArticleCollect(props) {
       `/users/orderrecord`,
       `/users/articlecollect`,
       `/users/productcollect`,
-      `/users/`,
+      `/users/personalpage`,
       `/users/mycoupon`,
     ],
   }
