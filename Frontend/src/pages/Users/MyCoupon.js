@@ -52,17 +52,19 @@ function MyCoupon(props) {
 
     let useText = document.querySelectorAll('.isUsed')
 
-    for (let i = 0; i < useText.length; i++) {
-      if (useText[i].innerHTML === '未使用') {
-        useText[i].style.color = 'blue'
-      } else {
-        useText[i].style.color = 'red'
-      }
-    }
+    // for (let i = 0; i < useText.length; i++) {
+    //   if (useText[i].innerHTML === '未使用') {
+    //     useText[i].style.color = 'blue'
+    //   } else {
+    //     useText[i].style.color = 'red'
+    //   }
+    // }
   }
   useEffect(() => {
     fetchData()
-  }, [userId])
+  }, [])
+  const [isUsed, setisUsed] = useState('isUsedBlue')
+  const [isUsed1, setisUsed1] = useState('isUsedRed')
 
   const couponCard = datas.map((v, i) => {
     return (
@@ -80,7 +82,9 @@ function MyCoupon(props) {
         </div>
         <div className="couponInfo d-flex justify-content-around mt-2">
           <div className="usetext">期限{v.useDeadline}</div>
-          <div className="usetext isUsed">{v.isUsed ? '已使用' : '未使用'}</div>
+          <div className={`usetext ${!v.isUsed ? isUsed : isUsed1}`}>
+            {v.isUsed ? '已使用' : '未使用'}
+          </div>
         </div>
       </div>
     )
