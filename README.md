@@ -42,14 +42,3 @@
 - 其他：npm、Nodemailer、reCAPTCHA、google map api、open weather api、Swiper、socket.io、mailchimp
 
 
-## 顏色
-
-| Hex                                                                |
-|------------------------------------------------------------------ |
- ![#4153BB](https://via.placeholder.com/10/4153BB?text=+) #4153BB |
-  ![#0a192f](https://via.placeholder.com/10/F4B942?text=+) #0a192f |
-   ![#0a192f](https://via.placeholder.com/10/6E7491?text=+) #0a192f |
-     ![#0a192f](https://via.placeholder.com/10/7C8DB0?text=+) #0a192f |
-
-
-
