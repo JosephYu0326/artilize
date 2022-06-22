@@ -13,6 +13,20 @@
 - 吳佩珊 討論區系統
 - 傅詩婷 UI/UX 主視覺設計
 
+## 展示
+
+#### 1. 傅詩婷 
+- UI/UX主視覺設計
+  - 網站Sitemap製作
+  - Style Guide訂定
+  - 網站入口製作
+  - 會員管理系統：介面設計及切版 <br/><br/>
+<img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/entrance.png" width="400" height="200"   alt="入口網頁"/><br/>
+   入口網頁<br/><br/>
+<img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/home.png" width="400" height="200"   alt="首頁"/><br/>
+   首頁<br/><br/>
+   <a href="https://www.youtube.com/watch?v=h0GvvBTBg3U"><img src="http://img.youtube.com/vi/h0GvvBTBg3U/0.jpg" width="400" height="300"   alt="影片"/></a><br/>
+   <a href="https://www.youtube.com/watch?v=h0GvvBTBg3U">影片<a/>
 
 
 ## 動機與目的
@@ -100,16 +114,4 @@
     4.nodemon or npm start or yarn start 啟動server
 
 ```
-## 展示
 
-#### 1. 傅詩婷 
-- UI/UX主視覺設計
-  - 網站Sitemap製作
-  - Style Guide訂定
-  - 網站入口製作
-  - 會員管理系統：介面設計及切版 <br/><br/>
-<img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/entrance.png" width="400" height="200"   alt="入口網頁"/><br/>
-   入口網頁<br/><br/>
-<img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/home.png" width="400" height="200"   alt="首頁"/><br/>
-   首頁<br/><br/>
-   [![IMAGE ALT TEXT](http://img.youtube.com/vi/h0GvvBTBg3U/0.jpg)](https://www.youtube.com/watch?v=h0GvvBTBg3U)
