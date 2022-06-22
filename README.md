@@ -24,8 +24,8 @@
    網站入口製作<br/><br/>
 <img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/home.png" width="400" height="200"   alt="首頁"/><br/>
    首頁切版<br/><br/>
-   <a href="https://www.youtube.com/watch?v=h0GvvBTBg3U"><img src="http://img.youtube.com/vi/h0GvvBTBg3U/0.jpg" width="400" height="300"   alt="影片"/></a><br/>
-   <a href="https://www.youtube.com/watch?v=h0GvvBTBg3U">影片<a/>
+   <a href="https://youtu.be/h0GvvBTBg3U?t=561"><img src="http://img.youtube.com/vi/h0GvvBTBg3U/0.jpg" width="400" height="300"   alt="影片"/></a><br/>
+   <a href="https://youtu.be/h0GvvBTBg3U?t=561">影片<a/>
   
 #### 2. 余忠憲 
 - 會員管理系統：功能製作
