@@ -4,6 +4,17 @@
 資展國際高雄前端工程師養成班125期 期末專題
 
 
+## 組員
+
+- 許智筌 (組長) B2B活動展覽系統 
+- 梁力中        展覽售票系統
+- 余忠憲 會員管理系統、展覽地圖搜尋、天氣預報及整合
+- 楊絢智 商品販售系統
+- 吳佩珊 討論區系統
+- 傅詩婷 UI/UX 主視覺設計
+
+
+
 ## 動機與目的
 
 在這瞬息萬變的時代，美感與跨領域能力是當今非常重要的軟實力。這個世界並不缺少美，而是缺少發現美的眼睛。網站的名稱Artilize藝化，便是希望藝術就像液體般在不知不覺中自然的融入每個人的生活。
@@ -40,5 +51,18 @@
 - 資料庫：MySQL
 - 版本控制：Git、Github
 - 其他：npm、Nodemailer、reCAPTCHA、google map api、open weather api、Swiper、socket.io、mailchimp
+
+
+## 使用顏色
+
+| Hex                                                                |
+|------------------------------------------------------------------ |
+ ![#4153BB](https://github.com/JosephYu0326/artilize/blob/master/color/4153BB.png) #4153BB |
+  ![#F4B942](https://github.com/JosephYu0326/artilize/blob/master/color/F4B942.png) #F4B942 |
+   ![#6E7491](https://github.com/JosephYu0326/artilize/blob/master/color/6E7491.png) #6E7491 |
+![#7C8DB0](https://github.com/JosephYu0326/artilize/blob/master/color/7C8DB0.png) #7C8DB0 |
+![#CBD4E6](https://github.com/JosephYu0326/artilize/blob/master/color/CBD4E6.png) #CBD4E6 |
+![#F1F1F1](https://github.com/JosephYu0326/artilize/blob/master/color/F1F1F1.png)#F1F1F1 |
+
 
 
