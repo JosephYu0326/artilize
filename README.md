@@ -24,14 +24,13 @@
    網站入口製作<br/><br/>
 <img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/home.png" width="400" height="200"   alt="首頁"/><br/>
    首頁切版<br/><br/>
-   <a href="https://youtu.be/h0GvvBTBg3U"><img src="http://img.youtube.com/vi/h0GvvBTBg3U/0.jpg" width="400" height="300"   alt="影片"/></a><br/>
-   <a href="https://youtu.be/h0GvvBTBg3U">影片<a/>
+   <a href="https://youtu.be/h0GvvBTBg3U?t=1"><img src="http://img.youtube.com/vi/h0GvvBTBg3U/0.jpg" width="400" height="300"   alt="影片"/></a><br/>
+   <a href="https://youtu.be/h0GvvBTBg3U?t=1">影片<a/>
   
 #### 2. 余忠憲 
 - 會員管理系統：功能製作
 - 展覽活動地圖搜尋：介面設計、切版及功能製作
-- 天氣預報：
-  - 使用open weather api預報今日天氣<br/><br/>
+- 天氣預報<br/><br/>
 <img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/會員登入.png" width="400" height="200"   alt="會員登入"/><br/>
    使用第三方會員進行登入(facebook、google)、使用reCAPTCHA進行我不是機器人驗證<br/><br/>
 <img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/忘記密碼.png" width="400" height="200"   alt="忘記密碼"/><br/>
@@ -42,7 +41,20 @@
    使用open weather api預報今日天氣<br/><br/>
    <a href="https://youtu.be/h0GvvBTBg3U?t=561"><img src="http://img.youtube.com/vi/h0GvvBTBg3U/0.jpg" width="400" height="300"   alt="影片"/></a><br/>
    <a href="https://youtu.be/h0GvvBTBg3U?t=561">影片<a/>
-
+     
+#### 3. 吳佩珊 
+- 討論區系統：介面設計、切版及功能製作<br/><br/>
+<img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/會員登入.png" width="400" height="200"   alt="會員登入"/><br/>
+   使用第三方會員進行登入(facebook、google)、使用reCAPTCHA進行我不是機器人驗證<br/><br/>
+<img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/忘記密碼.png" width="400" height="200"   alt="忘記密碼"/><br/>
+   使用Nodemailer進行email寄送<br/><br/>
+ <img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/地圖.png" width="400" height="200"   alt="地圖"/><br/>
+   使用google map api搜尋客製地圖marker<br/><br/>
+  <img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/weather.png" width="400" height="200"   alt="weather"/><br/>
+   使用open weather api預報今日天氣<br/><br/>
+   <a href="https://youtu.be/h0GvvBTBg3U?t=561"><img src="http://img.youtube.com/vi/h0GvvBTBg3U/0.jpg" width="400" height="300"   alt="影片"/></a><br/>
+   <a href="https://youtu.be/h0GvvBTBg3U?t=561">影片<a/>
+     
 ## 動機與目的
 
 在這瞬息萬變的時代，美感與跨領域能力是當今非常重要的軟實力。這個世界並不缺少美，而是缺少發現美的眼睛。網站的名稱Artilize藝化，便是希望藝術就像液體般在不知不覺中自然的融入每個人的生活。
