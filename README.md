@@ -53,6 +53,15 @@
    <a href="https://youtu.be/h0GvvBTBg3U?t=971"><img src="http://img.youtube.com/vi/h0GvvBTBg3U/0.jpg" width="400" height="300"   alt="影片"/></a><br/>
    <a href="https://youtu.be/h0GvvBTBg3U?t=971">影片<a/>
      
+ #### 4. 許智筌 
+- B2B活動展覽系統：介面設計、切版及功能製作<br/><br/>
+<img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/新增展覽.png" width="400" height="200"   alt="新增展覽"/><br/>
+   新增活動展覽、上傳多張圖片及表單驗證<br/><br/>
+<img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/編輯及刪除展覽.png" width="400" height="200"   alt="編輯及刪除展覽"/><br/>
+   編輯、瀏覽及刪除展覽<br/><br/>
+   <a href="https://youtu.be/h0GvvBTBg3U?t=1222"><img src="http://img.youtube.com/vi/h0GvvBTBg3U/0.jpg" width="400" height="300"   alt="影片"/></a><br/>
+   <a href="https://youtu.be/h0GvvBTBg3U?t=1222">影片<a/>
+     
 ## 動機與目的
 
 在這瞬息萬變的時代，美感與跨領域能力是當今非常重要的軟實力。這個世界並不缺少美，而是缺少發現美的眼睛。網站的名稱Artilize藝化，便是希望藝術就像液體般在不知不覺中自然的融入每個人的生活。
