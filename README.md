@@ -64,5 +64,37 @@
 ![#CBD4E6](https://github.com/JosephYu0326/artilize/blob/master/README/color/CBD4E6.png) #CBD4E6 |
 ![#F1F1F1](https://github.com/JosephYu0326/artilize/blob/master/README/color/F1F1F1.png)#F1F1F1 |
 
+## 如何使用
 
+```bash
+  1. git clone https://github.com/JosephYu0326/artilize.git
+  2. 使用兩個終端開啟Frontend及Backend
+    
+    //Frontend
+    1. npm install or yarn install
+    2. 新增.env 在根目錄
+    REACT_APP_GOOGLE_MAPS_API_KEY=
+    REACT_APP_GOOGLE_MAPS_API_KEY1=
+    REACT_APP_API_URL="http://localhost:5000"
+    REACT_APP_GOOGLE_RECAPTCHA_KEY=
+    REACT_APP_GOOGLE_LOGIN_KEY=
+    REACT_APP_FACEBOOK_LOGIN_KEY=
+    REACT_APP_WEATHER_API_KEY=
+    3.npm start or yarn start 開啟專案
+
+    //Backend
+    1. npm install or yarn install
+    2. 新增.env在根目錄
+    port=5000
+    MYSQL_HOST= localhost
+    MYSQL_USER= root
+    MYSQL_PASSWORD = Passw0rd
+    MySQL_DB = artilize
+    EMAIL=
+    EMAILPASSWORD=
+    URL=http://localhost:3000
+    MAILCHIMP_API=
+    MAILCHIMP_AUTH=
+    3.匯入artilize.sql
+    4.nodemon or npm start or yarn start 啟動server
 
