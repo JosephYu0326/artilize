@@ -62,7 +62,7 @@
    <a href="https://youtu.be/h0GvvBTBg3U?t=1222"><img src="http://img.youtube.com/vi/h0GvvBTBg3U/0.jpg" width="400" height="300"   alt="影片"/></a><br/>
    <a href="https://youtu.be/h0GvvBTBg3U?t=1222">影片<a/>
      
-  #### 5. 楊絢智 
+#### 5. 楊絢智 
 - 商品販售系統：介面設計、切版及功能製作<br/><br/>
 <img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/商品.png" width="400" height="200"   alt="商品"/><br/>
    商品檢視介面<br/><br/>
@@ -73,7 +73,7 @@
    <a href="https://youtu.be/h0GvvBTBg3U?t=1428"><img src="http://img.youtube.com/vi/h0GvvBTBg3U/0.jpg" width="400" height="300"   alt="影片"/></a><br/>
    <a href="https://youtu.be/h0GvvBTBg3U?t=1428">影片<a/>
      
-   #### 6. 梁力中 
+#### 6. 梁力中 
 - 展覽售票系統：介面設計、切版及功能製作<br/><br/>
 <img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/展覽.png" width="400" height="200"   alt="展覽"/><br/>
    展覽檢視介面<br/><br/>
