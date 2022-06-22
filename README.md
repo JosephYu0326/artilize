@@ -73,6 +73,23 @@
    <a href="https://youtu.be/h0GvvBTBg3U?t=1428"><img src="http://img.youtube.com/vi/h0GvvBTBg3U/0.jpg" width="400" height="300"   alt="影片"/></a><br/>
    <a href="https://youtu.be/h0GvvBTBg3U?t=1428">影片<a/>
      
+   #### 6. 梁力中 
+- 展覽售票系統：介面設計、切版及功能製作<br/><br/>
+<img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/展覽.png" width="400" height="200"   alt="展覽"/><br/>
+   展覽檢視介面<br/><br/>
+<img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/展覽元件.png" width="400" height="200"   alt="展覽元件"/><br/>
+   自行設計選單、日曆等元件<br/><br/>
+ <img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/展覽詳細介面.png" width="400" height="200"   alt="展覽詳細介面"/><br/>
+   展覽詳細介面<br/><br/>
+ <img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/展覽購物車.png" width="400" height="200"   alt="展覽購物車"/><br/>
+   自行設計購物車等元件<br/><br/>
+ <img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/優惠券.png" width="400" height="200"   alt="優惠券"/><br/>
+   優惠券<br/><br/>
+ <img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/訂單紀錄.png" width="400" height="200"   alt="訂單紀錄"/><br/>
+   訂單紀錄<br/><br/>
+   <a href="https://youtu.be/h0GvvBTBg3U?t=1600"><img src="http://img.youtube.com/vi/h0GvvBTBg3U/0.jpg" width="400" height="300"   alt="影片"/></a><br/>
+   <a href="https://youtu.be/h0GvvBTBg3U?t=1600">影片<a/>
+     
 ## 動機與目的
 
 在這瞬息萬變的時代，美感與跨領域能力是當今非常重要的軟實力。這個世界並不缺少美，而是缺少發現美的眼睛。網站的名稱Artilize藝化，便是希望藝術就像液體般在不知不覺中自然的融入每個人的生活。
