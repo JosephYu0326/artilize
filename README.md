@@ -27,7 +27,22 @@
    首頁<br/><br/>
    <a href="https://www.youtube.com/watch?v=h0GvvBTBg3U"><img src="http://img.youtube.com/vi/h0GvvBTBg3U/0.jpg" width="400" height="300"   alt="影片"/></a><br/>
    <a href="https://www.youtube.com/watch?v=h0GvvBTBg3U">影片<a/>
-
+  
+#### 2. 余忠憲 
+- 會員管理系統：功能製作
+  - 使用第三方會員進行登入(facebook、google)
+  - 使用Nodemailer進行email寄送
+  - 使用reCAPTCHA進行我不是機器人驗證
+- 展覽活動地圖搜尋：介面設計、切版及功能製作
+  - 使用google map api搜尋客製地圖marker
+- 天氣預報：
+  - 使用open weather api預報今日天氣<br/><br/>
+<img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/entrance.png" width="400" height="200"   alt="入口網頁"/><br/>
+   入口網頁<br/><br/>
+<img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/home.png" width="400" height="200"   alt="首頁"/><br/>
+   首頁<br/><br/>
+   <a href="https://www.youtube.com/watch?v=h0GvvBTBg3U"><img src="http://img.youtube.com/vi/h0GvvBTBg3U/0.jpg" width="400" height="300"   alt="影片"/></a><br/>
+   <a href="https://www.youtube.com/watch?v=h0GvvBTBg3U">影片<a/>
 
 ## 動機與目的
 
