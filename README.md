@@ -44,16 +44,14 @@
      
 #### 3. 吳佩珊 
 - 討論區系統：介面設計、切版及功能製作<br/><br/>
-<img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/會員登入.png" width="400" height="200"   alt="會員登入"/><br/>
-   使用第三方會員進行登入(facebook、google)、使用reCAPTCHA進行我不是機器人驗證<br/><br/>
-<img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/忘記密碼.png" width="400" height="200"   alt="忘記密碼"/><br/>
-   使用Nodemailer進行email寄送<br/><br/>
- <img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/地圖.png" width="400" height="200"   alt="地圖"/><br/>
-   使用google map api搜尋客製地圖marker<br/><br/>
-  <img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/weather.png" width="400" height="200"   alt="weather"/><br/>
-   使用open weather api預報今日天氣<br/><br/>
-   <a href="https://youtu.be/h0GvvBTBg3U?t=561"><img src="http://img.youtube.com/vi/h0GvvBTBg3U/0.jpg" width="400" height="300"   alt="影片"/></a><br/>
-   <a href="https://youtu.be/h0GvvBTBg3U?t=561">影片<a/>
+<img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/討論區.png" width="400" height="200"   alt="討論區"/><br/>
+   介面設計、切版及功能製作<br/><br/>
+<img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/chat.png" width="400" height="200"   alt="chat"/><br/>
+   使用Socket.io實現即時聊天系統<br/><br/>
+ <img src="https://github.com/JosephYu0326/artilize/blob/master/README/demo%20image/mailchimp.png" width="400" height="200"   alt="mailchimp"/><br/>
+  使用mailchimp訂閱電子報<br/><br/>
+   <a href="https://youtu.be/h0GvvBTBg3U?t=971"><img src="http://img.youtube.com/vi/h0GvvBTBg3U/0.jpg" width="400" height="300"   alt="影片"/></a><br/>
+   <a href="https://youtu.be/h0GvvBTBg3U?t=971">影片<a/>
      
 ## 動機與目的
 
