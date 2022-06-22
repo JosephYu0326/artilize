@@ -57,12 +57,12 @@
 
 | Hex                                                                |
 |------------------------------------------------------------------ |
- ![#4153BB](https://github.com/JosephYu0326/artilize/blob/master/color/4153BB.png) #4153BB |
-  ![#F4B942](https://github.com/JosephYu0326/artilize/blob/master/color/F4B942.png) #F4B942 |
-   ![#6E7491](https://github.com/JosephYu0326/artilize/blob/master/color/6E7491.png) #6E7491 |
-![#7C8DB0](https://github.com/JosephYu0326/artilize/blob/master/color/7C8DB0.png) #7C8DB0 |
-![#CBD4E6](https://github.com/JosephYu0326/artilize/blob/master/color/CBD4E6.png) #CBD4E6 |
-![#F1F1F1](https://github.com/JosephYu0326/artilize/blob/master/color/F1F1F1.png)#F1F1F1 |
+ ![#4153BB](https://github.com/JosephYu0326/artilize/blob/master/README/color/4153BB.png) #4153BB |
+  ![#F4B942](https://github.com/JosephYu0326/artilize/blob/master/README/color/F4B942.png) #F4B942 |
+   ![#6E7491](https://github.com/JosephYu0326/artilize/blob/master/README/color/6E7491.png) #6E7491 |
+![#7C8DB0](https://github.com/JosephYu0326/artilize/blob/master/README/color/7C8DB0.png) #7C8DB0 |
+![#CBD4E6](https://github.com/JosephYu0326/artilize/blob/master/README/color/CBD4E6.png) #CBD4E6 |
+![#F1F1F1](https://github.com/JosephYu0326/artilize/blob/master/README/color/F1F1F1.png)#F1F1F1 |
 
 
 
