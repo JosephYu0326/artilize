@@ -175,4 +175,13 @@
     4.nodemon or npm start or yarn start 啟動server
 
 ```
+## 資料來源
+-  <a href="https://artemperor.tw/">非池中<a/> <br/>
+-  <a href="https://www.npm.gov.tw/">故宮博物院<a/> <br/>
+     
+## 此專案僅供資展國際期末專題使用，不會用於商業用途     
+     
+    
+     
+     
 
