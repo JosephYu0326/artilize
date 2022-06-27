@@ -120,7 +120,7 @@
 
 ## 技術應用
 
-- 前端開發：TML5、CSS、Javascript、Bootstrap、jQuery、SASS、React.js
+- 前端開發：HTML5、CSS、Javascript、Bootstrap、jQuery、SASS、React.js
 - 設計工具：Figma、Photoshop、Illustrator
 - 後端技術：Node.js、Express
 - 資料庫：MySQL
